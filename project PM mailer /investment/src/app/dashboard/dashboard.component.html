@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Dashboard</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="../../assets/css/animate.min.css" rel="stylesheet"/>
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="../../assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="../../assets/css/demo.css" rel="stylesheet" />
+
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="../../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+
+</head>
+<body>
+
+<div>
+    <div class="sidebar" data-color="lightgray" data-image="../../assets/img/sidebar-5.jpg">
+
+    <!--
+
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
+
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    Personalised Mailer
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="#">
+                        <i class="pe-7s-graph"></i>
+                        <p style="color: white">Dashboard</p>
+                    </a>
+                </li> 
+                </ul>
+                <ul class="nav">
+            <li class="active" >
+                    <a href="#">
+                        <i class="pe-7s-graph"></i>
+                        <p style="color: white"><a  style="color: white" [routerLink]="'/chart'">CHARTS</a> </p>
+                    </a>
+                </li> 
+
+            </ul>
+              <ul class="nav">
+                <li class="active">
+                    <a href="#">
+                        <i class="pe-7s-graph"></i>
+                        <p style="color: white">Settings</p>
+                    </a>
+                </li> 
+                </ul>
+                  <ul class="nav">
+                <li class="active">
+                    <a href="#">
+                        <i class="pe-7s-graph"></i>
+                        <p style="color: white">User Profile</p>
+                    </a>
+                </li> 
+                </ul>
+                  <ul class="nav">
+                <li class="active">
+                    <a href="#">
+                        <i class="pe-7s-graph"></i>
+                        <p style="color: white">Logout</p>
+                    </a>
+                </li> 
+                </ul>
+            <li>
+            <br>
+                 
+</li>
+    	</div>
+    </div>
+
+    >
+</div>
+<div [@routerTransition]>
+    <div class="container">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+
+            <h2 class="text-muted"><small>Personalised Mailer</small></h2>
+        
+       
+            <div >
+                <select #selectedname class="drop">
+                    <option *ngFor="let post of list" [value]="post.Code">
+                        {{post.Company}}
+                    </option>
+                </select>
+            </div>
+<br>
+           &nbsp; <button (click)="search(selectedname.value)" class="btn btn-primary my-2 my-sm-0" type="submit"> Search</button>
+      </div>
+    
+<div class="col-md-4">
+</div>
+<div class="col-md-8">
+<br>
+
+<table class="table table">
+  <thead>
+    <tr>
+
+      <th><h3 class="heading">News</h3></th>
+   
+    </tr>
+  </thead>
+  <tbody *ngFor="let data of dat">
+    <tr>
+      
+      <td>{{data.News}}</td>
+      
+    </tr>
+   
+  </tbody>
+</table>
+  </div>
+    </div>
+    </div>
+
+<!-- <table class="table table-inverse">
+  <thead>
+    <tr>
+
+      <th><h3 class="heading">News</h3></th>
+   
+    </tr>
+  </thead>
+  <tbody *ngFor="let data of dat">
+    <tr>
+      
+      <td>{{data.News}}</td>
+      
+    </tr>
+   
+  </tbody>
+</table> -->
+
+</body>
+
+    
+
+</html>
