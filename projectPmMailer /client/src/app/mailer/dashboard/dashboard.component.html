@@ -1,71 +1,58 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="assets/img/favicon.ico">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Dashboard</title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-  <meta name="viewport" content="width=device-width" />
-  <!--     Fonts and icons     -->
-  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-</head>
-
-<body>
-  <div>
-  <aside>
-<app-sidebar></app-sidebar>
-</aside>
-  </div>
-  <div class="text-center">
-
-    <app-navbar></app-navbar>
-  </div>
-
-  <div class="container-fluid">
-    <div class="row d-flex d-md-block flex-nowrap wrapper">
-      <main class="col-md-9 float-left col px-5 pl-md-2 pt-2 main">
-        <div>
-          <div class="container marg">
+<link rel="icon" type="image/png" href="assets/img/favicon.ico">
+<!--     Fonts and icons     -->
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+<!-- sidebafr added -->
+<div>
+  <app-sidebar></app-sidebar>
+</div>
+<!-- navbar added -->
+<div class="text-center">
+  <app-navbar></app-navbar>
+</div>
+<!-- Search Started -->
+<div class="container-fluid">
+  <div class="row d-flex d-md-block flex-nowrap wrapper">
+    <main class="col-md-9 float-left col px-5 pl-md-2 pt-2 main">
+      <div>
+        <div class="container marg">
+          <br>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-6">
+            <h2 class="text-muted"><small>Personalised Mailer</small></h2>
+            <div>
+            <!-- dropdown for company -->
+              <select #selectedname class="drop">
+                <option *ngFor="let post of list" [value]="post.Code">
+                  {{post.Company}}
+                </option>
+              </select>
+            </div>
+            <br> &nbsp;
+            <button (click)="search(selectedname.value)" class="btn btn-primary" type="button"> Search</button>
+          </div>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-6">
             <br>
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-6">
-              <h2 class="text-muted"><small>Personalised Mailer</small></h2>
-              <div>
-                <select #selectedname class="drop">
-                  <option *ngFor="let post of list" [value]="post.Code">
-                    {{post.Company}}
-                  </option>
-                </select>
-              </div>
-              <br> &nbsp;
-              <button (click)="search(selectedname.value)" class="btn btn-primary" type="button"> Search</button>
-            </div>
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-6">
-              <br>
-              <table class="table table">
-                <thead>
-                  <tr>
-                    <h3 class="heading">News</h3>
-                  </tr>
-                </thead>
-                <tbody *ngFor="let data of dat">
-                  <tr>
-                    <td>{{data.News}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <table class="table table">
+              <thead>
+                <tr>
+                  <h3 class="heading">News</h3>
+                </tr>
+              </thead>
+              <!-- news table from websites -->
+              <tbody *ngFor="let data of dat">
+                <tr>
+                  <td>{{data.News}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   </div>
-</body>
-
-</html>
+</div>
+<!-- search ended -->
