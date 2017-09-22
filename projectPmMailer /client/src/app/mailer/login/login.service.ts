@@ -23,4 +23,13 @@ export class LoginService {
       .map(res => res);
   }
   //Method for google-auth end
+
+   //Method for facebook-auth
+  facebook() {
+    const url = 'http://localhost:3000/api/auth/facebook'
+    return this.http
+      .get(url)
+      .map(res => res);
+  }
+  //Method for facebook-auth end
 }
