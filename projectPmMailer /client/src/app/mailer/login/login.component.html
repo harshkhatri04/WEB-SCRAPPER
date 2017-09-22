@@ -50,7 +50,6 @@
                   </div>
                 </div>
                 <pre>
-
 									</pre>
                 <input id="pwd" type="password" class="form-control" name="pwd" value="" placeholder="Password" formControlName="pwd" required [(ngModel)]="password">
                 <div *ngIf="pwd.invalid && (pwd.dirty || email.touched)">
@@ -66,7 +65,6 @@
                 </div>
                 <div>
                   <pre>
-
 									</pre>
                   <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="checkUser(emailID,password)">Login</button>
                   <a [routerLink]="'/signup'" style="color: blue">New User</a>
@@ -76,14 +74,15 @@
           </form>
         </form>
         <pre></pre>
-        <button class="loginBtn loginBtn--facebook">
+        <button class="loginBtn loginBtn--facebook" style="width: 220px">
           Login with Facebook
         </button>
         <pre></pre>
-        <button class="loginBtn loginBtn--google" (click)="loginByGoogle()">
+        <button class="loginBtn loginBtn--google" (click)='loginByGoogle()' style="width: 220px">
           Login with Google
         </button>
       </div>
     </div>
   </div>
 </section>
+ 
