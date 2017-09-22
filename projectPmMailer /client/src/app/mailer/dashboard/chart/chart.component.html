@@ -1,14 +1,18 @@
+<!--     Fonts and icons     -->
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+<!--nav bar-->
 <app-navbar></app-navbar>
 <div class="container-fluid marg">
   <div class="row">
     <div class="col-sm-3">
+    <!--sidebar-->
       <app-sidebar></app-sidebar>
     </div>
+     <!--line chart for Gandhimathi Appliances Ltd.-->
     <div class="col-sm-6">
-      <div style="display: block;">
-        <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      <div class="canvasstyle ">
+        <canvas id="canvas" baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"></canvas>
       </div>
     </div>
     </div>
@@ -16,11 +20,11 @@
     <div class="row">
     <div class="col-sm-3">
     </div>
+     <!--line chart for Havells India Ltd.-->
     <div class="col-sm-6">
-      <div style="display: block;">
-        <canvas baseChart width="400" height="400" [datasets]="lineChartData1" [labels]="lineChartLabels1" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      <div class="canvasstyle">
+        <canvas id="canvas" baseChart width="400" height="400" [datasets]="lineChartData1" [labels]="lineChartLabels1" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"></canvas>
       </div>
     </div>
   </div>
 </div>
-<script src="node_modules/chart.js/src/chart.js"></script>

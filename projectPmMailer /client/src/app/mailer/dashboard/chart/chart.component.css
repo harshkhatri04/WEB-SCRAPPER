@@ -1,3 +1,20 @@
-.marg{
-	margin-top: 5%;
+/*style for container div*/
+
+.marg {
+  margin-top: 4%;
+}
+
+
+/*style for canvas div */
+
+.canvasstyle {
+  display: block;
+}
+
+
+/*style for canvas size*/
+
+#canvas {
+  height: 200%;
+  width: 100%;
 }
