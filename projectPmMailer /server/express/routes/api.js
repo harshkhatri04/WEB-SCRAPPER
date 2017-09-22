@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const nodemailer = require('nodemailer');
 const sgTransport = require('nodemailer-sendgrid-transport');
+const logger = require('../services/app.logger');
 
 // =============forgot password=============
 var LocalStrategy = require('passport-local').Strategy;
@@ -12,7 +13,7 @@ var async = require('async');
 var crypto = require('crypto');
 var flash = require('express-flash');
 
-var logger = require('morgan');
+// var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 //==================forgotPassword===============
 
@@ -40,11 +41,14 @@ module.exports = function(router) {
         user.mobile = req.body.mobile;
         //user.temporaryToken =  jwt.sign({ user }, config.secret);
         if (req.body.name == null || req.body.password == null || req.body.email == null || req.body.mobile == null) {
+            logger.debug("fields not filled");
             res.json({ success: false, message: 'Ensure all the fields are filled' });
+
         } else {
             user.save(function(err) {
                 if (err) {
                     if (err.errors.name) {
+                        logger.error("name not filled properly");
                         res.json({ success: false, message: err.errors.name.message });
                     }
 
@@ -68,8 +72,10 @@ module.exports = function(router) {
 
                     transporter.sendMail(mailOptions, function(error, info) {
                         if (error) {
-                            console.log(error);
+                            logger.debug("error in sending mail");
+                            // console.log(error);
                         } else {
+                            logger.debug("email sen successfully");
                             console.log('Email sent: ' + info.response);
 
 
@@ -78,6 +84,7 @@ module.exports = function(router) {
                         }
                     });
 
+                    logger.debug("user created successfully");
                     res.json({ success: true, message: 'user created' });
                 }
 
@@ -106,12 +113,13 @@ module.exports = function(router) {
             if (err) throw err;
 
             if (!user) {
-
+                logger.debug("user not found");
                 res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
             } else {
                 // check if password matches
                 user.comparePassword(req.params.password, function(err, isMatch) {
                     if (isMatch && !err) {
+                        logger.debug("password matched");
                         // if user is found and password is right create a token
                         var token = jwt.sign({ user }, config.secret);
                         // return the information including token as JSON
@@ -119,6 +127,7 @@ module.exports = function(router) {
                         //console.log({ success: true, token: 'JWT ' + token })*/
                     } else {
                         //console.log("found")
+                        logger.debug("wrong password entered");
                         res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
                     }
                 });
@@ -158,8 +167,11 @@ module.exports = function(router) {
         async.waterfall([
             function(done) {
                 crypto.randomBytes(20, function(err, buf) {
+
+                    logger.debug("encrypting the password");
                     var token = buf.toString('hex');
                     done(err, token);
+
                     // console.log('err');
                 });
             },
@@ -170,7 +182,7 @@ module.exports = function(router) {
                 User.findOne({ email: req.params.email }, function(err, user) {
                     if (!user) {
                         //console.log(email)
-
+                        logger.debug("No account with that email address exists");
                         req.flash('error', 'No account with that email address exists.');
                         return res.redirect('/forgot');
                     }
@@ -210,8 +222,10 @@ module.exports = function(router) {
 
                 transporter.sendMail(mailOptions, function(error, info) {
                     if (error) {
+                        logger.debug("error");
                         console.log(error);
                     } else {
+                        logger.debug("email sent successfully with response");
                         console.log('Email sent: ' + info.response);
 
 
@@ -234,6 +248,7 @@ module.exports = function(router) {
         var rpwtoken = req.params.token;
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
             if (!user) {
+                logger.debug("Password reset token is invalid or has expired");
                 req.flash('error', 'Password reset token is invalid or has expired.');
                 return res.redirect('http://localhost:4200/forgot/');
             }
@@ -251,6 +266,7 @@ module.exports = function(router) {
                 User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
                     if (!user) {
                         console.log('err')
+                        logger.dev("Password reset token is invalid or has expired.");
                         req.flash('error', 'Password reset token is invalid or has expired.');
                         return res.redirect('back');
                     }
@@ -312,7 +328,7 @@ module.exports = function(router) {
                     }
                     currency.push(metadata);
                 });
-
+                logger.debug("currency");
                 console.log(currency);
                 res.json({ data: currency });
             }
@@ -324,10 +340,12 @@ module.exports = function(router) {
     router.get('/details', function(req, res, next) {
         nasdaq.find((err, data) => {
             if (err) {
+                logger.debug("error");
                 console.log("error")
 
             } else {
                 res.json(data)
+                logger.debug("getting details");
                 console.log(data)
             }
         })
@@ -362,7 +380,7 @@ module.exports = function(router) {
                     }
                     stock.push(metadata1);
                 });
-
+                logger.dev("posting stock prices of nasdaq for wsj webisite");
                 console.log(stock);
                 res.json({ data: stock });
             }
