@@ -27,7 +27,8 @@ const mongoose = require('mongoose');
 const connect = mongoose.connect('mongodb://192.168.252.47:27017/testing');
 
 const passportGoogle = require('../auth/google');
-const configuration = require('./../config/googleAuth')
+const configuration = require('./../config/googleAuth');
+const passportFacebook = require('../auth/facebook');
 
 module.exports = function(router) {
 
@@ -385,6 +386,16 @@ module.exports = function(router) {
         })
     );
     /* GOOGLE ROUTER Ends */
+/* FACEBOOK ROUTER */
+router.get('/auth/facebook',
+  passportFacebook.authenticate('facebook'));
 
+router.get('/auth/facebook/callback',
+  passportFacebook.authenticate('facebook', { failureRedirect: 'http://localhost:4200/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('http://localhost:4200/dashboard');
+  });
+ 
     return router;
 }
