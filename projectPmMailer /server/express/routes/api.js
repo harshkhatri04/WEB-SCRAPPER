@@ -25,6 +25,10 @@ let cheerio = require('cheerio');
 
 const mongoose = require('mongoose');
 const connect = mongoose.connect('mongodb://192.168.252.47:27017/testing');
+
+const passportGoogle = require('../auth/google');
+const configuration = require('./../config/googleAuth')
+
 module.exports = function(router) {
 
     router.post('/users', function(req, res) {
@@ -366,5 +370,21 @@ module.exports = function(router) {
     });
 
     //HTTP Post method for stock price of NASDAQ for WSJ website
+
+    /* GOOGLE ROUTER */
+    router.get('/auth/google',
+        passport.authenticate('google', {
+            scope: ['https://www.googleapis.com/auth/plus.login', , 'https://www.googleapis.com/auth/plus.profile.emails.read']
+        })
+    );
+
+    router.get('/auth/google/callback',
+        passport.authenticate('google', {
+            successRedirect: configuration.successRedirect,
+            failureRedirect: configuration.failureRedirect
+        })
+    );
+    /* GOOGLE ROUTER Ends */
+
     return router;
 }
