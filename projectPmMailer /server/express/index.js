@@ -1,15 +1,13 @@
 const express = require('express');
-
+const app = express();
 const mongoose = require('mongoose');
 const router = express.Router();
 const routes = require('./routes/api')(router);
-const auth = require('./routes/auth')
 const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
 const cors = require('cors');
-const app = express();
 const config = require('./config/database')
 
 /*======forgot password====*/
@@ -40,9 +38,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use('/api', routes);
-
-//middleware for google-auth
-app.use('/', auth);
 
 //reset pwd middleware
 app.use(logger('dev'));

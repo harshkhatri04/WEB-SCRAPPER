@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
-import { RegisterService } from './register.service';
+import { SignUpService } from './sign-up.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,17 +8,9 @@ import { Router } from '@angular/router';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit { 
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
-
-export class SignUpComponent implements OnInit { {
-  constructor(private RegisterService: RegisterService, private router: Router) {}
+  constructor(private SignUpService: SignUpService, private router: Router) {}
   /*Object that store all the fields of the form */
   hero = { name: '', mobile: '', email: '', pwd: '', cpwd: '' };
   user: any;
@@ -76,16 +68,10 @@ export class SignUpComponent implements OnInit { {
       "password": pwd,
       "confirmPassword": cpwd
     }
-    this.RegisterService.addUser(this.user)
+    this.SignUpService.addUser(this.user)
       .subscribe((res) => {
-        console.log(res)
         if (res)
-          this.router.navigateByUrl('login')
-        //this.value = res.token;
-      })
-    console.log('test successful')
-    console.log('name:' + name + 'email' + email + 'mobile' + mobile + 'pwd' + pwd + 'cpwd' + cpwd)
+          this.router.navigateByUrl('login')        
+      })    
   }
-
-
 }
