@@ -1,0 +1,12 @@
+body{
+   
+background: linear-gradient(to bottom, #333, #DE6262);
+background-color: cover;
+background-repeat: repeat-y;
+}
+h3{
+   color: white;
+   justify-content: center;
+}.margin{
+    margin-top: 5%;
+}
