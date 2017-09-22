@@ -38,34 +38,34 @@ module.exports = function(router) {
                     }
 
                 } else {
-                         var transporter = nodemailer.createTransport({
-                   service: 'gmail',
-                   auth: {
-                       user: 'personalizedemailer@gmail.com',
-                       pass: 'niit@123'
-                   }
-               });
+                    var transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                            user: 'personalizedemailer@gmail.com',
+                            pass: 'niit@123'
+                        }
+                    });
 
-               var mailOptions = {
-                   from: 'personalizedemailer@gmail.com',
-                   to: user.email,
-                   subject: 'Registered on Personalized-Emailer',
-                text: 'Hello,\n\n' +
-                  'You have been successfully registered on Personalized-Emailer.\n',
+                    var mailOptions = {
+                        from: 'personalizedemailer@gmail.com',
+                        to: user.email,
+                        subject: 'Registered on Personalized-Emailer',
+                        text: 'Hello,\n\n' +
+                            'You have been successfully registered on Personalized-Emailer.\n',
 
-               };
+                    };
 
-               transporter.sendMail(mailOptions, function(error, info) {
-                   if (error) {
-                       console.log(error);
-                   } else {
-                       console.log('Email sent: ' + info.response);
+                    transporter.sendMail(mailOptions, function(error, info) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log('Email sent: ' + info.response);
 
 
-                       //res.send(token);
-                   
-                   }
-               });
+                            //res.send(token);
+
+                        }
+                    });
 
                     res.json({ success: true, message: 'user created' });
                 }
@@ -181,7 +181,7 @@ module.exports = function(router) {
                     service: 'gmail',
                     auth: {
                         user: 'personalizedemailer@gmail.com',
-                       pass: 'niit@123'
+                        pass: 'niit@123'
                     }
                 });
 
@@ -257,22 +257,22 @@ module.exports = function(router) {
             },
             /* function(user, done) {
                var smtpTransport = nodemailer.createTransport('SMTP', {
-                 service: 'SendGrid',
-                 auth: {
-                   user: '!!! YOUR SENDGRID email !!!',
-                   pass: '!!! YOUR SENDGRID PASSWORD !!!'
-                 }
+            	 service: 'SendGrid',
+            	 auth: {
+            	   user: '!!! YOUR SENDGRID email !!!',
+            	   pass: '!!! YOUR SENDGRID PASSWORD !!!'
+            	 }
                });
                var mailOptions = {
-                 to: user.email,
-                 from: 'passwordreset@demo.com',
-                 subject: 'Your password has been changed',
-                 text: 'Hello,\n\n' +
-                   'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+            	 to: user.email,
+            	 from: 'passwordreset@demo.com',
+            	 subject: 'Your password has been changed',
+            	 text: 'Hello,\n\n' +
+            	   'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
                };
                smtpTransport.sendMail(mailOptions, function(err) {
-                 req.flash('success', 'Success! Your password has been changed.');
-                 done(err);
+            	 req.flash('success', 'Success! Your password has been changed.');
+            	 done(err);
                });
              }*/
         ], function(err) {

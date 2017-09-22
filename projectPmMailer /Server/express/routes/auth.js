@@ -1,19 +1,23 @@
-var express = require('express');
-var routers = express.Router();
+const express = require('express');
+const router = express.Router();
+const passport = require('passport');
+const passportGoogle = require('../auth/google');
+const config = require('./../config/googleAuth')
 
-var passportGoogle = require('../auth/google');
 
-router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Please Sign In with:' });
-});
+/* GOOGLE ROUTER */
+router.get('/auth/google',
+    passport.authenticate('google', {
+        scope: ['https://www.googleapis.com/auth/plus.login', , 'https://www.googleapis.com/auth/plus.profile.emails.read']
+    })
+);
 
-router.get('/google',
-  passportGoogle.authenticate('google', { scope: 'https://www.google.com/m8/feeds' }));
+router.get('/auth/google/callback',
+    passport.authenticate('google', {
+        successRedirect: config.successRedirect,
+        failureRedirect: config.failureRedirect
+    })
+);
+/* GOOGLE ROUTER Ends */
 
-router.get('/google/callback',
-  passportGoogle.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
-
-module.exports = routers;
+module.exports = router;

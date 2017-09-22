@@ -1,17 +1,40 @@
-var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var User = require('../models/User');
+const passport = require('passport');
+const User = require('../models/userModel');
+const GoogleStrategy = require('passport-google-oauth2').Strategy;
+const config = require ('../config/googleAuth')
 
 passport.use(new GoogleStrategy({
-    clientID: "591307876438-4nmmm817vks785u467lo22kss40kqno2.apps.googleusercontent.com",
-    clientSecret: "BagENe4LxG_PZ_qz2oFX7Aok",
-    callbackURL: "http://127.0.0.1:3000/auth/google/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-       User.findOrCreate({ userid: profile.id }, { name: profile.displayName,userid: profile.id }, function (err, user) {
-         return done(err, user);
-       });
-  }
+        clientID: config.clientID,
+        clientSecret: config.clientSecret,
+        callbackURL: config.callbackURL
+    },
+    function(accessToken, refreshToken, profile, done) {
+        //check user table for anyone with a facebook ID of profile.id
+        User.findOne({
+            'googleId': profile.id
+        }, function(err, user) {
+            if (err) {
+                return done(err);
+            }
+            //No user was found... so create a new user with values from Facebook (all the profile. stuff)
+            if (!user) {
+                user = new User({
+                    name: profile.displayName,
+                    email: profile.emails[0].value,
+                    //username: profile.username,
+                    //provider: 'facebook',
+                    //now in the future searching on User.findOne({'facebook.id': profile.id } will match because of this next line
+                    //facebook: profile._json
+                });
+                user.save(function(err) {
+                    if (err) console.log(err);
+                    return done(err, user);
+                });
+            } else {
+                //found user. Return
+                return done(err, user);
+            }
+        });
+    }
 ));
-
 module.exports = passport;
