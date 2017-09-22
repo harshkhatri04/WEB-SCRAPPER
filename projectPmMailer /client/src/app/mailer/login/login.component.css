@@ -623,3 +623,16 @@ h2 {
   background: #E74B37;
 
 }
+
+
+.col-md-4 .row{
+  margin-top: 7%;
+}
+
+.col-md-4 .button{
+  margin-top: 37%;
+}
+
+.btn{
+  margin-left: 20%;
+}
