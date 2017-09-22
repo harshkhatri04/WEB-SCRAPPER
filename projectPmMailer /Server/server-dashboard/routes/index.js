@@ -4,7 +4,7 @@ let cheerio = require('cheerio');
 var router = express.Router();
 let nasdaq=require('../model/nasdaq');
 const mongoose = require('mongoose');
-const connect = mongoose.connect('mongodb://localhost:27017/testing');
+const connect = mongoose.connect('mongodb://192.168.252.47:27017/testing');
 /* GET home page. */
 router.post('/', function(req, res, next) {
 	let term = req.body.term;
