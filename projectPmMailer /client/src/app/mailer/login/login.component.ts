@@ -53,6 +53,12 @@ export class LoginComponent implements OnInit {
         this.router.navigate(["/"]).then(result => { window.location.href = res.url; });
       })
   }
-  //Method for google-auth end    
+  //Method for facebook-auth   
+  loginByFacebook() {
+    this.LoginService.facebook()
+      .subscribe((res) => {
+        this.router.navigateByUrl('dashboard')
+      })
+  }  
 
 }

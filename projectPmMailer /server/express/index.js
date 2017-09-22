@@ -9,6 +9,7 @@ const passport = require('passport');
 const session = require('express-session');
 const cors = require('cors');
 const config = require('./config/database')
+const logger = require('./services/app.logger');
 
 /*======forgot password====*/
 var LocalStrategy = require('passport-local').Strategy;
@@ -17,7 +18,7 @@ var async = require('async');
 var crypto = require('crypto');
 var flash = require('express-flash');
 
-var logger = require('morgan');
+// var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 
 
@@ -40,27 +41,26 @@ app.use(express.static(__dirname + '/public'));
 app.use('/api', routes);
 
 //reset pwd middleware
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(session({ secret: 'session secret key' }));
 app.use(flash());
 app.use(cookieParser());
 /*=====================*/
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/public/app/views/index.html'))
-});
 
-const db = 'mongodb://localhost/testing';
+/*const db = 'mongodb://localhost/testing';
 mongoose.connect(db, (err) => {
     if (err)
         console.log('error occurred')
     else
         console.log('connected ')
 
-})
+})*/
 
 app.listen(config.port, () => {
-    console.log('listening ');
+
+		logger.info("application running on port 3000");
+   
 });
 
 module.exports = app;
