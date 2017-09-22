@@ -8,10 +8,12 @@ import { AppComponent } from './app.component';
 import { MailerComponent } from './mailer/mailer.component';
 import { LoginComponent } from './mailer/login/login.component';
 import { SignUpComponent } from './mailer/sign-up/sign-up.component';
-import { ForgotPswComponent } from './mailer/forgot-psw/forgot-psw.component';
+import { ForgotpasswordComponent } from './mailer/forgotpassword/forgotpassword.component';
+import { ResetpwdComponent } from './mailer/resetpwd/resetpwd.component';
 import { DashboardComponent } from './mailer/dashboard/dashboard.component';
 import { LoginService } from './mailer/login/login.service';
-
+import { ForgotpasswordService } from './mailer/forgotpassword/forgotpassword.service'
+import { ResetpwdService } from './mailer/resetpwd/resetpwd.service' 
 import { NasdaqService } from './mailer/dashboard/service/nasdaq.service';
 import { DashboardModule } from './mailer/dashboard/dashboard.module';
 const route:Routes=([
@@ -27,8 +29,12 @@ const route:Routes=([
   },
   {
     path:'forgot',
-    component:ForgotPswComponent
+    component:ForgotpasswordComponent
 
+  },
+   {
+    path: 'set/:token',
+    component: ResetpwdComponent
   },
   {
     path:'dashboard',
@@ -46,7 +52,8 @@ const route:Routes=([
     MailerComponent,
     LoginComponent,
     SignUpComponent,
-    ForgotPswComponent,
+    ForgotpasswordComponent,
+    ResetpwdComponent,
     DashboardComponent
     
     
@@ -59,7 +66,7 @@ const route:Routes=([
     DashboardModule,
     RouterModule.forRoot(route)
   ],
-  providers: [LoginService,NasdaqService ],
+  providers: [LoginService,ForgotpasswordService,ResetpwdService,NasdaqService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
