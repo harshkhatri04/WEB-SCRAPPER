@@ -16,6 +16,7 @@ const route:Routes=([  {
    component:ChartComponent
  }
  ])
+
 @NgModule({
  imports: [
    CommonModule,
@@ -36,6 +37,5 @@ const route:Routes=([  {
    ChartComponent
  ]
 })
+
 export class DashboardModule { }
-
-

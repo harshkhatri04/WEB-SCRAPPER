@@ -6,18 +6,18 @@ const nodemailer = require('nodemailer');
 const sgTransport = require('nodemailer-sendgrid-transport');
 
 // =============forgot password=============
-var LocalStrategy = require('passport-local').Strategy;
-var bcrypt = require('bcrypt-nodejs');
-var async = require('async');
-var crypto = require('crypto');
-var flash = require('express-flash');
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt-nodejs');
+const async = require('async');
+const crypto = require('crypto');
+const flash = require('express-flash');
 
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
 //==================forgotPassword===============
 
-var LocalStrategy = require('passport-local').Strategy;
-var passport = require('passport');
+
+const passport = require('passport');
 
 let nasdaq = require('../models/nasdaq');
 let request = require('request');
@@ -31,34 +31,34 @@ const configuration = require('./../config/googleAuth');
 const passportFacebook = require('../auth/facebook');
 
 module.exports = function(router) {
-
-    router.post('/users', function(req, res) {
-
-        var user = new User();
+    // signup url
+    router.post('/users', (req, res) => {
+        let user = new User();
         user.name = req.body.name;
         user.password = req.body.password;
         user.email = req.body.email;
         user.mobile = req.body.mobile;
-        //user.temporaryToken =  jwt.sign({ user }, config.secret);
+        // checking if fields are empty or not
         if (req.body.name == null || req.body.password == null || req.body.email == null || req.body.mobile == null) {
             res.json({ success: false, message: 'Ensure all the fields are filled' });
         } else {
-            user.save(function(err) {
+            user.save((err) => {
+                // return name of error in case of error
                 if (err) {
                     if (err.errors.name) {
                         res.json({ success: false, message: err.errors.name.message });
                     }
 
                 } else {
-                    var transporter = nodemailer.createTransport({
+                    let transporter = nodemailer.createTransport({
                         service: 'gmail',
                         auth: {
                             user: 'personalizedemailer@gmail.com',
                             pass: 'niit@123'
                         }
                     });
-
-                    var mailOptions = {
+                    // email template
+                    let mailOptions = {
                         from: 'personalizedemailer@gmail.com',
                         to: user.email,
                         subject: 'Registered on Personalized-Emailer',
@@ -72,17 +72,11 @@ module.exports = function(router) {
                             console.log(error);
                         } else {
                             console.log('Email sent: ' + info.response);
-
-
-                            //res.send(token);
-
                         }
                     });
 
                     res.json({ success: true, message: 'user created' });
                 }
-
-
             })
         }
     });
@@ -95,9 +89,7 @@ module.exports = function(router) {
             }
         })
     })
-
-
-
+    // login url
     router.get('/signin/:email/:password', function(req, res) {
 
         console.log(req.params)
@@ -220,15 +212,11 @@ module.exports = function(router) {
                         console.log(token);
                     }
                 });
-
-
             }
         ], function(err) {
             if (err) return next(err);
             res.redirect('/forgot');
         });
-        /*console.log(rpwtoken);
-        res.send(rpwtoken);*/
     });
 
     router.get('/reset/:token', function(req, res) {
