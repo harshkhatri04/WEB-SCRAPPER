@@ -16,6 +16,7 @@ import { ForgotpasswordService } from './mailer/forgotpassword/forgotpassword.se
 import { ResetpwdService } from './mailer/resetpwd/resetpwd.service' 
 import { NasdaqService } from './mailer/dashboard/service/nasdaq.service';
 import { DashboardModule } from './mailer/dashboard/dashboard.module';
+import { SignUpService } from './mailer/sign-up/sign-up.service';
 const route:Routes=([
 
 
@@ -66,7 +67,7 @@ const route:Routes=([
     DashboardModule,
     RouterModule.forRoot(route)
   ],
-  providers: [LoginService,ForgotpasswordService,ResetpwdService,NasdaqService ],
+  providers: [LoginService,ForgotpasswordService,ResetpwdService,NasdaqService ,SignUpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
