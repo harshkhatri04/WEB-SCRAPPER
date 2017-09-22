@@ -1,0 +1,37 @@
+.box{
+
+}
+.signup{
+  margin-top: 5%;
+  margin-right: 0%;
+}
+
+.row{
+  margin-top:4%;
+}
+
+.row label{
+  margin-top:5%;
+}
+
+.row button{
+  margin-top:5%;
+}
+
+.barcolor{
+   background-color: #e6e6e6;
+}
+a{
+   color:black;
+}
+
+
+
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+  }
