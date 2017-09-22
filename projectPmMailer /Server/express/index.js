@@ -3,7 +3,6 @@ const app = express();
 const mongoose = require('mongoose');
 const router = express.Router();
 const routes = require('./routes/api')(router);
-const auth = require('./routes/auth')
 const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -40,9 +39,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use('/api', routes);
 
-//middleware for google-auth
-app.use('/', auth);
-
 //reset pwd middleware
 app.use(logger('dev'));
 app.use(session({ secret: 'session secret key' }));
@@ -54,8 +50,7 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/app/views/index.html'))
 });
 
-const db = 'mongodb://localhost/testing';
-mongoose.connect(db, (err) => {
+mongoose.connect(config.DATABASE, (err) => {
     if (err)
         console.log('error occurred')
     else
@@ -63,7 +58,7 @@ mongoose.connect(db, (err) => {
 
 })
 
-app.listen(config.port, () => {
+app.listen(config.PORT, () => {
     console.log('listening ');
 });
 

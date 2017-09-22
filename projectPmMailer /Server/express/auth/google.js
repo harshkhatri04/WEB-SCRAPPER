@@ -4,9 +4,9 @@ const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const config = require ('../config/googleAuth')
 
 passport.use(new GoogleStrategy({
-        clientID: config.clientID,
-        clientSecret: config.clientSecret,
-        callbackURL: config.callbackURL
+        clientID: config.CLIENT_ID,
+        clientSecret: config.CLIENT_SECRET,
+        callbackURL: config.CALLBACK_URL
     },
     function(accessToken, refreshToken, profile, done) {
         //check user table for anyone with a facebook ID of profile.id

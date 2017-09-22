@@ -1,5 +1,5 @@
 module.exports = {
-    'secret': 'nodeauthsecret',
-    'database': 'mongodb://localhost/testregister',
-    'port': 3000
+    'SECRET': 'nodeauthsecret',
+    'DATABASE': 'mongodb://localhost/testregister',
+    'PORT': 3000
 }
