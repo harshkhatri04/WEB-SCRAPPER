@@ -38,7 +38,7 @@
             <div [hidden]="formDir.submitted">
               <div class="form-group">
                 <div class="row">
-                  <input id="email" type="email" class="form-control" name="email" value="" placeholder="Email Address" formControlName="email" required [(ngModel)]="emailID">
+                  <input id="email" type="email" class="form-control" name="email" placeholder="Email Address" formControlName="email" required [(ngModel)]="emailID">
                   <div *ngIf="email.invalid && (email.dirty || email.touched)">
                     <div *ngIf="email.errors.required">
                       Email is required.
@@ -52,7 +52,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <input id="pwd" type="password" class="form-control" name="pwd" value="" placeholder="Password" formControlName="pwd" required [(ngModel)]="password">
+                  <input id="pwd" type="password" class="form-control" name="pwd" placeholder="Password" formControlName="pwd" required [(ngModel)]="password">
                   <div *ngIf="pwd.invalid && (pwd.dirty || email.touched)">
                     <div *ngIf="pwd.errors.required">
                       Password is required.
