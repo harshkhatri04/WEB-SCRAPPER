@@ -6,7 +6,7 @@
   <app-navbar></app-navbar>
 </div>
 <!-- sidebar added -->
-<div class="container-fluid">
+<div class="container">
 <div class="col-md-4">
         
   <app-sidebar></app-sidebar>
@@ -30,11 +30,12 @@
               </select>
             </div>
             <br> &nbsp;
-            <button (click)="search(selectedname.value)" class="btn btn-primary" type="button"> {{config.dashboard.SEARCH}}</button>
+            <button (click)="search(selectedname.value)" class="btn btn-outline-primary" type="button"> {{config.dashboard.SEARCH}}</button>
           </div>
+          <div class="container">
           <div class="col-md-4">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-8">
             <br>
             <table class="table table">
               <thead>
@@ -50,6 +51,7 @@
               </tbody>
             </table>
           </div>
+        </div>
         </div>
       </div>
     </main>

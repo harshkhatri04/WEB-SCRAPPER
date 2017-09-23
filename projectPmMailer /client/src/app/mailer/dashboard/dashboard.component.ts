@@ -5,7 +5,7 @@ import { config } from '../../config/config';
 @Component({
  selector: 'app-dashboard',
  templateUrl: './dashboard.component.html',
- styleUrls: ['./dashboard.component.css','./animate.min.css','./light-bootstrap-dashboard.css','./demo.css','./pe-icon-7-stroke.css']
+ styleUrls: ['./dashboard.component.css']
 })
 
 export class DashboardComponent implements OnInit { 
