@@ -13,8 +13,8 @@
               <img class="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="First slide">
               <div class="carousel-caption d-none d-md-block">
                 <div class="banner-text">
-                  <h2>Stock Market</h2>
-                  <p>The real key to making money in stocks is not to get scared out of them.</p>
+                  <h2>{{config.login.STOCK_MARKET}}</h2>
+                  <p>{{config.login.PICTURE_DESCRIPTION_1}}</p>
                 </div>
               </div>
             </div>
@@ -22,8 +22,8 @@
               <img class="d-block img-fluid" src="https://images.pexels.com/photos/7097/people-coffee-tea-meeting.jpg" alt="First slide">
               <div class="carousel-caption d-none d-md-block">
                 <div class="banner-text">
-                  <h2>Stock Market</h2>
-                  <p>Stock market bubbles don't grow out of thin air. They have a solid basis in reality, but reality as distorted by a misconception.</p>
+                  <h2>{{config.login.STOCK_MARKET}}</h2>
+                  <p>{{config.login.PICTURE_DESCRIPTION_2}}</p>
                 </div>
               </div>
             </div>
@@ -32,13 +32,13 @@
       </div>
       <div class="col-md-4 login-sec">
         <!-- Login Form -->
-        <h2 class="text-center">Login</h2>
+        <h2 class="text-center">{{config.login.LOGIN}}</h2>
         <form class="login-form">
           <form [formGroup]="form" #formDir="ngForm">
             <div [hidden]="formDir.submitted">
               <div class="form-group">
                 <div class="row">
-                  <input id="email" type="email" class="form-control" name="email" placeholder="Email Address" formControlName="email" required [(ngModel)]="emailID">
+                  <input id="email" type="email" class="form-control" name="email" placeholder={{config.login.EMAIL}} formControlName="email" required [(ngModel)]="emailID">
                   <div *ngIf="email.invalid && (email.dirty || email.touched)">
                     <div *ngIf="email.errors.required">
                       Email is required.
@@ -52,7 +52,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <input id="pwd" type="password" class="form-control" name="pwd" placeholder="Password" formControlName="pwd" required [(ngModel)]="password">
+                  <input id="pwd" type="password" class="form-control" name="pwd" placeholder={{config.login.PASSWORD}} formControlName="pwd" required [(ngModel)]="password">
                   <div *ngIf="pwd.invalid && (pwd.dirty || email.touched)">
                     <div *ngIf="pwd.errors.required">
                       Password is required.
@@ -63,13 +63,13 @@
                   </div>
                 </div>
                 <div>
-                  <a [routerLink]="'/forgot'" style="color: blue">Forgot Password</a>
+                  <a [routerLink]="'/forgot'" style="color: blue">{{config.login.FORGET_PASSWORD}}</a>
                 </div>
                 <div>
                   <div class="row">
                     <div class="btn">
-                      <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="checkUser(emailID,password)">Login</button>
-                      <a [routerLink]="'/signup'" style="color: blue">New User</a>
+                      <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="checkUser(emailID,password)">{{config.login.LOGIN}}</button>
+                      <a [routerLink]="'/signup'" style="color: blue">{{config.login.NEW_USER}}</a>
                     </div>
                   </div>
                 </div>
@@ -78,11 +78,11 @@
           </form>
         </form>
         <div class="buttonLogin">
-          <button class="btn"(click)='loginByFacebook()'>
-            Login With Facebook
+          <button class="loginBtn loginBtn--facebook"(click)='loginByFacebook()'>
+           {{config.login.FACEBOOK}}
           </button>
           <button class="loginBtn loginBtn--google" (click)='loginByGoogle()'>
-            Login With Google
+            {{config.login.GOOGLE}}
           </button>
         </div>
       </div>

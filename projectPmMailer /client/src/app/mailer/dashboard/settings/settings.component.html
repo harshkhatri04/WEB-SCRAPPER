@@ -1,57 +1,54 @@
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-
-<body>
   <app-navbar></app-navbar>
-  <app-sidebar></app-sidebar>
-  <div class="container-fluid ">
-    <div class="row"></div>
+
+  <div class="container-fluid">
+   
     <br>
     <div class="row margin">
-      <div class="col-md-3"></div>
+      <div class="col-md-3"> </div>
       <div class="col-md-6">
-        <h3>Settings</h3>
+<br>
+        <h3 style="color: black">{{config.settings.SETTINGS}}</h3>
         <br>
         <form>
           <!-- Read-Only Field of Name displayed from database  -->
-          <input class="form-control" type="text" placeholder="Name from Database" readonly>
+          <input class="form-control" type="text" placeholder={{config.settings.NAME_FROM_DATABASE}} readonly>
           <br>
           <!-- Read-Only Field of Mobile displayed from database  -->
-          <input class="form-control" type="text" placeholder="Mobile from Database" readonly>
+          <input class="form-control" type="text" placeholder={{config.settings.MOBILE_FROM_DATABASE}} readonly>
           <br>
           <!-- Collapsable tab to Update name and Mobile starts here  -->
           <div class="card">
             <div class="card-header" role="tab" id="headingFour">
-              <h5 class="mb-0"><a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Update Name and Mobile</a></h5>
+              <h5 class="mb-0"><a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">{{ config.settings.UPDATE_NAME_AND_MOBILE }}</a></h5>
             </div><br>
             <div id="collapseFour" class="collapse show" role="tabpanel" aria-labelledby="headingFour">
               <div class="card-block">
                 <div class="form-group">
-                	<input type="text" class="form-control" id="inputName" placeholder="Name">
+                	<input type="text" class="form-control" id="inputName" placeholder={{config.settings.NAME}}>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="inputMobile" placeholder="Mobile">
+                  <input type="text" class="form-control" id="inputMobile" placeholder={{config.settings.MOBILE}}>
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">{{config.settings.SAVE}}</button>
               </div>
             </div>
           </div>
           <!-- Collapsable tab to Update name and Mobile ends here  -->
           <br>
           <!-- Read-Only Field of Email displayed from database  -->
-          <input class="form-control" type="text" placeholder="Email id from Database" readonly>
+          <input class="form-control" type="text" placeholder={{config.settings.EMAIL_ID_DATABASE}} readonly>
           <br>
           <!-- Collapsable tab to Add Alternate Email-Id start -->
           <div class="card">
             <div class="card-header" role="tab" id="headingOne">
-              <h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Add Alternate Email-ID</a></h5>
+              <h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">{{config.settings.ALTERNATE_EMAIL}}</a></h5>
             </div><br>
             <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
               <div class="card-block">
                 <div class="form-group">
                   <input type="password" class="form-control" id="inputEmail" placeholder="Email">
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">{{config.settings.SAVE }}</button>
               </div>
             </div>
           </div>
@@ -60,20 +57,20 @@
           <!-- Collapsable tab to Update Password starts  -->
           <div class="card">
             <div class="card-header" role="tab" id="headingTwo">
-              <h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Update Password</a></h5>
+              <h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">{{config.settings.UPDATE_PASSWORD}}</a></h5>
             </div><br>
             <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
               <div class="card-block">
                 <div class="form-group">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Current Password">
+                  <input type="password" class="form-control" id="inputPassword" placeholder={{config.settings.CURRENT_PASSWORD}}>
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="New Password">
+                  <input type="password" class="form-control" id="inputPassword" placeholder={{config.settings.NEW_PASSWORD}}>
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Confirm Password">
+                  <input type="password" class="form-control" id="inputPassword" placeholder={{config.settings.CURRENT_PASSWORD}}>
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">{{config.settings.SAVE }}</button>
               </div>
             </div>
           </div>
@@ -82,28 +79,28 @@
           <!-- Collapsable tab to Update Mailing Preferences starts  -->
           <div class="card">
             <div class="card-header" role="tab" id="headingThree">
-              <h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Update Mailing Preferences</a></h5>
+              <h5 class="mb-0"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">{{config.settings.MAILING_PREFERENCE}}</a></h5>
             </div><br>
             <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
               <div class="card-block">
                 <fieldset class="form-group">
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked> Daily
+                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked> {{config.settings.DAILY}}
                     </label>
                   </div>
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2"> Weekly
+                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2"> {{config.settings.WEEKLY}}
                     </label>
                   </div>
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3"> Monthly
+                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3"> {{config.settings.MONTHLY}}
                     </label>
                   </div>
                 </fieldset>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">{{config.settings.SAVE}}</button>
               </div>
             </div>
           </div>
@@ -113,4 +110,3 @@
       </div>
     </div>
   </div>
-</body>
