@@ -2,19 +2,19 @@ const User = require('../models/userModel')
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
+const configure = require('../config/configure');
 const nodemailer = require('nodemailer');
 const sgTransport = require('nodemailer-sendgrid-transport');
 
-// =============forgot password=============
+//forgot password
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt-nodejs');
 const async = require('async');
 const crypto = require('crypto');
 const flash = require('express-flash');
-
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
-//==================forgotPassword===============
+//forgotPassword End
 
 
 const passport = require('passport');
@@ -51,15 +51,15 @@ module.exports = function(router) {
 
                 } else {
                     let transporter = nodemailer.createTransport({
-                        service: 'gmail',
+                        service: configure.serviceProvider,
                         auth: {
-                            user: 'personalizedemailer@gmail.com',
-                            pass: 'niit@123'
+                            user: configure.mailSendingId,
+                            pass: configure.mailSendingPass
                         }
                     });
                     // email template
                     let mailOptions = {
-                        from: 'personalizedemailer@gmail.com',
+                        from: configure.mailSendingId,
                         to: user.email,
                         subject: 'Registered on Personalized-Emailer',
                         text: 'Hello,\n\n' +
@@ -120,7 +120,7 @@ module.exports = function(router) {
     });
 
 
-    /*==================reset pwd routes=================*/
+    //reset pwd routes
     passport.use(new LocalStrategy(function(email, password, done) {
         User.findOne({ email: email }, function(err, user) {
             if (err) return done(err);
@@ -144,7 +144,7 @@ module.exports = function(router) {
             done(err, user);
         });
     });
-
+    // route to provide token on forgotpassword
     router.get('/forgot/:email', function(req, res, next) {
 
         console.log('reset')
@@ -156,7 +156,7 @@ module.exports = function(router) {
                     // console.log('err');
                 });
             },
-
+            //function to check that email id exists or not
             function(token, done) {
                 rpwtoken = token;
                 console.log(req.params.email);
@@ -170,33 +170,34 @@ module.exports = function(router) {
 
                     user.resetPasswordToken = token;
 
-                    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+                    user.resetPasswordExpires = Date.now() + configure.tokenValidity; // 1 hour validity for link
 
                     user.save(function(err) {
                         done(err, token, user);
                     });
                 });
             },
+            //function to send a reset link on email
             function(token, user, done) {
 
                 var nodemailer = require('nodemailer');
 
                 var transporter = nodemailer.createTransport({
-                    service: 'gmail',
+                    service: configure.serviceProvider,
                     auth: {
-                        user: 'personalizedemailer@gmail.com',
-                        pass: 'niit@123'
+                        user: configure.mailSendingId,
+                        pass: configure.mailSendingPass
                     }
                 });
 
                 var mailOptions = {
-                    from: 'personalizedemailer@gmail.com',
+                    from: configure.mailSendingId,
                     to: user.email,
                     subject: 'Password Reset',
                     text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                         'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                         /*+ req.headers.host +*/
-                        'http://localhost:3000/api/reset/' + token + '\n\n' +
+                        configure.resetLinkUrl + token + '\n\n' +
                         'If you did not request this, please ignore this email and your password will remain unchanged.\n',
 
                 };
@@ -218,20 +219,20 @@ module.exports = function(router) {
             res.redirect('/forgot');
         });
     });
-
+    // route to take reset password request
     router.get('/reset/:token', function(req, res) {
         var rpwtoken = req.params.token;
+        //checking token validity
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
             if (!user) {
                 req.flash('error', 'Password reset token is invalid or has expired.');
-                return res.redirect('http://localhost:4200/forgot/');
+                return res.redirect(configure.OnFailureRedirect);
             }
-            res.redirect('http://localhost:4200/set/' + rpwtoken);
+            res.redirect(configure.OnSuccessRedirect + rpwtoken);
 
         });
     });
-
-
+    //route to reset password
     router.post('/reset/:token', function(req, res) {
         console.log(req.params)
         console.log(req.body)
@@ -247,7 +248,7 @@ module.exports = function(router) {
                     user.password = req.body.password;
                     user.resetPasswordToken = undefined;
                     user.resetPasswordExpires = undefined;
-
+                    //saving password
                     user.save(function(err) {
                         req.logIn(user, function(err) {
                             done(err, user);
@@ -255,37 +256,19 @@ module.exports = function(router) {
                     });
                 });
             },
-            /* function(user, done) {
-               var smtpTransport = nodemailer.createTransport('SMTP', {
-            	 service: 'SendGrid',
-            	 auth: {
-            	   user: '!!! YOUR SENDGRID email !!!',
-            	   pass: '!!! YOUR SENDGRID PASSWORD !!!'
-            	 }
-               });
-               var mailOptions = {
-            	 to: user.email,
-            	 from: 'passwordreset@demo.com',
-            	 subject: 'Your password has been changed',
-            	 text: 'Hello,\n\n' +
-            	   'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
-               };
-               smtpTransport.sendMail(mailOptions, function(err) {
-            	 req.flash('success', 'Success! Your password has been changed.');
-            	 done(err);
-               });
-             }*/
+
         ], function(err) {
             res.redirect('/');
         });
     });
 
-    /*=================reset pwd=================*/
-router.get('/logout', function (req, res) {
-    console.log("agaya")
-  req.session.destroy();
-  res.send("logout success!");
-});
+    //reset pwd end
+
+    //route for logout
+    router.get('/logout', function(req, res) {
+        req.session.destroy();
+        res.send("logout success!");
+    });
 
     //Dashboard
 
@@ -378,16 +361,16 @@ router.get('/logout', function (req, res) {
         })
     );
     /* GOOGLE ROUTER Ends */
-/* FACEBOOK ROUTER */
-router.get('/auth/facebook',
-  passportFacebook.authenticate('facebook'));
+    /* FACEBOOK ROUTER */
+    router.get('/auth/facebook',
+        passportFacebook.authenticate('facebook'));
 
-router.get('/auth/facebook/callback',
-  passportFacebook.authenticate('facebook', { failureRedirect: 'http://localhost:4200/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('http://localhost:4200/dashboard');
-  });
- 
+    router.get('/auth/facebook/callback',
+        passportFacebook.authenticate('facebook', { failureRedirect: 'http://localhost:4200/login' }),
+        function(req, res) {
+            // Successful authentication, redirect home.
+            res.redirect('http://localhost:4200/dashboard');
+        });
+
     return router;
 }

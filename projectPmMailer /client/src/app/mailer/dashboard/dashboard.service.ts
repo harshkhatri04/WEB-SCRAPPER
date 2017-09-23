@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 export class DashboardService {
 
   constructor(private http : Http) { }
+   //method for logout
    signout()
      {
      	const url = 'http://localhost:3000/api/logout/'

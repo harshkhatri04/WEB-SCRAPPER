@@ -27,16 +27,13 @@ export class NavbarComponent implements OnInit {
   		console.log(data);
   	})
   }
-
+ // method for logout
    logout(){
-      
               this.DashboardService.signout()
                   .subscribe((res) => {
 
                   	this.router.navigateByUrl('logout')
                   })
-
-
                 }
 
 }
