@@ -33,6 +33,19 @@ export const config =
 	"NEW_USER":"New User",
 	"FACEBOOK":"Login With Facebook",
 	"GOOGLE":"Login With Google"
+},
+
+"dashboard":{
+"PERSONALISED_MAILER":"Personalised Mailer",
+"SEARCH":"Search",
+"NEWS":"News"
+},
+
+"sidebar":{
+"DASHBOARD":"Dashboard",
+"SETTINGS":"Settings",
+"MAILS":"Mails",
+"CHARTS":"Charts"
 }
 
 }

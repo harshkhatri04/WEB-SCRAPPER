@@ -1,6 +1,6 @@
 <!-- navbar started --> 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="#">Personalised Mailer</a>
+  <a class="navbar-brand" href="#">{{config.dashboard.PERSONALISED_MAILER}}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,13 +9,13 @@
   <!-- navbar elements -->
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" [routerLink]="'/dashboard'">Dashboard <span class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="'/dashboard'">{{config.sidebar.DASHBOARD}} <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="'/charts'">Charts</a>
+        <a class="nav-link" [routerLink]="'/charts'">{{config.sidebar.CHARTS}}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="'/settings'">Settings</a>
+        <a class="nav-link" [routerLink]="'/settings'">{{config.sidebar.SETTINGS}}</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Disabled</a>

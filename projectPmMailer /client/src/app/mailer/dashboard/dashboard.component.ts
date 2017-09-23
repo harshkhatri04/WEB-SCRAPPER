@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NasdaqService} from './service/nasdaq.service';
+import { config } from '../../config/config';
 
 @Component({
  selector: 'app-dashboard',
@@ -13,9 +14,14 @@ data:any
 dat:any=[];
 val:any=['ETF','Bonds','Stocks','NASDAQ']
     
-    a:any;    ngOnInit() {      
+    a:any; 
+    config:any;   
+
+    ngOnInit() {      
         this.nas.getnas().subscribe((data)=>{              
         	this.list=data;console.log(this.list)    })
+
+        this.getConfig()
 }
   search(name){
 this.a={
@@ -26,5 +32,13 @@ this.a={
            this.dat=res.data;
             })
        }
+
+       getConfig():any {
+    return Promise.resolve(config)
+    .then(data => {
+      this.config = data;
+      console.log(data)
+    })
+  }
  
 }
