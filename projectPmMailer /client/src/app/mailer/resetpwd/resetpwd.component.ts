@@ -1,7 +1,7 @@
 import { Component, OnInit, Input,OnChanges,SimpleChanges} from '@angular/core';
 import { FormBuilder,FormGroup,FormControl,Validators} from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
-
+import { Router } from '@angular/router';
 import { ResetpwdService } from './resetpwd.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class ResetpwdComponent implements OnInit {
 
    tkn : any;
 
-  constructor(private ResetpwdService : ResetpwdService, private route : ActivatedRoute){
+  constructor(private ResetpwdService : ResetpwdService, private route : ActivatedRoute,private Router :Router){
 
     this.route.params.subscribe(params => this.tkn = (params.token));
   }
@@ -50,7 +50,7 @@ export class ResetpwdComponent implements OnInit {
     this.ResetpwdService.resetPassword(this.mydata,this.tkn)
                   .subscribe((res) => {
                       console.log(res)
-                      
+                      this.Router.navigateByUrl('logout')
                   })
                   
 

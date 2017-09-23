@@ -10,6 +10,7 @@ const session = require('express-session');
 const cors = require('cors');
 const config = require('./config/database')
 const logger = require('./services/app.logger');
+const configure = require('./config/configure')
 
 /*======forgot password====*/
 var LocalStrategy = require('passport-local').Strategy;

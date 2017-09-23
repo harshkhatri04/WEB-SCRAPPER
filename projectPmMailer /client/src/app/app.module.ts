@@ -17,6 +17,7 @@ import { ResetpwdService } from './mailer/resetpwd/resetpwd.service'
 import { NasdaqService } from './mailer/dashboard/service/nasdaq.service';
 import { DashboardModule } from './mailer/dashboard/dashboard.module';
 import { SignUpService } from './mailer/sign-up/sign-up.service';
+import { DashboardService } from './mailer/dashboard/dashboard.service';
 const route:Routes=([
 
 
@@ -43,8 +44,12 @@ const route:Routes=([
   },
    {
     path:'',component:LoginComponent
-  }
+  },
+  {
+   path:'logout',
+   component: LoginComponent
 
+  }
 ])
 
 @NgModule({
@@ -56,8 +61,6 @@ const route:Routes=([
     ForgotpasswordComponent,
     ResetpwdComponent,
     DashboardComponent
-    
-    
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,7 @@ const route:Routes=([
     DashboardModule,
     RouterModule.forRoot(route)
   ],
-  providers: [LoginService,ForgotpasswordService,ResetpwdService,NasdaqService ,SignUpService],
+  providers: [LoginService,ForgotpasswordService,ResetpwdService,DashboardService,NasdaqService ,SignUpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

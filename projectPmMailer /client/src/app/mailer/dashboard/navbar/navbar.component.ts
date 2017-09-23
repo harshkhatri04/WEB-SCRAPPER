@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+
+import {DashboardService} from '../dashboard.service'
+import { Router } from '@angular/router'
+
 import {config} from '../../../config/config'
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -7,8 +12,11 @@ import {config} from '../../../config/config'
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private DashboardService:DashboardService,private router : Router) { }
+
  config: any;
+
   ngOnInit() {
   	this.getConfig();
   }
@@ -19,5 +27,13 @@ export class NavbarComponent implements OnInit {
   		console.log(data);
   	})
   }
+ // method for logout
+   logout(){
+              this.DashboardService.signout()
+                  .subscribe((res) => {
+
+                  	this.router.navigateByUrl('logout')
+                  })
+                }
 
 }
