@@ -40,7 +40,7 @@
             <div [hidden]="formDir.submitted">
               <div class="form-group">
                 <div class="row">
-                  <input id="name" type="text" class="form-control" name="pwd" placeholder="Name" formControlName="name" required>
+                  <input id="name" type="text" class="form-control" name="pwd" placeholder="Name" formControlName="name" required [(ngModel)]="nameFirst">
                   <!-- Validation on the required name field -->
                   <div *ngIf="name.invalid && (name.dirty || name.touched)">
                     <div *ngIf="name.errors.required">
@@ -55,7 +55,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <input id="email" type="email" class="form-control" name="email" value="" placeholder="Email Address" formControlName="email" required [(ngModel)]="emailID">
+                  <input id="email" type="email" class="form-control" name="email"  placeholder="Email Address" formControlName="email" required [(ngModel)]="emailID">
                   <!-- Validation on the required email field -->
                   <div *ngIf="email.invalid && (email.dirty || email.touched)">
                     <div *ngIf="email.errors.required">
@@ -70,7 +70,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <input id="mobile" type="text" class="form-control" name="mobile" placeholder="mobile" formControlName="mobile" required>
+                  <input id="mobile" type="text" class="form-control" name="mobile" placeholder="mobile" formControlName="mobile" required  [(ngModel)]="mobileNo">
                   <!-- Validation on the required mobile field -->
                   <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
                     <div *ngIf="mobile.errors.required">
@@ -88,7 +88,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <input id="pwd" type="password" class="form-control" name="pwd" placeholder="Password" formControlName="pwd" required>
+                  <input id="pwd" type="password" class="form-control" name="pwd" placeholder="Password" formControlName="pwd" required [(ngModel)]="pwdFirst">
                   <!-- Validation on the required password field -->
                   <div *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)">
                     <div *ngIf="pwd.errors.required">
@@ -103,7 +103,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <input id="cpwd" type="password" class="form-control" name="cpwd" placeholder="Password" formControlName="cpwd" required>
+                  <input id="cpwd" type="password" class="form-control" name="cpwd" placeholder="Password" formControlName="cpwd" required [(ngModel)]="pwdConf"> 
                   <!-- Validation on the confirm password field -->
                   <div *ngIf="cpwd.invalid && (cpwd.dirty || cpwd.touched)">
                     <div *ngIf="cpwd.errors.required">
@@ -122,7 +122,7 @@
                 </div>
                 <!-- Registration form ends -->
                 <div class="btn"><!-- Register Button -->
-                  <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="addUser(name.value,email.value,mobie.value,pwd.value,cpwd.value)">Register</button>
+                  <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="addUser(nameFirst,emailID,mobileNo,pwdFirst,pwdConf)">Register</button>
                 </div>
               </div>
             </div>
