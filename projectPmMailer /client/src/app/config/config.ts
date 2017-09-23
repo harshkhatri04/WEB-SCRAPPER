@@ -1,6 +1,6 @@
+export const config =
 {
-	{
-		settings: {
+		"settings": {
 	"SETTINGS":"Settings",
 	"UPDATE_NAME_AND_MOBILE":"Update Name and Mobile",
 	"NAME":"Name",
@@ -14,7 +14,13 @@
 	"CONFIRM_PASSWORD":"Confirm Password",
 	"MAILING_PREFERENCE":"Update Mailing Preferences",
 	"DAILY":"Daily",
-	"WEEKELY":"Weekly",
+	"WEEKLY":"Weekly",
 	"MONTHLY":"Monthly",
 }
+}
+
+
+
+
+
 
