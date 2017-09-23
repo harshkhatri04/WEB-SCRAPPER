@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
-
+import { config } from '../../config/config';
 
 
 @Component({
@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   value: any;
   hero = { email: '', pwd: '' };
   form: FormGroup;
+  config: any;
   ngOnInit(): void {
     this.form = new FormGroup({ /*Validation functions through regex*/
       'email': new FormControl(this.hero.email, [
@@ -28,6 +29,8 @@ export class LoginComponent implements OnInit {
         Validators.minLength(4)
       ]),
     });
+
+    this.getConfig()
   }
   get email() { return this.form.get('email'); }
 
@@ -61,4 +64,11 @@ export class LoginComponent implements OnInit {
       })
   }  
 
+ getConfig():any {
+    return Promise.resolve(config)
+    .then(data => {
+      this.config = data;
+      console.log(data)
+    })
+  }
 }

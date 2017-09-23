@@ -14,10 +14,10 @@
         <br>
         <form>
           <!-- Read-Only Field of Name displayed from database  -->
-          <input class="form-control" type="text" placeholder="Name from Database" readonly>
+          <input class="form-control" type="text" placeholder={{config.settings.NAME_FROM_DATABASE}} readonly>
           <br>
           <!-- Read-Only Field of Mobile displayed from database  -->
-          <input class="form-control" type="text" placeholder="Mobile from Database" readonly>
+          <input class="form-control" type="text" placeholder={{config.settings.MOBILE_FROM_DATABASE}} readonly>
           <br>
           <!-- Collapsable tab to Update name and Mobile starts here  -->
           <div class="card">
@@ -27,10 +27,10 @@
             <div id="collapseFour" class="collapse show" role="tabpanel" aria-labelledby="headingFour">
               <div class="card-block">
                 <div class="form-group">
-                	<input type="text" class="form-control" id="inputName" placeholder="Name">
+                	<input type="text" class="form-control" id="inputName" placeholder={{config.settings.NAME}}>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="inputMobile" placeholder="Mobile">
+                  <input type="text" class="form-control" id="inputMobile" placeholder={{config.settings.MOBILE}}>
                 </div>
                 <button type="submit" class="btn btn-primary">{{config.settings.SAVE}}</button>
               </div>
@@ -39,7 +39,7 @@
           <!-- Collapsable tab to Update name and Mobile ends here  -->
           <br>
           <!-- Read-Only Field of Email displayed from database  -->
-          <input class="form-control" type="text" placeholder="Email id from Database" readonly>
+          <input class="form-control" type="text" placeholder={{config.settings.EMAIL_ID_DATABASE}} readonly>
           <br>
           <!-- Collapsable tab to Add Alternate Email-Id start -->
           <div class="card">
@@ -65,13 +65,13 @@
             <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
               <div class="card-block">
                 <div class="form-group">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Current Password">
+                  <input type="password" class="form-control" id="inputPassword" placeholder={{config.settings.CURRENT_PASSWORD}}>
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="New Password">
+                  <input type="password" class="form-control" id="inputPassword" placeholder={{config.settings.NEW_PASSWORD}}>
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Confirm Password">
+                  <input type="password" class="form-control" id="inputPassword" placeholder={{config.settings.CURRENT_PASSWORD}}>
                 </div>
                 <button type="submit" class="btn btn-primary">{{config.settings.SAVE }}</button>
               </div>
