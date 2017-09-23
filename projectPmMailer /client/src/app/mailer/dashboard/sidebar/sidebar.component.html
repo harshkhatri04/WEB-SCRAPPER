@@ -6,13 +6,13 @@
   <div class="list-group border-0 card text-center text-md-left">
     <a href="#menu1" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-dashboard"></i> <span class="d-none d-md-inline"></span> </a>
     <!-- sidebar elements -->
-    <a [routerLink]="'/dashboard'" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-film"></i> <span class="d-none d-md-inline">Dashboard</span></a>
+    <a [routerLink]="'/dashboard'" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-film"></i> <span class="d-none d-md-inline">{{config.sidebar.DASHBOARD}}</span></a>
     
     
-    <a [routerLink]="'/settings'" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-gear"></i> <span class="d-none d-md-inline">Settings </span></a>
+    <a [routerLink]="'/settings'" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-gear"></i> <span class="d-none d-md-inline">{{config.sidebar.SETTINGS}} </span></a>
     
-    <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-envelope"></i> <span class="d-none d-md-inline">Mails</span></a>
-    <a [routerLink]="'/charts'" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-bar-chart-o"></i> <span class="d-none d-md-inline">Charts</span></a>
+    <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-envelope"></i> <span class="d-none d-md-inline">{{config.sidebar.MAILS}}</span></a>
+    <a [routerLink]="'/charts'" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-bar-chart-o"></i> <span class="d-none d-md-inline">{{config.sidebar.CHARTS}}</span></a>
    
   </div>
 </div>

@@ -20,7 +20,7 @@
         <div class="marg">
           <br>
           <div class="col-md-6">
-            <h2 class="text-muted"><small>Personalised Mailer</small></h2>
+            <h2 class="text-muted"><small>{{config.dashboard.PERSONALISED_MAILER}}</small></h2>
             <div>
             <!-- dropdown for company -->
               <select #selectedname class="drop">
@@ -30,7 +30,7 @@
               </select>
             </div>
             <br> &nbsp;
-            <button (click)="search(selectedname.value)" class="btn btn-primary" type="button"> Search</button>
+            <button (click)="search(selectedname.value)" class="btn btn-primary" type="button"> {{config.dashboard.SEARCH}}</button>
           </div>
           <div class="col-md-4">
           </div>
@@ -39,11 +39,11 @@
             <table class="table table">
               <thead>
                 <tr>
-                  <h3 class="heading">News</h3>
+                  <h3 class="heading">{{config.dashboard.NEWS}}</h3>
                 </tr>
               </thead>
               <!-- news table from websites -->
-              <tbody *ngFor="let data of dat">
+              <tbody *ngFor="let data of news">
                 <tr>
                   <td>{{data.News}}</td>
                 </tr>
