@@ -24,8 +24,8 @@ let request = require('request');
 let cheerio = require('cheerio');
 
 const mongoose = require('mongoose');
-const connect = mongoose.connect('mongodb://192.168.252.47:27017/testing');
-
+/*const connect = mongoose.connect('mongodb://192.168.252.47:27017/testing');*/
+const connect = mongoose.connect('mongodb://localhost/testing');
 const passportGoogle = require('../auth/google');
 const configuration = require('./../config/googleAuth');
 const passportFacebook = require('../auth/facebook');
@@ -281,7 +281,11 @@ module.exports = function(router) {
     });
 
     /*=================reset pwd=================*/
-
+router.get('/logout', function (req, res) {
+    console.log("agaya")
+  req.session.destroy();
+  res.send("logout success!");
+});
 
     //Dashboard
 

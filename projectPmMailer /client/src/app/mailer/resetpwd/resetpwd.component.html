@@ -38,7 +38,7 @@
             <div [hidden]="formDir.submitted">
               <div class="form-group">
                 <div class="row">
-                  <input id="pwd" type="password" class="form-control" name="pwd" placeholder="Password" formControlName="pwd" required [(ngModel)]="password">
+                  <input id="pwd" type="password" class="form-control" name="pwd" placeholder="Password" formControlName="pwd" required #resetpwd>
                   <div *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)">
                     <div *ngIf="pwd.errors.required">
                       Password is required.
@@ -66,7 +66,7 @@
                   </div>
                 </div>
                 <div>
-                  <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="forgot(emailId.value)">Reset Password</button>
+                  <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="reset(resetpwd.value)">Reset Password</button>
                 </div>
               </div>
             </div>
