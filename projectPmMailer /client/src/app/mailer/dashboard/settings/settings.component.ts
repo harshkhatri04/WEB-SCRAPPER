@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { config } from '../../../config/config';
+
+
+ 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -6,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
+config:any;
   constructor() { }
 
+
   ngOnInit() {
+  	this.getConfig()
+  	
   }
 
+  getConfig():any {
+  	return Promise.resolve(config)
+  	.then(data => {
+  		this.config = data;
+  		console.log(data)
+  	})
+  }
 }
