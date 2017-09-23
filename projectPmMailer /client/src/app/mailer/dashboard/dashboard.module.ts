@@ -7,6 +7,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { ChartComponent } from './chart/chart.component';
 import {ChartsModule as Ng2Charts} from 'ng2-charts';
 
+//routes used in this component
 const route:Routes=([  {
    path:'settings',
    component:SettingsComponent
@@ -17,6 +18,7 @@ const route:Routes=([  {
  }
  ])
 
+//all the modules and declaration
 @NgModule({
  imports: [
    CommonModule,

@@ -3,15 +3,22 @@
 	@Injectable()
 	export class NasdaqService {
 	  constructor(private http: Http) {}
-	  getnas() {
-	    return this.http.get('http://localhost:3000/api/details')
+
+	  getstockapi:string='http://localhost:3000/api';
+	  //get the stocks code and company of nasdaq
+	  getnasdaqstocks() {
+	    return this.http.get(this.getstockapi+'/details')
 	      .map(res =>
 	        res.json()
 	      )
 	  }
+	  //get the stocks code and company of nasdaq End
+
+	  //get the news of respective code which was selected in dropdown 
 	  getresult(term) {
 	    console.log(term)
-	    return this.http.post('http://localhost:3000/api/news', term)
+	    return this.http.post(this.getstockapi+'/news', term)
 	      .map((res: Response) => res.json())
 	  }
+	  //get the news of respective code which was selected in dropdown
 	}
