@@ -42,13 +42,13 @@ export class SignUpComponent implements OnInit {
         /*Validation functions on the password field*/
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(8)
+        Validators.maxLength(20)
       ]),
       'cpwd': new FormControl(this.hero.cpwd, [
         /*Validation functions on the confirm password field*/
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(8)
+        Validators.maxLength(20)
       ]),
     });
   }
@@ -61,6 +61,7 @@ export class SignUpComponent implements OnInit {
 
   /*Function to post the data to express server*/
   addUser(name, email, mobile, pwd, cpwd) {
+
     this.user = {
       "name": name,
       "email": email,
@@ -68,9 +69,11 @@ export class SignUpComponent implements OnInit {
       "password": pwd,
       "confirmPassword": cpwd
     }
+    console.log(this.user.name)
     this.SignUpService.addUser(this.user)
       .subscribe((res) => {
         if (res)
+          console.log(res)
           this.router.navigateByUrl('login')        
       })    
   }
