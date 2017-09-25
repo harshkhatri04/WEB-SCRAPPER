@@ -4,7 +4,8 @@ let sinon = require('sinon');
 let App = require('./../index');
 
 let model = require('./../models/userModel');
-
+let detail = require('./../models/nasdaq')
+let detailStub = sinon.stub(detail, 'find')
 let insertStub = sinon.stub(model.prototype, 'save');
 let modelStub = sinon.stub(model, 'find');
 let findStub = sinon.stub(model, 'findOne')
@@ -74,6 +75,19 @@ describe('GET', () => {
                 }
                 console.log('in end')
             })
-
+//test case for HTTP Get method for stock price of NASDAQ for WSJ website
+describe('get method', () => {
+    it('respond with json', (done) => {
+        detailStub.yields(null, [{ Code: "100", Company: "abc" }])
+        request(App)
+        .get('/api/details')
+        .expect('Content-Type',/json/)
+            
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.body[0].Code).to.be.equal("100");
+                expect(res.body[0].Company).to.be.equal("abc");
+                done();
+            });
     });
 });

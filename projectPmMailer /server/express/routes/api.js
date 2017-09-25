@@ -24,8 +24,8 @@ let request = require('request');
 let cheerio = require('cheerio');
 
 const mongoose = require('mongoose');
-/*const connect = mongoose.connect('mongodb://192.168.252.47:27017/testing');*/
-const connect = mongoose.connect('mongodb://localhost/testing');
+const connect = mongoose.connect('mongodb://192.168.252.47:27017/testing');
+/*const connect = mongoose.connect('mongodb://localhost/testing');*/
 const passportGoogle = require('../auth/google');
 const configuration = require('./../config/googleAuth');
 const passportFacebook = require('../auth/facebook');
@@ -313,6 +313,8 @@ module.exports = function(router) {
         })
 
     })
+ 
+
     //HTTP Get method start
 
     //HTTP Post method for stock price of NASDAQ for WSJ website
