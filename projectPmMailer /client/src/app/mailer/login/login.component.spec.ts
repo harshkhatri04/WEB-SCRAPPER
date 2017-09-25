@@ -5,6 +5,12 @@ import{browser,element,by} from 'protractor';
 
 describe('LoginComponent', ()=>{
 
+<<<<<<< HEAD
+=======
+/*describe('LoginComponent', () => {
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
+>>>>>>> aaffdc97f718480dfb4959ff761728935b2f9640
 
  beforeEach(()=>{
     browser.get('http://localhost:4200');
@@ -19,4 +25,12 @@ describe('LoginComponent', ()=>{
 
  })
 
+<<<<<<< HEAD
 });
+=======
+  it('should be created', () => {
+    expect(component).toBeTruthy();
+  });
+});
+*/
+>>>>>>> aaffdc97f718480dfb4959ff761728935b2f9640
