@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {config} from '../../../config/config';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -8,8 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarComponent implements OnInit {
 
   constructor() { }
-
+   config:any;
   ngOnInit() {
+  	this.getConfig()
   }
-
+ 
+ getConfig():any {
+ 	return Promise.resolve(config)
+ 	.then(data => { 
+ 		this.config=data;
+ 		console.log(data);
+ 	})
+ }
 }
