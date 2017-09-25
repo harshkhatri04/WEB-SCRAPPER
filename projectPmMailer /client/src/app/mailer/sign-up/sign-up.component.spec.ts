@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-/*import { async, ComponentFixture, TestBed } from '@angular/core/testing';
->>>>>>> aaffdc97f718480dfb4959ff761728935b2f9640
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -27,12 +23,4 @@ element(by.id('name')).sendKeys('user');
 
  })
 
-<<<<<<< HEAD
 });
-=======
-  it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
-});
-*/
->>>>>>> aaffdc97f718480dfb4959ff761728935b2f9640
