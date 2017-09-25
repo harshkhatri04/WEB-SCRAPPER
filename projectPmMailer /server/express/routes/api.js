@@ -38,6 +38,7 @@ module.exports = function(router) {
         user.password = req.body.password;
         user.email = req.body.email;
         user.mobile = req.body.mobile;
+        console.log("In api "+req.body.name)
         // checking if fields are empty or not
         if (req.body.name == null || req.body.password == null || req.body.email == null || req.body.mobile == null) {
             res.json({ success: false, message: 'Ensure all the fields are filled' });
