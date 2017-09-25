@@ -4,7 +4,8 @@ let sinon = require('sinon');
 let App = require('./../index');
 
 let model = require('./../models/userModel');
-
+let detail = require('./../models/nasdaq')
+let detailStub = sinon.stub(detail, 'find')
 let insertStub = sinon.stub(model.prototype, 'save');
 let modelStub = sinon.stub(model, 'find');
 
@@ -46,30 +47,19 @@ describe('GET /', () => {
     });
 });
 
-// login url
-router.get('/signin/:email/:password', function(req, res) {
-    User.findOne({
-        email: req.params.email
-    }, function(err, user) {
-        if (err) throw err;
-
-        if (!user) {
-
-            res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
-        } else {
-            // check if password matches
-            user.comparePassword(req.params.password, function(err, isMatch) {
-                if (isMatch && !err) {
-                    // if user is found and password is right create a token
-                    var token = jwt.sign({ user }, config.secret);
-                    // return the information including token as JSON
-                    res.send({ success: true, token: 'JWT ' + token });
-                    //console.log({ success: true, token: 'JWT ' + token })*/
-                } else {
-                    //console.log("found")
-                    res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
-                }
-            });
-        }
+//test case for HTTP Get method for stock price of NASDAQ for WSJ website
+describe('get method', () => {
+    it('respond with json', (done) => {
+        detailStub.yields(null, [{ Code: "100", Company: "abc" }])
+        request(App)
+        .get('/api/details')
+        .expect('Content-Type',/json/)
+            
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.body[0].Code).to.be.equal("100");
+                expect(res.body[0].Company).to.be.equal("abc");
+                done();
+            })
     });
 });

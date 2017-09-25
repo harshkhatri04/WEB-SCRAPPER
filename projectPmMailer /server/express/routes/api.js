@@ -310,6 +310,8 @@ module.exports = function(router) {
         })
 
     })
+ 
+
     //HTTP Get method start
 
     //HTTP Post method for stock price of NASDAQ for WSJ website
