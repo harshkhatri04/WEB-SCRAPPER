@@ -38,19 +38,21 @@ module.exports = function(router) {
         user.password = req.body.password;
         user.email = req.body.email;
         user.mobile = req.body.mobile;
-        console.log("In api "+req.body.name)
         // checking if fields are empty or not
         if (req.body.name == null || req.body.password == null || req.body.email == null || req.body.mobile == null) {
             res.json({ success: false, message: 'Ensure all the fields are filled' });
         } else {
+
             user.save((err) => {
                 // return name of error in case of error
                 if (err) {
+
                     if (err.errors.name) {
                         res.json({ success: false, message: err.errors.name.message });
                     }
 
                 } else {
+
                     let transporter = nodemailer.createTransport({
                         service: configure.serviceProvider,
                         auth: {
@@ -75,8 +77,7 @@ module.exports = function(router) {
                             console.log('Email sent: ' + info.response);
                         }
                     });
-
-                    res.json({ success: true, message: 'user created' });
+                    res.json(" success: true, message: 'user created' ");
                 }
             })
         }
@@ -92,31 +93,33 @@ module.exports = function(router) {
     })
     // login url
     router.get('/signin/:email/:password', function(req, res) {
-
-        console.log(req.params)
+        console.log(req.params.email)
         User.findOne({
             email: req.params.email
         }, function(err, user) {
-            if (err) throw err;
-
+            if (err) {
+                throw err;
+            }
             if (!user) {
 
-                res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
+                res.send({ success: false, msg: 'Authentication failed. User not found.' })
+                //res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
             } else {
                 // check if password matches
                 user.comparePassword(req.params.password, function(err, isMatch) {
+
                     if (isMatch && !err) {
                         // if user is found and password is right create a token
                         var token = jwt.sign({ user }, config.secret);
                         // return the information including token as JSON
-                        res.send({ success: true, token: 'JWT ' + token });
+                        res.send(" success: true, token: 'JWT ' + token ");
                         //console.log({ success: true, token: 'JWT ' + token })*/
                     } else {
                         //console.log("found")
                         res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
                     }
                 });
-            }
+            }Argument of type '"async value"' is not assignable to parameter of type 'Expected<Response>'
         });
     });
 
