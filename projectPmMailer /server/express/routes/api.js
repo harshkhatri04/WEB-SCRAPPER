@@ -38,6 +38,7 @@ module.exports = function(router) {
         user.password = req.body.password;
         user.email = req.body.email;
         user.mobile = req.body.mobile;
+        console.log("In api "+req.body)
         // checking if fields are empty or not
         if (req.body.name == null || req.body.password == null || req.body.email == null || req.body.mobile == null) {
             res.json({ success: false, message: 'Ensure all the fields are filled' });
@@ -374,16 +375,16 @@ module.exports = function(router) {
         })
     );
     /* GOOGLE ROUTER Ends */
-/* FACEBOOK ROUTER */
-router.get('/auth/facebook',
-  passportFacebook.authenticate('facebook'));
+    /* FACEBOOK ROUTER */
+    router.get('/auth/facebook',
+        passportFacebook.authenticate('facebook'));
 
-router.get('/auth/facebook/callback',
-  passportFacebook.authenticate('facebook', { failureRedirect: 'http://localhost:4200/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('http://localhost:4200/dashboard');
-  });
- 
+    router.get('/auth/facebook/callback',
+        passportFacebook.authenticate('facebook', { failureRedirect: 'http://localhost:4200/login' }),
+        function(req, res) {
+            // Successful authentication, redirect home.
+            res.redirect('http://localhost:4200/dashboard');
+        });
+
     return router;
 }

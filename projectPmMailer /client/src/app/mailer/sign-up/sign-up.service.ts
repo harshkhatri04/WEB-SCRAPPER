@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+/*import { Injectable } from '@angular/core';
 
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -17,3 +17,4 @@ export class SignUpService {
       .map(res => res.json());
   }
 }
+*/
