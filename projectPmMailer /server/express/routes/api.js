@@ -119,7 +119,7 @@ module.exports = function(router) {
                         res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
                     }
                 });
-            }Argument of type '"async value"' is not assignable to parameter of type 'Expected<Response>'
+            }
         });
     });
 
