@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {NasdaqService} from './service/nasdaq.service';
 import { config } from '../../config/config';
+import {DashboardService} from './dashboard.service'
+import { Router } from '@angular/router'
+
 
 @Component({
  selector: 'app-dashboard',
@@ -10,7 +13,7 @@ import { config } from '../../config/config';
 
 export class DashboardComponent implements OnInit { 
 
-constructor(private nasdaq:NasdaqService) { }
+constructor(private nasdaq:NasdaqService,private DashboardService:DashboardService,private router : Router) { }
 
 list:any=[]
 data:any
@@ -57,5 +60,15 @@ this.nasdaq.getresult(this.value).subscribe(res=>{
   }
 
  //This function load the news basis of the the stock which was selected in dropdown 
- 
+
+ logout(){
+              this.DashboardService.signout()
+                  .subscribe((res) => {
+
+                    this.router.navigateByUrl('logout')
+                  })
+                }
+
 }
+
+ 
