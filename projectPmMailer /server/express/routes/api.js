@@ -112,9 +112,11 @@ module.exports = function(router) {
                         // if user is found and password is right create a token
                         var token = jwt.sign({ user }, config.secret);
                         // return the information including token as JSON
-                        res.send(" success: true, token: 'JWT ' + token ");
+                        console.log('success')
+                        res.send({ success: true, token: 'JWT ' + token });
                         //console.log({ success: true, token: 'JWT ' + token })*/
                     } else {
+                    	                        console.log('success')
                         //console.log("found")
                         res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
                     }
