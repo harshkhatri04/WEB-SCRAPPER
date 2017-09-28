@@ -37,17 +37,17 @@ export class LoginComponent implements OnInit {
   get pwd() { return this.form.get('pwd'); }
 
   checkUser(emailID, pwd) {
-
     this.LoginService.findUser(emailID, pwd)
       .subscribe((res) => {
-
         this.value = res.token;
         if (this.value)
           this.router.navigateByUrl('dashboard')
+        else
+          console.log('error')
+        //this.router.navigateByUrl('login')
       })
 
   }
-
 
   //Method for google-auth
   loginByGoogle() {
@@ -56,19 +56,20 @@ export class LoginComponent implements OnInit {
         this.router.navigate(["/"]).then(result => { window.location.href = res.url; });
       })
   }
+
   //Method for facebook-auth   
   loginByFacebook() {
     this.LoginService.facebook()
       .subscribe((res) => {
         this.router.navigateByUrl('dashboard')
       })
-  }  
+  }
 
- getConfig():any {
+  getConfig(): any {
     return Promise.resolve(config)
-    .then(data => {
-      this.config = data;
-      console.log(data)
-    })
+      .then(data => {
+        this.config = data;
+        //console.log(data)
+      })
   }
 }

@@ -69,7 +69,6 @@ export class SignUpComponent implements OnInit {
       "password": pwd,
       "confirmPassword": cpwd
     }
-    console.log(this.user.name)
     this.SignUpService.addUser(this.user)
       .subscribe((res) => {
         if (res)
