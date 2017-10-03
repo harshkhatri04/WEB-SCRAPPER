@@ -68,7 +68,7 @@
                 <div>
                   <div class="row">
                     <div class="btn">
-                      <button id="loginbutton" type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="checkUser(emailID,password)">{{config.login.LOGIN}}</button>
+                      <button id="loginbutton" type="submit" class="btn btn-primary button" [disabled]="form.invalid" (click)="checkUser(emailID,password)">{{config.login.LOGIN}}</button>
                       <a [routerLink]="'/signup'" style="color: blue">{{config.login.NEW_USER}}</a>
                     </div>
                   </div>
@@ -78,8 +78,8 @@
           </form>
         </form>
         <div class="buttonLogin">
-          <button class="loginBtn loginBtn--facebook"(click)='loginByFacebook()'>
-           {{config.login.FACEBOOK}}
+          <button class="loginBtn loginBtn--facebook" (click)='loginByFacebook()'>
+            {{config.login.FACEBOOK}}
           </button>
           <button class="loginBtn loginBtn--google" (click)='loginByGoogle()'>
             {{config.login.GOOGLE}}
