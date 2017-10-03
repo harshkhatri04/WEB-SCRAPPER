@@ -1,38 +1,70 @@
-import { TestBed, inject } from '@angular/core/testing';
-
+import { TestBed, async, inject } from '@angular/core/testing';
+import {
+  HttpModule,
+  Http,
+  Response,
+  ResponseOptions,
+  XHRBackend
+} from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 import { LoginService } from './login.service';
+describe('LoginService', () => {
 
-/*describe('LoginService', () => {
   beforeEach(() => {
+
     TestBed.configureTestingModule({
-      providers: [LoginService]
+      imports: [HttpModule],
+      providers: [
+        LoginService,
+        { provide: XHRBackend, useClass: MockBackend },
+      ]
     });
   });
 
-  it('should be created', inject([LoginService], (service: LoginService) => {
-    expect(service).toBeTruthy();
+ describe('findUser()', () => {
+
+    it('Local login should return login credentials',
+      inject([LoginService, XHRBackend], (loginService, mockBackend) => {
+        const mockResponse = { email: "abc@gmail.com", pwd: "12345" };
+
+
+
+        mockBackend.connections.subscribe((connection) => {
+          connection.mockRespond(new Response(new ResponseOptions({
+            body: JSON.stringify(mockResponse)
+          })));
+        });
+
+        loginService.findUser().subscribe((user) => {
+          expect(user.email).toEqual('abc@gmail.com');
+          expect(user.pwd).toEqual('12345');
+
+        });
+
+      }));
+
+    it('can instantiate service when inject service',
+    inject([LoginService], (service: LoginService) => {
+      expect(service instanceof LoginService).toBe(true);
   }));
-});
-*/
 
-describe('Service : LoginService',()=>{
 
-	let service : LoginService;
-	let http;
 
-	beforeEach(()=>{
-		service = new LoginService(http)
-	})
 
-		it('should return response'),()=>{
-			expect(service.google()).toBeTruthy();
-		}
+ it('can instantiate service with "new"', inject([Http], (http: Http) => {
+    expect(http).not.toBeNull('http should be provided');
+    let service = new LoginService(http);
+    expect(service instanceof LoginService).toBe(true, 'new service should be ok');
+  }));
 
-		it('should return response'),()=>{
-			expect(service.facebook()).toBeTruthy();
-		}
 
-	afterEach(()=>{
-		service = null;
-	})	
-})
+ it('can provide the mockBackend as XHRBackend',
+    inject([XHRBackend], (backend: MockBackend) => {
+      expect(backend).not.toBeNull('backend should be provided');
+  }));
+  });
+
+   
+  });
+  
+
