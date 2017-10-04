@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
 	form: FormGroup;
 	config: any;
 	
+	emailID:string;
+	password:string;
+
 	ngOnInit(): void {
 		this.form = new FormGroup({ /*Validation functions through regex*/
 			'email': new FormControl(this.hero.email, [
