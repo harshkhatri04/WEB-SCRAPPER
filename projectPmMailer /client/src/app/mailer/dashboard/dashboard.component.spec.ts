@@ -11,8 +11,7 @@ beforeEach(()=>{
     
 })
   it('should pass as user', function(){
-    
-    element(by.id('search')).click();
+        element(by.id('search')).click();
     browser.pause();
 
 })

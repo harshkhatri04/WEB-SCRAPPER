@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { SignUpService } from './sign-up.service';
 import { Router } from '@angular/router';
+import { config } from '../../config/config';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit { 
-
+  config=config;
   constructor(private SignUpService: SignUpService, private router: Router) {}
   /*Object that store all the fields of the form */
   hero = { name: '', mobile: '', email: '', pwd: '', cpwd: '' };
