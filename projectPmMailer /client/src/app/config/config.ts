@@ -45,6 +45,15 @@ export const config = {
     "SETTINGS": "Settings",
     "MAILS": "Mails",
     "CHARTS": "Charts"
-  }
+  },
+
+  "signup":{
+      "STOCK_MARKET":"Stock Market",
+      "REGISTER":"Register",
+      "NAME":"Name",
+      "EMAIL_ADDRESS":"Email Address",
+      "MOBILE":"Mobile",
+      "PASSWORD":"Password"
+   }
 
 }
