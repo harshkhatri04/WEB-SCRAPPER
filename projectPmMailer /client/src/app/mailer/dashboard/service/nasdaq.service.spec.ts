@@ -51,6 +51,22 @@ describe('NasdaqService (mockBackend)', () => {
     expect(service instanceof NasdaqService).toBe(true, 'new service should be ok');
   }));
 
+  it('get details methods',
+    inject([NasdaqService, XHRBackend], (NasdaqService, mockBackend) => {
+      const mockResponse = { term: "AADA" };
+
+      mockBackend.connections.subscribe((connection) => {
+        connection.mockRespond(new Response(new ResponseOptions({
+          body: JSON.stringify(mockResponse)
+        })));
+      });
+
+      NasdaqService.getresult().subscribe((nasdaqObj) => {
+        expect(nasdaqObj.term).toEqual('AADA');
+      });
+
+    }));
+
   describe('when getNasdaq', () => {
     it('test getRequest function',
       inject([NasdaqService, XHRBackend], (nasdaqService, mockBackend) => {
