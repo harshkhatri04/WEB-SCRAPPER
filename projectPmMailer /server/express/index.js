@@ -7,7 +7,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
-const cors = require('cors');
+//const cors = require('cors');
 const config = require('./config/database')
 const logger = require('./services/app.logger');
 const configure = require('./config/configure')
@@ -26,7 +26,14 @@ var cookieParser = require('cookie-parser');
 /*========================*/
 
 // Middleware
-app.use(cors());
+//app.use(cors());
+
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
+    next();
+});
 
 app.use(session({
     secret: 's3cr3t',
@@ -60,8 +67,8 @@ mongoose.connect(db, (err) => {
 
 app.listen(config.port, () => {
 
-		logger.info("application running on port 3000");
-   
+    logger.info("application running on port 3000");
+
 });
 
 module.exports = app;

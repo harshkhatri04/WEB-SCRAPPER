@@ -8,6 +8,8 @@ import 'rxjs/add/operator/map';
 export class SignUpService {
 
   constructor(private http: Http) {}
+
+  
   //method to hit server 
   addUser(user) {
     console.log(user)
