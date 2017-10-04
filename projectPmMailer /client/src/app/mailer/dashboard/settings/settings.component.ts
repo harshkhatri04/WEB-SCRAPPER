@@ -10,20 +10,20 @@ import { config } from '../../../config/config';
 })
 export class SettingsComponent implements OnInit {
 
-config:any;
+config=config;
   constructor() { }
 
 
   ngOnInit() {
-  	this.getConfig()
+  	// this.getConfig()
   	
   }
 
-  getConfig():any {
-  	return Promise.resolve(config)
-  	.then(data => {
-  		this.config = data;
-  		console.log(data)
-  	})
-  }
+  // getConfig():any {
+  // 	return Promise.resolve(config)
+  // 	.then(data => {
+  // 		this.config = data;
+  // 		console.log(data)
+  // 	})
+  // }
 }

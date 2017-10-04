@@ -3,7 +3,7 @@ import { FormBuilder,FormGroup,FormControl,Validators} from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { ResetpwdService } from './resetpwd.service';
-
+import { config } from '../../config/config';
 @Component({
   selector: 'app-resetpwd',
   templateUrl: './resetpwd.component.html',
@@ -12,7 +12,7 @@ import { ResetpwdService } from './resetpwd.service';
 export class ResetpwdComponent implements OnInit {
 
    tkn : any;
-
+   config=config;
   constructor(private ResetpwdService : ResetpwdService, private route : ActivatedRoute,private Router :Router){
 
     this.route.params.subscribe(params => this.tkn = (params.token));
