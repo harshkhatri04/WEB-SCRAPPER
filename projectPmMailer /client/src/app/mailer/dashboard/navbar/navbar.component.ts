@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import {DashboardService} from '../dashboard.service'
+import { DashboardService } from '../dashboard.service'
 import { Router } from '@angular/router'
 
-import {config} from '../../../config/config'
+import { config } from '../../../config/config'
 
 @Component({
   selector: 'app-navbar',
@@ -13,27 +13,27 @@ import {config} from '../../../config/config'
 export class NavbarComponent implements OnInit {
 
 
-  constructor(private DashboardService:DashboardService,private router : Router) { }
+  constructor(private DashboardService: DashboardService, private router: Router) {}
 
- config: any;
+  config: any;
 
   ngOnInit() {
-  	this.getConfig();
+    this.getConfig();
   }
-  getConfig(){
-  	return Promise.resolve(config)
-  	.then(data => {
-  		this.config=data;
-  		console.log(data);
-  	})
+  getConfig() {
+    return Promise.resolve(config)
+      .then(data => {
+        this.config = data;
+        console.log(data);
+      })
   }
- // method for logout
-   logout(){
-              this.DashboardService.signout()
-                  .subscribe((res) => {
+  // method for logout
+  logout() {
+    this.DashboardService.signout()
+      .subscribe((res) => {
 
-                  	this.router.navigateByUrl('logout')
-                  })
-                }
+        this.router.navigateByUrl('logout')
+      })
+  }
 
 }
