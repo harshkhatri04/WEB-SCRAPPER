@@ -23,7 +23,7 @@ describe('LoginService', () => {
     });
   });
 
-  it('Local login should return login credentials', fakeAsync(
+  it('Local login should return login credentials',
     inject([LoginService, XHRBackend], (loginService, mockBackend) => {
       const mockResponse = { email: "abc@gmail.com", pwd: "12345" };
       mockBackend.connections.subscribe((connection) => {
@@ -39,7 +39,7 @@ describe('LoginService', () => {
 
       });
 
-    })));
+    }));
 
   it('can instantiate service when inject service',
     inject([LoginService], (service: LoginService) => {
@@ -56,4 +56,5 @@ describe('LoginService', () => {
     inject([XHRBackend], (backend: MockBackend) => {
       expect(backend).not.toBeNull('backend should be provided');
     }));
+
 });
