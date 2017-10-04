@@ -13,8 +13,8 @@
               <img class="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="First slide">
               <div class="carousel-caption d-none d-md-block">
                 <div class="banner-text">
-                  <h2>Stock Market</h2>
-                  <p>The real key to making money in stocks is not to get scared out of them.</p>
+                  <h2>{{config.resetpwd.STOCK_MARKET}}</h2>
+                  <p>{{config.resetpwd.PIC}}</p>
                 </div>
               </div>
             </div>
@@ -22,8 +22,8 @@
               <img class="d-block img-fluid" src="https://images.pexels.com/photos/7097/people-coffee-tea-meeting.jpg" alt="First slide">
               <div class="carousel-caption d-none d-md-block">
                 <div class="banner-text">
-                  <h2>Stock Market</h2>
-                  <p>Stock market bubbles don't grow out of thin air. They have a solid basis in reality, but reality as distorted by a misconception.</p>
+                  <h2>{{config.resetpwd.STOCK_MARKET}}</h2>
+                  <p>{{config.resetpwd.PIC_TWO}}</p>
                 </div>
               </div>
             </div>
@@ -32,7 +32,7 @@
       </div>
       <div class="col-md-4 login-sec">
         <!-- Reset Password Form -->
-        <h2 class="text-center">New Password</h2>
+        <h2 class="text-center">{{config.resetpwd.NEW_PASSWORD}}</h2>
         <form class="reset-form">
           <form [formGroup]="form" #formDir="ngForm">
             <div [hidden]="formDir.submitted">
@@ -49,7 +49,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <input id="cpwd" type="password" class="form-control" name="cpwd" value="" placeholder="ConfirmPassword" formControlName="cpwd" required>
+                  <input id="cpwd" type="password" class="form-control" name="cpwd" value="" placeholder={{config.resetpwd.CONFIRM_PASSWORD}} formControlName="cpwd" required>
                   <div *ngIf="cpwd.invalid && (cpwd.dirty || cpwd.touched)">
                     <div *ngIf="cpwd.errors.required">
                       Password is required.
@@ -66,7 +66,7 @@
                   </div>
                 </div>
                 <div>
-                  <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="reset(resetpwd.value)">Reset Password</button>
+                  <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="reset(resetpwd.value)">{{config.resetpwd.RESET_PASSWORD}}</button>
                 </div>
               </div>
             </div>

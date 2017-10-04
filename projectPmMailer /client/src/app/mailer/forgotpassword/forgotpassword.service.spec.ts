@@ -1,4 +1,4 @@
-import { TestBed, fakeAsync, inject } from '@angular/core/testing';
+import { TestBed, fakeAsync,async, inject } from '@angular/core/testing';
 import {
   HttpModule,
   Http,
@@ -21,47 +21,37 @@ describe('ForgotpasswordService', () => {
     });
   });
 
-  
+  it('Forget Password should return email Id', 
+    inject([ForgotpasswordService, XHRBackend], (forgotpasswordService, mockBackend) => {
+      const mockResponse = { emailId: 'abc@gmail.com' };
 
-    it('Forget Password should return email Id',fakeAsync(
-      inject([ForgotpasswordService, XHRBackend], (forgotpasswordService, mockBackend) => {
-        const mockResponse = { emailId: 'abc@gmail.com'};
+      mockBackend.connections.subscribe((connection) => {
+        console.log("ass",connection);
+        connection.mockRespond(new Response(new ResponseOptions({
+          body: JSON.stringify(mockResponse)
+        })));
+      });
 
+      forgotpasswordService.forgotPassword().subscribe((users) => {
+        expect(users.emailId).toEqual("abc@gmail.com");
 
+      });
 
-        mockBackend.connections.subscribe((connection) => {
-        	  connection.mockRespond(new Response(new ResponseOptions({
-            body: JSON.stringify(mockResponse)
-          })));
-        });
-
-        forgotpasswordService.forgotPassword().subscribe((users) => {
-          expect(users.emailId).toEqual("abc@gmail.com");
-
-        });
-
-      })));
-
-    it('can instantiate service when inject service',
-      inject([ForgotpasswordService], (service: ForgotpasswordService) => {
-       expect(service instanceof ForgotpasswordService).toBe(true);
-      }));
-
-
-
-
-    it('can instantiate service with "new"', inject([Http], (http: Http) => {
-      expect(http).not.toBeNull('http should be provided');
-      let service = new ForgotpasswordService(http);
-      expect(service instanceof ForgotpasswordService).toBe(true, 'new service should be ok');
     }));
 
+  it('can instantiate service when inject service',
+    inject([ForgotpasswordService], (service: ForgotpasswordService) => {
+      expect(service instanceof ForgotpasswordService).toBe(true);
+    }));
 
-    it('can provide the mockBackend as XHRBackend',
-      inject([XHRBackend], (backend: MockBackend) => {
-        expect(backend).not.toBeNull('backend should be provided');
-      }));
-  });
+  it('can instantiate service with "new"', inject([Http], (http: Http) => {
+    expect(http).not.toBeNull('http should be provided');
+    let service = new ForgotpasswordService(http);
+    expect(service instanceof ForgotpasswordService).toBe(true, 'new service should be ok');
+  }));
 
-
-
+  it('can provide the mockBackend as XHRBackend',
+    inject([XHRBackend], (backend: MockBackend) => {
+      expect(backend).not.toBeNull('backend should be provided');
+    }));
+});
