@@ -8,16 +8,16 @@ import {config} from '../../../config/config';
 export class SidebarComponent implements OnInit {
 
   constructor() { }
-   config:any;
+   config=config;
   ngOnInit() {
-  	this.getConfig()
+  	// this.getConfig()
   }
  
- getConfig():any {
- 	return Promise.resolve(config)
- 	.then(data => { 
- 		this.config=data;
- 		console.log(data);
- 	})
- }
+ // getConfig():any {
+ // 	return Promise.resolve(config)
+ // 	.then(data => { 
+ // 		this.config=data;
+ // 		console.log(data);
+ // 	})
+ // }
 }

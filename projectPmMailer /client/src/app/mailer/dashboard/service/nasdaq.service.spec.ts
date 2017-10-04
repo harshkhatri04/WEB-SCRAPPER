@@ -24,7 +24,7 @@ describe('NasdaqService (mockBackend)', () => {
     { Code: "asasas", Company: 'Windstorm' }
 
   ];
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
       providers: [
@@ -32,7 +32,7 @@ describe('NasdaqService (mockBackend)', () => {
         { provide: XHRBackend, useClass: MockBackend }
       ]
     });
-  }));
+  });
 
   it('can instantiate service when inject service',
     inject([NasdaqService], (service: NasdaqService) => {
