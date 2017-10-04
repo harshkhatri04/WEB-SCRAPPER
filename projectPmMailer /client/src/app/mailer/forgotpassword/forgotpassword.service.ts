@@ -13,7 +13,7 @@ export class ForgotpasswordService {
  	const url = 'http://localhost:3000/api/forgot/' + emailId
  	return this.http
  							.get(url)
- 							.map(res => res);
+ 							.map(res => res.json());
  }
 
 }
