@@ -18,19 +18,20 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   config: any;
   ngOnInit(): void {
-    this.form = new FormGroup({ /*Validation functions through regex*/
-      'email': new FormControl(this.hero.email, [
-        Validators.required ||
-        Validators.minLength(4),
-        Validators.pattern("[^ @]*@[^ @]*")
-      ]),
-      'pwd': new FormControl(this.hero.pwd, [
-        Validators.required,
-        Validators.minLength(4)
-      ]),
-    });
+    
+    // this.form = new FormGroup({ /*Validation functions through regex*/
+    //   'email': new FormControl(this.hero.email, [
+    //     Validators.required ||
+    //     Validators.minLength(4),
+    //     Validators.pattern("[^ @]*@[^ @]*")
+    //   ]),
+    //   'pwd': new FormControl(this.hero.pwd, [
+    //     Validators.required,
+    //     Validators.minLength(4)
+    //   ]),
+    // });
 
-    this.getConfig()
+    // this.getConfig()
   }
   get email() { return this.form.get('email'); }
 

@@ -7,7 +7,9 @@ export class LoginService {
 
 
 
-  constructor(private http: Http) {} findUser(email, password) {
+  constructor(private http: Http) {} 
+
+  findUser(email, password) {
     //console.log(credentials);
     const url = 'http://192.168.252.47:3000/api/signin/' + email + "/" + password;
     return this.http
