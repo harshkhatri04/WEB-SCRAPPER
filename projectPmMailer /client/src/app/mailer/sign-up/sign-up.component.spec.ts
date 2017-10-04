@@ -45,7 +45,6 @@ describe('testing sign up component',()=>{
   let elHeading: HTMLElement;
   
   
-
 	//async beforeEach
   beforeEach(async()=>{
   	
