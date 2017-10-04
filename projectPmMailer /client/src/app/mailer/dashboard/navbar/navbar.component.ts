@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(private DashboardService: DashboardService, private router: Router) {}
-
+  
   config: any;
 
   ngOnInit() {
