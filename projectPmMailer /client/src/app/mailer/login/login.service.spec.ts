@@ -56,4 +56,5 @@ describe('LoginService', () => {
     inject([XHRBackend], (backend: MockBackend) => {
       expect(backend).not.toBeNull('backend should be provided');
     }));
+
 });

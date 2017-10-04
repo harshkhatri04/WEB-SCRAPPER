@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 	value: any;
 	hero = { email: '', pwd: '' };
 	form: FormGroup;
-	config: any;
+	config = config;
 	
 	emailID:string;
 	password:string;
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 			]),
 		});
 
-		this.getConfig()
+	/*	this.getConfig()*/
 	}
 	get email() { return this.form.get('email'); }
 
@@ -68,11 +68,11 @@ export class LoginComponent implements OnInit {
 			})
 	}
 
-	getConfig(): any {
+/*	getConfig(): any {
 		return Promise.resolve(config)
 			.then(data => {
 				this.config = data;
 				//console.log(data)
 			})
-	}
+	}*/
 }
