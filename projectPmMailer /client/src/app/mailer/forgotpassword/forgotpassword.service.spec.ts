@@ -30,8 +30,7 @@ describe('ForgotpasswordService', () => {
 
 
         mockBackend.connections.subscribe((connection) => {
-        	console.log(JSON.parse(connection) + "connection string");
-          connection.mockRespond(new Response(new ResponseOptions({
+        	  connection.mockRespond(new Response(new ResponseOptions({
             body: JSON.stringify(mockResponse)
           })));
         });

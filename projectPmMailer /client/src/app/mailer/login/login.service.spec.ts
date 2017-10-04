@@ -38,7 +38,6 @@ describe('LoginService', () => {
         });
 
         loginService.findUser("abc@gmail.com","12345").subscribe((user) => {
-          console.log(JSON.stringify(user),"aadad");
           expect(user.email).toEqual('abc@gmail.com');
           expect(user.pwd).toEqual('12345');
 
