@@ -34,7 +34,7 @@ describe('testing navbar component', () => {
     //For interpolation of DASHBOARD
     deDashboard = fixture.debugElement.query(By.css('.dashboard'));
     elDashboard = deDashboard.nativeElement;
-    //For interpolation of CHARTS
+    //For interpolation of CHART
     deCharts = fixture.debugElement.query(By.css('.chart'));
     elCharts = deCharts.nativeElement;
     //For interpolation of SETTINGS
