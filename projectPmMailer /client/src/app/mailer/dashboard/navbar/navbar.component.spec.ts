@@ -32,7 +32,7 @@ describe('Testing NavbarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NavbarComponent);
     comp = fixture.componentInstance;
-    de = fixture.debugElement.queryAll(By.css('a'));
+    de = fixture.debugElement.query(By.css('a'));
     el = de.nativeElement;
   })
 
