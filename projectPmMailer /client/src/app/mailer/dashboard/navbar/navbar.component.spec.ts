@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing'
+import { RouterTestingModule } from '@angular/router/testing';
 import { Router, RouterLinkWithHref } from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar.component';
 import { DashboardService } from '../dashboard.service'
 
-describe('Testing NavbarComponent', () => {
+describe('testing navbar component', () => {
 
   let comp: NavbarComponent;
   let fixture: ComponentFixture < NavbarComponent > ;
@@ -17,13 +17,12 @@ describe('Testing NavbarComponent', () => {
 
   //async beforeEach
   beforeEach(async() => {
+
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        FormsModule,
-        ReactiveFormsModule
+      imports: [RouterTestingModule,
+        FormsModule, ReactiveFormsModule
       ],
-      declarations: [NavbarComponent], //declaring component which has to be tested
+      declarations: [NavbarComponent], //declaring component to be tested
       providers: [{ provide: DashboardService }]
     }).compileComponents();
   })
@@ -31,15 +30,16 @@ describe('Testing NavbarComponent', () => {
   //sync beforeEach
   beforeEach(() => {
     fixture = TestBed.createComponent(NavbarComponent);
-    comp = fixture.componentInstance;
-    de = fixture.debugElement.query(By.css('a'));
-    el = de.nativeElement;
+    comp = fixture.componentInstance; //SignUp Component instance
+    deStock = fixture.debugElement.query(By.css('.dashboard'));
+    elStock = deStock.nativeElement;
   })
 
-  it('should create Navbar Component', () => {
-    const navbar = fixture.debugElement.componentInstance;
-    expect(navbar).toBeTruthy();
-  })
+  it('should create navbar component', () => {
+    const login = fixture.debugElement.componentInstance;
+    expect(login).toBeTruthy();
+  });
+
 
   it('should display original category value through interpolation of DASHBOARD', () => {
     fixture.detectChanges();
@@ -56,4 +56,4 @@ describe('Testing NavbarComponent', () => {
     expect(el.textContent).toContain(comp.config.sidebar.SETTINGS);
   });
 
-});
+})
