@@ -14,13 +14,12 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(private DashboardService: DashboardService, private router: Router) {}
-
   config=config;
 
   ngOnInit() {
     /*this.getConfig();*/
   }
-  /*getConfig() {
+ /* getConfig() {
     return Promise.resolve(config)
       .then(data => {
         this.config = data;
