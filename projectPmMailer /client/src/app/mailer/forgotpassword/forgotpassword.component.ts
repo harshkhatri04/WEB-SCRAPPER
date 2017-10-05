@@ -1,7 +1,7 @@
-import { Component, OnInit, Input,OnChanges,SimpleChanges} from '@angular/core';
-import { FormBuilder,FormGroup,FormControl,Validators} from '@angular/forms'
-import {NgForm} from '@angular/forms';
-import { config} from '../../config/config'
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
+import { NgForm } from '@angular/forms';
+import { config } from '../../config/config'
 import { ForgotpasswordService } from './forgotpassword.service';
 
 @Component({
@@ -10,20 +10,19 @@ import { ForgotpasswordService } from './forgotpassword.service';
   styleUrls: ['./forgotpassword.component.css']
 })
 export class ForgotpasswordComponent implements OnInit {
- config=config;
-  constructor(private ForgotpasswordService : ForgotpasswordService) { }
+  config = config;
+  constructor(private ForgotpasswordService: ForgotpasswordService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  forgot(email){
-  	//console.log(email)
-  	this.ForgotpasswordService.forgotPassword(email)
-  	              .subscribe((res) => {
-                      console.log(res)
-                      
-                  })
-                  
+  forgot(email) {
+    //console.log(email)
+    this.ForgotpasswordService.forgotPassword(email)
+      .subscribe((res) => {
+        console.log(res)
+
+      })
+
 
   }
 
