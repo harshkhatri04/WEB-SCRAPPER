@@ -12,8 +12,8 @@ describe('Settings component Testing', () => {
 
   let comp: SettingsComponent;
   let fixture: ComponentFixture < SettingsComponent > ;
-  let deSettings, deUpdateName, deAlternateEmail: DebugElement;
-  let elSettings, elUpdateName, elAlternateEmail: HTMLElement;
+  let deSettings, deUpdateName, deAlternateEmail,deUpdatePwd,deMailingPref: DebugElement;
+  let elSettings, elUpdateName, elAlternateEmail,elUpdatePwd,elMailingPref: HTMLElement;
 
   beforeEach(async() => {
 
@@ -35,6 +35,10 @@ describe('Settings component Testing', () => {
     elUpdateName = deUpdateName.nativeElement;
     deAlternateEmail = fixture.debugElement.query(By.css('.alternateEmail'));
     elAlternateEmail = deAlternateEmail.nativeElement;
+    deUpdatePwd = fixture.debugElement.query(By.css('.updatePwd'));
+    elUpdatePwd = deUpdatePwd.nativeElement;
+    deMailingPref = fixture.debugElement.query(By.css('.mailingPref'));
+    elMailingPref = deMailingPref.nativeElement;
   })
 
   it('should create Settings component', () => {
@@ -56,6 +60,16 @@ describe('Settings component Testing', () => {
   it('should display original category value through interpolation of alternate email', () => {
     fixture.detectChanges();
     expect(elAlternateEmail.textContent).toContain(comp.config.settings.ALTERNATE_EMAIL);
+  });
+
+  it('should display original category value through interpolation of Update Password', () => {
+    fixture.detectChanges();
+    expect(elUpdatePwd.textContent).toContain(comp.config.settings.UPDATE_PASSWORD);
+  });
+
+   it('should display original category value through interpolation of Mailing Pref', () => {
+    fixture.detectChanges();
+    expect(elMailingPref.textContent).toContain('Update Mailing Preferences');
   });
 
 })
