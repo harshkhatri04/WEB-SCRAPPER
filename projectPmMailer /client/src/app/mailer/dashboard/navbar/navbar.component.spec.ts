@@ -12,8 +12,8 @@ describe('testing navbar component', () => {
 
   let comp: NavbarComponent;
   let fixture: ComponentFixture < NavbarComponent > ;
-  let deDashboard, deCharts, deSetting: DebugElement;
-  let elDashboard, elCharts, elSetting: HTMLElement;
+  let deDashboard, deCharts, deSetting, deMailer: DebugElement;
+  let elDashboard, elCharts, elSetting, elMailer: HTMLElement;
 
   //async beforeEach
   beforeEach(async() => {
@@ -37,13 +37,15 @@ describe('testing navbar component', () => {
     elCharts = deCharts.nativeElement;
     deSetting = fixture.debugElement.query(By.css('.settings'));
     elSetting = deSetting.nativeElement;
+    deMailer = fixture.debugElement.query(By.css('.mailer'));
+    elMailer = deMailer.nativeElement;
   })
 
+  //test case for checking whether loginComponent is created or not
   it('should create navbar component', () => {
     const login = fixture.debugElement.componentInstance;
     expect(login).toBeTruthy();
   });
-
 
   it('should display original category value through interpolation of DASHBOARD', () => {
     fixture.detectChanges();
@@ -58,6 +60,11 @@ describe('testing navbar component', () => {
   it('should display original category value through interpolation of SETTINGS', () => {
     fixture.detectChanges();
     expect(elSetting.textContent).toContain(comp.config.sidebar.SETTINGS);
+  });
+
+  it('should display original category value through interpolation of MAILER', () => {
+    fixture.detectChanges();
+    expect(elMailer.textContent).toContain(comp.config.dashboard.PERSONALISED_MAILER);
   });
 
 })
