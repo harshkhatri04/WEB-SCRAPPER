@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar.component';
 import { DashboardService } from '../dashboard.service'
 
-describe('testing sign up component', () => {
+describe('testing navbar component', () => {
 
   let comp: NavbarComponent;
   let fixture: ComponentFixture < NavbarComponent > ;
@@ -36,7 +36,7 @@ describe('testing sign up component', () => {
       elStock = deStock.nativeElement;
   })
   
-  it('should create Login component', () => {
+  it('should create navbar component', () => {
     const login = fixture.debugElement.componentInstance;
     expect(login).toBeTruthy();
   });
