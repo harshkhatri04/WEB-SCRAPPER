@@ -12,8 +12,8 @@ describe('testing navbar component', () => {
 
   let comp: NavbarComponent;
   let fixture: ComponentFixture < NavbarComponent > ;
-  let de: DebugElement;
-  let el: HTMLElement;
+  let deDashboard, deCharts, deSetting: DebugElement;
+  let elDashboard, elCharts, elSetting: HTMLElement;
 
   //async beforeEach
   beforeEach(async() => {
@@ -30,9 +30,13 @@ describe('testing navbar component', () => {
   //sync beforeEach
   beforeEach(() => {
     fixture = TestBed.createComponent(NavbarComponent);
-    comp = fixture.componentInstance; //SignUp Component instance
-    deStock = fixture.debugElement.query(By.css('.dashboard'));
-    elStock = deStock.nativeElement;
+    comp = fixture.componentInstance; //Nav Component instance
+    deDashboard = fixture.debugElement.query(By.css('.dashboard'));
+    elDashboard = deDashboard.nativeElement;
+    deCharts = fixture.debugElement.query(By.css('.chart'));
+    elCharts = deCharts.nativeElement;
+    deSetting = fixture.debugElement.query(By.css('.settings'));
+    elSetting = deSetting.nativeElement;
   })
 
   it('should create navbar component', () => {
@@ -43,17 +47,17 @@ describe('testing navbar component', () => {
 
   it('should display original category value through interpolation of DASHBOARD', () => {
     fixture.detectChanges();
-    expect(el.textContent).toContain(comp.config.sidebar.DASHBOARD);
+    expect(elDashboard.textContent).toContain(comp.config.sidebar.DASHBOARD);
   });
 
   it('should display original category value through interpolation of CHARTS', () => {
     fixture.detectChanges();
-    expect(el.textContent).toContain(comp.config.sidebar.CHARTS);
+    expect(elCharts.textContent).toContain(comp.config.sidebar.CHARTS);
   });
 
   it('should display original category value through interpolation of SETTINGS', () => {
     fixture.detectChanges();
-    expect(el.textContent).toContain(comp.config.sidebar.SETTINGS);
+    expect(elSetting.textContent).toContain(comp.config.sidebar.SETTINGS);
   });
 
 })
