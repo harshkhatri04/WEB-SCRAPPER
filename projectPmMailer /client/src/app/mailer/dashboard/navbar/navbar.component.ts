@@ -14,19 +14,19 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(private DashboardService: DashboardService, private router: Router) {}
-  
-  config: any;
+
+  config=config;
 
   ngOnInit() {
-    this.getConfig();
+    /*this.getConfig();*/
   }
-  getConfig() {
+  /*getConfig() {
     return Promise.resolve(config)
       .then(data => {
         this.config = data;
         console.log(data);
-      })
-  }
+      })*/
+  
   // method for logout
   logout() {
     this.DashboardService.signout()
