@@ -12,9 +12,10 @@ describe('Testing NavbarComponent', () => {
 
   let comp: NavbarComponent;
   let fixture: ComponentFixture < NavbarComponent > ;
-  let deStock: DebugElement;
-  let elStock: HTMLElement;
+  let de: DebugElement;
+  let el: HTMLElement;
 
+  //async beforeEach
   beforeEach(async() => {
     TestBed.configureTestingModule({
       imports: [
@@ -22,16 +23,17 @@ describe('Testing NavbarComponent', () => {
         FormsModule,
         ReactiveFormsModule
       ],
-      declarations: [NavbarComponent],
+      declarations: [NavbarComponent], //declaring component which has to be tested
       providers: [{ provide: DashboardService }]
     }).compileComponents();
   })
 
+  //sync beforeEach
   beforeEach(() => {
     fixture = TestBed.createComponent(NavbarComponent);
     comp = fixture.componentInstance;
-    deStock = fixture.debugElement.query(By.css('.dashboard'));
-    elStock = deStock.nativeElement;
+    de = fixture.debugElement.queryAll(By.css('a'));
+    el = de.nativeElement;
   })
 
   it('should create Navbar Component', () => {
@@ -39,11 +41,19 @@ describe('Testing NavbarComponent', () => {
     expect(navbar).toBeTruthy();
   })
 
-  it('should display original category value through interpolation', () => {
+  it('should display original category value through interpolation of DASHBOARD', () => {
     fixture.detectChanges();
-    console.log("1 " + elStock.textContent)
-    console.log("2 " + comp.config.sidebar.DASHBOARD)
-    expect(elStock.textContent).toContain(comp.config.sidebar.DASHBOARD);
+    expect(el.textContent).toContain(comp.config.sidebar.DASHBOARD);
+  });
+
+  it('should display original category value through interpolation of CHARTS', () => {
+    fixture.detectChanges();
+    expect(el.textContent).toContain(comp.config.sidebar.CHARTS);
+  });
+
+  it('should display original category value through interpolation of SETTINGS', () => {
+    fixture.detectChanges();
+    expect(el.textContent).toContain(comp.config.sidebar.SETTINGS);
   });
 
 });
