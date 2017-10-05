@@ -47,6 +47,15 @@ export const config = {
     "CHARTS": "Charts"
   },
 
+  "signup":{
+      "STOCK_MARKET":"Stock Market",
+      "REGISTER":"Register",
+      "NAME":"Name",
+      "EMAIL_ADDRESS":"Email Address",
+      "MOBILE":"Mobile",
+      "PASSWORD":"Password"
+   },
+
   "forgotpassword": {
     "STOCK_MARKET": "Stock Market",
     "PIC":"The real key to making money in stocks is not to get scared out of them.",
@@ -65,5 +74,6 @@ export const config = {
      "CONFIRM_PASSWORD":"ConfirmPassword", 
      "RESET_PASSWORD":"Reset Password"
 }
+
 
 }
