@@ -12,8 +12,9 @@ describe('testing Settings component',()=>{
 
   let comp:   SettingsComponent;
   let fixture: ComponentFixture<SettingsComponent>;  
+   let deStock: DebugElement;
+  let elStock: HTMLElement;
 
-  //async beforeEach
   beforeEach(async()=>{
     
      TestBed.configureTestingModule({
@@ -27,11 +28,18 @@ describe('testing Settings component',()=>{
     beforeEach(()=>{
       fixture=TestBed.createComponent(SettingsComponent);
       comp=fixture.componentInstance;
+       deStock = fixture.debugElement.query(By.css('h3'));
+       elStock = deStock.nativeElement;
   })
   
   it('should create Settings component', () => {
     const settings = fixture.debugElement.componentInstance;
     expect(settings).toBeTruthy();
+  });
+
+  it('should display original category value through interpolation', () => {
+    fixture.detectChanges();
+    expect(elStock.textContent).toContain(comp.config.settings.SETTINGS);
   });
   
 })
