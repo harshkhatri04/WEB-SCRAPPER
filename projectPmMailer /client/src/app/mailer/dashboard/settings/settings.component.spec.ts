@@ -12,8 +12,8 @@ describe('Settings component Testing', () => {
 
   let comp: SettingsComponent;
   let fixture: ComponentFixture < SettingsComponent > ;
-  let deSettings, deUpdateName, deAlternateEmail,deUpdatePwd,deMailingPref: DebugElement;
-  let elSettings, elUpdateName, elAlternateEmail,elUpdatePwd,elMailingPref: HTMLElement;
+  let deSettings, deUpdateName, deAlternateEmail,deUpdatePwd,deMailingPref,deDaily,deWeekly,deMonthly: DebugElement;
+  let elSettings, elUpdateName, elAlternateEmail,elUpdatePwd,elMailingPref,elDaily,elWeekly,elMonthly: HTMLElement;
 
   beforeEach(async() => {
 
@@ -39,6 +39,12 @@ describe('Settings component Testing', () => {
     elUpdatePwd = deUpdatePwd.nativeElement;
     deMailingPref = fixture.debugElement.query(By.css('.mailingPref'));
     elMailingPref = deMailingPref.nativeElement;
+    deDaily = fixture.debugElement.query(By.css('.daily'));
+    elDaily = deDaily.nativeElement;
+    deWeekly = fixture.debugElement.query(By.css('.weekly'));
+    elWeekly = deWeekly.nativeElement;
+    deMonthly = fixture.debugElement.query(By.css('.monthly'));
+    elMonthly = deMonthly.nativeElement;
   })
 
   it('should create Settings component', () => {
@@ -69,7 +75,22 @@ describe('Settings component Testing', () => {
 
    it('should display original category value through interpolation of Mailing Pref', () => {
     fixture.detectChanges();
-    expect(elMailingPref.textContent).toContain('Update Mailing Preferences');
+    expect(elMailingPref.textContent).toContain(comp.config.settings.MAILING_PREFERENCE);
+  });
+
+   it('should display original category value through interpolation of pref to daily', () => {
+    fixture.detectChanges();
+    expect(elDaily.textContent).toContain(comp.config.settings.DAILY);
+  });
+
+    it('should display original category value through interpolation of pref to weekly', () => {
+    fixture.detectChanges();
+    expect(elWeekly.textContent).toContain(comp.config.settings.WEEKLY);
+  });
+
+     it('should display original category value through interpolation of pref to monthly', () => {
+    fixture.detectChanges();
+    expect(elMonthly.textContent).toContain(comp.config.settings.MONTHLY);
   });
 
 })
