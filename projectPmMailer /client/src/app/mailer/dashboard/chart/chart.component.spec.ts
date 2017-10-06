@@ -35,8 +35,8 @@ describe('testing chart component', () => {
 
   //test case for checking whether Chart is created or not
   it('should create chart component', () => {
-    const login = fixture.debugElement.componentInstance;
-    expect(login).toBeTruthy();
+    const chart = fixture.debugElement.componentInstance;
+    expect(chart).toBeTruthy();
   });
 
 })
