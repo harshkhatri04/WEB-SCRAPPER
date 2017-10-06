@@ -10,7 +10,7 @@ let insertStub = sinon.stub(model.prototype, 'save');
 let modelStub = sinon.stub(model, 'find');
 let findStub = sinon.stub(model, 'findOne')
 
-describe('Insert', () => {
+describe('POST /users', () => {
     before(() => {
         insertStub.yields(null, {
             name: "Pulkit",
@@ -53,7 +53,7 @@ describe('GET /', () => {
     });
 });
 
-describe('GET', () => {
+describe('GET /signin/:email/:password', () => {
     it('respond with json', (done) => {
         findStub.withArgs({ 'email': 'Pulkit176@gmail.com', 'password': 'Pulkit@123' })
             .yields(null, {

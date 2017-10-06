@@ -40,7 +40,7 @@
             <div [hidden]="formDir.submitted">
               <div class="form-group">
                 <div class="row">
-                  <input id="name" type="text" class="form-control name" name="pwd" placeholder={{config.signup.NAME}}  formControlName="name" required [(ngModel)]="nameFirst">
+                  <input id="name" type="text" class="form-control name" name="pwd" placeholder={{config.signup.NAME}} formControlName="name" required [(ngModel)]="nameFirst">
                   <!-- Validation on the required name field -->
                   <div *ngIf="name.invalid && (name.dirty || name.touched)">
                     <div *ngIf="name.errors.required">
@@ -55,7 +55,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <input id="email" type="email" class="form-control" name="email"  placeholder={{config.signup.EMAIL_ADDRESS}} formControlName="email" required [(ngModel)]="emailID">
+                  <input id="email" type="email" class="form-control" name="email" placeholder={{config.signup.EMAIL_ADDRESS}} formControlName="email" required [(ngModel)]="emailID">
                   <!-- Validation on the required email field -->
                   <div *ngIf="email.invalid && (email.dirty || email.touched)">
                     <div *ngIf="email.errors.required">
@@ -70,7 +70,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <input id="mobile" type="text" class="form-control" name="mobile" placeholder={{config.signup.MOBILE}} formControlName="mobile" required  [(ngModel)]="mobileNo">
+                  <input id="mobile" type="text" class="form-control" name="mobile" placeholder={{config.signup.MOBILE}} formControlName="mobile" required [(ngModel)]="mobileNo">
                   <!-- Validation on the required mobile field -->
                   <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
                     <div *ngIf="mobile.errors.required">
@@ -103,7 +103,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <input id="cpwd" type="password" class="form-control " name="cpwd" placeholder={{config.signup.PASSWORD}} formControlName="cpwd" required [(ngModel)]="pwdConf"> 
+                  <input id="cpwd" type="password" class="form-control " name="cpwd" placeholder={{config.signup.PASSWORD}} formControlName="cpwd" required [(ngModel)]="pwdConf">
                   <!-- Validation on the confirm password field -->
                   <div *ngIf="cpwd.invalid && (cpwd.dirty || cpwd.touched)">
                     <div *ngIf="cpwd.errors.required">
@@ -121,8 +121,12 @@
                   </div>
                 </div>
                 <!-- Registration form ends -->
-                <div class="btn"><!-- Register Button -->
+                <div class="btn">
+                  <!-- Register Button -->
                   <button id="register" type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="addUser(nameFirst,emailID,mobileNo,pwdFirst,pwdConf)">{{config.signup.REGISTER}}</button>
+                </div>
+                <div>
+                    <a [routerLink]="'/login'" style="color: blue">{{config.signup.LOGIN}}</a>
                 </div>
               </div>
             </div>
@@ -132,4 +136,3 @@
     </div>
   </div>
 </section>
-
