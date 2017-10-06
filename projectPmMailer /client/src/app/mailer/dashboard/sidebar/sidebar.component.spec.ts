@@ -1,14 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router, RouterLinkWithHref } from '@angular/router';
+import { async, ComponentFixture, TestBed,fakeAsync, tick } from '@angular/core/testing';
+import { Router, RouterLinkWithHref,RouterLink } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing'
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { DebugElement,Directive, Injectable, Input  } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar.component';
+import { SpyLocation }         from '@angular/common/testing';
+import {Location} from '@angular/common';
+import {ChartComponent} from '../chart/chart.component';
+import {SettingsComponent} from '../settings/settings.component';
+import {DashboardComponent} from '../dashboard.component';
+import {NavbarComponent} from '../navbar/navbar.component';
+import {ChartsModule as Ng2Charts} from 'ng2-charts';
+import {RouterLinkStubDirective} from '../../../../testing/router-stub';
+/*import {click} from '../../../../testing/router-stub';*/
 
 describe('SidebarComponent', () => {
 	let component: SidebarComponent;
 	let fixture: ComponentFixture<SidebarComponent>;
+	let location: SpyLocation;
+	let links: RouterLinkStubDirective[];
+	let linkDes: DebugElement[];
 	 let deChart,deDashboard,deSetting,deMails: DebugElement;
 	let elChart,elDashboard,elSetting,elMails: HTMLElement;
 
@@ -18,9 +30,10 @@ describe('SidebarComponent', () => {
 			imports: [
 				RouterTestingModule,
 				FormsModule,
+				Ng2Charts,
 				ReactiveFormsModule
 			],
-			declarations: [ SidebarComponent ]
+			declarations: [ SidebarComponent, ChartComponent,DashboardComponent,SettingsComponent,NavbarComponent,RouterLinkStubDirective]
 		})
 		.compileComponents();
 	}));
@@ -41,7 +54,12 @@ describe('SidebarComponent', () => {
 
 		deMails = fixture.debugElement.query(By.css('.mails'));
 		elMails = deMails.nativeElement;
+
+		linkDes=fixture.debugElement.queryAll(By.directive(RouterLinkStubDirective));
+		links=linkDes.map(de=>de.injector.get(RouterLinkStubDirective)as RouterLinkStubDirective);
+    console.log(links);
 	});
+
 it('should create Sidebar Component', () => {
 		const sidebar = fixture.debugElement.componentInstance;
 		expect(sidebar).toBeTruthy();
@@ -70,5 +88,12 @@ it('should create Sidebar Component', () => {
 		fixture.detectChanges();
 		expect(elChart.textContent).toContain(component.config.sidebar.CHARTS);
 	});
+
+	it('it can get router links from template',()=>{
+  expect(links.length).toBe(3,'should have 3 links');
+  expect(links[0].linkParams).toBe('/dashboard','1st link should go to dashboard');
+  expect(links[1].linkParams).toBe('/settings','2nd link should go to settings');
+  expect(links[2].linkParams).toBe('/charts','3rd link should go to charts');
+	})
 
 });
