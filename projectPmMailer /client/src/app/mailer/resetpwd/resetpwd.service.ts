@@ -16,6 +16,7 @@ export class ResetpwdService {
  	return this.http
  							.post(url,password)
  							.map(res => res.json());
+ 							
  }
 
 

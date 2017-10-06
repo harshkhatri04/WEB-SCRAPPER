@@ -170,7 +170,7 @@ module.exports = function(router) {
                     if (!user) {
                         //console.log(email)
 
-                        req.flash('error', 'No account with that email address exists.');
+                        res.flash('error', 'No account with that email address exists.');
                         return res.redirect('/forgot');
                     }
 
@@ -264,7 +264,8 @@ module.exports = function(router) {
             },
 
         ], function(err) {
-            res.redirect('/');
+            if (err) return next(err);
+            res.send({ success: true});
         });
     });
 

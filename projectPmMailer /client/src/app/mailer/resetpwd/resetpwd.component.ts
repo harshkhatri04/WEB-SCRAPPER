@@ -50,7 +50,7 @@ export class ResetpwdComponent implements OnInit {
     this.ResetpwdService.resetPassword(this.mydata,this.tkn)
                   .subscribe((res) => {
                       console.log(res)
-                      this.Router.navigateByUrl('logout')
+                      this.Router.navigateByUrl('reset')
                   })
                   
 
