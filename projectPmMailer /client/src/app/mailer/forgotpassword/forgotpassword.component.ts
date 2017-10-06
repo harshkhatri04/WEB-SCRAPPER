@@ -20,9 +20,9 @@ export class ForgotpasswordComponent implements OnInit {
   form: FormGroup;
 
   ngOnInit(): void {
-    this.form = new FormGroup({ /*Validation functions through regex*/
+    this.form = new FormGroup({/*Validation functions through regex*/
       
-      'email': new FormControl('', [
+      'email': new FormControl(this.hero.email, [
         Validators.required ||
         Validators.minLength(4),
         Validators.pattern("[^ @]*@[^ @]*")
@@ -31,18 +31,14 @@ export class ForgotpasswordComponent implements OnInit {
     });
   }
 
-
-
-
   get pwd() { return this.form.get('email'); }
   
 
 
   forgot(email){
-  	//console.log(email)
   	this.ForgotpasswordService.forgotPassword(email)
   	              .subscribe((res) => {
-                      console.log(res)
+                      console.log(res,"false")
                       
                   })
                   

@@ -34,8 +34,6 @@ export class LoginComponent implements OnInit {
 				Validators.minLength(4)
 			]),
 		});
-
-	/*	this.getConfig()*/
 	}
 	get email() { return this.form.get('email'); }
 
@@ -44,13 +42,13 @@ export class LoginComponent implements OnInit {
 	checkUser(emailID, pwd) {
 		this.LoginService.findUser(emailID, pwd)
 			.subscribe((res) => {
-				console.log(res)
 				this.value = res.token;
 				if (this.value)
 					this.router.navigateByUrl('dashboard')
-				else
-					console.log('error')
+				else{
+					}
 			})
+				
 	}
 
 	//Method for google-auth
@@ -68,12 +66,4 @@ export class LoginComponent implements OnInit {
 				this.router.navigateByUrl('dashboard')
 			})
 	}
-
-/*	getConfig(): any {
-		return Promise.resolve(config)
-			.then(data => {
-				this.config = data;
-				//console.log(data)
-			})
-	}*/
 }

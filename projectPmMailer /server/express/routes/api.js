@@ -12,7 +12,8 @@ const bcrypt = require('bcrypt-nodejs');
 const async = require('async');
 const crypto = require('crypto');
 const flash = require('express-flash');
-const logger = require('morgan');
+// const logger = require('morgan');
+const logger = require('../services/app.logger');
 const cookieParser = require('cookie-parser');
 //forgotPassword End
 
@@ -40,6 +41,7 @@ module.exports = function(router) {
         // checking if fields are empty or not
         if (req.body.name == null || req.body.password == null || req.body.email == null || req.body.mobile == null) {
             res.json({ success: false, message: 'Ensure all the fields are filled' });
+            logger.info("ensure all fields are filled");
         } else {
 
             user.save((err) => {
@@ -48,6 +50,7 @@ module.exports = function(router) {
 
                     if (err.errors.name) {
                         res.json({ success: false, message: err.errors.name.message });
+                        logger.info("ensure all fields are filled");
                     }
 
                 } else {
@@ -70,9 +73,9 @@ module.exports = function(router) {
 
                     transporter.sendMail(mailOptions, function(error, info) {
                         if (error) {
-                            console.log(error);
+                            logger.info("cannot send mail");
                         } else {
-                            console.log('Email sent: ' + info.response);
+                            logger.info("mail sent successfully to" + info.response);
                         }
                     });
                     res.json(" success: true, message: 'user created' ");
@@ -83,9 +86,13 @@ module.exports = function(router) {
 
     router.get('/', function(req, res) {
         User.find((err, data) => {
-            if (err) console.log('error')
+            if (err){
+              res.send({success:false,message:"error in finding"})  
+              logger.info("error");  
+            } 
             else {
                 res.json(data)
+                logger.info("data fetched successfully");
             }
         })
     })
@@ -97,10 +104,12 @@ module.exports = function(router) {
         }, function(err, user) {
             if (err) {
                 throw err;
+                logger.info("error");
             }
             if (!user) {
 
                 res.send({ success: false, msg: 'Authentication failed. User not found.' })
+                logger.info("Authentication failed. User not found");
                 //res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
             } else {
                 // check if password matches
@@ -113,11 +122,13 @@ module.exports = function(router) {
                         //console.log('success')
                         res.status(200)
                         res.send({ success: true, token: 'JWT ' + token });
+                        logger.info("token generated successfully");
                         //console.log({ success: true, token: 'JWT ' + token })*/
                     } else {
                         //console.log('success')
                         //console.log("found")
                         res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
+                        logger.info("Authentication failed. Wrong password.");
                     }
                 });
             }
@@ -158,18 +169,18 @@ module.exports = function(router) {
                 crypto.randomBytes(20, function(err, buf) {
                     var token = buf.toString('hex');
                     done(err, token);
-                    // console.log('err');
+                    // console.log('err')
                 });
             },
             //function to check that email id exists or not
             function(token, done) {
                 rpwtoken = token;
-                console.log(req.params.email);
+                
                 User.findOne({ email: req.params.email }, function(err, user) {
                     if (!user) {
                         //console.log(email)
-
-                        req.flash('error', 'No account with that email address exists.');
+                        logger.warn("No account with that email address exists.");
+                        res.flash('error', 'No account with that email address exists.');
                         return res.redirect('/forgot');
                     }
 
@@ -209,19 +220,21 @@ module.exports = function(router) {
 
                 transporter.sendMail(mailOptions, function(error, info) {
                     if (error) {
-                        console.log(error);
+                        logger.warn("network error");
                     } else {
-                        console.log('Email sent: ' + info.response);
+                        // console.log('Email sent: ' + info.response);
+                        logger.info("Email sent to user to reset password");
 
 
                         //res.send(token);
-                        console.log(token);
+                        
                     }
                 });
             }
         ], function(err) {
             if (err) return next(err);
             res.redirect('/forgot');
+            logger.info('redirect to forgot')
         });
     });
     // route to take reset password request
@@ -230,10 +243,12 @@ module.exports = function(router) {
         //checking token validity
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
             if (!user) {
+                logger.warn("Password reset token is invalid or has expired.");
                 req.flash('error', 'Password reset token is invalid or has expired.');
                 return res.redirect(configure.OnFailureRedirect);
             }
             res.redirect(configure.OnSuccessRedirect + rpwtoken);
+            logger.warn("redirect to reset password page");
 
         });
     });
@@ -245,7 +260,8 @@ module.exports = function(router) {
             function(done) {
                 User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
                     if (!user) {
-                        console.log('err')
+                        // console.log('err')
+                        logger.warn("Password reset token is invalid or has expired.");
                         req.flash('error', 'Password reset token is invalid or has expired.');
                         return res.redirect('back');
                     }
@@ -253,6 +269,7 @@ module.exports = function(router) {
                     user.password = req.body.password;
                     user.resetPasswordToken = undefined;
                     user.resetPasswordExpires = undefined;
+
                     //saving password
                     user.save(function(err) {
                         req.logIn(user, function(err) {
@@ -263,7 +280,10 @@ module.exports = function(router) {
             },
 
         ], function(err) {
-            res.redirect('/');
+            if (err) return next(err);
+            logger.info("password successfully changed")
+            res.send({ success: true});
+
         });
     });
 
@@ -273,6 +293,7 @@ module.exports = function(router) {
     router.get('/logout', function(req, res) {
         req.session.destroy();
         res.send("logout success!");
+        logger.info("successfully logged out")
     });
 
     //Dashboard
@@ -294,7 +315,8 @@ module.exports = function(router) {
                     currency.push(metadata);
                 });
 
-                console.log(currency);
+                logger.info("currency");
+                // console.log(currency);
                 res.json({ data: currency });
             }
         })
@@ -305,11 +327,12 @@ module.exports = function(router) {
     router.get('/details', function(req, res, next) {
         nasdaq.find((err, data) => {
             if (err) {
-                console.log("error")
+                logger.error("error")
 
             } else {
                 res.json(data)
-                console.log(data)
+            // console.log(data)
+            logger.error("nasdaq details found")    
             }
         })
 
@@ -346,7 +369,8 @@ module.exports = function(router) {
                     stock.push(metadata1);
                 });
 
-                console.log(stock);
+                logger.info("stock data price of NASDAQ")
+                // console.log(stock);
                 res.json({ data: stock });
             }
         })

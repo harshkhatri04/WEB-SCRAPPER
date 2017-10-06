@@ -48,6 +48,11 @@ const route: Routes = ([{
     path: 'logout',
     component: LoginComponent
 
+  },
+  {
+    path: 'reset',
+    component: LoginComponent
+
   }
 ])
 

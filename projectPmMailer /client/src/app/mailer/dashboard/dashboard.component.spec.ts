@@ -1,17 +1,19 @@
 import { async, ComponentFixture, TestBed ,fakeAsync,tick} from '@angular/core/testing';
 import { DebugElement, ChangeDetectorRef }    from '@angular/core';
-import { DashboardComponent } from './dashboard.component';
-import { FormsModule } from '@angular/forms';
-import { By }              from '@angular/platform-browser';
-import { Router,RouterLinkWithHref, RouterState,ActivatedRoute, Event } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { SidebarComponent} from './sidebar/sidebar.component';
-import { NasdaqService } from './service/nasdaq.service';
-import { DashboardService} from './dashboard.service';
 import { Directive, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
+import { By }          from '@angular/platform-browser';
+import { Router,RouterLinkWithHref, RouterState,ActivatedRoute, Event } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import 'rxjs/add/observable/of';
+
+import { DashboardComponent } from './dashboard.component';
+import { SidebarComponent} from './sidebar/sidebar.component';
+import { NasdaqService } from './service/nasdaq.service';
+import { DashboardService} from './dashboard.service';
+
 
 @Directive({
   selector: '[routerLink]',
@@ -60,7 +62,7 @@ describe('DashboardComponent', () => {
    // nasdaqService actually injected into the component
     let nasdaqService = fixture.debugElement.injector.get(NasdaqService);
    
-    // Setup spy on the `getQuote` method
+    // Setup spy on the `getnasdaqstocks` method
     spy = spyOn(nasdaqService, 'getnasdaqstocks')
           .and.returnValue(Observable.of(mockData));
 
@@ -76,21 +78,19 @@ describe('DashboardComponent', () => {
  });
 
 it('should create dashboard component',()=>{
- // const dashboard=fixture.debugElement.componentInstance;
  expect(component).toBeTruthy();
 });
 
 it('should display original title', () => {
-  // Hooray! No `fixture.detectChanges()` needed
- // fixture.detectChanges()
+
+ fixture.detectChanges()
   expect(el.textContent).toContain(component.config.dashboard.PERSONALISED_MAILER);
 
 });
 
 it('should display dashboard title', () => {
 
-  // No `fixture.detectChanges()` needed
- // fixture.detectChanges()
+fixture.detectChanges()
   expect(elstock.textContent).toContain(component.config.dashboard.DASHBOARD);
 
 });
