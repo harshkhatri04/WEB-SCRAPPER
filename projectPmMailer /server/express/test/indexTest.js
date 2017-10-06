@@ -54,40 +54,42 @@ describe('GET /', () => {
 });
 
 describe('GET', () => {
-            it('respond with json', (done) => {
+    it('respond with json', (done) => {
+        findStub.withArgs({ 'email': 'Pulkit176@gmail.com', 'password': 'Pulkit@123' })
+            .yields(null, {
+                name: "Pulkit",
+                password: "Pulkit@123",
+                email: "Pulkit@gmail.com",
+                mobile: 9799999900
+            })
+        request(App)
+            .get('/api/signin/Pulkit176@gmail.com/Pulkit@123')
+            .end((err, res) => {
+                if (err) {
+                    console.log('hello')
+                    return err;
+                } else {
+                    expect(res.body).to.be.equal(" success: true, token: 'JWT ' + token ");
+                    done();
+                }
+                console.log('in end')
+            })
+    })
+})
 
-                        findStub.withArgs({ 'email': 'Pulkit176@gmail.com', 'password': 'Pulkit@123' })
-                            .yields(null, {
-                                name: "Pulkit",
-                                password: "Pulkit@123",
-                                email: "Pulkit@gmail.com",
-                                mobile: 9799999900
-                            })
-                        request(App)
-                            .get('/api/signin/Pulkit176@gmail.com/Pulkit@123')
-                            .end((err, res) => {
-                                if (err) {
-                                    console.log('hello')
-                                    return err;
-                                } else {
-                                    expect(res.body).to.be.equal(" success: true, token: 'JWT ' + token ");
-                                    done();
-                                }
-                                console.log('in end')
-                            })
-                        //test case for HTTP Get method for stock price of NASDAQ for WSJ website
-                        describe('get method', () => {
-                            it('respond with json', (done) => {
-                                detailStub.yields(null, [{ Code: "100", Company: "abc" }])
-                                request(App)
-                                    .get('/api/details')
-                                    .expect('Content-Type', /json/)
+//test case for HTTP Get method for stock price of NASDAQ for WSJ website
+describe('get method', () => {
+    it('respond with json', (done) => {
+        detailStub.yields(null, [{ Code: "100", Company: "abc" }])
+        request(App)
+            .get('/api/details')
+            .expect('Content-Type', /json/)
 
-                                    .end((err, res) => {
-                                        if (err) return done(err);
-                                        expect(res.body[0].Code).to.be.equal("100");
-                                        expect(res.body[0].Company).to.be.equal("abc");
-                                        done();
-                                    });
-                            });
-                        });
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.body[0].Code).to.be.equal("100");
+                expect(res.body[0].Company).to.be.equal("abc");
+                done();
+            });
+    });
+});
