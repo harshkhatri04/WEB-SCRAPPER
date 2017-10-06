@@ -25,14 +25,9 @@ val:any=['ETF','Bonds','Stocks','NASDAQ']
     config=config; 
     news:any=[];
      value:any;   
-
-   
-  
-
+     
 //load dropdown for nasdaq stocks  
 ngOnInit() {      
-
-  // this.getConfig();
     this.nasdaq.getnasdaqstocks().subscribe((data)=>{              
     this.list=data;console.log(this.list)    })
 
@@ -49,18 +44,6 @@ this.nasdaq.getresult(this.value).subscribe(res=>{
     this.news=res.data;
     })
        }
-
-
-  //      getConfig():any {
-  //   return Promise.resolve(config)
-  //   .then(data => {
-  //     this.config = data;
-  //     console.log(data)
-  //   })
-  // }
-
- //This function load the news basis of the the stock which was selected in dropdown 
-
  logout(){
               this.DashboardService.signout()
                   .subscribe((res) => {

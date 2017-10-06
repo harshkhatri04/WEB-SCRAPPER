@@ -31,15 +31,11 @@ export class ForgotpasswordComponent implements OnInit {
     });
   }
 
-
-
-
   get pwd() { return this.form.get('email'); }
   
 
 
   forgot(email){
-  	//console.log(email)
   	this.ForgotpasswordService.forgotPassword(email)
   	              .subscribe((res) => {
                       console.log(res)

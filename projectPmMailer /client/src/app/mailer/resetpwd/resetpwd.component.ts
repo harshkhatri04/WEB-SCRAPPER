@@ -43,13 +43,11 @@ export class ResetpwdComponent implements OnInit {
   
 
  reset(resetpwd){
-    console.log(resetpwd)
     this.mydata = {
       password : resetpwd
     }
     this.ResetpwdService.resetPassword(this.mydata,this.tkn)
                   .subscribe((res) => {
-                      console.log(res)
                       this.Router.navigateByUrl('logout')
                   })
                   
