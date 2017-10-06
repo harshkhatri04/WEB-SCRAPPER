@@ -15,15 +15,9 @@ config=config;
 
 
   ngOnInit() {
-  	// this.getConfig()
+  	
   	
   }
 
-  // getConfig():any {
-  // 	return Promise.resolve(config)
-  // 	.then(data => {
-  // 		this.config = data;
-  // 		console.log(data)
-  // 	})
-  // }
+
 }
