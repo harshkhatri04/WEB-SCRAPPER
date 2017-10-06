@@ -11,7 +11,7 @@ export class LoginService {
 
   findUser(email, password) {
     //console.log(credentials);
-    const url = 'http://192.168.252.47:3000/api/signin/' + email + "/" + password;
+    const url = 'http://localhost:3000/api/signin/' + email + "/" + password;
     return this.http
       .get(url)
       .map(res => res.json());
@@ -19,7 +19,7 @@ export class LoginService {
 
   //Method for google-auth
   google() {
-    const url = 'http://192.168.252.47:3000/api/auth/google'
+    const url = 'http://localhost:3000/api/auth/google'
     return this.http
       .get(url)
       .map(res => res);
@@ -28,7 +28,7 @@ export class LoginService {
 
    //Method for facebook-auth
   facebook() {
-    const url = 'http://192.168.252.47:3000/api/auth/facebook'
+    const url = 'http://localhost:3000/api/auth/facebook'
     return this.http
       .get(url)
       .map(res => res);

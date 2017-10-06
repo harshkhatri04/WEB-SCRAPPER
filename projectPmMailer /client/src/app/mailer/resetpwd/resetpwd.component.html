@@ -13,7 +13,7 @@
               <img class="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="First slide">
               <div class="carousel-caption d-none d-md-block">
                 <div class="banner-text">
-                  <h2>{{config.resetpwd.STOCK_MARKET}}</h2>
+                  <h2 id="heading">{{config.resetpwd.STOCK_MARKET}}</h2>
                   <p>{{config.resetpwd.PIC}}</p>
                 </div>
               </div>
@@ -32,7 +32,7 @@
       </div>
       <div class="col-md-4 login-sec">
         <!-- Reset Password Form -->
-        <h2 class="text-center">{{config.resetpwd.NEW_PASSWORD}}</h2>
+        <h2 class="text-center">{{config.resetpwd.RESET_PASSWORD}}</h2>
         <form class="reset-form">
           <form [formGroup]="form" #formDir="ngForm">
             <div [hidden]="formDir.submitted">

@@ -16,7 +16,6 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 //forgotPassword End
 
-
 const passport = require('passport');
 
 let nasdaq = require('../models/nasdaq');
@@ -24,7 +23,7 @@ let request = require('request');
 let cheerio = require('cheerio');
 
 const mongoose = require('mongoose');
-const connect = mongoose.connect('mongodb://192.168.252.47:27017/testing');
+const connect = mongoose.connect('mongodb://admin:admin@192.168.252.203:27018/personalizedmailer');
 /*const connect = mongoose.connect('mongodb://localhost/testing');*/
 const passportGoogle = require('../auth/google');
 const configuration = require('./../config/googleAuth');

@@ -23,9 +23,7 @@
               <div class="carousel-caption d-none d-md-block">
                 <div class="banner-text stockmarket">
                   <h2>{{config.login.STOCK_MARKET}}</h2>
-                  
-                  <!-- <p>{{config.login.PICTURE_DESCRIPTION_2}}</p>
- -->
+                  <p>{{config.login.PICTURE_DESCRIPTION_2}}</p>
                 </div>
               </div>
             </div>
@@ -41,6 +39,7 @@
               <div class="form-group">
                 <div class="row">
                   <input id="email" type="email" class="form-control" name="email" placeholder={{config.login.EMAIL}} formControlName="email" required [(ngModel)]="emailID">
+                 
                   <div *ngIf="email.invalid && (email.dirty || email.touched)">
                     <div *ngIf="email.errors.required">
                       Email is required.
