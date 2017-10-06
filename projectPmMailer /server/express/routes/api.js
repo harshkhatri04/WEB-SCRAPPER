@@ -51,7 +51,6 @@ module.exports = function(router) {
                     }
 
                 } else {
-
                     let transporter = nodemailer.createTransport({
                         service: configure.serviceProvider,
                         auth: {
@@ -112,6 +111,7 @@ module.exports = function(router) {
                         var token = jwt.sign({ user }, config.secret);
                         // return the information including token as JSON
                         //console.log('success')
+                        res.status(200)
                         res.send({ success: true, token: 'JWT ' + token });
                         //console.log({ success: true, token: 'JWT ' + token })*/
                     } else {
