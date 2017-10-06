@@ -73,7 +73,6 @@ export class SignUpComponent implements OnInit {
     this.SignUpService.addUser(this.user)
       .subscribe((res) => {
         if (res)
-          console.log(res)
           this.router.navigateByUrl('login')        
       })    
   }

@@ -10,14 +10,7 @@ export class SidebarComponent implements OnInit {
   constructor() { }
    config=config;
   ngOnInit() {
-  	// this.getConfig()
+
   }
- 
- // getConfig():any {
- // 	return Promise.resolve(config)
- // 	.then(data => { 
- // 		this.config=data;
- // 		console.log(data);
- // 	})
- // }
+
 }

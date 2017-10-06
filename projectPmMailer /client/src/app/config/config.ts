@@ -35,7 +35,7 @@ export const config = {
   },
 
   "dashboard": {
-    "DASHBOARD":"Dashboard",
+    "DASHBOARD": "Dashboard",
     "PERSONALISED_MAILER": "Personalised Mailer",
     "SEARCH": "Search",
     "NEWS": "News"
@@ -54,7 +54,8 @@ export const config = {
     "NAME": "Name",
     "EMAIL_ADDRESS": "Email Address",
     "MOBILE": "Mobile",
-    "PASSWORD": "Password"
+    "PASSWORD": "Password",
+    "LOGIN": "Login"
   },
 
   "forgotpassword": {

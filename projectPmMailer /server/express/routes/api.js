@@ -17,7 +17,6 @@ const logger = require('../services/app.logger');
 const cookieParser = require('cookie-parser');
 //forgotPassword End
 
-
 const passport = require('passport');
 
 let nasdaq = require('../models/nasdaq');
@@ -176,12 +175,12 @@ module.exports = function(router) {
             //function to check that email id exists or not
             function(token, done) {
                 rpwtoken = token;
-                console.log(req.params.email);
+                
                 User.findOne({ email: req.params.email }, function(err, user) {
                     if (!user) {
                         //console.log(email)
-
-                        req.flash('error', 'No account with that email address exists.');
+                        logger.warn("No account with that email address exists.");
+                        res.flash('error', 'No account with that email address exists.');
                         return res.redirect('/forgot');
                     }
 
@@ -221,19 +220,21 @@ module.exports = function(router) {
 
                 transporter.sendMail(mailOptions, function(error, info) {
                     if (error) {
-                        console.log(error);
+                        logger.warn("network error");
                     } else {
-                        console.log('Email sent: ' + info.response);
+                        // console.log('Email sent: ' + info.response);
+                        logger.info("Email sent to user to reset password");
 
 
                         //res.send(token);
-                        console.log(token);
+                        
                     }
                 });
             }
         ], function(err) {
             if (err) return next(err);
             res.redirect('/forgot');
+            logger.info('redirect to forgot')
         });
     });
     // route to take reset password request
@@ -242,10 +243,12 @@ module.exports = function(router) {
         //checking token validity
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
             if (!user) {
+                logger.warn("Password reset token is invalid or has expired.");
                 req.flash('error', 'Password reset token is invalid or has expired.');
                 return res.redirect(configure.OnFailureRedirect);
             }
             res.redirect(configure.OnSuccessRedirect + rpwtoken);
+            logger.warn("redirect to reset password page");
 
         });
     });
@@ -257,7 +260,8 @@ module.exports = function(router) {
             function(done) {
                 User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
                     if (!user) {
-                        console.log('err')
+                        // console.log('err')
+                        logger.warn("Password reset token is invalid or has expired.");
                         req.flash('error', 'Password reset token is invalid or has expired.');
                         return res.redirect('back');
                     }
@@ -265,6 +269,7 @@ module.exports = function(router) {
                     user.password = req.body.password;
                     user.resetPasswordToken = undefined;
                     user.resetPasswordExpires = undefined;
+
                     //saving password
                     user.save(function(err) {
                         req.logIn(user, function(err) {
@@ -275,7 +280,10 @@ module.exports = function(router) {
             },
 
         ], function(err) {
-            res.redirect('/');
+            if (err) return next(err);
+            logger.info("password successfully changed")
+            res.send({ success: true});
+
         });
     });
 
