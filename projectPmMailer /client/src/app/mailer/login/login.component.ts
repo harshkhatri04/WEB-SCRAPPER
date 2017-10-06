@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
 	checkUser(emailID, pwd) {
 		this.LoginService.findUser(emailID, pwd)
 			.subscribe((res) => {
+				console.log(res)
 				this.value = res.token;
 				if (this.value)
 					this.router.navigateByUrl('dashboard')

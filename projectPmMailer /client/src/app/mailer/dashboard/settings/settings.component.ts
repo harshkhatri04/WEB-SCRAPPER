@@ -15,7 +15,7 @@ config=config;
 
 
   ngOnInit() {
-  	
+
   	
   }
 
