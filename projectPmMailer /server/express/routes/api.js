@@ -86,11 +86,10 @@ module.exports = function(router) {
 
     router.get('/', function(req, res) {
         User.find((err, data) => {
-            if (err){
-              res.send({success:false,message:"error in finding"})  
-              logger.info("error");  
-            } 
-            else {
+            if (err) {
+                res.send({ success: false, message: "error in finding" })
+                logger.info("error");
+            } else {
                 res.json(data)
                 logger.info("data fetched successfully");
             }
@@ -175,7 +174,7 @@ module.exports = function(router) {
             //function to check that email id exists or not
             function(token, done) {
                 rpwtoken = token;
-                
+
                 User.findOne({ email: req.params.email }, function(err, user) {
                     if (!user) {
                         //console.log(email)
@@ -227,7 +226,7 @@ module.exports = function(router) {
 
 
                         //res.send(token);
-                        
+
                     }
                 });
             }
@@ -282,7 +281,7 @@ module.exports = function(router) {
         ], function(err) {
             if (err) return next(err);
             logger.info("password successfully changed")
-            res.send({ success: true});
+            res.send({ success: true });
 
         });
     });
@@ -331,8 +330,8 @@ module.exports = function(router) {
 
             } else {
                 res.json(data)
-            // console.log(data)
-            logger.error("nasdaq details found")    
+                // console.log(data)
+                logger.error("nasdaq details found")
             }
         })
 
@@ -375,8 +374,6 @@ module.exports = function(router) {
             }
         })
     });
-
-    //HTTP Post method for stock price of NASDAQ for WSJ website
 
     /* GOOGLE ROUTER */
     router.get('/auth/google',
