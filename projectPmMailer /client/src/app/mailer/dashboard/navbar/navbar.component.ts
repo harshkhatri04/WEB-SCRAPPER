@@ -19,14 +19,7 @@ export class NavbarComponent implements OnInit {
   config=config;
 
   ngOnInit() {
-    /*this.getConfig();*/
   }
-  /*getConfig() {
-    return Promise.resolve(config)
-      .then(data => {
-        this.config = data;
-        console.log(data);
-      })*/
   
   // method for logout
   logout() {
