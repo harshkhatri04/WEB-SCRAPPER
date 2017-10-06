@@ -33,10 +33,10 @@ describe('testing forgotPassword component', () => {
 		comp = fixture.componentInstance; //Nav Component instance
 	})
 
-	//test case for checking whether navbar is created or not
-	it('should create navbar component', () => {
-		const navbar = fixture.debugElement.componentInstance;
-		expect(navbar).toBeTruthy();
+	//test case for checking whether forgot password is created or not
+	it('should create forgot password component', () => {
+		const forgetPassword = fixture.debugElement.componentInstance;
+		expect(forgetPassword).toBeTruthy();
 	});
 
 })
