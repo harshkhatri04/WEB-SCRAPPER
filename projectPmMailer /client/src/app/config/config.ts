@@ -47,33 +47,31 @@ export const config = {
     "CHARTS": "Charts"
   },
 
-  "signup":{
-      "STOCK_MARKET":"Stock Market",
-      "REGISTER":"Register",
-      "NAME":"Name",
-      "EMAIL_ADDRESS":"Email Address",
-      "MOBILE":"Mobile",
-      "PASSWORD":"Password"
-   },
+  "signup": {
+    "STOCK_MARKET": "Stock Market",
+    "REGISTER": "Register",
+    "NAME": "Name",
+    "EMAIL_ADDRESS": "Email Address",
+    "MOBILE": "Mobile",
+    "PASSWORD": "Password"
+  },
 
   "forgotpassword": {
     "STOCK_MARKET": "Stock Market",
-    "PIC":"The real key to making money in stocks is not to get scared out of them.",
-    "PIC_TWO":"Stock market bubbles don't grow out of thin air. They have a solid basis in reality, but reality as distorted by a misconception.",
-    "FORGOT_PASSWORD":"Forgot Password",
-    "EMAIL_ADDRESS":"Email Address",
-    "RESET_PASSWORD":"Reset Password"
+    "PIC": "The real key to making money in stocks is not to get scared out of them.",
+    "PIC_TWO": "Stock market bubbles don't grow out of thin air. They have a solid basis in reality, but reality as distorted by a misconception.",
+    "FORGOT_PASSWORD": "Forgot Password",
+    "EMAIL_ADDRESS": "Email Address",
+    "RESET_PASSWORD": "Reset Password"
   },
 
-  "resetpwd":{
-     "STOCK_MARKET": "Stock Market",
-    "PIC":"The real key to making money in stocks is not to get scared out of them.",
-    "PIC_TWO":"Stock market bubbles don't grow out of thin air. They have a solid basis in reality, but reality as distorted by a misconception.", 
-     "NEW_PASSSWORD":"New Password",
-     "PASSWORD":"Password",
-     "CONFIRM_PASSWORD":"ConfirmPassword", 
-     "RESET_PASSWORD":"Reset Password"
-}
-
-
+  "resetpwd": {
+    "STOCK_MARKET": "Stock Market",
+    "PIC": "The real key to making money in stocks is not to get scared out of them.",
+    "PIC_TWO": "Stock market bubbles don't grow out of thin air. They have a solid basis in reality, but reality as distorted by a misconception.",
+    "NEW_PASSSWORD": "New Password",
+    "PASSWORD": "Password",
+    "CONFIRM_PASSWORD": "ConfirmPassword",
+    "RESET_PASSWORD": "Reset Password"
+  }
 }
