@@ -6,5 +6,7 @@ export class SettingsService {
 
   constructor(private http:Http) {
    }
-
+  updateNameAndMobile(name,mobile){
+     
+  }
 }

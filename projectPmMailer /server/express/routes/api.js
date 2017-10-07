@@ -32,17 +32,7 @@ const passportFacebook = require('../auth/facebook');
 
     
     
-    /*  router.get('/', function(req, res) {
-          User.find((err, data) => {
-              if (err) {
-                  res.send({ success: false, message: "error in finding" })
-                  logger.info("error");
-              } else {
-                  res.json(data)
-                  logger.info("data fetched successfully");
-              }
-          })
-      })*/
+   
 
     
 

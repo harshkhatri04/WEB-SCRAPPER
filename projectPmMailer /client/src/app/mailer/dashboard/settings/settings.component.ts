@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { config } from '../../../config/config';
 
+import { config } from '../../../config/config';
+import { SettingsService } from './settings.service';
 
  
 @Component({
@@ -16,7 +17,8 @@ config=config;
  email:string;
  mobile:string;
  password:string;
-  constructor() { }
+  constructor(private settingsService:SettingsService) { 
+  }
       
 
   ngOnInit() {
@@ -27,6 +29,11 @@ config=config;
        this.mobile = this.currentUser.mobile;
        this.password = this.currentUser.password;
   	
+  }
+
+ updateName(){
+   console.log("suceessss")
+   // console.log(newMobile)
   }
 
 

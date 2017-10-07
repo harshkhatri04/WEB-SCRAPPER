@@ -24,12 +24,12 @@
             <div id="collapseFour" class="collapse show" role="tabpanel" aria-labelledby="headingFour">
               <div class="card-block">
                 <div class="form-group">
-                	<input type="text" class="form-control" id="inputName" placeholder={{config.settings.NAME}}>
+                	<input type="text" class="form-control" id="inputName" placeholder={{config.settings.NAME}} formControlName="newName">
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="inputMobile" placeholder={{config.settings.MOBILE}}>
+                  <input type="text" class="form-control" id="inputMobile" placeholder={{config.settings.MOBILE}} formControlName="newMobile">
                 </div>
-                <button type="submit" class="btn btn-primary">{{config.settings.SAVE}}</button>
+                <button type="click" class="btn btn-primary" (click)="updateNameAndMobile(newName,newMobile)">{{config.settings.SAVE}}dasa</button>
               </div>
             </div>
           </div>

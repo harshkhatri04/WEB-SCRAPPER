@@ -18,7 +18,7 @@ import { NasdaqService } from './mailer/dashboard/service/nasdaq.service';
 import { DashboardModule } from './mailer/dashboard/dashboard.module';
 import { SignUpService } from './mailer/sign-up/sign-up.service';
 import { DashboardService } from './mailer/dashboard/dashboard.service';
-
+import { SettingsService } from './mailer/dashboard/settings/settings.service';
 const route: Routes = ([{
     path: 'login',
     component: LoginComponent	
@@ -74,7 +74,7 @@ const route: Routes = ([{
     DashboardModule,
     RouterModule.forRoot(route)
   ],
-  providers: [LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService],
+  providers: [LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService,SettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

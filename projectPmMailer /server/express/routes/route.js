@@ -29,6 +29,7 @@ const logout = require('./logout')
 const getNews = require('./getNews')*/
 const googleAuth = require('./googleAuth')
 const facebookAuth = require('./facebookAuth')
+const update = require('./update')
 const api = require('./api')
 
 
@@ -41,5 +42,5 @@ app.use('/postNews', api);
 app.use('/getNews', api);
 app.use('/googleAuth', googleAuth);
 app.use('/facebookAuth', facebookAuth);
-
+app.use('/update',update);
 module.exports= app;
