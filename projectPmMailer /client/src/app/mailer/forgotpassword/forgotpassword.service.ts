@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+import { config } from '../../config/config'
+
 @Injectable()
 export class ForgotpasswordService {
 
   constructor(private http : Http) { }
 
    forgotPassword(emailId){
-   	 //console.log(emailId);
- 	//console.log(credentials);
- 	const url = 'http://localhost:3000/api/forgot/' + emailId
+ 	const url = config.urlToServer.FORGOT_PASSWORD_SERVICE_GET + emailId
  	return this.http
  							.get(url)
- 							.map(res => res.json());
+ 							.map(res => res.json(),error=>error.json());
  }
 
 }

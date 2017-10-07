@@ -47,6 +47,5 @@ export class ChartComponent implements OnInit {
   // events of charts
   
   public chartHovered(e: any): void {
-    console.log(e);
   }
 }

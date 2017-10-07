@@ -11,10 +11,21 @@ import { config } from '../../../config/config';
 export class SettingsComponent implements OnInit {
 
 config=config;
+ currentUser:any;
+ name:string;
+ email:string;
+ mobile:string;
+ password:string;
   constructor() { }
-
+      
 
   ngOnInit() {
+       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+       
+       this.name = this.currentUser.name;
+       this.email = this.currentUser.email;
+       this.mobile = this.currentUser.mobile;
+       this.password = this.currentUser.password;
   	
   }
 

@@ -1,15 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const nasdaqsch = new Schema({
+const nasdaqschema = new Schema({
 
-Code:String,
-Company:String,
+    Code: String,
+    Company: String,
 
-},{collection:'nasdaq'});
+}, { collection: 'nasdaq' });
 
-var Weather = mongoose.model('nasdaq', nasdaqsch);
+var nasdaqdata = mongoose.model('nasdaq', nasdaqschema);
 
-//var user1 = new Users({ firstName: 'gaurav', lastName: 'gupta', age: 22 });
-
-module.exports = Weather;
+module.exports = nasdaqdata;

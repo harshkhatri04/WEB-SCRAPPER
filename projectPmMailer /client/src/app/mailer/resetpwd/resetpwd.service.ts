@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+import { config } from '../../config/config'
+
 @Injectable()
 export class ResetpwdService {
 
@@ -9,13 +11,12 @@ export class ResetpwdService {
    
 
 
-    resetPassword(password,token){
-   	 console.log("Hii "+token+ " " + password);
- 	//console.log(credentials);
- 	const url = 'http://localhost:3000/api/reset/'+ token;
+    resetPassword(password,token){ 
+ 	const url = config.urlToServer.RESET_PASSWORD_POST+ token;
  	return this.http
  							.post(url,password)
- 							.map(res => res.json());
+ 							.map(res => res.json(),error=>error.json());
+ 							
  }
 
 

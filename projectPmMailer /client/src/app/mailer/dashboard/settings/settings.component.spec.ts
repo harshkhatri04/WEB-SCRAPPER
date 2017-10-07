@@ -19,8 +19,7 @@ describe('Settings component Testing', () => {
 
     TestBed.configureTestingModule({
       imports: [RouterTestingModule,
-        FormsModule, ReactiveFormsModule
-      ],
+        FormsModule, ReactiveFormsModule],
       declarations: [SettingsComponent, NavbarComponent], //declaring component to be tested
       providers: [{ provide: DashboardService }]
     }).compileComponents();
