@@ -22,7 +22,7 @@ const passport = require('passport');
 let nasdaq = require('../models/nasdaq');
 let request = require('request');
 let cheerio = require('cheerio');
-
+const CronJob =require('cron').CronJob;
 const mongoose = require('mongoose');
 const connect = mongoose.connect('mongodb://192.168.252.47:27017/testing');
 /*const connect = mongoose.connect('mongodb://localhost/testing');*/
@@ -333,7 +333,7 @@ module.exports = function(router) {
                     let updown = $(this).find('li.crinfo_diff').text().trim();
                     let hours = $(this).find('.c_crinfo_sub h5').text().trim();
                     let hPrice = $(this).find('span#ms_quote_val').text().trim();
-                    let hupdown = $(this).find('span.deltaBar-pos').text();
+                    let hupdown = $(this).find('#ms_quote_deltaBar').text();
 
                     let metadata1 = {
                         closeAt: close,
@@ -353,6 +353,72 @@ module.exports = function(router) {
         })
     });
 
+
+    var job=new CronJob({
+        cronTime:'* * * * *',
+        onTick:function(req, res, next) {
+        nasdaq.find((err, data) => {
+            if (err) {
+                console.log("error")
+
+            } else {
+                // res.json(data)
+                // getnasdaq(data.Code);
+                // console.log(data);
+                getnasdaq(data)
+
+            }
+        })
+
+    },start:false,
+    timeZone:'Asia/Kolkata'
+
+        }
+    );
+    job.start();
+
+
+ function getnasdaq(data) {
+  
+   for(let i=0;i<data.length;i++){
+    term=data[i].Code;
+    news(term);
+   }
+   function news(term) {
+        
+        request('http://quotes.wsj.com/' + term, function(error, response, html) {
+            if (!error && response.statusCode == 200) {
+                let $ = cheerio.load(html);
+                let stock = [];
+                $('.charts-datacol').each(function(i, element) {
+                    let close = $(this).find('.crinfo_time').text().trim();
+                    let price = $(this).find('span#quote_val').text().trim();
+                    let updown = $(this).find('li.crinfo_diff').text().trim();
+                    let hours = $(this).find('.c_crinfo_sub h5').text().trim();
+                    let hPrice = $(this).find('span#ms_quote_val').text().trim();
+                    let hupdown = $(this).find('#ms_quote_deltaBar').text();
+
+                    let metadata1 = {
+                        term:term,
+                        closeAt: close,
+                        Price: price,
+                        upDown: updown,
+                        hours: hours,
+                        hPrice: hPrice,
+                        hupdown: hupdown,
+
+                    }
+                    stock.push(metadata1);
+                });
+                    res.json({data:stock});
+                
+                // res.json({ data: stock });
+            }
+        })
+    }
+
+
+}
     //HTTP Post method for stock price of NASDAQ for WSJ website
 
     /* GOOGLE ROUTER */
@@ -379,6 +445,8 @@ module.exports = function(router) {
             // Successful authentication, redirect home.
             res.redirect('http://localhost:4200/dashboard');
         });
+
+
 
     return router;
 }
