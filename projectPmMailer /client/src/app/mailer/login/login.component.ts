@@ -8,62 +8,76 @@ import { config } from '../../config/config';
 
 
 @Component({
-	selector: 'app-login',
-	templateUrl: './login.component.html',
-	styleUrls: ['./login.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-	constructor(private LoginService: LoginService, private router: Router) {}
-	value: any;
-	hero = { email: '', pwd: '' };
-	form: FormGroup;
-	config = config;
-	
-	emailID:string;
-	password:string;
+  constructor(private LoginService: LoginService, private router: Router) {}
+  value: any;
+  hero = { email: '', pwd: '' };
+  form: FormGroup;
+  config = config;
 
-	ngOnInit(): void {
-		this.form = new FormGroup({ /*Validation functions through regex*/
-			'email': new FormControl(this.hero.email, [
-				Validators.required ||
-				Validators.minLength(4),
-				Validators.pattern("[^ @]*@[^ @]*")
-			]),
-			'pwd': new FormControl(this.hero.pwd, [
-				Validators.required,
-				Validators.minLength(4)
-			]),
-		});
-	}
-	get email() { return this.form.get('email'); }
+  emailID: string;
+  password: string;
 
-	get pwd() { return this.form.get('pwd'); }
+  ngOnInit(): void {
+    this.form = new FormGroup({ /*Validation functions through regex*/
+      'email': new FormControl(this.hero.email, [
+        Validators.required ||
+        Validators.minLength(4),
+        Validators.pattern("[^ @]*@[^ @]*")
+      ]),
+      'pwd': new FormControl(this.hero.pwd, [
+        Validators.required,
+        Validators.minLength(4)
+      ]),
+    });
+  }
+  get email() { return this.form.get('email'); }
 
-	checkUser(emailID, pwd) {
-		this.LoginService.findUser(emailID, pwd)
-			.subscribe((res) => {
-				this.value = res.token;
-				if (this.value)
-					this.router.navigateByUrl('dashboard')
-				else{
-					}
-			})
-				
-	}
+  get pwd() { return this.form.get('pwd'); }
 
-	//Method for google-auth
-	loginByGoogle() {
-		this.LoginService.google()
-			.subscribe((res) => {
-				this.router.navigate(["/"]).then(result => { window.location.href = res.url; });
-			})
-	}
+  checkUser(emailID, pwd) {
+    this.LoginService.findUser(emailID, pwd)
+      .subscribe((res) => {
+        this.value = res.token;
+        if (this.value)
+          this.router.navigateByUrl('dashboard')
+        else {
+          this.router.navigateByUrl('login')
+        }
+      }, error => {
+        console.log("Error" + error)
+      })
 
-	//Method for facebook-auth   
-	loginByFacebook() {
-		this.LoginService.facebook()
-			.subscribe((res) => {
-				this.router.navigate(["/"]).then(result => { window.location.href = res.url; });
-			})
-	}
+  }
+
+  //Method for google-auth
+  loginByGoogle() {
+    this.LoginService.google()
+      .subscribe((res) => {
+        if (res)
+          this.router.navigate(["/"]).then(result => { window.location.href = res.url; });
+        else {
+          this.router.navigateByUrl('login')
+        }
+      }, error => {
+        console.log("Error" + error)
+      })
+  }
+
+  //Method for facebook-auth   
+  loginByFacebook() {
+    this.LoginService.facebook()
+      .subscribe((res) => {
+        if (res)
+          this.router.navigate(["/"]).then(result => { window.location.href = res.url; });
+        else
+          this.router.navigateByUrl('login')
+      }, error => {
+        console.log("Error" + error)
+      })
+  }
 }

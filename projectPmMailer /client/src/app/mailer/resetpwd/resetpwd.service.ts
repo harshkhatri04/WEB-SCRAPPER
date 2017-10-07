@@ -13,7 +13,8 @@ export class ResetpwdService {
  	const url = 'http://localhost:3000/api/reset/'+ token;
  	return this.http
  							.post(url,password)
- 							.map(res => res.json());
+ 							.map(res => res.json(),error=>error.json());
+ 							
  }
 
 
