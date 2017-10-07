@@ -19,14 +19,14 @@ const resetPassword = require('./resetPassword')
 const logout = require('./logout')
 const googleAuth = require('./googleAuth')
 const facebookAuth = require('./facebookAuth')
-const api = require('./api')
+const scrap = require('./scrap')
 
 app.use('/signup', signup);
 app.use('/login', login);
 app.use('/resetPwd', resetPassword);
 app.use('/logout', logout);
-app.use('/postNews', api);
-app.use('/getNews', api);
+app.use('/postNews', scrap);
+app.use('/getNews', scrap);
 app.use('/googleAuth', googleAuth);
 app.use('/facebookAuth', facebookAuth);
 
