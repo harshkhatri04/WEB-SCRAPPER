@@ -16,9 +16,8 @@
 
 	  //get the news of respective code which was selected in dropdown 
 	  getresult(term) {
-	    console.log(term)
 	    return this.http.post(this.getstockapi+'/news', term)
-	      .map((res: Response) => res.json())
+	      .map((res: Response) => res.json(),error=>error.json())
 	  }
 	  //get the news of respective code which was selected in dropdown
 	}

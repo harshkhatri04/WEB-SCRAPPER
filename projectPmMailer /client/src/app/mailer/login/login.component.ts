@@ -8,11 +8,12 @@ import { config } from '../../config/config';
 
 
 @Component({
-	selector: 'app-login',
-	templateUrl: './login.component.html',
-	styleUrls: ['./login.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
 	constructor(private LoginService: LoginService, private router: Router) {}
 	value: any;
 	hero = { email: '', pwd: '' };
@@ -35,11 +36,11 @@ export class LoginComponent implements OnInit {
 			]),
 		});
 
-	/*	this.getConfig()*/
-	}
-	get email() { return this.form.get('email'); }
+  }
+  get email() { return this.form.get('email'); }
 
-	get pwd() { return this.form.get('pwd'); }
+  get pwd() { return this.form.get('pwd'); }
+
 
 	checkUser(emailID, pwd) {
 		this.LoginService.findUser(emailID, pwd)
@@ -66,21 +67,34 @@ export class LoginComponent implements OnInit {
 			})
 	}
 
-	//Method for google-auth
-	loginByGoogle() {
-		this.LoginService.google()
-			.subscribe((res) => {
-				this.router.navigate(["/"]).then(result => { window.location.href = res.url; });
-			})
-	}
 
-	//Method for facebook-auth   
-	loginByFacebook() {
-		this.LoginService.facebook()
-			.subscribe((res) => {
-				this.router.navigateByUrl('dashboard')
-			})
-	}
 
+  //Method for google-auth
+  loginByGoogle() {
+    this.LoginService.google()
+      .subscribe((res) => {
+        if (res)
+          this.router.navigate(["/"]).then(result => { window.location.href = res.url; });
+        else {
+          this.router.navigateByUrl('login')
+        }
+      }, error => {
+        console.log("Error" + error)
+      })
+  }
+
+
+  //Method for facebook-auth   
+  loginByFacebook() {
+    this.LoginService.facebook()
+      .subscribe((res) => {
+        if (res)
+          this.router.navigate(["/"]).then(result => { window.location.href = res.url; });
+        else
+          this.router.navigateByUrl('login')
+      }, error => {
+        console.log("Error" + error)
+      })
+  }
 
 }

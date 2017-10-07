@@ -9,13 +9,12 @@ export class ResetpwdService {
    
 
 
-    resetPassword(password,token){
-   	 console.log("Hii "+token+ " " + password);
- 	//console.log(credentials);
+    resetPassword(password,token){ 
  	const url = 'http://localhost:3000/api/reset/'+ token;
  	return this.http
  							.post(url,password)
- 							.map(res => res.json());
+ 							.map(res => res.json(),error=>error.json());
+ 							
  }
 
 

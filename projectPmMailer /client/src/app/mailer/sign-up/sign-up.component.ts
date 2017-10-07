@@ -9,8 +9,8 @@ import { config } from '../../config/config';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent implements OnInit { 
-  config=config;
+export class SignUpComponent implements OnInit {
+  config = config;
   constructor(private SignUpService: SignUpService, private router: Router) {}
   /*Object that store all the fields of the form */
   hero = { name: '', mobile: '', email: '', pwd: '', cpwd: '' };
@@ -18,7 +18,7 @@ export class SignUpComponent implements OnInit {
 
   form: FormGroup;
 
-  ngOnInit(): void {/*Validation functions of register page*/
+  ngOnInit(): void { /*Validation functions of register page*/
     this.form = new FormGroup({
       'name': new FormControl(this.hero.name, [
         /*Validation functions on the name field*/
@@ -62,7 +62,6 @@ export class SignUpComponent implements OnInit {
 
   /*Function to post the data to express server*/
   addUser(name, email, mobile, pwd, cpwd) {
-
     this.user = {
       "name": name,
       "email": email,
@@ -73,8 +72,11 @@ export class SignUpComponent implements OnInit {
     this.SignUpService.addUser(this.user)
       .subscribe((res) => {
         if (res)
-          console.log(res)
-          this.router.navigateByUrl('login')        
-      })    
+          this.router.navigateByUrl('login')
+        else
+          this.router.navigateByUrl('signup')
+      }, error => {
+        console.log("Error" + error)
+      })
   }
 }
