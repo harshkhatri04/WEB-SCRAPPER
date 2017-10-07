@@ -1,0 +1,26 @@
+<!-- Modal -->
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Select your Preferences</h5>
+      <button type="button" class="close" (click)="close()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <label>Investment Type</label>
+      <angular2-multiselect [data]="placeholderExampleList" [(ngModel)]="placeholderExampleSelectedItems" [settings]="placeholderExampleSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+      <label> Select the Frequency of Email</label>
+      <div class="container">
+        <div *ngFor="let frequency of frequency" class="radio">
+          <label>
+            <input type="radio" name="frequency" id="duration" [(ngModel)]="user.frequency" [value]="frequency.display"> {{frequency.display}}
+          </label>
+        </div>
+      </div>
+      <!---->
+      <div class="btn container">
+        <form #f="ngForm" novalidate>
+          <button type="submit" class="btn btn-primary" (click)="save(user.frequency, f.valid);confirm()">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>

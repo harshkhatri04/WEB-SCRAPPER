@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { DialogService } from "ng2-bootstrap-modal";
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 
 import { AppComponent } from './app.component';
 import { MailerComponent } from './mailer/mailer.component';
@@ -18,10 +21,12 @@ import { NasdaqService } from './mailer/dashboard/service/nasdaq.service';
 import { DashboardModule } from './mailer/dashboard/dashboard.module';
 import { SignUpService } from './mailer/sign-up/sign-up.service';
 import { DashboardService } from './mailer/dashboard/dashboard.service';
+import { PreferenceComponent } from './mailer/preference/preference.component';
+import {PreferenceService} from './mailer/preference/preference.service';
 
 const route: Routes = ([{
     path: 'login',
-    component: LoginComponent	
+    component: LoginComponent
   },
   {
     path: 'signup',
@@ -50,9 +55,8 @@ const route: Routes = ([{
 
   },
   {
-    path: 'reset',
-    component: LoginComponent
-
+    path: 'preference',
+    component: PreferenceComponent
   }
 ])
 
@@ -64,17 +68,20 @@ const route: Routes = ([{
     SignUpComponent,
     ForgotpasswordComponent,
     ResetpwdComponent,
-    DashboardComponent
+    DashboardComponent,
+    PreferenceComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    BootstrapModalModule,
     HttpModule,
     DashboardModule,
+     AngularMultiSelectModule,
     RouterModule.forRoot(route)
   ],
-  providers: [LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService],
+  providers: [LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService, DialogService, PreferenceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

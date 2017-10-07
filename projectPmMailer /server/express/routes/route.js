@@ -30,7 +30,7 @@ const getNews = require('./getNews')*/
 const googleAuth = require('./googleAuth')
 const facebookAuth = require('./facebookAuth')
 const api = require('./api')
-
+const preference = require('./preference')
 
 
 app.use('/signup', signup);
@@ -41,5 +41,6 @@ app.use('/postNews', api);
 app.use('/getNews', api);
 app.use('/googleAuth', googleAuth);
 app.use('/facebookAuth', facebookAuth);
+app.use('/investment' ,  preference);
 
 module.exports= app;

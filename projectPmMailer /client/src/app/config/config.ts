@@ -84,6 +84,7 @@ export const config = {
 	  "LOGIN_SERVICE_GET":"http://localhost:3000/login/signin/",
 	  "LOGIN_SERVICE_GOGGLE_GET" : "http://localhost:3000/googleAuth/auth/google",
 	  "LOGIN_SERVICE_FACEBOOK_GET" : "http://localhost:3000/facebookAuth/auth/facebook",
-		"FORGOT_PASSWORD_SERVICE_GET" : "http://localhost:3000/resetPwd/forgot/"	  
+		"FORGOT_PASSWORD_SERVICE_GET" : "http://localhost:3000/resetPwd/forgot/"
+		
   }
 }

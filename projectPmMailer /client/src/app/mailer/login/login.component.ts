@@ -3,9 +3,10 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
+import { DialogService } from "ng2-bootstrap-modal";
 import { config } from '../../config/config';
 
-
+import {PreferenceComponent} from '../preference/preference.component';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import { config } from '../../config/config';
 })
 export class LoginComponent implements OnInit {
 
-	constructor(private LoginService: LoginService, private router: Router) {}
+	constructor(private LoginService: LoginService, private router: Router, private dialogService:DialogService) {}
 	value: any;
 	hero = { email: '', pwd: '' };
 	form: FormGroup;
@@ -61,7 +62,8 @@ export class LoginComponent implements OnInit {
 				 }));
 		
 				if (this.value)
-					this.router.navigateByUrl('dashboard')
+					this.router.navigateByUrl('dashboard'),
+        this.showConfirm()
 				else
 					console.log('error')
 			})
@@ -96,5 +98,21 @@ export class LoginComponent implements OnInit {
         console.log("Error" + error)
       })
   }
+
+  //method for preference setting
+	showConfirm() {
+            let disposable = this.dialogService.addDialog(PreferenceComponent, {
+                title:'Confirm title', 
+                message:'Confirm message'})
+                .subscribe((isConfirmed)=>{
+                    //We get dialog result
+                    if(isConfirmed) {
+                        alert('accepted');
+                    }
+                    else {
+                        alert('declined');
+                    }
+                });
+        }
 
 }

@@ -49,7 +49,7 @@ app.use('/', routes);
 
 app.listen(config.port, () => {
 
-    logger.info("application running on port 3000");
+    logger.info("application running on port"+config.port);
 
 });
 
