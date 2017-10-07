@@ -14,6 +14,7 @@ let fundmodel = require('../models/fundsmodel')
 
 //HTTP Get method start 
 router.get('/details', function(req, res, next) {
+    
     nasdaq.find((err, data) => {
         if (err) {
             console.log("error")

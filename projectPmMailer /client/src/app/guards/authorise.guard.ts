@@ -19,7 +19,7 @@ export class AuthoriseGuard implements CanActivate{
 		
 		if(!isAuthorised){
 		console.log("AuthoriseGuard: The User is not authorised and can not navigate to Dashboard page")
-		this.route.navigateByUrl("/login");
+		this.route.navigate(['/login']);
 		
 		}
 		return isAuthorised;
