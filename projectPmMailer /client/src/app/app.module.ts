@@ -18,6 +18,7 @@ import { NasdaqService } from './mailer/dashboard/service/nasdaq.service';
 import { DashboardModule } from './mailer/dashboard/dashboard.module';
 import { SignUpService } from './mailer/sign-up/sign-up.service';
 import { DashboardService } from './mailer/dashboard/dashboard.service';
+import { AuthoriseGuard} from './guards/authorise.guard';
 
 const route: Routes = ([{
     path: 'login',
@@ -29,16 +30,17 @@ const route: Routes = ([{
   },
   {
     path: 'forgot',
-    component: ForgotpasswordComponent
+    component: ForgotpasswordComponent,
 
   },
   {
     path: 'set/:token',
-    component: ResetpwdComponent
+    component: ResetpwdComponent,
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthoriseGuard]
   },
   {
     path: '',
@@ -74,7 +76,8 @@ const route: Routes = ([{
     DashboardModule,
     RouterModule.forRoot(route)
   ],
-  providers: [LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService],
+  providers: [LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService,AuthoriseGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
