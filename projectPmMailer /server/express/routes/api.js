@@ -186,9 +186,6 @@ module.exports = function(router) {
             },
             //function to send a reset link on email
             function(token, user, done) {
-
-                var nodemailer = require('nodemailer');
-
                 var transporter = nodemailer.createTransport({
                     service: configure.serviceProvider,
                     auth: {
@@ -383,6 +380,36 @@ module.exports = function(router) {
             // Successful authentication, redirect home.
             res.redirect('http://localhost:4200/dashboard');
         });
+
+    router.post('/aletrsOnPreference', function(req, res, next) {
+        var transporter = nodemailer.createTransport({
+            service: configure.serviceProvider,
+            auth: {
+                user: configure.mailSendingId,
+                pass: configure.mailSendingPass
+            }
+        });
+
+        var mailOptions = {
+            from: configure.mailSendingId,
+            to: user.email,
+            subject: 'Password Reset',
+            text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+                'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+                /*+ req.headers.host +*/
+                configure.resetLinkUrl + token + '\n\n' +
+                'If you did not request this, please ignore this email and your password will remain unchanged.\n',
+
+        };
+
+        transporter.sendMail(mailOptions, function(error, info) {
+            if (error) {
+                logger.warn("network error");
+            } else {
+                logger.info("Email sent to user to reset password");
+            }
+        });
+    })
 
     return router;
 }
