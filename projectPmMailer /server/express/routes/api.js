@@ -40,7 +40,7 @@ module.exports = function(router) {
         user.mobile = req.body.mobile;
         // checking if fields are empty or not
         if (req.body.name == null || req.body.password == null || req.body.email == null || req.body.mobile == null) {
-            res.json({ success: false, message: 'Ensure all the fields are filled' });
+            return res.status(400).json({ success: false, message: 'Ensure all the fields are filled' });
             logger.info("ensure all fields are filled");
         } else {
 
@@ -49,7 +49,7 @@ module.exports = function(router) {
                 if (err) {
 
                     if (err.errors.name) {
-                        res.json({ success: false, message: err.errors.name.message });
+                        return res.status(403).json({ success: false, message: err.errors.name.message });
                         logger.info("ensure all fields are filled");
                     }
 
@@ -78,23 +78,24 @@ module.exports = function(router) {
                             logger.info("mail sent successfully to" + info.response);
                         }
                     });
-                    res.json(" success: true, message: 'user created' ");
+                    return res.status(200).json(" success: true, message: 'user created' ");
                 }
             })
         }
     });
 
-    router.get('/', function(req, res) {
-        User.find((err, data) => {
-            if (err) {
-                res.send({ success: false, message: "error in finding" })
-                logger.info("error");
-            } else {
-                res.json(data)
-                logger.info("data fetched successfully");
-            }
-        })
-    })
+    /*  router.get('/', function(req, res) {
+          User.find((err, data) => {
+              if (err) {
+                  res.send({ success: false, message: "error in finding" })
+                  logger.info("error");
+              } else {
+                  res.json(data)
+                  logger.info("data fetched successfully");
+              }
+          })
+      })*/
+
     // login url
     router.get('/signin/:email/:password', function(req, res) {
         console.log(req.params.email)
@@ -102,12 +103,12 @@ module.exports = function(router) {
             email: req.params.email
         }, function(err, user) {
             if (err) {
-                throw err;
+                return res.status(400).send({ success: false, message: 'There is error in finding' })
                 logger.info("error");
             }
             if (!user) {
 
-                res.send({ success: false, msg: 'Authentication failed. User not found.' })
+                return res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' })
                 logger.info("Authentication failed. User not found");
                 //res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
             } else {
@@ -119,14 +120,13 @@ module.exports = function(router) {
                         var token = jwt.sign({ user }, config.secret);
                         // return the information including token as JSON
                         //console.log('success')
-                        res.status(200)
-                        res.send({ success: true, token: 'JWT ' + token });
+                        return res.status(200).send({ success: true, token: 'JWT ' + token });
                         logger.info("token generated successfully");
                         //console.log({ success: true, token: 'JWT ' + token })*/
                     } else {
                         //console.log('success')
                         //console.log("found")
-                        res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
+                        return res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
                         logger.info("Authentication failed. Wrong password.");
                     }
                 });
@@ -161,32 +161,24 @@ module.exports = function(router) {
     });
     // route to provide token on forgotpassword
     router.get('/forgot/:email', function(req, res, next) {
-
-        console.log('reset')
         async.waterfall([
             function(done) {
                 crypto.randomBytes(20, function(err, buf) {
                     var token = buf.toString('hex');
                     done(err, token);
-                    // console.log('err')
                 });
             },
             //function to check that email id exists or not
             function(token, done) {
                 rpwtoken = token;
-
                 User.findOne({ email: req.params.email }, function(err, user) {
                     if (!user) {
-                        //console.log(email)
                         logger.warn("No account with that email address exists.");
                         res.flash('error', 'No account with that email address exists.');
                         return res.redirect('/forgot');
                     }
-
                     user.resetPasswordToken = token;
-
                     user.resetPasswordExpires = Date.now() + configure.tokenValidity; // 1 hour validity for link
-
                     user.save(function(err) {
                         done(err, token, user);
                     });
@@ -221,12 +213,7 @@ module.exports = function(router) {
                     if (error) {
                         logger.warn("network error");
                     } else {
-                        // console.log('Email sent: ' + info.response);
                         logger.info("Email sent to user to reset password");
-
-
-                        //res.send(token);
-
                     }
                 });
             }
@@ -253,8 +240,6 @@ module.exports = function(router) {
     });
     //route to reset password
     router.post('/reset/:token', function(req, res) {
-        console.log(req.params)
-        console.log(req.body)
         async.waterfall([
             function(done) {
                 User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
@@ -291,7 +276,7 @@ module.exports = function(router) {
     //route for logout
     router.get('/logout', function(req, res) {
         req.session.destroy();
-        res.send("logout success!");
+        res.status(200).send("logout success!");
         logger.info("successfully logged out")
     });
 
@@ -313,10 +298,9 @@ module.exports = function(router) {
                     }
                     currency.push(metadata);
                 });
-
                 logger.info("currency");
                 // console.log(currency);
-                res.json({ data: currency });
+                res.status(200).json({ data: currency });
             }
         })
     });
@@ -327,9 +311,9 @@ module.exports = function(router) {
         nasdaq.find((err, data) => {
             if (err) {
                 logger.error("error")
-
+                res.status(400).json({ success: false, message: "Bad request" })
             } else {
-                res.json(data)
+                res.status(200).json(data)
                 // console.log(data)
                 logger.error("nasdaq details found")
             }
@@ -370,7 +354,7 @@ module.exports = function(router) {
 
                 logger.info("stock data price of NASDAQ")
                 // console.log(stock);
-                res.json({ data: stock });
+                res.status(200).json({ data: stock });
             }
         })
     });

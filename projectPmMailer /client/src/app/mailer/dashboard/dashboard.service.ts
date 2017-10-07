@@ -11,6 +11,6 @@ export class DashboardService {
      	const url = 'http://localhost:3000/api/logout/'
  	return this.http
  							.get(url)
- 							.map(res => res)
+ 							.map(res => res,error=>error)
      }
 }
