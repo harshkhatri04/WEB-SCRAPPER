@@ -55,6 +55,7 @@ module.exports = function(router) {
                     }
 
                 } else {
+
                     let transporter = nodemailer.createTransport({
                         service: configure.serviceProvider,
                         auth: {
@@ -80,22 +81,11 @@ module.exports = function(router) {
                         }
                     });
                     return res.status(200).json(" success: true, message: 'user created' ");
+
                 }
             })
         }
     });
-
-    /*  router.get('/', function(req, res) {
-          User.find((err, data) => {
-              if (err) {
-                  res.send({ success: false, message: "error in finding" })
-                  logger.info("error");
-              } else {
-                  res.json(data)
-                  logger.info("data fetched successfully");
-              }
-          })
-      })*/
 
     // login url
     router.get('/signin/:email/:password', function(req, res) {
@@ -111,6 +101,7 @@ module.exports = function(router) {
 
                 return res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' })
                 logger.info("Authentication failed. User not found");
+
                 //res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
             } else {
                 // check if password matches
@@ -121,7 +112,7 @@ module.exports = function(router) {
                         var token = jwt.sign({ user }, config.secret);
                         // return the information including token as JSON
                         //console.log('success')
-                        return res.status(500).send({ success: true, token: 'JWT ' + token });
+                        return res.status(200).send({ success: true, token: 'JWT ' + token, name: user.name, email: user.email, mobile: user.mobile, password: user.password });
                         logger.info("token generated successfully");
                         //console.log({ success: true, token: 'JWT ' + token })*/
                     } else {
@@ -162,11 +153,13 @@ module.exports = function(router) {
     });
     // route to provide token on forgotpassword
     router.get('/forgot/:email', function(req, res, next) {
+
         async.waterfall([
             function(done) {
                 crypto.randomBytes(20, function(err, buf) {
                     var token = buf.toString('hex');
                     done(err, token);
+
                 });
             },
             //function to check that email id exists or not
@@ -174,12 +167,18 @@ module.exports = function(router) {
                 rpwtoken = token;
                 User.findOne({ email: req.params.email }, function(err, user) {
                     if (!user) {
+
                         logger.warn("No account with that email address exists.");
-                        res.flash('error', 'No account with that email address exists.');
-                        return res.redirect('/forgot');
+                        //res.flash('error', 'No account with that email address exists.');
+                        return res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' })
+
+
                     }
+
                     user.resetPasswordToken = token;
+
                     user.resetPasswordExpires = Date.now() + configure.tokenValidity; // 1 hour validity for link
+
                     user.save(function(err) {
                         done(err, token, user);
                     });
@@ -230,12 +229,13 @@ module.exports = function(router) {
         //checking token validity
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
             if (!user) {
+
                 logger.warn("Password reset token is invalid or has expired.");
-                req.flash('error', 'Password reset token is invalid or has expired.');
-                return res.redirect(configure.OnFailureRedirect);
+                //req.flash('error', 'Password reset token is invalid or has expired.');
+                return res.status(401).send({ success: false, msg: 'Password reset token is invalid or has expired.' })
+
             }
             res.redirect(configure.OnSuccessRedirect + rpwtoken);
-            logger.warn("redirect to reset password page");
 
         });
     });
@@ -246,9 +246,10 @@ module.exports = function(router) {
                 User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
                     if (!user) {
                         // console.log('err')
+                        return res.status(401).send({ success: false, msg: 'Password reset token is invalid or has expired.' });
                         logger.warn("Password reset token is invalid or has expired.");
-                        req.flash('error', 'Password reset token is invalid or has expired.');
-                        return res.redirect('back');
+                        //req.flash('error', 'Password reset token is invalid or has expired.');
+                        //return res.status(401).send({ success: false, msg: 'error', 'Password reset token is invalid or has expired.'})
                     }
 
                     user.password = req.body.password;
@@ -268,7 +269,6 @@ module.exports = function(router) {
             if (err) return next(err);
             logger.info("password successfully changed")
             res.send({ success: true });
-
         });
     });
 
@@ -317,6 +317,7 @@ module.exports = function(router) {
                 res.status(200).json(data)
                 // console.log(data)
                 logger.error("nasdaq details found")
+
             }
         })
 
