@@ -28,6 +28,7 @@ const connect = mongoose.connect('mongodb://admin:admin@192.168.252.203:27018/pe
 /*const connect = mongoose.connect('mongodb://localhost/testing');*/
 const passportGoogle = require('../auth/google');
 const configuration = require('./../config/googleAuth');
+const configurationFb = require('./../config/facebookAuth');
 const passportFacebook = require('../auth/facebook');
 
 module.exports = function(router) {
@@ -120,7 +121,7 @@ module.exports = function(router) {
                         var token = jwt.sign({ user }, config.secret);
                         // return the information including token as JSON
                         //console.log('success')
-                        return res.status(200).send({ success: true, token: 'JWT ' + token });
+                        return res.status(500).send({ success: true, token: 'JWT ' + token });
                         logger.info("token generated successfully");
                         //console.log({ success: true, token: 'JWT ' + token })*/
                     } else {
@@ -186,6 +187,9 @@ module.exports = function(router) {
             },
             //function to send a reset link on email
             function(token, user, done) {
+
+                var nodemailer = require('nodemailer');
+
                 var transporter = nodemailer.createTransport({
                     service: configure.serviceProvider,
                     auth: {
@@ -372,44 +376,52 @@ module.exports = function(router) {
     /* GOOGLE ROUTER Ends */
     /* FACEBOOK ROUTER */
     router.get('/auth/facebook',
-        passportFacebook.authenticate('facebook'));
+        passport.authenticate('facebook', { scope: 'email' }));
 
+    // handle the callback after facebook has authenticated the user
     router.get('/auth/facebook/callback',
-        passportFacebook.authenticate('facebook', { failureRedirect: 'http://localhost:4200/login' }),
-        function(req, res) {
-            // Successful authentication, redirect home.
-            res.redirect('http://localhost:4200/dashboard');
-        });
+        passport.authenticate('facebook', {
+            successRedirect: configurationFb.successRedirect,
+            failureRedirect: configurationFb.failureRedirect
+        }));
 
-    router.post('/aletrsOnPreference', function(req, res, next) {
-        var transporter = nodemailer.createTransport({
-            service: configure.serviceProvider,
-            auth: {
-                user: configure.mailSendingId,
-                pass: configure.mailSendingPass
-            }
-        });
 
-        var mailOptions = {
-            from: configure.mailSendingId,
-            to: user.email,
-            subject: 'Password Reset',
-            text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-                'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-                /*+ req.headers.host +*/
-                configure.resetLinkUrl + token + '\n\n' +
-                'If you did not request this, please ignore this email and your password will remain unchanged.\n',
+    var CronJob = require('cron').CronJob;
+    var job = new CronJob({
+        cronTime: '00 25 12 * * 1-6',
+        onTick: function() {
+            /*
+             * Runs every weekday (Monday through Saturday)
+             * at 12:25:00 AM. It does not run on Sunday.
+             */
+            var transporter = nodemailer.createTransport({
+                service: configure.serviceProvider,
+                auth: {
+                    user: configure.mailSendingId,
+                    pass: configure.mailSendingPass
+                }
+            });
 
-        };
+            var mailOptions = {
+                from: configure.mailSendingId,
+                to: 'pulkitkakkar176@gmail.com',
+                subject: 'As per your requment',
+                text: 'Hello !!!'
+            };
 
-        transporter.sendMail(mailOptions, function(error, info) {
-            if (error) {
-                logger.warn("network error");
-            } else {
-                logger.info("Email sent to user to reset password");
-            }
-        });
-    })
+            transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                    logger.warn("network error");
+                } else {
+                    logger.info("Email sent to user to reset password");
+                }
+            });
+        },
+        start: false,
+        timeZone: 'Asia/Kolkata'
+    });
+
+    job.start();
 
     return router;
 }

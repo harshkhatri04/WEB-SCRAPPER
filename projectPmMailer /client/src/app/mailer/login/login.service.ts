@@ -14,7 +14,7 @@ export class LoginService {
 		const url = 'http://localhost:3000/api/signin/' + email + "/" + password;
 		return this.http
 			.get(url)
-			.map(res => res.json(),error=>error);
+			.map(res => res.json(),error=>error.JSON());
 	}
 
 	//Method for google-auth

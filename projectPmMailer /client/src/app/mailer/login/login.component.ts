@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
     this.LoginService.facebook()
       .subscribe((res) => {
         if (res)
-          this.router.navigateByUrl('dashboard')
+          this.router.navigate(["/"]).then(result => { window.location.href = res.url; });
         else
           this.router.navigateByUrl('login')
       }, error => {
