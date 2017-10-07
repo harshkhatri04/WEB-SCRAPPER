@@ -12,16 +12,16 @@ import { ForgotpasswordService } from './forgotpassword.service';
 })
 export class ForgotpasswordComponent implements OnInit {
 
- config = config;
+  config = config;
 
-  constructor(private ForgotpasswordService : ForgotpasswordService) { }
+  constructor(private ForgotpasswordService: ForgotpasswordService) {}
 
-  hero = {email: ''};
+  hero = { email: '' };
   form: FormGroup;
 
   ngOnInit(): void {
-    this.form = new FormGroup({/*Validation functions through regex*/
-      
+    this.form = new FormGroup({ /*Validation functions through regex*/
+
       'email': new FormControl(this.hero.email, [
         Validators.required ||
         Validators.minLength(4),
@@ -32,16 +32,14 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   get pwd() { return this.form.get('email'); }
-  
 
+  forgot(email) {
+    this.ForgotpasswordService.forgotPassword(email)
+      .subscribe((res) => {
 
-  forgot(email){
-  	this.ForgotpasswordService.forgotPassword(email)
-  	              .subscribe((res) => {
-                      
-                      
-                  })
-                  
+      }, error => {
+        console.log("Error" + error)
+      })
 
   }
 
