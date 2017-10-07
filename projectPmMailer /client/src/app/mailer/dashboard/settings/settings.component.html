@@ -11,10 +11,10 @@
         <br>
         <form>
           <!-- Read-Only Field of Name displayed from database  -->
-          <input class="form-control" type="text" placeholder={{config.settings.NAME_FROM_DATABASE}} readonly>
+          <input class="form-control" type="text" placeholder={{name}} readonly>
           <br>
           <!-- Read-Only Field of Mobile displayed from database  -->
-          <input class="form-control" type="text" placeholder={{config.settings.MOBILE_FROM_DATABASE}} readonly>
+          <input class="form-control" type="text" placeholder={{mobile}} readonly>
           <br>
           <!-- Collapsable tab to Update name and Mobile starts here  -->
           <div class="card">
@@ -36,7 +36,7 @@
           <!-- Collapsable tab to Update name and Mobile ends here  -->
           <br>
           <!-- Read-Only Field of Email displayed from database  -->
-          <input class="form-control" type="text" placeholder={{config.settings.EMAIL_ID_DATABASE}} readonly>
+          <input class="form-control" type="text" placeholder={{email}} readonly>
           <br>
           <!-- Collapsable tab to Add Alternate Email-Id start -->
           <div class="card">
@@ -70,7 +70,7 @@
                 <div class="form-group">
                   <input type="password" class="form-control" id="inputPassword" placeholder={{config.settings.CURRENT_PASSWORD}}>
                 </div>
-                <button type="submit" class="btn btn-primary">{{config.settings.SAVE }}</button>
+                <button type="submit" class="btn btn-primary">{{config.settings.SAVE}}</button>
               </div>
             </div>
           </div>

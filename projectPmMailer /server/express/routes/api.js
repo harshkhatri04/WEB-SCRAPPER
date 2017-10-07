@@ -1,3 +1,4 @@
+
 const User = require('../models/userModel')
 const path = require('path');
 const jwt = require('jsonwebtoken');
@@ -12,8 +13,7 @@ const bcrypt = require('bcrypt-nodejs');
 const async = require('async');
 const crypto = require('crypto');
 const flash = require('express-flash');
-// const logger = require('morgan');
-const logger = require('../services/app.logger');
+const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 //forgotPassword End
 
@@ -28,6 +28,7 @@ const connect = mongoose.connect('mongodb://admin:admin@192.168.252.203:27018/pe
 /*const connect = mongoose.connect('mongodb://localhost/testing');*/
 const passportGoogle = require('../auth/google');
 const configuration = require('./../config/googleAuth');
+const configurationFb = require('./../config/facebookAuth');
 const passportFacebook = require('../auth/facebook');
 
 module.exports = function(router) {
@@ -40,8 +41,7 @@ module.exports = function(router) {
         user.mobile = req.body.mobile;
         // checking if fields are empty or not
         if (req.body.name == null || req.body.password == null || req.body.email == null || req.body.mobile == null) {
-            return res.status(400).json({ success: false, message: 'Ensure all the fields are filled' });
-            logger.info("ensure all fields are filled");
+            res.json({ success: false, message: 'Ensure all the fields are filled' });
         } else {
 
             user.save((err) => {
@@ -49,11 +49,11 @@ module.exports = function(router) {
                 if (err) {
 
                     if (err.errors.name) {
-                        return res.status(403).json({ success: false, message: err.errors.name.message });
-                        logger.info("ensure all fields are filled");
+                        res.json({ success: false, message: err.errors.name.message });
                     }
 
                 } else {
+
                     let transporter = nodemailer.createTransport({
                         service: configure.serviceProvider,
                         auth: {
@@ -73,29 +73,25 @@ module.exports = function(router) {
 
                     transporter.sendMail(mailOptions, function(error, info) {
                         if (error) {
-                            logger.info("cannot send mail");
+                            console.log(error);
                         } else {
-                            logger.info("mail sent successfully to" + info.response);
+                            console.log('Email sent: ' + info.response);
                         }
                     });
-                    return res.status(200).json(" success: true, message: 'user created' ");
+                    res.json(" success: true, message: 'user created' ");
                 }
             })
         }
     });
 
-    /*  router.get('/', function(req, res) {
-          User.find((err, data) => {
-              if (err) {
-                  res.send({ success: false, message: "error in finding" })
-                  logger.info("error");
-              } else {
-                  res.json(data)
-                  logger.info("data fetched successfully");
-              }
-          })
-      })*/
-
+    router.get('/', function(req, res) {
+        User.find((err, data) => {
+            if (err) console.log('error')
+            else {
+                res.json(data)
+            }
+        })
+    })
     // login url
     router.get('/signin/:email/:password', function(req, res) {
         console.log(req.params.email)
@@ -103,13 +99,11 @@ module.exports = function(router) {
             email: req.params.email
         }, function(err, user) {
             if (err) {
-                return res.status(400).send({ success: false, message: 'There is error in finding' })
-                logger.info("error");
+                throw err;
             }
             if (!user) {
 
-                return res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' })
-                logger.info("Authentication failed. User not found");
+                res.send({ success: false, msg: 'Authentication failed. User not found.' })
                 //res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
             } else {
                 // check if password matches
@@ -120,14 +114,12 @@ module.exports = function(router) {
                         var token = jwt.sign({ user }, config.secret);
                         // return the information including token as JSON
                         //console.log('success')
-                        return res.status(200).send({ success: true, token: 'JWT ' + token });
-                        logger.info("token generated successfully");
+                        res.send({ success: true, token: 'JWT ' + token, name:user.name,email:user.email,mobile:user.mobile,password:user.password });
                         //console.log({ success: true, token: 'JWT ' + token })*/
                     } else {
                         //console.log('success')
                         //console.log("found")
-                        return res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
-                        logger.info("Authentication failed. Wrong password.");
+                        res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
                     }
                 });
             }
@@ -161,25 +153,34 @@ module.exports = function(router) {
     });
     // route to provide token on forgotpassword
     router.get('/forgot/:email', function(req, res, next) {
+
+        console.log('reset')
         async.waterfall([
             function(done) {
                 crypto.randomBytes(20, function(err, buf) {
                     var token = buf.toString('hex');
                     done(err, token);
+                    // console.log('err');
                 });
             },
             //function to check that email id exists or not
             function(token, done) {
                 rpwtoken = token;
+                console.log(req.params.email);
                 User.findOne({ email: req.params.email }, function(err, user) {
                     if (!user) {
+
                         logger.warn("No account with that email address exists.");
                         //res.flash('error', 'No account with that email address exists.');
                         return res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' })
 
+
                     }
+
                     user.resetPasswordToken = token;
+
                     user.resetPasswordExpires = Date.now() + configure.tokenValidity; // 1 hour validity for link
+
                     user.save(function(err) {
                         done(err, token, user);
                     });
@@ -212,16 +213,19 @@ module.exports = function(router) {
 
                 transporter.sendMail(mailOptions, function(error, info) {
                     if (error) {
-                        logger.warn("network error");
+                        console.log(error);
                     } else {
-                        logger.info("Email sent to user to reset password");
+                        console.log('Email sent: ' + info.response);
+
+
+                        //res.send(token);
+                        console.log(token);
                     }
                 });
             }
         ], function(err) {
             if (err) return next(err);
             res.redirect('/forgot');
-            logger.info('redirect to forgot')
         });
     });
     // route to take reset password request
@@ -230,17 +234,20 @@ module.exports = function(router) {
         //checking token validity
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
             if (!user) {
+
                 logger.warn("Password reset token is invalid or has expired.");
                 //req.flash('error', 'Password reset token is invalid or has expired.');
                 return res.status(401).send({ success: false, msg:'Password reset token is invalid or has expired.'})
+
             }
             res.redirect(configure.OnSuccessRedirect + rpwtoken);
-            logger.warn("redirect to reset password page");
 
         });
     });
     //route to reset password
     router.post('/reset/:token', function(req, res) {
+        console.log(req.params)
+        console.log(req.body)
         async.waterfall([
             function(done) {
                 User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
@@ -250,12 +257,12 @@ module.exports = function(router) {
                         logger.warn("Password reset token is invalid or has expired.");
                         //req.flash('error', 'Password reset token is invalid or has expired.');
                         //return res.status(401).send({ success: false, msg: 'error', 'Password reset token is invalid or has expired.'})
+
                     }
 
                     user.password = req.body.password;
                     user.resetPasswordToken = undefined;
                     user.resetPasswordExpires = undefined;
-
                     //saving password
                     user.save(function(err) {
                         req.logIn(user, function(err) {
@@ -266,10 +273,7 @@ module.exports = function(router) {
             },
 
         ], function(err) {
-            if (err) return next(err);
-            logger.info("password successfully changed")
-            res.send({ success: true });
-
+            res.redirect('/');
         });
     });
 
@@ -278,8 +282,7 @@ module.exports = function(router) {
     //route for logout
     router.get('/logout', function(req, res) {
         req.session.destroy();
-        res.status(200).send("logout success!");
-        logger.info("successfully logged out")
+        res.send("logout success!");
     });
 
     //Dashboard
@@ -300,9 +303,9 @@ module.exports = function(router) {
                     }
                     currency.push(metadata);
                 });
-                logger.info("currency");
-                // console.log(currency);
-                res.status(200).json({ data: currency });
+
+                console.log(currency);
+                res.json({ data: currency });
             }
         })
     });
@@ -312,12 +315,11 @@ module.exports = function(router) {
     router.get('/details', function(req, res, next) {
         nasdaq.find((err, data) => {
             if (err) {
-                logger.error("error")
-                res.status(400).json({ success: false, message: "Bad request" })
+                console.log("error")
+
             } else {
-                res.status(200).json(data)
-                // console.log(data)
-                logger.error("nasdaq details found")
+                res.json(data)
+                console.log(data)
             }
         })
 
@@ -354,12 +356,13 @@ module.exports = function(router) {
                     stock.push(metadata1);
                 });
 
-                logger.info("stock data price of NASDAQ")
-                // console.log(stock);
-                res.status(200).json({ data: stock });
+                console.log(stock);
+                res.json({ data: stock });
             }
         })
     });
+
+    //HTTP Post method for stock price of NASDAQ for WSJ website
 
     /* GOOGLE ROUTER */
     router.get('/auth/google',
@@ -375,16 +378,16 @@ module.exports = function(router) {
         })
     );
     /* GOOGLE ROUTER Ends */
-    /* FACEBOOK ROUTER */
-    router.get('/auth/facebook',
-        passportFacebook.authenticate('facebook'));
+/* FACEBOOK ROUTER */
+		   router.get('/auth/facebook',
+		   passport.authenticate('facebook', { scope : 'email' }));
 
-    router.get('/auth/facebook/callback',
-        passportFacebook.authenticate('facebook', { failureRedirect: 'http://localhost:4200/login' }),
-        function(req, res) {
-            // Successful authentication, redirect home.
-            res.redirect('http://localhost:4200/dashboard');
-        });
+		    // handle the callback after facebook has authenticated the user
+		    router.get('/auth/facebook/callback',
+		        passport.authenticate('facebook', {
+		            successRedirect : configurationFb.successRedirect,
+		            failureRedirect : configurationFb.failureRedirect
+		        }));
 
     return router;
 }
