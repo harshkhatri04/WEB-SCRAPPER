@@ -112,7 +112,7 @@ module.exports = function(router) {
                         var token = jwt.sign({ user }, config.secret);
                         // return the information including token as JSON
                         //console.log('success')
-                        res.send({ success: true, token: 'JWT ' + token });
+                        res.send({ success: true, token: 'JWT ' + token, name:user.name,email:user.email,mobile:user.mobile,password:user.password });
                         //console.log({ success: true, token: 'JWT ' + token })*/
                     } else {
                         //console.log('success')

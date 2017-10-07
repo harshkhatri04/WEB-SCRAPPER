@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit {
 	hero = { email: '', pwd: '' };
 	form: FormGroup;
 	config = config;
-	
-	emailID:string;
+	emailId:string;
 	password:string;
-
+  name:string;
+  mobile:any;
 	ngOnInit(): void {
 		this.form = new FormGroup({ /*Validation functions through regex*/
 			'email': new FormControl(this.hero.email, [
@@ -44,8 +44,21 @@ export class LoginComponent implements OnInit {
 	checkUser(emailID, pwd) {
 		this.LoginService.findUser(emailID, pwd)
 			.subscribe((res) => {
-				console.log(res)
+				
 				this.value = res.token;
+        this.name = res.name;
+        this.emailId = res.email;
+        this.mobile = res.mobile;
+        this.password = res.password;
+			localStorage.setItem('currentUser', JSON.stringify({ 
+				token: this.value,
+				name: this.name,
+				email:this.emailId,
+				mobile:this.mobile,
+				password:this.password
+				
+				 }));
+		
 				if (this.value)
 					this.router.navigateByUrl('dashboard')
 				else
@@ -69,11 +82,5 @@ export class LoginComponent implements OnInit {
 			})
 	}
 
-/*	getConfig(): any {
-		return Promise.resolve(config)
-			.then(data => {
-				this.config = data;
-				//console.log(data)
-			})
-	}*/
+
 }
