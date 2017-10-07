@@ -163,7 +163,7 @@ function currencynews() {
 /*This the cron job function to do scheduling on the nasdaq data*/
 var job = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 39 18 * * *',
+    cronTime: '00 50 19 * * *',
     onTick: function(req, res, next) {
         nasdaq.find((err, data) => {
             if (err) {

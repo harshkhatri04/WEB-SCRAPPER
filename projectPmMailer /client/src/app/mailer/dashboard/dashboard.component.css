@@ -8,3 +8,18 @@
 .drop{
 	width: 200px !important;
 }
+
+.text {
+	color: white;
+	font-weight:bold;
+	background-color: black;
+}
+
+.list li{
+	float: left;
+	margin-left:10px;
+}
+
+.list{
+  list-style: none;
+}
