@@ -11,7 +11,11 @@ let UserSchema = new Schema({
     mobile: { type: Number },
     password: { type: String },
     resetPasswordToken: String,
-    resetPasswordExpires: Date
+    resetPasswordExpires: Date,
+    preferences: {
+        items: [{ id: Number, itemName: String }],
+        frequency: String
+    }
 
 });
 //pre method to encrypt password

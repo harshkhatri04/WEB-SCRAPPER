@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+import { config } from '../../config/config'
+
 @Injectable()
 export class LoginService {
 
@@ -11,7 +13,7 @@ export class LoginService {
 
 	findUser(email, password) {
 		//console.log(credentials);
-		const url = 'http://localhost:3000/login/signin/' + email + "/" + password;
+		const url = config.urlToServer.LOGIN_SERVICE_GET + email + "/" + password;
 		return this.http
 			.get(url)
 			.map(res => res.json(),error=>error.JSON());
@@ -19,7 +21,7 @@ export class LoginService {
 
 	//Method for google-auth
 	google() {
-		const url = 'http://localhost:3000/googleAuth/auth/google'
+		const url = config.urlToServer.LOGIN_SERVICE_GOGGLE_GET
 		return this.http
 			.get(url)
 			.map(res => res,error=>error.json());
@@ -28,7 +30,7 @@ export class LoginService {
 
 	 //Method for facebook-auth
 	facebook() {
-		const url = 'http://localhost:3000/facebookAuth/auth/facebook'
+		const url = config.urlToServer.LOGIN_SERVICE_FACEBOOK_GET
 		return this.http
 			.get(url)
 			.map(res => res,error=>error.json());

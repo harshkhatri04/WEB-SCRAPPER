@@ -8,7 +8,6 @@ const router = express.Router();
 
 // login url
 router.get('/signin/:email/:password', function(req, res) {
-    console.log(req.params.email)
     User.findOne({
         email: req.params.email
     }, function(err, user) {
@@ -43,6 +42,7 @@ router.get('/signin/:email/:password', function(req, res) {
         }
     });
 });
+
 
 
    router.get('/', function(req, res) {
