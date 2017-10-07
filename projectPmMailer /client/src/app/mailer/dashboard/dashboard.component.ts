@@ -51,6 +51,7 @@ export class DashboardComponent implements OnInit {
       console.log("Error" + error)
     })
   }
+  
   logout() {
     this.DashboardService.signout()
       .subscribe((res) => {

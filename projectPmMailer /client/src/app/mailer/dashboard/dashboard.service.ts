@@ -4,13 +4,13 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DashboardService {
 
-  constructor(private http : Http) { }
-   //method for logout
-   signout()
-     {
-     	const url = 'http://localhost:3000/logout/logout/'
- 	return this.http
- 							.get(url)
- 							.map(res => res,error=>error)
-     }
+  constructor(private http: Http) {}
+  //method for logout
+  signout() {
+    const url = 'http://localhost:3000/logout/logout/'
+    return this.http
+      .get(url)
+      .map(res => res, error => error)
+  }
+
 }
