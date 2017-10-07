@@ -38,7 +38,7 @@ export class ForgotpasswordComponent implements OnInit {
       .subscribe((res) => {
 
       }, error => {
-        console.log("Error" + error)
+        console.log("Error wrong email id" + error)
       })
 
   }

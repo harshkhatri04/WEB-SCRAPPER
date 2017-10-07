@@ -174,8 +174,9 @@ module.exports = function(router) {
                 User.findOne({ email: req.params.email }, function(err, user) {
                     if (!user) {
                         logger.warn("No account with that email address exists.");
-                        res.flash('error', 'No account with that email address exists.');
-                        return res.redirect('/forgot');
+                        //res.flash('error', 'No account with that email address exists.');
+                        return res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' })
+
                     }
                     user.resetPasswordToken = token;
                     user.resetPasswordExpires = Date.now() + configure.tokenValidity; // 1 hour validity for link
@@ -230,8 +231,8 @@ module.exports = function(router) {
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
             if (!user) {
                 logger.warn("Password reset token is invalid or has expired.");
-                req.flash('error', 'Password reset token is invalid or has expired.');
-                return res.redirect(configure.OnFailureRedirect);
+                //req.flash('error', 'Password reset token is invalid or has expired.');
+                return res.status(401).send({ success: false, msg:'Password reset token is invalid or has expired.'})
             }
             res.redirect(configure.OnSuccessRedirect + rpwtoken);
             logger.warn("redirect to reset password page");
@@ -245,9 +246,10 @@ module.exports = function(router) {
                 User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
                     if (!user) {
                         // console.log('err')
+                        return res.status(401).send({ success: false, msg: 'Password reset token is invalid or has expired.' });
                         logger.warn("Password reset token is invalid or has expired.");
-                        req.flash('error', 'Password reset token is invalid or has expired.');
-                        return res.redirect('back');
+                        //req.flash('error', 'Password reset token is invalid or has expired.');
+                        //return res.status(401).send({ success: false, msg: 'error', 'Password reset token is invalid or has expired.'})
                     }
 
                     user.password = req.body.password;
