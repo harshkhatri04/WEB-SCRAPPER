@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
   get pwd() { return this.form.get('pwd'); }
 
-
+//Method for Local Login with LOcal Storage
 	checkUser(emailID, pwd) {
 		this.LoginService.findUser(emailID, pwd)
 			.subscribe((res) => {
