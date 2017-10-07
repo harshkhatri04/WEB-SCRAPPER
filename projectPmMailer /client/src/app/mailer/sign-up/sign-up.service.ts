@@ -12,7 +12,7 @@ export class SignUpService {
   
   //method to hit server 
   addUser(user) {
-    const url = 'http://localhost:3000/api/users'; // sign up url
+    const url = 'http://localhost:3000/signup/users'; // sign up url
     return this.http
       .post(url, user)
       .map(res => res.json(),error => error);

@@ -21,7 +21,7 @@ import { DashboardService } from './mailer/dashboard/dashboard.service';
 
 const route: Routes = ([{
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent	
   },
   {
     path: 'signup',

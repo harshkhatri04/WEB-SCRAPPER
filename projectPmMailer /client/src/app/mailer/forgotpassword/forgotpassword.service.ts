@@ -8,7 +8,7 @@ export class ForgotpasswordService {
   constructor(private http : Http) { }
 
    forgotPassword(emailId){
- 	const url = 'http://localhost:3000/api/forgot/' + emailId
+ 	const url = 'http://localhost:3000/resetPwd/forgot/' + emailId
  	return this.http
  							.get(url)
  							.map(res => res.json(),error=>error.json());

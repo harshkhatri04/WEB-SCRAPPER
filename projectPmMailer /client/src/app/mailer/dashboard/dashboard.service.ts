@@ -8,7 +8,7 @@ export class DashboardService {
    //method for logout
    signout()
      {
-     	const url = 'http://localhost:3000/api/logout/'
+     	const url = 'http://localhost:3000/logout/logout/'
  	return this.http
  							.get(url)
  							.map(res => res,error=>error)

@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const router = express.Router();
-const routes = require('./routes/api')(router);
+
+const connect = mongoose.connect('mongodb://admin:admin@192.168.252.203:27018/personalizedmailer');
+
+const routes = require('./routes/route');
 const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -46,15 +48,13 @@ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
-app.use('/api', routes);
 
 //reset pwd middleware
 // app.use(logger('dev'));
 app.use(session({ secret: 'session secret key' }));
 app.use(flash());
 app.use(cookieParser());
-/*=====================*/
-
+app.use('/', routes);
 
 /*const db = 'mongodb://localhost/testing';
 mongoose.connect(db, (err) => {
