@@ -68,28 +68,17 @@ export class PreferenceComponent extends DialogComponent<ConfirmModel,boolean> i
 		{ value: 'W', display: 'Weekly' },
 		{value: 'M', display: 'Monthly'}
 ];
-	onItemSelect(item:any){
-		/*this.preference.insert(item).subscribe((data)=>{
-				this.pref=data;
-console.log(this.pref);
-			})
-		console.log(item);*/
-		/*console.log(this.basicExampleSelectedItems);
-		console.log(this.basicExampleSelectedItemsContact);*/
-		
+	onItemSelect(item:string[]){
+		this.items=item;
 	}
-	OnItemDeSelect(item:String){
-		
-		/*console.log(item);*/
-		console.log(this.basicExampleSelectedItems);
-
-	 /* console.log(this.basicExampleSelectedItemsContact);*/
+	OnItemDeSelect(item:string[]){
+		this.items=item;
 	}
 	onSelectAll(items: string[]){
-		console.log(items);
     this.items=items;
 	}
-	 onDeSelectAll(items: String){
+	 onDeSelectAll(items: string[]){
+	 	this.items=items;
 	}
 confirm() {
 		this.result = true;
@@ -100,7 +89,7 @@ confirm() {
 			items:this.items,
 			frequency: preferenceSetting
       }
-      let email="rahuljain0042@gmail.com";//localStorage.getItem('email');
+      let email="admin@123";//localStorage.getItem('email');
 
 				this.preference.insert(preferences,email).subscribe((res)=>{
 					
