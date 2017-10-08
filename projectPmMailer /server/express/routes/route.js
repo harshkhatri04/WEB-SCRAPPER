@@ -33,7 +33,7 @@ app.use('/getNews', scrap);
 app.use('/googleAuth', googleAuth);
 app.use('/facebookAuth', facebookAuth);
 app.use('/update',update);
-app.use('/investment' ,  preference);
+app.use('/investment' , preference);
 
 module.exports = app;
 
