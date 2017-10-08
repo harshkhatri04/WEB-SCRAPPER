@@ -16,7 +16,6 @@ import { CurrencyComponent } from './currency/currency.component';
 import { FundsComponent} from './funds/funds.component';
 import {DashboardComponent} from './dashboard.component';
 
-
 //routes used in this component
 const route:Routes=([  {
    path:'settings',
