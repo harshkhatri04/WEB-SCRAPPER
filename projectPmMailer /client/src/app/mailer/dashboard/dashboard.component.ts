@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
    this.value = {
      term: name
    }
-   this.nasdaq.getresult(this.value).subscribe(res => {
+   this.nasdaq.getstock(this.value).subscribe(res => {
      console.log(res)
      this.news = res.data;
    }, error => {
