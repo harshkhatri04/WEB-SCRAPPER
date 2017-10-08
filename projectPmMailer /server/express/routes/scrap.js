@@ -39,8 +39,8 @@ router.get('/fund', function(req, res, next) {
 
 })
 
-router.get('/stock', function(req, res, next) {
-    stockmodel.find((err, data) => {
+router.get('/stock/:id', function(req, res, next) {
+    stockmodel.find({term: req.params.id}, (err, data) => {
         if (err) {
             console.log("error")
 

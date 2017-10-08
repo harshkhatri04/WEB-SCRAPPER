@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { DialogService } from "ng2-bootstrap-modal";
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
-
 import { AppComponent } from './app.component';
 import { MailerComponent } from './mailer/mailer.component';
 import { LoginComponent } from './mailer/login/login.component';
@@ -18,6 +17,8 @@ import { LoginService } from './mailer/login/login.service';
 import { ForgotpasswordService } from './mailer/forgotpassword/forgotpassword.service'
 import { ResetpwdService } from './mailer/resetpwd/resetpwd.service'
 import { NasdaqService } from './mailer/dashboard/service/nasdaq.service';
+import {CurrencyService} from './mailer/dashboard/service/currency.service';
+import {FundService} from './mailer/dashboard/service/fund.service';
 import { DashboardModule } from './mailer/dashboard/dashboard.module';
 import { SignUpService } from './mailer/sign-up/sign-up.service';
 import { DashboardService } from './mailer/dashboard/dashboard.service';
@@ -87,7 +88,7 @@ const route: Routes = ([{
     RouterModule.forRoot(route)
   ],
 
- providers: [LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService, DialogService, PreferenceService,SettingsService],
+ providers: [LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService, DialogService, PreferenceService,SettingsService,CurrencyService,FundService],
 
 
   bootstrap: [AppComponent]

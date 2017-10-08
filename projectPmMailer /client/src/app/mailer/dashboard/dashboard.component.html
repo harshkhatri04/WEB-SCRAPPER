@@ -35,7 +35,7 @@
           <div class="col-md-6">
           <ul class="nav nav-tabs">
           <li class="nav-item">
-    <a class="nav-link" [routerLink]="'/currency'">Currency</a>
+    <a class="nav-link active" [routerLink]="'/currency'">Currency</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" [routerLink]="'/nasdaq'" >Nasdaq</a>
@@ -81,19 +81,13 @@
              </li>
                        </ul> -->
          </div>
-          
-          <div class="container">
-            <div class="col-md-4">
-            </div>
-            <div>
-              <br>
-              <h3 class="heading">{{config.dashboard.NEWS}}</h3>
-              <div *ngFor="let data of news">
-                {{data.News}}
-                <hr>
-              </div>
-            </div>
-          </div>
+         <br>
+          <div *ngFor="let post of list">
+         <p>{{post.Time}}</p>
+         <p>{{post.Headline}}</p>
+         <p>{{post.News}}</p>
+         <hr>
+         </div>
         </div>
       </div>
     </main>
