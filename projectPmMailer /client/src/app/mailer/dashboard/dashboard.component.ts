@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
    this.DashboardService.signout()
      .subscribe((res) => {
 
-       this.router.navigateByUrl('logout')
+       this.router.navigateByUrl('')
      }, error => {
        console.log("Error" + error)
      })

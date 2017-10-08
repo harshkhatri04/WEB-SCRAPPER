@@ -15,13 +15,13 @@ export class AuthoriseGuard implements CanActivate{
 
 	private isAuthorised(): boolean {
 
-		let isAuthorised: boolean= Math.random() < 0.5;
+		let Authorised: boolean= Math.random() < 0.5;
 		
-		if(!isAuthorised){
-		console.log("AuthoriseGuard: The User is not authorised and can not navigate to Dashboard page")
-		this.route.navigate(['/login']);
+		if(!Authorised){
+		alert("AuthoriseGuard: The User is not authorised and can not navigate to Dashboard page")
+		this.route.navigate(['']);
 		
 		}
-		return isAuthorised;
+		return Authorised;
 	}
 }
