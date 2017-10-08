@@ -11,6 +11,13 @@ import { SettingsComponent } from './settings/settings.component';
 import { ChartComponent } from './chart/chart.component';
 import {ChartsModule as Ng2Charts} from 'ng2-charts';
 import { TweetComponent } from './tweet/tweet.component';
+import { NasdaqComponent } from './nasdaq/nasdaq.component';
+import { CurrencyComponent } from './currency/currency.component';
+import { FundsComponent} from './funds/funds.component';
+import {DashboardComponent} from './dashboard.component';
+
+
+>>>>>>> fd6df1f12eab89e240530a60d3224c12723763d2
 
 
 
@@ -18,6 +25,18 @@ import { TweetComponent } from './tweet/tweet.component';
 const route:Routes=([  {
    path:'settings',
    component:SettingsComponent
+ },
+  {
+   path:'nasdaq',
+   component:NasdaqComponent
+ },
+  {
+   path:'currency',
+   component:DashboardComponent
+ },
+  {
+   path:'funds',
+   component:FundsComponent
  },
  {
    path:'charts',
@@ -39,12 +58,18 @@ const route:Routes=([  {
    SidebarComponent,
    ChartComponent,
    TweetComponent,
+   NasdaqComponent,
+   CurrencyComponent,
+   FundsComponent
  ],
  exports: [
   SettingsComponent,
    NavbarComponent,
    SidebarComponent,
-   ChartComponent
+   NasdaqComponent,
+   CurrencyComponent,
+   ChartComponent,
+   FundsComponent
  ]
 })
 
