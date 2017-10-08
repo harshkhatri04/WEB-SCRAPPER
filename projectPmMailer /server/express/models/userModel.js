@@ -15,7 +15,8 @@ let UserSchema = new Schema({
     preferences: {
         items: [{ id: Number, itemName: String }],
         frequency: String
-    }
+    },
+    alternateEmail:{type:String,default:null}
 
 });
 //pre method to encrypt password

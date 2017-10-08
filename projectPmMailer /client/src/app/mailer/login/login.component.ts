@@ -43,30 +43,28 @@ export class LoginComponent implements OnInit {
 
   get pwd() { return this.form.get('pwd'); }
 
-//Method for Local Login with LOcal Storage
+//Method for Local Login with Local Storage
 	checkUser(emailID, pwd) {
 		this.LoginService.findUser(emailID, pwd)
-			.subscribe((res) => {
-				
+			.subscribe((res) => { // getting user information from server  
 				this.value = res.token;
         this.name = res.name;
         this.emailId = res.email;
         this.mobile = res.mobile;
         this.password = res.password;
+      // setting user information in local storage
 			localStorage.setItem('currentUser', JSON.stringify({ 
 				token: this.value,
 				name: this.name,
 				email:this.emailId,
 				mobile:this.mobile,
 				password:this.password
-				
-				 }));
-		
-				if (this.value)
-					this.router.navigateByUrl('dashboard'),
+				}));
+		  if(this.value)// checking if retrieved token is valid or not
+			  this.router.navigateByUrl('dashboard'),
         this.showConfirm()
-				else
-					alert('Invalid Credentials');
+			else
+				alert('Invalid Credentials');
 			})
 	}
 
