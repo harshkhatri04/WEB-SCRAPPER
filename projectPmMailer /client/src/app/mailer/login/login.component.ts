@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
 					this.router.navigateByUrl('dashboard'),
         this.showConfirm()
 				else
-					console.log('error')
+					alert('Invalid Credentials');
 			})
 	}
 
