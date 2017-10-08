@@ -10,6 +10,12 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ChartComponent } from './chart/chart.component';
 import {ChartsModule as Ng2Charts} from 'ng2-charts';
+import { NasdaqComponent } from './nasdaq/nasdaq.component';
+import { CurrencyComponent } from './currency/currency.component';
+import { FundsComponent} from './funds/funds.component';
+import {DashboardComponent} from './dashboard.component';
+
+
 
 
 
@@ -17,6 +23,18 @@ import {ChartsModule as Ng2Charts} from 'ng2-charts';
 const route:Routes=([  {
    path:'settings',
    component:SettingsComponent
+ },
+  {
+   path:'nasdaq',
+   component:NasdaqComponent
+ },
+  {
+   path:'currency',
+   component:DashboardComponent
+ },
+  {
+   path:'funds',
+   component:FundsComponent
  },
  {
    path:'charts',
@@ -37,12 +55,18 @@ const route:Routes=([  {
    NavbarComponent,
    SidebarComponent,
    ChartComponent,
+   NasdaqComponent,
+   CurrencyComponent,
+   FundsComponent
  ],
  exports: [
   SettingsComponent,
    NavbarComponent,
    SidebarComponent,
-   ChartComponent
+   NasdaqComponent,
+   CurrencyComponent,
+   ChartComponent,
+   FundsComponent
  ]
 })
 
