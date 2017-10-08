@@ -10,6 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ChartComponent } from './chart/chart.component';
 import {ChartsModule as Ng2Charts} from 'ng2-charts';
+import { TweetComponent } from './tweet/tweet.component';
 
 
 
@@ -37,6 +38,7 @@ const route:Routes=([  {
    NavbarComponent,
    SidebarComponent,
    ChartComponent,
+   TweetComponent,
  ],
  exports: [
   SettingsComponent,

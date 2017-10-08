@@ -2,13 +2,13 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Select your Preferences</h5>
+      <h5 class="modal-title" id="exampleModalLabel">{{config.preference.PREFERENCE}}</h5>
       <button type="button" class="close" (click)="close()">&times;</button>
     </div>
     <div class="modal-body">
-      <label>Investment Type</label>
+      <label>{{config.preference.INVESTMENT_TYPE}}</label>
       <angular2-multiselect [data]="placeholderExampleList" [(ngModel)]="placeholderExampleSelectedItems" [settings]="placeholderExampleSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
-      <label> Select the Frequency of Email</label>
+      <label>{{config.preference.SELECT_FREQUENCY_OF_MAIL}}</label>
       <div class="container">
         <div *ngFor="let frequency of frequency" class="radio">
           <label>
@@ -19,7 +19,7 @@
       <!---->
       <div class="btn container">
         <form #f="ngForm" novalidate>
-          <button type="submit" class="btn btn-primary" (click)="save(user.frequency, f.valid);confirm()">Submit</button>
+          <button type="submit" class="btn btn-primary" (click)="save(user.frequency, f.valid);confirm()">{{config.preference.SUBMIT}}</button>
         </form>
       </div>
     </div>

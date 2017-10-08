@@ -86,5 +86,12 @@ export const config = {
 	  "LOGIN_SERVICE_FACEBOOK_GET" : "http://localhost:3000/facebookAuth/auth/facebook",
 		"FORGOT_PASSWORD_SERVICE_GET" : "http://localhost:3000/resetPwd/forgot/"
 		
+  },
+
+  "preference":{
+  	"PREFERENCE": "Select your Preferences",
+  	"INVESTMENT_TYPE" :   "Investment Type",
+  	 "SELECT_FREQUENCY_OF_MAIL":"Select the Frequency of Email",
+  	 "SUBMIT":"Submit",
   }
 }
