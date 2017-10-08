@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogComponent, DialogService} from "ng2-bootstrap-modal";
 import {PreferenceService} from './preference.service';
+import {config} from '../../config/config'
 
 export interface ConfirmModel {
 	title:string;
@@ -19,6 +20,7 @@ export class PreferenceComponent extends DialogComponent<ConfirmModel,boolean> i
  radioBut: any=[];
 	pref: any=[];
 	items:string[];
+	config=config;
 //preferences items
 	basicExampleSelectedItems = [];
 	placeholderExampleList = [];

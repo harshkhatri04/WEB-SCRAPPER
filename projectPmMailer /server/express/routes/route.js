@@ -20,20 +20,24 @@ const logout = require('./logout')
 const googleAuth = require('./googleAuth')
 const facebookAuth = require('./facebookAuth')
 const update = require('./update')
-const api = require('./api')
+
 const preference = require('./preference')
 const scrap = require('./scrap')
+const index = require('./index')
+const tweets = require('./tweets')
 
 app.use('/signup', signup);
 app.use('/login', login);
 app.use('/resetPwd', resetPassword);
 app.use('/logout', logout);
 app.use('/postNews', scrap);
-app.use('/getNews', scrap);
+
 app.use('/googleAuth', googleAuth);
 app.use('/facebookAuth', facebookAuth);
 app.use('/update',update);
 app.use('/investment' , preference);
+app.use('/', index);
+app.use('/tweets', tweets);
 
 module.exports = app;
 

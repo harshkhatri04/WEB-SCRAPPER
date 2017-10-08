@@ -25,6 +25,45 @@ router.get('/details', function(req, res, next) {
     })
 
 })
+
+router.get('/fund', function(req, res, next) {
+    fundmodel.find((err, data) => {
+        if (err) {
+            console.log("error")
+
+        } else {
+            res.json(data)
+            console.log(data)
+        }
+    })
+
+})
+
+router.get('/stock', function(req, res, next) {
+    stockmodel.find((err, data) => {
+        if (err) {
+            console.log("error")
+
+        } else {
+            res.json(data)
+            console.log(data)
+        }
+    })
+
+})
+
+router.get('/currency', function(req, res, next) {
+    currencymodel.find((err, data) => {
+        if (err) {
+            console.log("error")
+
+        } else {
+            res.json(data)
+            console.log(data)
+        }
+    })
+
+})
 //HTTP Get method start
 
 //HTTP Post method for stock price of NASDAQ for WSJ website
@@ -163,7 +202,7 @@ function currencynews() {
 /*This the cron job function to do scheduling on the nasdaq data*/
 var job = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 50 19 * * *',
+    cronTime: '00 37 15 * * *',
     onTick: function(req, res, next) {
         nasdaq.find((err, data) => {
             if (err) {
