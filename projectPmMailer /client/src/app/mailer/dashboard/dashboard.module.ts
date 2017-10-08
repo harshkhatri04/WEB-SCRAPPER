@@ -17,10 +17,6 @@ import { FundsComponent} from './funds/funds.component';
 import {DashboardComponent} from './dashboard.component';
 
 
->>>>>>> fd6df1f12eab89e240530a60d3224c12723763d2
-
-
-
 //routes used in this component
 const route:Routes=([  {
    path:'settings',
