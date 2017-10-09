@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
+let config = require('../config/database')
 let connect = mongoose.connect('mongodb://192.168.252.47:27017/testing');
 let currencymodel = require('../models/currencymodel')
 let stockmodel = require('../models/stock')
@@ -9,6 +10,7 @@ let request = require('request');
 let CronJob = require('cron').CronJob;
 let cheerio = require('cheerio');
 let fundmodel = require('../models/fundsmodel')
+let user = require('../models/userModel')
 
 //HTTP Post method end
 
@@ -40,7 +42,7 @@ router.get('/fund', function(req, res, next) {
 })
 
 router.get('/stock/:id', function(req, res, next) {
-    stockmodel.find({term: req.params.id}, (err, data) => {
+    stockmodel.find({ term: req.params.id }, (err, data) => {
         if (err) {
             console.log("error")
 
@@ -64,6 +66,7 @@ router.get('/currency', function(req, res, next) {
     })
 
 })
+
 //HTTP Get method start
 
 //HTTP Post method for stock price of NASDAQ for WSJ website
@@ -198,6 +201,26 @@ function currencynews() {
     })
 }
 
+/*This the cron job function to get all emailId and there preference set*/
+var getEmailAndPreferenceJob = new CronJob({
+    /*format is second, minute, hour, day of month, months, day of week*/
+    cronTime: '* * * * *',
+    onTick: function(req, res, next) {
+        user.find((err, data) => {
+            if (err) {
+                console.log("error")
+
+            } else {
+                console.log(data)
+            }
+        })
+
+    },
+    start: false,
+    timeZone: 'Asia/Kolkata'
+
+});
+getEmailAndPreferenceJob.start();
 
 /*This the cron job function to do scheduling on the nasdaq data*/
 var job = new CronJob({
@@ -212,6 +235,7 @@ var job = new CronJob({
                 getnasdaq(data);
                 fundsnews();
                 currencynews();
+
             }
         })
 
