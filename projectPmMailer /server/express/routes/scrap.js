@@ -20,7 +20,7 @@ router.get('/details', function(req, res, next) {
 
         } else {
             res.json(data)
-            console.log(data)
+            
         }
     })
 
@@ -33,20 +33,20 @@ router.get('/fund', function(req, res, next) {
 
         } else {
             res.json(data)
-            console.log(data)
+           
         }
     })
 
 })
 
-router.get('/stock/:id', function(req, res, next) {
+router.get('/news/:id', function(req, res, next) {
     stockmodel.find({term: req.params.id}, (err, data) => {
         if (err) {
             console.log("error")
 
         } else {
             res.json(data)
-            console.log(data)
+          
         }
     })
 
@@ -59,7 +59,7 @@ router.get('/currency', function(req, res, next) {
 
         } else {
             res.json(data)
-            console.log(data)
+           
         }
     })
 
@@ -92,7 +92,7 @@ router.post('/stock', function(req, res, next) {
                 stock.push(metadata1);
             });
 
-            console.log(stock);
+        
             res.json({ data: stock });
         }
     })
@@ -124,7 +124,7 @@ function getnasdaq(data) {
                             // logger.error('not found')
                             console.log('error')
                         } else if (data) {
-                            console.log('success', data);
+                            
                         }
                     });
                 })
@@ -156,7 +156,7 @@ function fundsnews() {
                         console.log("error")
 
                     } else if (data) {
-                        console.log("sucess", data)
+                        
                     }
 
                 })
@@ -212,6 +212,7 @@ var job = new CronJob({
                 getnasdaq(data);
                 fundsnews();
                 currencynews();
+
             }
         })
 

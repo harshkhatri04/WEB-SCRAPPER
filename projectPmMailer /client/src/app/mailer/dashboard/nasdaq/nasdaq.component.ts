@@ -15,6 +15,8 @@ config=config;
 list:any;
 value:any;
 news:any;
+stock:any;
+head:any;
   ngOnInit() {
      this.nasdaq.getnasdaqstocks().subscribe((data) => {
 
@@ -29,12 +31,25 @@ news:any;
    this.value = {
      term: name
    }
-   this.nasdaq.getresult().subscribe(res => {
+   this.searchnews(name);
+   this.nasdaq.getresult(this.value).subscribe(res => {
      console.log(res)
-     this.news = res.data;
+     this.stock = res.data;
    }, error => {
      console.log("Error" + error)
    })
+ }
+
+ searchnews(name){
+this.head='NEWS';
+   this.nasdaq.getnews(name).subscribe(res => {
+    
+     this.news = res;
+
+   }, error => {
+     console.log("Error" + error)
+   })
+
  }
 
 
