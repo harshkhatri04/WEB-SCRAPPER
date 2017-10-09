@@ -77,6 +77,30 @@ router.delete('/deleteUser/:email',(req,res)=>{
 	}
 	);
 });
-//route ends here
 
+// route to update password
+// route starts here
+router.post('/updatePassword/:email',(req,res)=>{
+	User.findOne({email:req.params.email},function(err,user){
+		if(err){
+			res.status(400).send({status:false,message:'error updating password'})
+		}else{
+			user.comparePassword(req.body.password,function(err,isMatch){
+				if(isMatch && !err){
+					user.password = req.body.newPassword;
+          user.save((err)=>{
+          	if(err){
+          		res.status(400).send({success:false,message:'could not update password'})
+          	}else{
+          		res.status(200).send({success:true,message:'password updated successfully'})
+          	}
+          })
+				}else{
+          res.status(400).send({success:false,message:'password mismatch'})
+				}
+			})
+		}
+	})
+})
+// route ends here
 module.exports = router;
