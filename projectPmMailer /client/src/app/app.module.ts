@@ -61,6 +61,11 @@ const route: Routes = ([{
 
   },
   {
+    path: 'reset',
+    component: LoginComponent
+
+  },
+  {
     path: 'preference',
     component: PreferenceComponent
   }
