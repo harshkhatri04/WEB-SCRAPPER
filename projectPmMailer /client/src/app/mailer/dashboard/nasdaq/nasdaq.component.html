@@ -80,21 +80,22 @@
         <b><p class="h4">{{header}}</p></b>
         <hr>
         <div *ngFor="let data of stocknews">
-          <div class="card bg-dark text-white mb-3" style="background-color: #333;" *ngIf=data.news>
+          <div class="card text-white mb-3" style="background-color: #80cbc4;" *ngIf=data.news>
             <div class="card-body">
-              <p style="color: #ffe0b2">{{data.news}}</p>
+              <p class ="h7" style="color: #333">{{data.news}}</p>
             </div>
           </div>
         </div>
+
       </div>
     </div>
     <!--Conatiner for Tweetes -->
     <div class="col-md-4"  style="margin-top: 15%">
-      <div class="card bg-dark text-white mb-3" style="background-color: white;" *ngFor="let data of investmentProductuser">
+      <div class="card text-white mb-3" style="background-color: #e0f2f1;" *ngFor="let data of investmentProductuser">
         <div class="card-body">
-          <p style="color: #ffe0b2">{{data.text}}</p>
+          <h6 style="color: #333">{{data.text}}</h6>
         </div>
       </div>
     </div>
-  </div>
+    </div>
 </div>
