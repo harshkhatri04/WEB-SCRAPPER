@@ -15,7 +15,7 @@ export class NasdaqComponent implements OnInit {
 
   constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService,private tweetService:TweetService) { }
 list:string;
-
+nasdaqcode:number;
 config=config;
 value:{};
 stockprice:string;
