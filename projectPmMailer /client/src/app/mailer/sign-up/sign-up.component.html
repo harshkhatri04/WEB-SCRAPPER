@@ -121,12 +121,12 @@
                   </div>
                 </div>
                 <!-- Registration form ends -->
-                <div class="btn">
+                <div class="btn" align="center">
                   <!-- Register Button -->
-                  <button id="register" type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="addUser(nameFirst,emailID,mobileNo,pwdFirst,pwdConf)">{{config.signup.REGISTER}}</button>
+                  <button id="register" type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="addUser(nameFirst,emailID,mobileNo,pwdFirst,pwdConf)" style="width: 100%">{{config.signup.REGISTER}}</button>
                 </div>
-                <div>
-                    <a [routerLink]="'/login'" style="color: blue">{{config.signup.LOGIN}}</a>
+                <div align="center">
+                  <a [routerLink]="'/login'">{{config.signup.ACCOUNT_EXIST}}{{config.signup.LOGIN}}</a>
                 </div>
               </div>
             </div>

@@ -16,18 +16,18 @@
 	  //get the stocks code and company of nasdaq End
 
 	  //get the news of respective code which was selected in dropdown 
-	  getresult() {
+	  getresult(term) {
 
-	    return this.http.get(this.getstockapi+'/postNews/stock')
+	    return this.http.post(this.getstockapi+'/postNews/stock/',term)
 	      .map((res: Response) => res.json(),error=>error.json())
 
 	  }
 	  //get the news of respective code which was selected in dropdown
 	
-  // getstock(term) {
-	 //    console.log(term)
-	 //    return this.http.post(this.getstockapi+'/postNews/stock', term)
-	 //      .map((res: Response) => res.json())
-	 //  }
+  getnews(id) {
+	   console.log("This sucesss",id)
+	    return this.http.get(this.getstockapi+'/postNews/news/'+id)
+	      .map((res: Response) => res.json())
+	  }
 
 	}

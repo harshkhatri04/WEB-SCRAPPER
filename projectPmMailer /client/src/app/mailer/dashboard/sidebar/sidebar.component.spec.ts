@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed,fakeAsync, tick } from '@angular/core/testing';
 import { Router, RouterLinkWithHref,RouterLink } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing'
+import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement,Directive, Injectable, Input  } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -91,9 +91,6 @@ it('should create Sidebar Component', () => {
 
 	it('it can get router links from template',()=>{
   expect(links.length).toBe(3,'should have 3 links');
- /* expect(links[0].linkParams).toBe('/dashboard','1st link should go to dashboard');
-  expect(links[1].linkParams).toBe('/settings','2nd link should go to settings');
-  expect(links[2].linkParams).toBe('/charts','3rd link should go to charts');*/
 	})
 
 });

@@ -25,7 +25,7 @@ import { DashboardService } from './mailer/dashboard/dashboard.service';
 import { SettingsService } from './mailer/dashboard/settings/settings.service';
 import { PreferenceComponent } from './mailer/preference/preference.component';
 import {PreferenceService} from './mailer/preference/preference.service';
-
+import {TweetService} from './mailer/dashboard/tweet/tweet.service';
 /*import { AuthoriseGuard} from './guards/authorise.guard';
 */
 
@@ -61,6 +61,11 @@ const route: Routes = ([{
 
   },
   {
+    path: 'reset',
+    component: LoginComponent
+
+  },
+  {
     path: 'preference',
     component: PreferenceComponent
   }
@@ -88,7 +93,7 @@ const route: Routes = ([{
     RouterModule.forRoot(route)
   ],
 
- providers: [LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService, DialogService, PreferenceService,SettingsService,CurrencyService,FundService],
+ providers: [LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService, DialogService, PreferenceService,SettingsService,CurrencyService,FundService,TweetService],
 
 
   bootstrap: [AppComponent]
