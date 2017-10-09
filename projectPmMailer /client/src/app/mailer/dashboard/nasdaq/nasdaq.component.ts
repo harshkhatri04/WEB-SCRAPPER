@@ -11,17 +11,23 @@ import {tweetSearch} from '../service/tweet.service'
 })
 export class NasdaqComponent implements OnInit {
 config=config;
+<<<<<<< HEAD
   constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService,private tweetService:tweetSearch) { }
 list:string;
+=======
+  constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService) { }
+nasdaqcode:string;
+>>>>>>> 8c033c8af987151f076712c372be4a5f22697242
 value:{};
-news:string;
-stock:string;
-head:string;
+stockprice:string;
+stocknews:string;
+header:string;
+
   ngOnInit() {
      this.nasdaq.getnasdaqstocks().subscribe((data) => {
 
-     this.list = data;
-     console.log(this.list)
+     this.nasdaqcode = data;
+     console.log(this.nasdaqcode)
    }, error => {
      console.log("Error" + error)
    })
@@ -34,18 +40,21 @@ head:string;
    this.searchnews(name);
    this.nasdaq.getresult(this.value).subscribe(res => {
      console.log(res)
-     this.stock = res.data;
+     this.stockprice = res.data;
    }, error => {
      console.log("Error" + error)
    })
  }
 
  searchnews(name:string){
-this.head='NEWS'
+
   this.twitnasdaq();
+
+this.header='NEWS'
+
    this.nasdaq.getnews(name).subscribe(res => {
     
-     this.news = res;
+     this.stocknews = res;
 
    }, error => {
      console.log("Error" + error)

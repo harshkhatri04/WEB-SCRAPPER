@@ -63,7 +63,7 @@ export const config = {
 	"STOCK_MARKET": "Stock Market",
 	"PIC": "The real key to making money in stocks is not to get scared out of them.",
 	"PIC_TWO": "Stock market bubbles don't grow out of thin air. They have a solid basis in reality, but reality as distorted by a misconception.",
-	"FORGOT_PASSWORD": "Forgot Password",
+	"FORGOT_PASSWORD": "Forgot Password?",
 	"EMAIL_ADDRESS": "Email Address",
 	"RESET_PASSWORD": "Reset Password"
   },
