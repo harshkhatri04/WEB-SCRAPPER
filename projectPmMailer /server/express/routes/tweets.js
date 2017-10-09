@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var Twit = require('twit');
-var config = require('../config/configure');
+var config = require('../config/tweetconfig');
 
 // instantiate Twit module
 var twitter = new Twit(config.twitter);
 
 var TWEET_COUNT = 15;
 var MAX_WIDTH = 305;
-var FILTER_URL = 'statuses/filter';
+var OEMBED_URL = 'statuses/oembed';
 var USER_TIMELINE_URL = 'statuses/user_timeline';
 
 /**
@@ -16,12 +16,12 @@ var USER_TIMELINE_URL = 'statuses/user_timeline';
  */
 router.get('/user_timeline/:user', function(req, res) {
 
-  var filterTweets = [], tweets = [],
+  var oembedTweets = [], tweets = [],
 
   params = {
     screen_name: req.params.user, // the user id passed in as part of the route
     count: TWEET_COUNT, // how many tweets to return
-    
+    lang : en
   };
 
   // the max_id is passed in via a query string param
@@ -37,33 +37,32 @@ router.get('/user_timeline/:user', function(req, res) {
     var i = 0, len = tweets.length;
 
     for(i; i < len; i++) {
-      getFilter(tweets[i]);
+      getOEmbed(tweets[i]);
     }
   });
 
   /**
    * requests the oEmbed html
    */
-  function getFilter (tweet) {
+  function getOEmbed (tweet) {
 
     // oEmbed request params
     var params = {
       "id": tweet.id_str,
       "maxwidth": MAX_WIDTH,
       "hide_thread": true,
-      "omit_script": true,
-      
+      "omit_script": true
     };
 
     // request data 
-    twitter.get(FILTER_URL, params, function (err, data, resp) {
+    twitter.post(OEMBED_URL, params, function (err, data, resp) {
       tweet.filter = data;
-      filterTweets.push(tweet);
-console.log(tweet.text,tweet.created_at,"================");
+      oembedTweets.push(tweet);
+console.log(tweet.text,tweet.created_at,tweet.media_url,"================");
       // do we have oEmbed HTML for all Tweets?
-      if (filterTweets.length == tweets.length) {
+      if (oembedTweets.length == tweets.length) {
         res.setHeader('Content-Type', 'application/json');
-        res.send(filterTweets);
+        res.send(oembedTweets);
 
       }
     });
