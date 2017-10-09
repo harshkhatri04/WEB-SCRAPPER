@@ -8,7 +8,7 @@ export class TweetService {
  tweetSearch(user: string) {
  	console.log(user);
     return this.http
-      .get('http://localhost:3000/tweets/user_timeline/'+user);
-      .map(res => res, error => error)
+      .get('http://localhost:3000/tweets/user_timeline/'+user)
+      .map((res: Response)=> res.json());
   }
 }

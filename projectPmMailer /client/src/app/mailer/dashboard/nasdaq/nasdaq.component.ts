@@ -51,8 +51,6 @@ this.head='NEWS'
    })
 
  }
-
-
  logout() {
    this.DashboardService.signout()
      .subscribe((res) => {

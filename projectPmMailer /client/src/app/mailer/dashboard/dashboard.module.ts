@@ -36,6 +36,10 @@ const route:Routes=([  {
  {
    path:'charts',
    component:ChartComponent
+ },
+ {
+   path:'tweet',
+   component:TweetComponent
  }
  ])
 
