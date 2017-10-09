@@ -3,7 +3,7 @@ import { NasdaqService } from './service/nasdaq.service';
 import { config } from '../../config/config';
 import { DashboardService } from './dashboard.service'
 import { Router } from '@angular/router'
-
+import {CurrencyService} from './service/currency.service';
 
 @Component({
  selector: 'app-dashboard',
@@ -13,13 +13,13 @@ import { Router } from '@angular/router'
 
 export class DashboardComponent implements OnInit {
 
- constructor(private nasdaq: NasdaqService, private DashboardService: DashboardService, private router: Router) {}
+ constructor(private currency: CurrencyService, private DashboardService: DashboardService, private router: Router) {}
 
  list: any = []
  data: any
 
  dat: any = [];
- val: any = ['ETF', 'Bonds', 'Stocks', 'NASDAQ']
+
 
  a: any;
  config = config;
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
 
  //load dropdown for nasdaq stocks  
  ngOnInit() {
-   this.nasdaq.getnasdaqstocks().subscribe((data) => {
+    this.currency.getcurrency().subscribe((data) => {
 
      this.list = data;
      console.log(this.list)
@@ -40,17 +40,6 @@ export class DashboardComponent implements OnInit {
  //load dropdown for nasdaq stocks end
 
  //This function load the news basis of the the stock which was selected in dropdown  
- search(name) {
-   this.value = {
-     term: name
-   }
-   this.nasdaq.getstock(this.value).subscribe(res => {
-     console.log(res)
-     this.news = res.data;
-   }, error => {
-     console.log("Error" + error)
-   })
- }
  
  logout() {
    this.DashboardService.signout()
