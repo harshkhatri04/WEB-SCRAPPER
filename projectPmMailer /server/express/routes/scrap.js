@@ -22,7 +22,7 @@ router.get('/details', function(req, res, next) {
 
         } else {
             res.json(data)
-            console.log(data)
+
         }
     })
 
@@ -35,20 +35,21 @@ router.get('/fund', function(req, res, next) {
 
         } else {
             res.json(data)
-            console.log(data)
+
         }
     })
 
 })
 
-router.get('/stock/:id', function(req, res, next) {
+
+router.get('/news/:id', function(req, res, next) {
     stockmodel.find({ term: req.params.id }, (err, data) => {
         if (err) {
             console.log("error")
 
         } else {
             res.json(data)
-            console.log(data)
+
         }
     })
 
@@ -61,7 +62,7 @@ router.get('/currency', function(req, res, next) {
 
         } else {
             res.json(data)
-            console.log(data)
+
         }
     })
 
@@ -95,7 +96,7 @@ router.post('/stock', function(req, res, next) {
                 stock.push(metadata1);
             });
 
-            console.log(stock);
+
             res.json({ data: stock });
         }
     })
@@ -127,7 +128,7 @@ function getnasdaq(data) {
                             // logger.error('not found')
                             console.log('error')
                         } else if (data) {
-                            console.log('success', data);
+
                         }
                     });
                 })
@@ -159,7 +160,7 @@ function fundsnews() {
                         console.log("error")
 
                     } else if (data) {
-                        console.log("sucess", data)
+
                     }
 
                 })
@@ -202,25 +203,43 @@ function currencynews() {
 }
 
 /*This the cron job function to get all emailId and there preference set*/
-var getEmailAndPreferenceJob = new CronJob({
+var mailJob = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '* * * * *',
-    onTick: function(req, res, next) {
+    cronTime: '00 27 14 * * *',
+    onTick: function(req, res) {
         user.find((err, data) => {
             if (err) {
-                console.log("error")
-
+                console.log(err);
             } else {
-                console.log(data)
+                getEmailAndPreference(data)
+                //console.log(data)
             }
         })
-
     },
     start: false,
     timeZone: 'Asia/Kolkata'
 
 });
-getEmailAndPreferenceJob.start();
+mailJob.start();
+
+function getEmailAndPreference(data) {
+    for (let i = 0; i < data.length; i++) {
+        console.log(data[i].email)
+    }
+}
+
+function sendDailyMails() {
+    user.find((err, data) => {
+        if (err) {
+            console.log('error')
+            return err
+        } else {
+            return data;
+        }
+    })
+}
+
+
 
 /*This the cron job function to do scheduling on the nasdaq data*/
 var job = new CronJob({
@@ -246,4 +265,5 @@ var job = new CronJob({
 });
 job.start();
 //HTTP Post method for stock price of NASDAQ for WSJ website
+
 module.exports = router;
