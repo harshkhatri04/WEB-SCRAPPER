@@ -78,16 +78,27 @@
           <p style="color: #ffe0b2">{{data.news}}</p>
         </div>
       </div>
-       <div class="card bg-dark text-white mb-3" style="background-color: #333;" *ngFor="let data of investmentProductuser">
+      <!-- ====================== -->
+      <h1>Tweets</h1>
+      <div class="card bg-dark text-white mb-3" style="background-color: #333;" *ngFor="let data of investmentProductuser">
+        <figure class="profile profile-inline">
+          <img src="photo.png" class="profile-avatar" alt="image">
+        </figure>
+        <br>
         <div class="card-body">
           <p style="color: #ffe0b2">{{data.text}}</p>
+          <div *ngIf="data.entities.media">
+            <img class="img" src="{{data.entities.media[0].media_url}}">
+          </div>
+            <h6>{{data.created_at}}</h6>
         </div>
       </div>
-      <!-- <div *ngFor="let data of news">
-        <p>{{data.news}}</p>
-        <hr>
-      </div> -->
     </main>
   </div>
 </div>
-<!-- search ended -->
+<!-- search ende
+
+
+
+
+d -->

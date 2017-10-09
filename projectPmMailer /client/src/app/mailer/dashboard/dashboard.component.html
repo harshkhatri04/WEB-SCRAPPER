@@ -41,46 +41,8 @@
   <li class="nav-item">
     <a class="nav-link" [routerLink]="'/funds'">Funds</a>
   </li>
-
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="'/tweet'">Tweet</a>
-  </li>
   
 </ul>
-            <!-- <h2 class="text-muted"><small>{{config.dashboard.PERSONALISED_MAILER}}</small></h2>
-                      
-            <div>
-              dropdown for company
-              <select #selectedname class="drop">
-                <option [value]="post.Code" *ngFor="let post of list" >
-                  {{post.Company}}
-                </option>
-              </select>
-            </div>
-            <br> &nbsp;
-            <button id="search" (click)="search(selectedname.value)" class="btn btn-outline-primary" type="button"> {{config.dashboard.SEARCH}}</button>
-                      </div>
-            
-                      jumbotron for displaying stock price of nasdaq data
-                      <div class="jumbotron marg container text"  *ngFor="let data of listPrice">
-                       <div class="row">
-                       <div class="col-md-8">
-            <p>{{data.closeAt}}</p>
-            <h1>{{data.Price}}</h1>
-            <h4>{{data.upDown}}</h4>
-            <p>{{data.hours}}</p>
-                       </div>
-                       
-                       </div>
-            <ul class="list">
-             <li>
-               <h4>{{data.hPrice}}</h4>
-             </li>
-             
-             <li>
-               <p>{{data.hupdown}}</p>
-             </li>
-                       </ul> -->
          </div>
          <br>
          <div class="card bg-dark text-white mb-3" style="background-color: #333;" *ngFor="let post of list">
