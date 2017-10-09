@@ -24,12 +24,6 @@ export class TweetComponent implements OnInit {
   	let user='';
   }
 */
-  nasdaq(){
-  	let user='nasdaq';
-  	this.tweetService.tweetSearch(user).subscribe((data)=>{
-					this.investmentProductuser=data;
-					console.log(this.investmentProductuser);
-				})
-  }
+ 
 
 }

@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit {
    }, error => {
      console.log("Error" + error)
    })
+    this.gettweet();
 
  }
  //load dropdown for nasdaq stocks end

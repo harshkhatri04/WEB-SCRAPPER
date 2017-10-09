@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {DashboardService} from '../dashboard.service';
 import { Router } from '@angular/router'
 import {NasdaqService} from '../service/nasdaq.service';
-
+import {tweetSearch} from '../service/tweet.service'
 @Component({
   selector: 'app-nasdaq',
   templateUrl: './nasdaq.component.html',
@@ -11,7 +11,7 @@ import {NasdaqService} from '../service/nasdaq.service';
 })
 export class NasdaqComponent implements OnInit {
 config=config;
-  constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService) { }
+  constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService,private tweetService:tweetSearch) { }
 list:string;
 value:{};
 news:string;
@@ -42,6 +42,7 @@ head:string;
 
  searchnews(name:string){
 this.head='NEWS'
+  this.twitnasdaq();
    this.nasdaq.getnews(name).subscribe(res => {
     
      this.news = res;
@@ -51,6 +52,15 @@ this.head='NEWS'
    })
 
  }
+
+  twitnasdaq(){
+    let user='nasdaq';
+    this.tweetService.tweetSearch(user).subscribe((data)=>{
+          this.investmentProductuser=data;
+          console.log(this.investmentProductuser);
+        })
+  }
+
  logout() {
    this.DashboardService.signout()
      .subscribe((res) => {
