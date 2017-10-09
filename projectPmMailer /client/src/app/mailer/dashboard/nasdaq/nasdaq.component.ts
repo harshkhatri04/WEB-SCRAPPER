@@ -12,11 +12,11 @@ import {NasdaqService} from '../service/nasdaq.service';
 export class NasdaqComponent implements OnInit {
 config=config;
   constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService) { }
-list:any;
-value:any;
-news:any;
-stock:any;
-head:any;
+list:string;
+value:{};
+news:string;
+stock:string;
+head:string;
   ngOnInit() {
      this.nasdaq.getnasdaqstocks().subscribe((data) => {
 
@@ -27,7 +27,7 @@ head:any;
    })
   }
 
- search(name) {
+ search(name:string) {
    this.value = {
      term: name
    }
@@ -40,8 +40,8 @@ head:any;
    })
  }
 
- searchnews(name){
-this.head='NEWS';
+ searchnews(name:string){
+this.head='NEWS'
    this.nasdaq.getnews(name).subscribe(res => {
     
      this.news = res;
