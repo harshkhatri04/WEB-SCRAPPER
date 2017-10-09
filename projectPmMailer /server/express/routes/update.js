@@ -61,5 +61,22 @@ router.put('/updateName/:email',(req,res)=>{
  });
 //route ends here
 
+//route to delete user account
+//route starts here
+router.delete('/deleteUser/:email',(req,res)=>{
+	User.findOneAndRemove({
+		email:req.params.email
+	},
+	(err,data)=>{
+		if(err) {
+			res.send(err)
+		}
+			else{
+				res.send('deleted successfully');
+			}
+	}
+	);
+});
+//route ends here
 
 module.exports = router;

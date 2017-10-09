@@ -7,5 +7,4 @@ module.exports = {
     'mailSendingId': 'personalizedemailer@gmail.com',
     'mailSendingPass': 'niit@123',
     'tokenValidity': 3600000,
-
 }
