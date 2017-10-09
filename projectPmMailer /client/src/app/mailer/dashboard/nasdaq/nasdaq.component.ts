@@ -3,26 +3,25 @@ import { Component, OnInit } from '@angular/core';
 import {DashboardService} from '../dashboard.service';
 import { Router } from '@angular/router'
 import {NasdaqService} from '../service/nasdaq.service';
-import {tweetSearch} from '../service/tweet.service'
+import {TweetService} from '../service/tweet.service';
+
 @Component({
   selector: 'app-nasdaq',
   templateUrl: './nasdaq.component.html',
   styleUrls: ['./nasdaq.component.css']
 })
 export class NasdaqComponent implements OnInit {
-config=config;
-<<<<<<< HEAD
-  constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService,private tweetService:tweetSearch) { }
+
+
+  constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService,private tweetService:TweetService) { }
 list:string;
-=======
-  constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService) { }
-nasdaqcode:string;
->>>>>>> 8c033c8af987151f076712c372be4a5f22697242
+
+config=config;
 value:{};
 stockprice:string;
 stocknews:string;
 header:string;
-
+investmentProductuser:string;
   ngOnInit() {
      this.nasdaq.getnasdaqstocks().subscribe((data) => {
 

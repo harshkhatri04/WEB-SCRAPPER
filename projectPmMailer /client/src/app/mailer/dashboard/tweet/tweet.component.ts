@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TweetService} from './tweet.service';
+
 
 @Component({
   selector: 'app-tweet',
@@ -9,7 +9,7 @@ import {TweetService} from './tweet.service';
 export class TweetComponent implements OnInit {
    investmentProductuser: string;
 
-  constructor(private tweetService: TweetService) { }
+  constructor() { }
 
   ngOnInit() {
   }
