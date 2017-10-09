@@ -1,19 +1,13 @@
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-
 <!-- sidebar started -->
 <div class="col-md-2 float-left col-1 pl-0 pr-0 collapse width show side fixed-top" id="sidebar">
   <div class="list-group border-0 card text-center text-md-left">
     <a href="#menu1" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-dashboard"></i> <span class="d-none d-md-inline"></span> </a>
     <!-- sidebar elements -->
     <a [routerLink]="'/dashboard'" class="list-group-item d-inline-block collapsed sidebar" data-parent="#sidebar"><i class="fa fa-film"></i> <span class="d-none d-md-inline dashboard">{{config.sidebar.DASHBOARD}}</span></a>
-    
-    
     <a [routerLink]="'/settings'" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-gear"></i> <span class="d-none d-md-inline settings">{{config.sidebar.SETTINGS}} </span></a>
-    
-    <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-envelope"></i> <span class="d-none d-md-inline mails">{{config.sidebar.MAILS}}</span></a>
     <a [routerLink]="'/charts'" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-bar-chart-o"></i> <span class="d-none d-md-inline charts">{{config.sidebar.CHARTS}}</span></a>
-   
   </div>
 </div>
 <!-- sidebar ends -->
