@@ -15,6 +15,13 @@ import {PreferenceComponent} from '../preference/preference.component';
 })
 export class LoginComponent implements OnInit {
 
+  /*alert:{
+    type:any,
+    message:any
+  };*/
+  alert: any={};
+  public myErrorMsg: string;
+
 	constructor(private LoginService: LoginService, private router: Router, private dialogService:DialogService) {}
 	value: any;
 	hero = { email: '', pwd: '' };
@@ -60,12 +67,21 @@ export class LoginComponent implements OnInit {
 				mobile:this.mobile,
 				password:this.password
 				}));
-		  if(this.value)// checking if retrieved token is valid or not
+		  if(this.value){// checking if retrieved token is valid or not
 			  this.router.navigateByUrl('dashboard'),
         this.showConfirm()
-			else
+      }
+			else{
 				alert('Invalid Credentials');
-			})
+      }
+       
+
+			},
+      error => {
+        this.newAlert('none','You have entered wrong credentials')
+        this.myErrorMsg="email id not correct";
+        console.log("Error wrong email id" + error)
+      })
 	}
 
 
@@ -96,6 +112,14 @@ export class LoginComponent implements OnInit {
       }, error => {
         console.log("Error" + error)
       })
+  }
+ // alert method
+  newAlert(type: String, message:String)
+  {
+    this.alert={
+      type:type,
+      message:message
+    }
   }
 
   //method for preference setting

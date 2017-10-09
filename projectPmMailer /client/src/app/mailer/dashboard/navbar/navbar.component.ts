@@ -25,7 +25,8 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.DashboardService.signout()
       .subscribe((res) => {
-
+       //localStorage.removeItem('currentUser');
+       localStorage.clear()
         this.router.navigateByUrl('logout')
       }, error => {
         console.log("Error" + error)

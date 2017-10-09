@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
  logout() {
    this.DashboardService.signout()
      .subscribe((res) => {
-
+       localStorage.clear()
        this.router.navigateByUrl('')
      }, error => {
        console.log("Error" + error)

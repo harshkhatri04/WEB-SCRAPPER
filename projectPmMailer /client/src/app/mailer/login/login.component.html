@@ -35,8 +35,7 @@
         <h2 class="text-center">{{config.login.LOGIN}}</h2>
         <form class="login-form">
           <form [formGroup]="form" #formDir="ngForm">
-            <div [hidden]="formDir.submitted">
-              <div class="form-group">
+           <div class="form-group">
                 <div class="row">
                   <input id="email" type="email" class="form-control" name="email" placeholder={{config.login.EMAIL}} formControlName="email" required [(ngModel)]="emailID">
                  
@@ -66,6 +65,13 @@
                 <div>
                   <a [routerLink]="'/forgot'" style="color: blue">{{config.login.FORGET_PASSWORD}}</a>
                 </div>
+
+                <div *ngIf="alert" id="alert" class="alert-{{alert.type}}">
+       
+                 {{alert.message}}
+                 </div> 
+
+
                 <div>
                   <div class="row">
                     <div class="btn">
@@ -73,9 +79,14 @@
                       <a [routerLink]="'/signup'" style="color: blue">{{config.login.NEW_USER}}</a>
                     </div>
                   </div>
+            
+                     
+              
+
+
                 </div>
               </div>
-            </div>
+            <!-- </div> -->
           </form>
         </form>
         <div class="buttonLogin">
@@ -85,6 +96,11 @@
           <button class="loginBtn loginBtn--google" (click)='loginByGoogle()'>
             {{config.login.GOOGLE}}
           </button>
+
+
+         
+       
+                
         </div>
       </div>
     </div>
