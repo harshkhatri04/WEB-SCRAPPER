@@ -38,7 +38,7 @@ app.use('/update',update);
 app.use('/investment' , preference);
 app.use('/', index);
 app.use('/tweets', tweets);
-app.use('/liveTweets',liveTweets);
+//app.use('/liveTweets',liveTweets);
 
 module.exports = app;
 
