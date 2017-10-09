@@ -206,14 +206,14 @@ function currencynews() {
 /*This the cron job function to get all emailId and there preference set*/
 var dailyMailJob = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 25 15 * * *',
+    cronTime: '00 59 15 * * *',
     onTick: function(req, res) {
         user.find((err, data) => {
             if (err) {
                 res.status(403).send({ success: false, message: 'You are unauthorized' })
             } else {
-                //getEmailAndPreference(data)
-                console.log(data)
+                getEmailAndPreference(data)
+                //console.log(data)
             }
         })
     },
@@ -225,7 +225,8 @@ dailyMailJob.start();
 
 function getEmailAndPreference(data) {
     for (let i = 0; i < data.length; i++) {
-        sendMails(data[i].email)
+        console.log(JSON.stringify(data[i].preferences.items))
+        //sendMails(data[i].email)
     }
 }
 
