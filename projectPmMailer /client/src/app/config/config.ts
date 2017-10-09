@@ -55,7 +55,8 @@ export const config = {
 	"EMAIL_ADDRESS": "Email Address",
 	"MOBILE": "Mobile",
 	"PASSWORD": "Password",
-	"LOGIN": "Login"
+	"LOGIN": "Login",
+	"ACCOUNT_EXIST": "Already have an account?"
   },
 
   "forgotpassword": {
