@@ -1,3 +1,17 @@
-<p>
-  tweet works!
-</p>
+ <button id="search" (click)="nasdaq()" class="btn btn-outline-primary" type="button">Twitter</button>
+<div class="container-fluid">
+<div class="row">
+ <div class="col-md-4 col-lg-3" *ngFor ="let data of investmentProductuser">
+                       <div class="card">
+                       <a>
+                           <!-- <img class="card-img-top img-fluid" src="https://image.tmdb.org/t/p/w500{{data.poster_path}}"> -->
+                           <div class="card-block">
+                               <p class="card-title">{{data.text}}<br></p>
+                               <p class="card-text">{{data.created_at}}<br>
+                                <!-- <button type="button" (click)="add(data)">Add</button> --></p>
+                           </div>
+                           </a>
+                       </div>
+                   </div>
+                   </div>
+                   </div>

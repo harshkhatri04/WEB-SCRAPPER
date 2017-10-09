@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {DashboardService} from '../dashboard.service';
 import { Router } from '@angular/router'
 import {NasdaqService} from '../service/nasdaq.service';
+import {TweetService} from '../service/tweet.service';
 
 @Component({
   selector: 'app-nasdaq',
@@ -10,18 +11,22 @@ import {NasdaqService} from '../service/nasdaq.service';
   styleUrls: ['./nasdaq.component.css']
 })
 export class NasdaqComponent implements OnInit {
-config=config;
-  constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService) { }
+
+
+  constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService,private tweetService:TweetService) { }
 list:string;
+nasdaqcode:number;
+config=config;
 value:{};
-news:string;
-stock:string;
-head:string;
+stockprice:string;
+stocknews:string;
+header:string;
+investmentProductuser:string;
   ngOnInit() {
      this.nasdaq.getnasdaqstocks().subscribe((data) => {
 
-     this.list = data;
-     console.log(this.list)
+     this.nasdaqcode = data;
+     console.log(this.nasdaqcode)
    }, error => {
      console.log("Error" + error)
    })
@@ -34,17 +39,21 @@ head:string;
    this.searchnews(name);
    this.nasdaq.getresult(this.value).subscribe(res => {
      console.log(res)
-     this.stock = res.data;
+     this.stockprice = res.data;
    }, error => {
      console.log("Error" + error)
    })
  }
 
  searchnews(name:string){
-this.head='NEWS'
+
+  this.twitnasdaq();
+
+this.header='NEWS'
+
    this.nasdaq.getnews(name).subscribe(res => {
     
-     this.news = res;
+     this.stocknews = res;
 
    }, error => {
      console.log("Error" + error)
@@ -52,6 +61,13 @@ this.head='NEWS'
 
  }
 
+  twitnasdaq(){
+    let user='nasdaq';
+    this.tweetService.tweetSearch(user).subscribe((data)=>{
+          this.investmentProductuser=data;
+          console.log(this.investmentProductuser);
+        })
+  }
 
  logout() {
    this.DashboardService.signout()

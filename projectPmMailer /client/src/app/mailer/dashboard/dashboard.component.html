@@ -20,77 +20,48 @@
     </ul>
   </div>
 </nav>
-<!-- navbar ends -->
-<!-- sidebar added -->
-<div class="container">
-  <div class="col-md-4">
-    <app-sidebar></app-sidebar>
-  </div>
-  <!-- Search Started -->
-  <div class="row d-flex d-md-block flex-nowrap wrapper">
-    <main class="col-md-9 float-left col px-5 pl-md-2 pt-2 main">
-      <div>
-        <div class="marg">
+<div class="container-fluid" style="margin-top: 55px;">
+  <div class="row">
+    <!--Conatiner for Sidebar -->
+    <div class="col-md-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <!--Conatiner for Details -->
+    <div class="col-md-6">
+      <div class="d-flex d-md-block flex-nowrap wrapper">
+        <div class="float-left col px-5 pl-md-2 pt-2 main">
           <br>
-          <div class="col-md-6">
-          <ul class="nav nav-tabs">
-          <li class="nav-item">
-    <a class="nav-link active" [routerLink]="'/currency'">Currency</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="'/nasdaq'" >Nasdaq</a>
-  </li>
-  
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="'/funds'">Funds</a>
-  </li>
-  
-</ul>
-            <!-- <h2 class="text-muted"><small>{{config.dashboard.PERSONALISED_MAILER}}</small></h2>
-                      
-            <div>
-              dropdown for company
-              <select #selectedname class="drop">
-                <option [value]="post.Code" *ngFor="let post of list" >
-                  {{post.Company}}
-                </option>
-              </select>
+          <div class="col-md-12">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" [routerLink]="'/currency'">Currency</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="'/nasdaq'">Nasdaq</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="'/funds'">Funds</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="'/tweet'">Twit</a>
+              </li>
+            </ul>
+          </div>
+          <br>
+          <div class="card bg-dark text-white mb-3 col-md-12" style="background-color: #333;" *ngFor="let post of list">
+            <div class="card-body">
+              <h3 class="card-title text-uppercase" style="color: #bbdefb"><b>{{post.Time}}</b></h3>
+              <p class="card-text text-uppercase"><b>{{post.Headline}}</b></p>
+              <p style="color: #ffe0b2">{{post.News}}</p>
+              <hr>
             </div>
-            <br> &nbsp;
-            <button id="search" (click)="search(selectedname.value)" class="btn btn-outline-primary" type="button"> {{config.dashboard.SEARCH}}</button>
-                      </div>
-            
-                      jumbotron for displaying stock price of nasdaq data
-                      <div class="jumbotron marg container text"  *ngFor="let data of listPrice">
-                       <div class="row">
-                       <div class="col-md-8">
-            <p>{{data.closeAt}}</p>
-            <h1>{{data.Price}}</h1>
-            <h4>{{data.upDown}}</h4>
-            <p>{{data.hours}}</p>
-                       </div>
-                       
-                       </div>
-            <ul class="list">
-             <li>
-               <h4>{{data.hPrice}}</h4>
-             </li>
-             
-             <li>
-               <p>{{data.hupdown}}</p>
-             </li>
-                       </ul> -->
-         </div>
-         <br>
-          <div *ngFor="let post of list">
-         <p>{{post.Time}}</p>
-         <p>{{post.Headline}}</p>
-         <p>{{post.News}}</p>
-         <hr>
-         </div>
+          </div>
         </div>
       </div>
-    </main>
+    </div>
+    <!--Conatiner for Tweetes -->
+    <div class="col-md-4">
+      DATA
+    </div>
   </div>
 </div>
-<!-- search ended -->

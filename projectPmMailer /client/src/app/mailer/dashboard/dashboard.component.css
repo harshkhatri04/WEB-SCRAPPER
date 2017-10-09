@@ -1,8 +1,10 @@
 /* for dashboard content */
-
+.color {
+	background-color: red;
+}
 .marg {
-  margin-left:17%;
-  margin-top: 7%;
+  margin-left:7%;
+  
 }
 
 .drop{

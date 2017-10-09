@@ -20,82 +20,81 @@
     </ul>
   </div>
 </nav>
-<!-- navbar ends -->
-<!-- sidebar added -->
-<div class="container">
-  <div class="col-md-4">
-    <app-sidebar></app-sidebar>
-  </div>
-  <!-- Search Started -->
-  <div class="row d-flex d-md-block flex-nowrap wrapper">
-    <main class="col-md-9 float-left col px-5 pl-md-2 pt-2 main">
-      <div>
-        <div class="marg">
+<!-- navbar ends-->
+<div class="container-fluid" style="margin-top: 55px;">
+  <div class="row">
+    <!--Conatiner for Sidebar -->
+    <div class="col-md-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <!--Conatiner for Details -->
+    <div class="col-md-6">
+      <div class="d-flex d-md-block flex-nowrap wrapper">
+        <div class="float-left col px-5 pl-md-2 pt-2 main">
           <br>
-          <div class="col-md-6">
-          <ul class="nav nav-tabs">
-          <li class="nav-item">
-    <a class="nav-link" [routerLink]="'/currency'">Currency</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="'/nasdaq'" >Nasdaq</a>
-  </li>
-  
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="'/funds'">Funds</a>
-  </li>
-  
-</ul>
-            
-                      
-            <div>
-             
-              <select #selectedname class="drop">
-                <option [value]="post.Code" *ngFor="let post of list" >
-                  {{post.Company}}
-                </option>
-              </select>
+          <div class="col-md-12">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" [routerLink]="'/currency'">Currency</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="'/nasdaq'">Nasdaq</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="'/funds'">Funds</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="'/tweet'">Twit</a>
+              </li>
+            </ul>
+          </div>
+          <br>
+          <div>
+            <select #selectedname class="drop">
+              <option [value]="post.Code" *ngFor="let post of nasdaqcode">
+                {{post.Company}}
+              </option>
+            </select>
+          </div>
+          <br> &nbsp;
+          <button id="search" (click)="search(selectedname.value)" class="btn btn-outline-primary" type="button"> {{config.dashboard.SEARCH}}</button>
+          <div class="jumbotron marg container text" *ngFor="let data of stockprice">
+            <div class="row">
+              <div class="col-md-8">
+                <p>{{data.closeAt}}</p>
+                <h1>{{data.Price}}</h1>
+                <h4>{{data.upDown}}</h4>
+                <p>{{data.hours}}</p>
+              </div>
             </div>
-            <br> &nbsp;
-            <button id="search" (click)="search(selectedname.value)" class="btn btn-outline-primary" type="button"> {{config.dashboard.SEARCH}}</button>
-                      </div>
-                      </div>
-
-                      <div class="jumbotron marg container text"  *ngFor="let data of stock">
-                       <div class="row">
-                       <div class="col-md-8">
-            <p>{{data.closeAt}}</p>
-            <h1>{{data.Price}}</h1>
-            <h4>{{data.upDown}}</h4>
-            <p>{{data.hours}}</p>
-                       </div>
-                       
-                       </div>
             <ul class="list">
-             <li>
-               <h4>{{data.hPrice}}</h4>
-             </li>
-             
-             <li>
-               <p>{{data.hupdown}}</p>
-             </li>
-                       </ul> 
-            
-         </div>
-         </div>
-       <p>{{head}}</p>
-       <hr>
-         <div *ngFor="let data of news">
-           <p>{{data.news}}</p>
-           <hr>
-         </div>
-
-          
-
-         </main>
+              <li>
+                <h4>{{data.hPrice}}</h4>
+              </li>
+              <li>
+                <p>{{data.hupdown}}</p>
+              </li>
+            </ul>
+          </div>
         </div>
-
+        <b><p class="h4">{{header}}</p></b>
+        <hr>
+        <div *ngFor="let data of stocknews">
+          <div class="card bg-dark text-white mb-3" style="background-color: #333;" *ngIf=data.news>
+            <div class="card-body">
+              <p style="color: #ffe0b2">{{data.news}}</p>
+            </div>
+          </div>
+        </div>
       </div>
-  
-  
-<!-- search ended -->
+    </div>
+    <!--Conatiner for Tweetes -->
+    <div class="col-md-4"  style="margin-top: 15%">
+      <div class="card bg-dark text-white mb-3" style="background-color: white;" *ngFor="let data of investmentProductuser">
+        <div class="card-body">
+          <p style="color: #ffe0b2">{{data.text}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

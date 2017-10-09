@@ -47,7 +47,7 @@
                       Email must contain @.
                     </div>
                     <div *ngIf="email.errors.minlength">
-                      Email must be at least 4 characters long.
+                      Email must be least 4 characters long.
                     </div>
                   </div>
                 </div>
@@ -75,8 +75,8 @@
                 <div>
                   <div class="row">
                     <div class="btn">
-                      <button id="loginbutton" type="submit" class="btn btn-primary button" [disabled]="form.invalid" (click)="checkUser(emailID,password)">{{config.login.LOGIN}}</button>
-                      <a [routerLink]="'/signup'" style="color: blue">{{config.login.NEW_USER}}</a>
+                      <button id="loginbutton" type="submit" class="btn btn-primary  button btnsize" [disabled]="form.invalid" (click)="checkUser(emailID,password)">{{config.login.LOGIN}}</button>
+                      <button class="btn btn-primary button " [routerLink]="'/signup'">{{config.login.NEW_USER}}</button>
                     </div>
                   </div>
             
