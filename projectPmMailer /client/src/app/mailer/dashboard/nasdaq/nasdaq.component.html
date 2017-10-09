@@ -11,9 +11,6 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <!-- navbar elements -->
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link dash" [routerLink]="'/dashboard'">{{config.dashboard.DASHBOARD}} <span class="sr-only">(current)</span></a>
-      </li>
       <li class="nav-item">
         <a class="nav-link" (click)="logout()">Logout</a>
       </li>
@@ -46,7 +43,7 @@
             </ul>
             <div>
               <select #selectedname class="drop">
-                <option [value]="post.Code" *ngFor="let post of list">
+                <option [value]="post.Code" *ngFor="let post of nasdaqcode">
                   {{post.Company}}
                 </option>
               </select>
@@ -55,7 +52,7 @@
             <button id="search" (click)="search(selectedname.value)" class="btn btn-outline-primary" type="button"> {{config.dashboard.SEARCH}}</button>
           </div>
         </div>
-        <div class="jumbotron marg container text" *ngFor="let data of stock">
+        <div class="jumbotron marg container text" *ngFor="let data of stockprice">
           <div class="row">
             <div class="col-md-8">
               <p>{{data.closeAt}}</p>
@@ -74,13 +71,16 @@
           </ul>
         </div>
       </div>
-
-      <b><p class="h4">{{head}}</p></b>
-
+      <b><p class="h4">{{header}}</p></b>
       <hr>
-      <div class="card bg-dark text-white mb-3" style="background-color: #333;" *ngFor="let data of news">
+      <div class="card bg-dark text-white mb-3" style="background-color: #333;" *ngFor="let data of stocknews">
         <div class="card-body">
           <p style="color: #ffe0b2">{{data.news}}</p>
+        </div>
+      </div>
+       <div class="card bg-dark text-white mb-3" style="background-color: #333;" *ngFor="let data of investmentProductuser">
+        <div class="card-body">
+          <p style="color: #ffe0b2">{{data.text}}</p>
         </div>
       </div>
       <!-- <div *ngFor="let data of news">
