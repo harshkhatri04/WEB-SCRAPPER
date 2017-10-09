@@ -16,8 +16,9 @@ let UserSchema = new Schema({
         items: [{ id: Number, itemName: String }],
         frequency: String
     },
-    alternateEmail:{type:String,default:null}
-
+    alternateEmail:{type:String,default:null},
+    flag:Number,
+   
 });
 //pre method to encrypt password
 UserSchema.pre('save', function(next) {
