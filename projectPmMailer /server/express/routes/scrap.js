@@ -9,8 +9,10 @@ let nasdaq = require('../models/nasdaq');
 let request = require('request');
 let CronJob = require('cron').CronJob;
 let cheerio = require('cheerio');
+let nodemailer = require('nodemailer');
 let fundmodel = require('../models/fundsmodel')
 let user = require('../models/userModel')
+let configure = require('../config/configure');
 
 //HTTP Post method end
 
@@ -22,7 +24,6 @@ router.get('/details', function(req, res, next) {
 
         } else {
             res.json(data)
-
         }
     })
 
@@ -192,7 +193,7 @@ function currencynews() {
                         console.log("error")
 
                     } else if (data) {
-                        console.log("sucess", data)
+                        console.log("success", data)
                     }
 
                 })
@@ -203,13 +204,13 @@ function currencynews() {
 }
 
 /*This the cron job function to get all emailId and there preference set*/
-var mailJob = new CronJob({
+var dailyMailJob = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 27 14 * * *',
+    cronTime: '00 47 14 * * *',
     onTick: function(req, res) {
         user.find((err, data) => {
             if (err) {
-                console.log(err);
+                res.status(403).send({ success: false, message: 'You are unauthorized' })
             } else {
                 getEmailAndPreference(data)
                 //console.log(data)
@@ -220,26 +221,43 @@ var mailJob = new CronJob({
     timeZone: 'Asia/Kolkata'
 
 });
-mailJob.start();
+dailyMailJob.start();
 
 function getEmailAndPreference(data) {
     for (let i = 0; i < data.length; i++) {
-        console.log(data[i].email)
+        sendMails(data[i].email)
     }
 }
 
-function sendDailyMails() {
-    user.find((err, data) => {
-        if (err) {
-            console.log('error')
-            return err
-        } else {
-            return data;
+function sendMails(emailId) {
+    let nodemailer = require('nodemailer');
+
+    let transporter = nodemailer.createTransport({
+        service: configure.serviceProvider,
+        auth: {
+            user: configure.mailSendingId,
+            pass: configure.mailSendingPass
         }
-    })
+    });
+
+    let mailOptions = {
+        from: configure.mailSendingId,
+        to: emailId,
+        subject: 'Personalized Emailer',
+        text: "We are testing our system, so please don't unsubscribe. We will get back to you shortly",
+
+    };
+
+    transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+            /*logger.warn("network error");*/
+            console.log("emailId is wrong " + emailId)
+        } else {
+            /* logger.info("Email sent to user to reset password");*/
+            console.log("successfully to " + emailId)
+        }
+    });
 }
-
-
 
 /*This the cron job function to do scheduling on the nasdaq data*/
 var job = new CronJob({
@@ -249,7 +267,6 @@ var job = new CronJob({
         nasdaq.find((err, data) => {
             if (err) {
                 console.log("error")
-
             } else {
                 getnasdaq(data);
                 fundsnews();
