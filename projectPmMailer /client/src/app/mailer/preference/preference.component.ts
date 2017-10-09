@@ -21,6 +21,8 @@ export class PreferenceComponent extends DialogComponent<ConfirmModel,boolean> i
 	pref: any=[];
 	items:string[];
 	config=config;
+	registeredData: any;
+	email:string;
 //preferences items
 	basicExampleSelectedItems = [];
 	placeholderExampleList = [];
@@ -91,10 +93,10 @@ confirm() {
 			items:this.items,
 			frequency: preferenceSetting
       }
-      let email="admin@123";//localStorage.getItem('email');
-
-				this.preference.insert(preferences,email).subscribe((res)=>{
-					
+      this.registeredData=JSON.parse(localStorage.getItem('currentUser'));
+       this.email=this.registeredData.email;
+				this.preference.insert(preferences,this.email).subscribe((data)=>{
+					console.log(JSON.stringify(data));
 				})
 		}
 }

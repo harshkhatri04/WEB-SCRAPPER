@@ -44,6 +44,10 @@
   <li class="nav-item">
     <a class="nav-link" [routerLink]="'/funds'">Funds</a>
   </li>
+
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="'/tweet'">Tweet</a>
+  </li>
   
 </ul>
             <!-- <h2 class="text-muted"><small>{{config.dashboard.PERSONALISED_MAILER}}</small></h2>
@@ -82,13 +86,15 @@
                        </ul> -->
          </div>
          <br>
-          <div *ngFor="let post of list">
-         <p>{{post.Time}}</p>
-         <p>{{post.Headline}}</p>
-         <p>{{post.News}}</p>
+         <div class="card bg-dark text-white mb-3" style="background-color: #333;" *ngFor="let post of list">
+           <div class="card-body" >
+         <h3 class="card-title text-uppercase" style="color: #bbdefb"><b>{{post.Time}}</b></h3>
+         <p class="card-text text-uppercase"><b>{{post.Headline}}</b></p>
+         <p style="color: #ffe0b2">{{post.News}}</p>
          <hr>
          </div>
         </div>
+          </div>
       </div>
     </main>
   </div>

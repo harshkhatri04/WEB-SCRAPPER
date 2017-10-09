@@ -9,6 +9,7 @@ let detailStub = sinon.stub(detail, 'find')
 let insertStub = sinon.stub(model.prototype, 'save');
 let modelStub = sinon.stub(model, 'find');
 let findStub = sinon.stub(model, 'findOne')
+let updateStub = sinon.stub(model,'update');
 
 describe('POST /users', () => {
 	before(() => {
@@ -93,3 +94,26 @@ describe('get method', () => {
 			});
 	});
 });
+
+describe('update user mobile number',()=>{
+     before(function() {
+     	console.log('in before')
+       updateStub.withArgs({ '_email': 'admin@gmail.com' }, { $set: { "mobile": 8989177424}})
+           .yields(null, {
+               "ok": 1,
+               "nModified": 1,
+               "n": 1
+           })
+   })
+      it('should respond with json', function(done) {
+       request(App)
+           .put('/updateMobile/admin@gmail.com')
+           .send({ "mobile": 8989177424 })
+           .end(function(err, res) {
+               if (err) {return done(err)};
+               expect(res.body.ok).to.be.equal(1);
+               done();
+           })
+           
+   })
+})

@@ -8,17 +8,19 @@ router.put('/investment/:email', (req, res) => {
         items: req.body.items,
         frequency: req.body.frequency
     }
-
     User.findOneAndUpdate({ email: req.params.email }, {
+
         $set: {
-            preferences: obj
+            preferences: [obj]
         }
     }, (err, Data) => {
+        /*console.log(JSON.stringify(Data))*/
         if (err) {
             console.log('error occured');
         } else {
 
-            res.send('update successfully');
+            res.send(Data);
+            console.log(JSON.stringify(Data));
         }
 
     });
