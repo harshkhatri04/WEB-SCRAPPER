@@ -14,12 +14,13 @@ router.put('/investment/:email', (req, res) => {
             preferences: [obj]
         }
     }, (err, Data) => {
-        console.log(JSON.stringify(Data))
+        /*console.log(JSON.stringify(Data))*/
         if (err) {
             console.log('error occured');
         } else {
 
             res.send(Data);
+            console.log(JSON.stringify(Data));
         }
 
     });
