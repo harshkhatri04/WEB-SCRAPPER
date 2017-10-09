@@ -12,31 +12,19 @@ const router = express.Router();
 
 // signup url
 router.post('/users', (req, res) => {
-<<<<<<< HEAD
-    
-        let user = new User();
-        user.name = req.body.name;
-        user.password = req.body.password;
-        user.email = req.body.email;
-        user.mobile = req.body.mobile;
-        user.flag=0;
-        // checking if fields are empty or not
-        if (req.body.name == null || req.body.password == null || req.body.email == null || req.body.mobile == null) {
-            return res.status(400).json({ success: false, message: 'Ensure all the fields are filled' });
-            logger.info("ensure all fields are filled");
-        } else {
-=======
+
     let user = new User();
     user.name = req.body.name;
     user.password = req.body.password;
     user.email = req.body.email;
     user.mobile = req.body.mobile;
+    user.flag=0;
     // checking if fields are empty or not
     if (req.body.name == null || req.body.password == null || req.body.email == null || req.body.mobile == null) {
         return res.status(400).json({ success: false, message: 'Ensure all the fields are filled' });
         logger.info("ensure all fields are filled");
     } else {
->>>>>>> a4df5ad0e44f91888fbb2852fbbd90587b676b74
+
 
         user.save((err) => {
             // return name of error in case of error

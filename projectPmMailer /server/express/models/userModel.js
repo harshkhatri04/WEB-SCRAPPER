@@ -17,6 +17,7 @@ let UserSchema = new Schema({
         frequency: String
     },
     alternateEmail:{type:String,default:null},
+    flag:Number,
    
 });
 //pre method to encrypt password

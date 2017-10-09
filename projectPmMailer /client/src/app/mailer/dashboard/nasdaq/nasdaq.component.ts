@@ -12,16 +12,17 @@ import {NasdaqService} from '../service/nasdaq.service';
 export class NasdaqComponent implements OnInit {
 config=config;
   constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService) { }
-list:string;
+nasdaqcode:string;
 value:{};
-news:string;
-stock:string;
-head:string;
+stockprice:string;
+stocknews:string;
+header:string;
+
   ngOnInit() {
      this.nasdaq.getnasdaqstocks().subscribe((data) => {
 
-     this.list = data;
-     console.log(this.list)
+     this.nasdaqcode = data;
+     console.log(this.nasdaqcode)
    }, error => {
      console.log("Error" + error)
    })
@@ -34,17 +35,17 @@ head:string;
    this.searchnews(name);
    this.nasdaq.getresult(this.value).subscribe(res => {
      console.log(res)
-     this.stock = res.data;
+     this.stockprice = res.data;
    }, error => {
      console.log("Error" + error)
    })
  }
 
  searchnews(name:string){
-this.head='NEWS'
+this.header='NEWS'
    this.nasdaq.getnews(name).subscribe(res => {
     
-     this.news = res;
+     this.stocknews = res;
 
    }, error => {
      console.log("Error" + error)
