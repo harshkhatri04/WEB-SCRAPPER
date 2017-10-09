@@ -32,7 +32,7 @@
       <div class="d-flex d-md-block flex-nowrap wrapper">
         <div class="float-left col px-5 pl-md-2 pt-2 main">
           <br>
-          <div class="col-md-12">
+          <div class="col-md-6">
             <ul class="nav nav-tabs">
               <li class="nav-item">
                 <a class="nav-link active" [routerLink]="'/currency'">Currency</a>
@@ -43,13 +43,12 @@
               <li class="nav-item">
                 <a class="nav-link" [routerLink]="'/funds'">Funds</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" [routerLink]="'/tweet'">Twit</a>
-              </li>
             </ul>
           </div>
           <br>
+
           <div class="card text-white mb-3" style="background-color: #80cbc4;" *ngFor="let post of list">
+
             <div class="card-body">
               <h6 class="text-uppercase" style="color: #004d40"><b>{{post.Time}}</b></h6>
               <p class="h4 text-uppercase"><b>{{post.Headline}}</b></p>
@@ -57,7 +56,9 @@
               <hr>
             </div>
           </div>
-        </div>
+
+      </div>
+
       </div>
     </div>
     <!--Conatiner for Tweetes -->

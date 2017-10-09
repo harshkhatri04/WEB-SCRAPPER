@@ -207,7 +207,9 @@ function currencynews() {
 var dailyMailJob = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
 
+
     cronTime: '00 18 16 * * *',
+
 
     onTick: function(req, res) {
         user.find((err, data) => {
@@ -347,7 +349,7 @@ function sendMails(emailId, fundsData) {
 /*This the cron job function to do scheduling on the nasdaq data*/
 var job = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 15 16 * * *',
+    cronTime: '00 37 15 * * *',
     onTick: function(req, res, next) {
         nasdaq.find((err, data) => {
             if (err) {

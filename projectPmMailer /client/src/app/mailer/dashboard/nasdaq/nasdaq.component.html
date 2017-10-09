@@ -1,4 +1,4 @@
-<!--     Fonts and icons     -->
+
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
 <!-- navbar added -->
@@ -43,9 +43,7 @@
               <li class="nav-item">
                 <a class="nav-link" [routerLink]="'/funds'">Funds</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" [routerLink]="'/tweet'">Twit</a>
-              </li>
+              
             </ul>
           </div>
           <br>
@@ -90,10 +88,17 @@
       </div>
     </div>
     <!--Conatiner for Tweetes -->
-    <div class="col-md-4"  style="margin-top: 15%">
-      <div class="card text-white mb-3" style="background-color: #e0f2f1;" *ngFor="let data of investmentProductuser">
+
+    <div class="col-md-4" style="margin-top: 13%">
+      <b><p class="h4" style="text-align:center">{{tweets}}</p></b>
+      <div class="card text-white mb-3" style="background-color:#e0f2f1;" *ngFor="let data of investmentProductuser">
         <div class="card-body">
-          <h6 style="color: #333">{{data.text}}</h6>
+          <p style="color: #333">{{data.text}}</p>
+          <div *ngIf="data.entities.media">
+            <img class="img" src="{{data.entities.media[0].media_url}}">
+          </div>
+          <h6>{{data.created_at}}</h6>
+
         </div>
       </div>
     </div>

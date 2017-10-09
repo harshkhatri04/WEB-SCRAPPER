@@ -14,16 +14,6 @@ export class TweetComponent implements OnInit {
   ngOnInit() {
   }
 
- /* currency(currencyuser:string){
-  	this.investmentProductuser=currencyuser;
-   let user='';
-  }
 
-  funds(fundsuser: string){
-  	this.investmentProductuser=fundsuser;
-  	let user='';
-  }
-*/
- 
 
 }
