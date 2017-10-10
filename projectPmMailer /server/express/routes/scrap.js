@@ -30,8 +30,8 @@ router.get('/details', function(req, res, next) {
 })
 
 router.get('/fund', function(req, res, next) {
-     date = new Date();
-    fundmodel.find({ day: date.getDay(), month: date.getMonth(), year: year.getFullYear()}, (err, data) => {
+    date = new Date();
+    fundmodel.find({ day: date.getDay(), month: date.getMonth(), year: year.getFullYear() }, (err, data) => {
         if (err) {
             console.log("error")
 
@@ -259,6 +259,16 @@ var dailyMailJob = new CronJob({
                                     console.log('error in fundmodel')
                                 } else {
                                     //sendMails(data[i].email, fundsData.Headline)
+                                }
+                            })
+                            let news = stockmodel.find({}).select('news');
+                            news.exec(function(err, stockData) {
+                                if (err) {
+                                    console.log('error in stockmodel')
+                                } else {
+                                    let stock = stockData.map(ele => ele.news)
+                                    //console.log(JSON.stringify(stock, null, 2))
+                                    sendMails(data[i].email, stock)
                                 }
                             })
                         } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
