@@ -11,18 +11,18 @@ passport.use(new FacebookStrategy({
     callbackURL: config.callbackURL,
     profileFields: ['id', 'displayName', 'emails']
 }, function(accessToken, refreshToken, profile, done) {
-    console.log(profile);
-    var facebookemail = new User({
+    
+    var facebookEmail = new User({
         email: profile.email,
         name: profile.displayName
     });
 
     /* save if new */
-    User.findOne({ email: facebookemail.email }, function(err, user) {
+    User.findOne({ email: facebookEmail.email }, function(err, user) {
         if (!user) {
-            facebookemail.save(function(err, facebookemail) {
+            facebookEmail.save(function(err, facebookEmail) {
                 if (err) return done(err);
-                done(null, facebookemail);
+                done(null, facebookEmail);
             });
         } else {
 
