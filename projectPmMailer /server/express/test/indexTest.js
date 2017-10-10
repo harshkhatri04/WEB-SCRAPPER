@@ -4,12 +4,18 @@ let sinon = require('sinon');
 let App = require('./../index');
 
 let model = require('./../models/userModel');
-let detail = require('./../models/nasdaq')
+let detail = require('./../models/nasdaq');
+let currency = require('./../models/currencymodel')
+let fund = require('./../models/fundsmodel')
+let stock = require('./../models/stock')
 let detailStub = sinon.stub(detail, 'find')
 let insertStub = sinon.stub(model.prototype, 'save');
 let modelStub = sinon.stub(model, 'find');
 let findStub = sinon.stub(model, 'findOne')
 let updateStub = sinon.stub(model, 'update');
+let currencyStub = sinon.stub(currency, 'find')
+let stockStub = sinon.stub(stock, 'find')
+let fundStub = sinon.stub(fund, 'find')
 
 describe('POST /signup/users', () => {
     before(() => {
@@ -94,7 +100,8 @@ describe('get method', () => {
 
 describe('update user mobile number', () => {
     before(function() {
-        updateStub.withArgs({ _email: 'admin@gmail.com' }, { $set: { mobile: 8989177424 } })
+        console.log('in before')
+        updateStub.withArgs({ '_email': 'admin@gmail.com' }, { $set: { "mobile": 8989177424 } })
             .yields(null, {
                 "ok": 1,
                 "nModified": 1,
@@ -103,8 +110,8 @@ describe('update user mobile number', () => {
     })
     it('should respond with json', function(done) {
         request(App)
-            .put('/update/updateMobile/admin@gmail.com')
-            .send({ mobile: 8989177424 })
+            .put('/updateMobile/admin@gmail.com')
+            .send({ "mobile": 8989177424 })
             .end(function(err, res) {
                 if (err) { return done(err) };
                 expect(res.body.ok).to.be.equal(1);
@@ -113,3 +120,71 @@ describe('update user mobile number', () => {
 
     })
 })
+
+describe('get method for curency', () => {
+    it('respond with json', (done) => {
+        currencyStub.yields(null, [{
+            Time: "22:00",
+            Headline: "Headline--",
+            News: "News",
+            day: "day",
+            month: "month",
+            year: "year",
+        }])
+        request(App)
+            .get('/postNews/currency')
+            .expect('Content-Type', /json/)
+
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.body[0].Time).to.be.equal("22:00");
+                expect(res.body[0].Headline).to.be.equal("Headline--");
+                done();
+            });
+    });
+});
+
+describe('get method for fund', () => {
+    it('respond with json', (done) => {
+        fundStub.yields(null, [{
+            Time: "time",
+            Headline: "Headline",
+            News: "News",
+            day: "day",
+            month: "month",
+            year: "year"
+        }])
+        request(App)
+            .get('/postNews/fund')
+            .expect('Content-Type', /json/)
+
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.body[0].Time).to.be.equal("time");
+                expect(res.body[0].Headline).to.be.equal("Headline");
+                done();
+            });
+    });
+});
+
+describe('get method for stock', () => {
+    it('respond with json', (done) => {
+        stockStub.yields(null, [{
+            term: "AABA",
+            news: "news",
+            day: "day",
+            month: "month",
+            year: "year",
+        }])
+        request(App)
+            .get('/postNews/news/AABA')
+            .expect('Content-Type', /json/)
+
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.body[0].term).to.be.equal("AABA");
+                expect(res.body[0].news).to.be.equal("news");
+                done();
+            });
+    });
+});

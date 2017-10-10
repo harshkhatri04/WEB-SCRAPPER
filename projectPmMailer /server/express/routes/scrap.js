@@ -77,6 +77,7 @@ router.get('/currency', function(req, res, next) {
 //HTTP Post method for stock price of NASDAQ for WSJ website
 router.post('/stock', function(req, res, next) {
     let term = req.body.term;
+    console.log("============================",term)
     request('http://quotes.wsj.com/' + term, function(error, response, html) {
         if (!error && response.statusCode == 200) {
             let $ = cheerio.load(html);

@@ -1,12 +1,15 @@
 const express = require('express');
+const app = express();
 const router = express.Router();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const User = require('../models/userModel')
 const config = require('../config/database');
 const configure = require('../config/configure');
 const logger = require('../services/app.logger');
 
+<<<<<<< HEAD
 //route to update name by the given email
 //route starts here
 router.put('/updateName/:email', (req, res) => {
@@ -23,39 +26,36 @@ router.put('/updateName/:email', (req, res) => {
 		});
 });
 //route ends here
+=======
+>>>>>>> 6842e43a4a4deb7bda9e519ca826d85f085738de
 
-//route to update mobile number by the given email
-//route starts here
-router.put('/updateMobile/:email', (req, res) => {
-		User.update({ email: req.params.email }, {
-				$set: {
-						mobile: req.body.mobile // updating the mobile number in the database by mobile number provided by user
-				}
-		}, (err, result) => {
-				if (err) {
-						res.send(err)
-				} else {
-						res.send(result)
-				}
-		});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
+    next();
 });
-//route ends here
+//route to update name by the given email
+//route starts here
 
-//route to add alternate email id
-//route starts here
-router.put('/addAlternateEmail/:email', (req, res) => {
-		User.update({ email: req.params.email }, {
-				$set: {
-						alternateEmail: req.body.alternateEmail // adding alternate email id provided by user
-				}
-		}, (err, result) => {
-				if (err) {
-						res.send(err)
-				} else {
-						res.send(result)
-				}
-		});
-});
+router.put('/updateUser/:email',(req,res)=>{
+  User.update({email:req.params.email},{ 
+ 		$set:{
+ 			name:req.body.name, // updating the name in database by name provided by user
+      mobile:req.body.mobile,
+      alternateEmail:req.body.alternateEmail
+ 		}
+ 	},(err, result) => {
+    if (err) {
+    	res.send(err)
+    }else{
+    	res.send(result)
+    }
+     }
+  );
+ });
 //route ends here
 
 //route to delete user account
