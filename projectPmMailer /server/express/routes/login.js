@@ -23,15 +23,18 @@ router.get('/signin/:email/:password', function(req, res) {
         } else {
             // check if password matches
             user.comparePassword(req.params.password, function(err, isMatch) {
-
                 if (isMatch && !err) {
                     // if user is found and password is right create a token
                     var token = jwt.sign({ user }, config.secret);
                     // return the information including token as JSON
                     //console.log('success')
+<<<<<<< HEAD
+                    return res.status(200).send({ success: true, token: 'JWT ' + token, name: user.name, email: user.email, mobile: user.mobile, password: user.password, flag: user.flag });
+=======
 
                     return res.status(200).send({ success: true, token: 'JWT ' + token ,email:user.email});
 
+>>>>>>> 6842e43a4a4deb7bda9e519ca826d85f085738de
                     logger.info("token generated successfully");
                     //console.log({ success: true, token: 'JWT ' + token })*/
                 } else {
@@ -45,18 +48,16 @@ router.get('/signin/:email/:password', function(req, res) {
     });
 });
 
-
-
-   router.get('/', function(req, res) {
-          User.find((err, data) => {
-              if (err) {
-                  res.send({ success: false, message: "error in finding" })
-                  logger.info("error");
-              } else {
-                  res.json(data)
-                  logger.info("data fetched successfully");
-              }
-          })
-      })
+router.get('/', function(req, res) {
+    User.find((err, data) => {
+        if (err) {
+            res.send({ success: false, message: "error in finding" })
+            logger.info("error");
+        } else {
+            res.json(data)
+            logger.info("data fetched successfully");
+        }
+    })
+})
 
 module.exports = router;
