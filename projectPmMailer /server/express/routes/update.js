@@ -8,7 +8,6 @@ const User = require('../models/userModel')
 const config = require('../config/database');
 const configure = require('../config/configure');
 const logger = require('../services/app.logger');
-
 //route to update name by the given email
 //route starts here
 router.put('/updateName/:email', (req, res) => {
