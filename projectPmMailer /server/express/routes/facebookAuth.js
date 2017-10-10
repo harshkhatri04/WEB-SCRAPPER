@@ -1,16 +1,19 @@
-const passportFacebook = require('../auth/facebook');
+const configurationFb = require('./../config/facebookAuth');
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 
 
 /* FACEBOOK ROUTER */
 router.get('/auth/facebook',
-    passportFacebook.authenticate('facebook'));
+    passport.authenticate('facebook', { scope: 'email' })
+);
 
 router.get('/auth/facebook/callback',
-    passportFacebook.authenticate('facebook', { failureRedirect: 'http://localhost:4200/login' }),
-    function(req, res) {
-        // Successful authentication, redirect home.
-        res.redirect('http://localhost:4200/dashboard');
-    });
+    passport.authenticate('facebook', {
+        successRedirect: configurationFb.successRedirect,
+        failureRedirect: configurationFb.failureRedirect
+    })
+);
+
 module.exports = router;
