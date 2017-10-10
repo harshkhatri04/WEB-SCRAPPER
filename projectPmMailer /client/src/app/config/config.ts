@@ -39,7 +39,9 @@ export const config = {
 	"PERSONALISED_MAILER": "Personalised Mailer",
 	"SEARCH": "Search",
 	"NEWS": "News",
-	"TWEETS": "Tweets"
+	"TWEETS": "Tweets",
+	"LOGOUT":"Logout",
+	"READ_MORE":"Read More"
   },
 
   "sidebar": {

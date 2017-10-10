@@ -13,6 +13,11 @@
 
 
 
+
+
+
+
+
 /**
  * card background color
  */
@@ -20,6 +25,11 @@
 .cardStyle {
   background-color: #80cbc4;
 }
+
+
+
+
+
 
 
 
@@ -35,6 +45,11 @@
 
 
 
+
+
+
+
+
 /**
  * heading color
  */
@@ -46,11 +61,21 @@
 
 
 
+
+
+
+
+
 /* for dashboard content */
 
 .color {
   background-color: red;
 }
+
+
+
+
+
 
 
 
@@ -66,6 +91,11 @@ margins
 
 
 
+
+
+
+
+
 /**
  * width
  */
@@ -73,6 +103,11 @@ margins
 .drop {
   width: 200px !important;
 }
+
+
+
+
+
 
 
 
@@ -90,6 +125,11 @@ margins
 
 
 
+
+
+
+
+
 /**
  * lists
  */
@@ -98,6 +138,11 @@ margins
   float: left;
   margin-left: 10px;
 }
+
+
+
+
+
 
 
 
@@ -113,6 +158,11 @@ margins
 
 
 
+
+
+
+
+
 /**
  * image width
  */
@@ -120,6 +170,11 @@ margins
 .img {
   width: 100%;
 }
+
+
+
+
+
 
 
 
@@ -136,6 +191,11 @@ margins
 
 
 
+
+
+
+
+
 /**
  * margin for tweet icon
  */
@@ -143,6 +203,11 @@ margins
 .fa {
   margin-right: 1%;
 }
+
+
+
+
+
 
 
 
@@ -160,6 +225,11 @@ margins
 
 
 
+
+
+
+
+
 /**
  * heading alignment
  */
@@ -167,6 +237,11 @@ margins
 .tweetsHeading {
   text-align: center
 }
+
+
+
+
+
 
 
 
@@ -186,6 +261,11 @@ margins
 
 
 
+
+
+
+
+
 /**
  * color
  */
@@ -193,6 +273,11 @@ margins
 .fa-twitter {
   color: #33b5e5;
 }
+
+
+
+
+
 
 
 
@@ -211,6 +296,11 @@ margins
 
 
 
+
+
+
+
+
 /**
  * card heading color
  */
@@ -218,3 +308,10 @@ margins
 .card-data h6 {
   color: black;
 }
+
+@media (max-width: 767px){
+  .tweetMarg{
+    margin-left: 10%;
+  }
+}
+

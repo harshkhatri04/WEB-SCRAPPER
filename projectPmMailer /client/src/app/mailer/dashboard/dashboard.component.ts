@@ -30,13 +30,8 @@ export class DashboardComponent implements OnInit {
  //load dropdown for nasdaq stocks  
  ngOnInit() {
    this.twitinsight();
-    this.currency.getcurrency().subscribe((data) => {
-
-     this.list = data;
-     console.log(this.list)
-   }, error => {
-     console.log("Error" + error)
-   })
+  
+   
     
 
  }
