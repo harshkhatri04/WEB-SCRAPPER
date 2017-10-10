@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
 	password:string;
   name:string;
   mobile:any;
+  flag:number;
 	ngOnInit(): void {
 		
 		this.form = new FormGroup({ /*Validation functions through regex*/
@@ -59,17 +60,25 @@ export class LoginComponent implements OnInit {
         this.emailId = res.email;
         this.mobile = res.mobile;
         this.password = res.password;
+        this.flag=res.flag;
       // setting user information in local storage
 			localStorage.setItem('currentUser', JSON.stringify({ 
 				token: this.value,
 				name: this.name,
 				email:this.emailId,
 				mobile:this.mobile,
-				password:this.password
+				password:this.password,
+        flag:this.flag
 				}));
 		  if(this.value){// checking if retrieved token is valid or not
+        if(this.flag==0){
 			  this.router.navigateByUrl('dashboard'),
         this.showConfirm()
+        this.flag++;
+        }
+        else{
+          this.router.navigateByUrl('dashboard')
+        }
       }
 			else{
 				alert('Invalid Credentials');
