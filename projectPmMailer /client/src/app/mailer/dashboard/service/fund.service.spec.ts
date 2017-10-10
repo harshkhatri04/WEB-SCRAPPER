@@ -1,24 +1,39 @@
-import { TestBed, inject } from '@angular/core/testing';
-
+import { TestBed, fakeAsync,async, inject } from '@angular/core/testing';
+import {
+  HttpModule,
+  Http,
+  Response,
+  ResponseOptions,
+  XHRBackend
+} from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 import { FundService } from './fund.service';
-
-/**
- * configuring module with test environment
- */
-
 describe('FundService', () => {
+
   beforeEach(() => {
+
     TestBed.configureTestingModule({
-      providers: [FundService]
+      imports: [HttpModule],
+      providers: [
+        FundService,
+        { provide: XHRBackend, useClass: MockBackend },
+      ]
     });
   });
 
-  /**
-   * [it description] checking component creation
-   * @param {[type]}          'should be created' [description]
-   * @param {FundService) =>      {                         expect(service).toBeTruthy();  })} inject([FundService], (service [description]
-   */
-  it('should be created', inject([FundService], (service: FundService) => {
-    expect(service).toBeTruthy();
+  it('can instantiate service when inject service',
+    inject([FundService], (service: FundService) => {
+      expect(service instanceof FundService).toBe(true);
+    }));
+
+  it('can instantiate service with "new"', inject([Http], (http: Http) => {
+    expect(http).not.toBeNull('http should be provided');
+    let service = new FundService(http);
+    expect(service instanceof FundService).toBe(true, 'new service should be ok');
   }));
+
+  it('can provide the mockBackend as XHRBackend',
+    inject([XHRBackend], (backend: MockBackend) => {
+      expect(backend).not.toBeNull('backend should be provided');
+    }));
 });

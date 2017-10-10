@@ -1,28 +1,39 @@
-import { TestBed, inject } from '@angular/core/testing';
-
+import { TestBed, fakeAsync,async, inject } from '@angular/core/testing';
+import {
+  HttpModule,
+  Http,
+  Response,
+  ResponseOptions,
+  XHRBackend
+} from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 import { SettingsService } from './settings.service';
-
-
-/**
- * [description]
- * @param  {[type]}   'SettingsService' [description]
- * @param  {Function} ()                [description]
- * @return {[type]}                     [description]
- */
 describe('SettingsService', () => {
+
   beforeEach(() => {
+
     TestBed.configureTestingModule({
-      providers: [SettingsService]
+      imports: [HttpModule],
+      providers: [
+        SettingsService,
+        { provide: XHRBackend, useClass: MockBackend },
+      ]
     });
   });
 
-  /**
-   * [description]
-   * @param  {[type]} 'should                   be            created'        [description]
-   * @param  {[type]} inject([SettingsService], (service:     SettingsService [description]
-   * @return {[type]}                           [description]
-   */
-  it('should be created', inject([SettingsService], (service: SettingsService) => {
-    expect(service).toBeTruthy();
+  it('can instantiate service when inject service',
+    inject([SettingsService], (service: SettingsService) => {
+      expect(service instanceof SettingsService).toBe(true);
+    }));
+
+  it('can instantiate service with "new"', inject([Http], (http: Http) => {
+    expect(http).not.toBeNull('http should be provided');
+    let service = new SettingsService(http);
+    expect(service instanceof SettingsService).toBe(true, 'new service should be ok');
   }));
+
+  it('can provide the mockBackend as XHRBackend',
+    inject([XHRBackend], (backend: MockBackend) => {
+      expect(backend).not.toBeNull('backend should be provided');
+    }));
 });

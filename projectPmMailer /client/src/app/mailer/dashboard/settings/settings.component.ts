@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 
 import { config } from '../../../config/config';
 import { SettingsService } from './settings.service';
@@ -14,25 +15,62 @@ import { SettingsService } from './settings.service';
  * SettingsComponent class
  */
 export class SettingsComponent implements OnInit {
+  userInfo: FormGroup;
   config = config;
   currentUser: any;
-  name: string;
   email: string;
-  mobile: string;
-  password: string;
-  constructor(private settingsService: SettingsService) {}
+  constructor(
+    @Inject(FormBuilder) private fb: FormBuilder,
+    private settingsService: SettingsService) {
+    //this.fb=fb;
+    this.userInfo = fb.group({
+      email: ['', [Validators.required]],
+      //status:['',[Validators.required]],
+      name: ['', [Validators.required]],
+      mobile: ['', [Validators.required]],
+      alternateEmail: ['', [Validators.required]]
 
-  /**
-   * [ngOnInit description]
-   * @return {[type]} [description]
-   */
+    });
+  }
+
   ngOnInit() {
-    // get user details from local storage
+
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.name = this.currentUser.name;
     this.email = this.currentUser.email;
-    this.mobile = this.currentUser.mobile;
-    this.password = this.currentUser.password;
+    // get user details from local storage
+    this.settingsService.getDataFromDB(this.email)
+      .subscribe((res) => {
+        let data = {
+          email: res.email,
+          name: res.name,
+          mobile: res.mobile,
+          alternateEmail: res.alternateEmail
+        }
+           this.displayData(data);
+      })
+    }
+
+  //
+  displayData(data: any) {
+    this.userInfo = this.fb.group({
+      email: [data.email],
+      name: [data.name],
+      mobile: [data.mobile],
+      alternateEmail: [data.alternateEmail],
+    })
+  }
+
+  updateUserInfo(userInfo,email) {
+    let user = {
+      name: userInfo.get('name').value,
+      mobile:userInfo.get('mobile').value,
+      alternateEmail:userInfo.get('alternateEmail').value
+    }
+     this.settingsService.updateUser(user,email)
+        .subscribe((res)=>{
+          console.log(res)
+        })
+
   }
 
 }
