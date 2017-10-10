@@ -206,7 +206,7 @@ function currencynews() {
 /*This the cron job function to get all emailId and there preference set*/
 var dailyMailJob = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 18 16 * * *',
+    cronTime: '00 20 19 * * *',
     onTick: function(req, res) {
         user.find((err, data) => {
             if (err) {
@@ -224,8 +224,20 @@ var dailyMailJob = new CronJob({
 dailyMailJob.start();
 
 function getEmailAndPreference(data) {
+
+    console.log("=========data")
     for (let i = 0; i < data.length; i++) {
-        console.log(data[i].preferences)
+        if(data[i].preferences[0]) {
+            console.log("IF ",data[i].preferences[0]);
+        }else{
+             console.log("ELSE ",data[i].preferences);
+        }
+        
+        // else if((typeof(data[i].preferences)=='string')){
+        //     console.log(data[i].preferences[0].frequency)
+        //     console.log(data[i].preferences[0].items)
+        // }
+        
         //sendMails(data[i].email)
     }
 }
