@@ -135,3 +135,9 @@ margins
 
   margin-right: 1%;
 }
+
+@media (max-width: 767px){
+  .tweetMarg{
+    margin-left: 10%;
+  }
+}

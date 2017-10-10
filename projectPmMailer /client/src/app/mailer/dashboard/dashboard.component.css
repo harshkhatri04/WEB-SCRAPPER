@@ -214,3 +214,10 @@ margins
 .card-data h6 {
   color: black;
 }
+
+@media (max-width: 767px){
+  .tweetMarg{
+    margin-left: 10%;
+  }
+}
+
