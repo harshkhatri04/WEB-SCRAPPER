@@ -1,57 +1,59 @@
 /* for dashboard content */
 
 .marg {
-  margin-left:7%;
+  margin-left: 7%;
   margin-top: 7%;
 }
 
-.drop{
-	width: 200px !important;
+.drop {
+  width: 200px !important;
 }
 
 .text {
 	color: black;
 	font-weight:bold;
 	background-color: #e0e0e0;
-
 }
 
-.list li{
-	float: left;
-	margin-left:10px;
+.list li {
+  float: left;
+  margin-left: 10px;
 }
 
-.list{
+.list {
   list-style: none;
 }
-.img{
-	width: 400px;
+
+.img {
+  width: 400px;
 }
+
 .profile {
-   position: absolute;
-   top: -12px;
-   display: inline-block;
-   overflow: hidden;
-   box-sizing: border-box;
-   width: 25px;
-   height: 25px;
-   margin: 0;
-   border: 1px solid #fff;
-   border-radius: 50%;
+  position: absolute;
+  top: -12px;
+  display: inline-block;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 25px;
+  height: 25px;
+  margin: 0;
+  border: 1px solid #fff;
+  border-radius: 50%;
 }
 
 .profile-avatar {
-   display: block;
-   width: 100%;
-   height: auto;
-   border-radius: 50%;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
 }
 
 .profile-inline {
-   position: relative;
-   top: 0;
-   display: inline-block;
+  position: relative;
+  top: 0;
+  display: inline-block;
 }
+
 
 .profile-inline ~ .card-title {
    display: inline-block;
