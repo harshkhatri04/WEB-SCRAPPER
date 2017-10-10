@@ -21,17 +21,10 @@ value:{};
 stockprice:string;
 stocknews:string;
 header:string;
-<<<<<<< HEAD
 investmentProductuser:string;
 listchart:{};
   ngOnInit() {
      this.nasdaq.getnasdaqstocks().subscribe((data) => {
-=======
-investmentProductuser:any=[];
-	ngOnInit() {
-		 this.nasdaq.getnasdaqstocks().subscribe((data) => {
->>>>>>> d350c5491ad1714b1bd76bf61582dbe5af252c9c
-
 		 this.nasdaqcode = data;
 		 console.log(this.nasdaqcode)
 	 }, error => {
