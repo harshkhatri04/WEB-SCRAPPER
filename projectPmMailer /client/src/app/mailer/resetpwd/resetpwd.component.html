@@ -35,7 +35,7 @@
         <h2 class="text-center">{{config.resetpwd.RESET_PASSWORD}}</h2>
         <form class="reset-form">
           <form [formGroup]="form" #formDir="ngForm">
-            <div [hidden]="formDir.submitted">
+            <!-- <div [hidden]="formDir.submitted"> -->
               <div class="form-group">
                 <div class="row">
                   <input id="pwd" type="password" class="form-control" name="pwd" placeholder="Password" formControlName="pwd" required #resetpwd>
@@ -69,10 +69,16 @@
                   <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="reset(resetpwd.value)">{{config.resetpwd.RESET_PASSWORD}}</button>
                 </div>
               </div>
-            </div>
+            <!-- </div> -->
           </form>
         </form>
       </div>
     </div>
   </div>
 </section>
+
+
+<div *ngIf="alert" id="alert" class="alert-{{alert.type}}">
+       
+                 {{alert.message}}
+                 </div> 
