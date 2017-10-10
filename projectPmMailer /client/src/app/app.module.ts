@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { ChartsModule } from 'ng2-charts';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { DialogService } from "ng2-bootstrap-modal";
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
@@ -26,7 +27,7 @@ import { SettingsService } from './mailer/dashboard/settings/settings.service';
 import { PreferenceComponent } from './mailer/preference/preference.component';
 import {PreferenceService} from './mailer/preference/preference.service';
 import {TweetService} from './mailer/dashboard/service/tweet.service';
-import { ChartsModule } from 'ng2-charts';
+
 /*import { AuthoriseGuard} from './guards/authorise.guard';
 */
 
