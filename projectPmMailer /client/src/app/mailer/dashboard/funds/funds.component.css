@@ -23,3 +23,16 @@
 .list{
   list-style: none;
 }
+
+.img {
+  width: 100%;
+}
+
+.card-data{
+  background-color:white;
+  margin-left: 3%;
+
+}
+.fa {
+  margin-right: 1%;
+}
