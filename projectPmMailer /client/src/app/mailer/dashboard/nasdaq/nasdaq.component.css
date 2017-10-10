@@ -10,9 +10,8 @@
 }
 
 .text {
-	color: black;
-	
-	background-color: #e0e0e0;
+	color: white;
+ background-color:gray;
 }
 
 .list li {

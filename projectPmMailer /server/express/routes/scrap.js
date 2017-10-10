@@ -31,7 +31,7 @@ router.get('/details', function(req, res, next) {
 
 router.get('/fund', function(req, res, next) {
     date = new Date();
-    fundmodel.find({ day: date.getDay(), month: date.getMonth(), year: year.getFullYear() }, (err, data) => {
+    fundmodel.find({ day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }, (err, data) => {
         if (err) {
             console.log("error")
 
@@ -60,7 +60,7 @@ router.get('/news/:id', function(req, res, next) {
 
 router.get('/currency', function(req, res, next) {
     date = new Date();
-    currencymodel.find({ day: date.getDay(), month: date.getMonth(), year: year.getFullYear() }, (err, data) => {
+    currencymodel.find({ day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }, (err, data) => {
         if (err) {
             console.log("error")
 
@@ -451,7 +451,6 @@ var monthlyMailJob = new CronJob({
                     })*/
 
                 }
-
             }
         })
     },
@@ -477,7 +476,7 @@ function sendMails(emailId, fundsData) {
         subject: 'Personalized Emailer',
         html: `<ul>News</ul><br><li>
 							${fundsData}
-        			</li>`
+							</li>`
 
     };
 

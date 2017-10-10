@@ -9,6 +9,10 @@ import { SettingsService } from './settings.service';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
+
+/**
+ * SettingsComponent class
+ */
 export class SettingsComponent implements OnInit {
   config = config;
   currentUser: any;
@@ -18,8 +22,12 @@ export class SettingsComponent implements OnInit {
   password: string;
   constructor(private settingsService: SettingsService) {}
 
+  /**
+   * [ngOnInit description]
+   * @return {[type]} [description]
+   */
   ngOnInit() {
-  	// get user details from local storage
+    // get user details from local storage
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.name = this.currentUser.name;
     this.email = this.currentUser.email;
