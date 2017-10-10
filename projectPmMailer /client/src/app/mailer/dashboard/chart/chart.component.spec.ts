@@ -2,11 +2,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DebugElement } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChartsModule as Ng2Charts } from 'ng2-charts';
+import { HttpModule } from '@angular/http';
 
 import { ChartComponent } from './chart.component';
-import { NavbarComponent } from './../navbar/navbar.component'
-import { DashboardService } from '../dashboard.service'
-import { ChartsModule as Ng2Charts } from 'ng2-charts';
+import { NavbarComponent } from './../navbar/navbar.component';
+import { DashboardService } from '../dashboard.service';
+import {SidebarComponent} from '../sidebar/sidebar.component';
+import {NasdaqService} from '../service/nasdaq.service';
 
 describe('testing chart component', () => {
 
@@ -20,10 +23,11 @@ describe('testing chart component', () => {
         RouterTestingModule,
         FormsModule,
         ReactiveFormsModule,
-        Ng2Charts
+        Ng2Charts,
+        HttpModule
       ],
-      declarations: [ChartComponent, NavbarComponent], //declaring component to be tested
-      providers: [{ provide: DashboardService }]
+      declarations: [ChartComponent, NavbarComponent,NavbarComponent,SidebarComponent], //declaring component to be tested
+      providers: [NasdaqService,{ provide: DashboardService }]
     }).compileComponents();
   })
 

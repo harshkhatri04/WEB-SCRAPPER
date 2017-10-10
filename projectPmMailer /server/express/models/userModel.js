@@ -7,6 +7,7 @@ const validate = require('mongoose-validator');
 
 let UserSchema = new Schema({
     name: { type: String },
+    id: { type: String },
     email: { type: String },
     mobile: { type: Number },
     password: { type: String },
