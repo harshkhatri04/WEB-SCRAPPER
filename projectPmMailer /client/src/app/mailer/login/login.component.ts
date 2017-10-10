@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
   name:string;
   mobile:any;
   flag:number;
+  registeredData: any;
+  emailCheck: string;
 	ngOnInit(): void {
 		
 		this.form = new FormGroup({ /*Validation functions through regex*/
@@ -61,20 +63,22 @@ export class LoginComponent implements OnInit {
         this.mobile = res.mobile;
         this.password = res.password;
         this.flag=res.flag;
+        console.log("-=====",this.flag)
       // setting user information in local storage
 			localStorage.setItem('currentUser', JSON.stringify({ 
 				token: this.value,
 				name: this.name,
 				email:this.emailId,
 				mobile:this.mobile,
-				password:this.password,
-        flag:this.flag
+				password:this.password
 				}));
 		  if(this.value){// checking if retrieved token is valid or not
         if(this.flag==0){
 			  this.router.navigateByUrl('dashboard'),
         this.showConfirm()
         this.flag++;
+        this.flagSet(this.flag)
+        console.log(this.flag);
         }
         else{
           this.router.navigateByUrl('dashboard')
@@ -129,6 +133,14 @@ export class LoginComponent implements OnInit {
       type:type,
       message:message
     }
+  }
+
+flagSet(flag:number){
+  this.registeredData=JSON.parse(localStorage.getItem('currentUser'));
+       this.emailCheck=this.registeredData.email;
+    this.LoginService.firstPreference(flag,this.emailCheck).subscribe((data)=>{
+          console.log(data);
+        })
   }
 
   //method for preference setting
