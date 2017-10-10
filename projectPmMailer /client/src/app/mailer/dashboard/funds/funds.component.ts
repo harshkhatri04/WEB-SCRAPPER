@@ -9,13 +9,22 @@ import {TweetService} from '../service/tweet.service';
   templateUrl: './funds.component.html',
   styleUrls: ['./funds.component.css']
 })
+
+/**
+ * fund component class
+ */
 export class FundsComponent implements OnInit {
   config = config;
   fundnews: String;
   investmentProductuser:string;
 
+
   constructor(private DashboardService: DashboardService, private router: Router, private fund: FundService,private tweetService:TweetService) {}
 
+
+  /**
+   * [ngOnInit description] getting funds
+   */ 
   ngOnInit() {
     this.fund.getfund().subscribe((data) => {
 
@@ -27,6 +36,7 @@ export class FundsComponent implements OnInit {
     this.twitfunds();
  }
 
+ 
  twitfunds(){
     
     let user='MutualFundscom';

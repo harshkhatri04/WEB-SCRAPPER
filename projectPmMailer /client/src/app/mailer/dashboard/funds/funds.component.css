@@ -1,38 +1,104 @@
+/* margin top*/
+
+.container-fluid {
+
+  margin-top: 55px;
+}
+
+
+
+/**
+ * card background color
+ */
+
+.cardStyle {
+  background-color: #80cbc4;
+}
+
+
+
+/**
+ * heading color
+ */
+
+.card-body h6 {
+  color: #004d40;
+}
+
+
+
+/**
+ * heading color
+ */
+
+.h7 {
+  color: #333;
+}
+
+
+
 /* for dashboard content */
 
 .marg {
-  margin-left:7%;
+  margin-left: 7%;
   margin-top: 7%;
 }
 
-.drop{
-	width: 200px !important;
+
+
+/*width*/
+
+.drop {
+  width: 200px !important;
 }
+
+
+
+/*text styling*/
 
 .text {
-	color: white;
-	font-weight:bold;
-	background-color: black;
+  color: white;
+  font-weight: bold;
+  background-color: black;
 }
 
-.list li{
-	float: left;
-	margin-left:10px;
+
+
+
+
+
+
+
+/*list items*/
+
+.list li {
+  float: left;
+  margin-left: 10px;
 }
 
-.list{
+
+
+
+
+
+
+
+/*list*/
+
+.list {
   list-style: none;
 }
+
 
 .img {
   width: 100%;
 }
 
-.card-data{
-  background-color:white;
+.card-data {
+  background-color: white;
   margin-left: 3%;
-
 }
+
 .fa {
   margin-right: 1%;
 }
