@@ -1,6 +1,6 @@
 <!--     Fonts and icons     -->
 <app-navbar></app-navbar>
-<div class="container-fluid" style="margin-top: 55px;">
+<div class="container-fluid">
   <div class="row">
     <!--Conatiner for Sidebar -->
     <div class="col-md-2">
@@ -25,19 +25,15 @@
             </ul>
           </div>
           <br>
-
-          <div class="card text-white mb-3" style="background-color: #80cbc4;" *ngFor="let post of list">
-
+          <div class="card text-white mb-3 cardStyle" *ngFor="let post of list">
             <div class="card-body">
-              <h6 class="text-uppercase" style="color: #004d40"><b>{{post.Time}}</b></h6>
+              <h6 class="text-uppercase"><b>{{post.Time}}</b></h6>
               <p class="h4 text-uppercase"><b>{{post.Headline}}</b></p>
-              <p class="h7" style="color: #333">{{post.News}}</p>
+              <p class="h7">{{post.News}}</p>
               <hr>
             </div>
           </div>
-
-      </div>
-
+        </div>
       </div>
     </div>
     <!--Conatiner for Tweetes -->

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { SignUpService } from './sign-up.service';
 import { Router } from '@angular/router';
 import { config } from '../../config/config';
-
+import swal from 'sweetalert2';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -71,8 +71,23 @@ export class SignUpComponent implements OnInit {
     }
     this.SignUpService.addUser(this.user)
       .subscribe((res) => {
-        if (res)
-          this.router.navigateByUrl('login')
+        if (res){
+          //alert("email sent to your id")
+          swal({
+      timer: 3000,
+      title: "Personalised Mailer!",
+      text: "you have been successfully registered",
+      type: 'success',
+      showConfirmButton: false,
+    }).then(()=>{},
+    (dismiss)=>{
+      if (dismiss === 'timer') {
+        //navigate here
+        this.router.navigateByUrl('login')
+       
+      }
+    });   
+        }
         else
           this.router.navigateByUrl('signup')
       }, error => {
