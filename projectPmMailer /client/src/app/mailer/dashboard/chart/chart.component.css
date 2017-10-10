@@ -2,8 +2,9 @@
 
 .marg {
   margin-top: 8%;
-
 }
+
+
 
 
 /*style for canvas div */
@@ -13,9 +14,19 @@
 }
 
 
+
+
 /*style for canvas size*/
 
 #canvas {
   height: 200%;
   width: 100%;
+}
+
+
+
+/* top margin */
+
+.container-fluid {
+  margin-top: 55px;
 }

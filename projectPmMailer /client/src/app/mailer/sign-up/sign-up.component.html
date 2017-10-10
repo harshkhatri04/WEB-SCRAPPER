@@ -1,4 +1,5 @@
 <section class="login-block">
+  <!-- parent conatiner -->
   <div class="container">
     <div class="row">
       <div class="col-md-8 banner-sec">
@@ -32,12 +33,13 @@
           </div>
         </div>
       </div>
+      <!-- login section -->
       <div class="col-md-4 login-sec">
         <!-- Registration Form Starts-->
         <h2 class="text-center">{{config.signup.REGISTER}}</h2>
         <form class="login-form">
           <form [formGroup]="form" #formDir="ngForm">
-            <div [hidden]="formDir.submitted">
+            <!-- <div [hidden]="formDir.submitted"> -->
               <div class="form-group">
                 <div class="row">
                   <input id="name" type="text" class="form-control name" name="pwd" placeholder={{config.signup.NAME}} formControlName="name" required [(ngModel)]="nameFirst">
@@ -129,7 +131,7 @@
                   <a [routerLink]="'/login'">{{config.signup.ACCOUNT_EXIST}}{{config.signup.LOGIN}}</a>
                 </div>
               </div>
-            </div>
+            <!-- </div> -->
           </form>
         </form>
       </div>
