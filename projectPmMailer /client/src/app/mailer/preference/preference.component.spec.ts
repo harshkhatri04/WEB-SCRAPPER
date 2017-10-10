@@ -33,9 +33,9 @@ describe('PreferenceComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PreferenceComponent);
     component = fixture.componentInstance;
-    de = fixture.debugElement.query(By.css('modal-title'));
+    /*de = fixture.debugElement.query(By.css('modal-title'));
     el = de.nativeElement;
-
+*/
   });
 
   it('should be created', () => {
