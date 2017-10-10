@@ -68,7 +68,6 @@ export class LoginComponent implements OnInit {
       // setting user information in local storage
 			localStorage.setItem('currentUser', JSON.stringify({ 
 				token: this.value,
-				name: this.name,
 				email:this.emailId,
 				mobile:this.mobile,
 				password:this.password
