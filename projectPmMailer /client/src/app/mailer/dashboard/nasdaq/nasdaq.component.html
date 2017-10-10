@@ -1,4 +1,3 @@
-<!--     Fonts and icons     -->
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
 <!-- navbar added -->
@@ -43,9 +42,6 @@
               <li class="nav-item">
                 <a class="nav-link" [routerLink]="'/funds'">Funds</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" [routerLink]="'/tweet'">Twit</a>
-              </li>
             </ul>
           </div>
           <br>
@@ -58,7 +54,6 @@
           </div>
           <br> &nbsp;
           <button id="search" (click)="search(selectedname.value)" class="btn btn-outline-primary" type="button"> {{config.dashboard.SEARCH}}</button>
-          
           <div class="jumbotron marg container text" *ngFor="let data of stockprice">
             <div class="row">
               <div class="col-md-8">
@@ -78,25 +73,29 @@
             </ul>
           </div>
         </div>
-       <!--  <b><p class="h4">{{header}}</p></b> -->
+        <b><p class="h4">{{header}}</p></b>
         <hr>
-        
-          <div *ngFor="let data of stocknews" class="card bg-dark text-white mb-3" style="background-color: #333;">
+        <div *ngFor="let data of stocknews">
+          <div class="card text-white mb-3" style="background-color: #80cbc4;" *ngIf=data.news>
             <div class="card-body">
-              <p style="color: #ffe0b2">{{data.news}}</p>
+              <p class="h7" style="color: #333">{{data.news}}</p>
             </div>
           </div>
+        </div>
       </div>
     </div>
     <!--Conatiner for Tweetes -->
-    <div class="col-md-4">
-    <!-- <b><p class="h4" style="text-align:center">{{tweets}}</p></b>
-              <div class="card bg-dark text-white mb-3" style="background-color: white;" *ngFor="let data of investmentProductuser">
-            
-                <div class="card-body">
-                  <p style="color: #ffe0b2">{{data.text}}</p>
-        </div> </div>     -->        
-     
+    <div class="col-md-4" style="margin-top: 13%">
+      <b><p class="h4" style="text-align:center">{{tweets}}</p></b>
+      <div class="card text-white mb-3" style="background-color:#e0f2f1;" *ngFor="let data of investmentProductuser">
+        <div class="card-body">
+          <p style="color: #333">{{data.text}}</p>
+          <div *ngIf="data.entities.media">
+            <img class="img" src="{{data.entities.media[0].media_url}}">
+          </div>
+          <h6>{{data.created_at}}</h6>
+        </div>
+      </div>
     </div>
   </div>
 </div>

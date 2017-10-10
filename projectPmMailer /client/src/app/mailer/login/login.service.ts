@@ -16,7 +16,7 @@ export class LoginService {
 		const url = config.urlToServer.LOGIN_SERVICE_GET + email + "/" + password;
 		return this.http
 			.get(url)
-			.map(res => res.json(),error=>error.JSON());
+			.map(res => res.json(),error=>error.json());
 	}
 
 	//Method for google-auth

@@ -12,13 +12,13 @@ let UserSchema = new Schema({
     password: { type: String },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    preferences: {
+    preferences: [{
         items: [{ id: Number, itemName: String }],
         frequency: String
-    },
-    alternateEmail:{type:String,default:null},
-    flag:Number,
-   
+    }],
+    alternateEmail: { type: String, default: null },
+    flag: Number,
+
 });
 //pre method to encrypt password
 UserSchema.pre('save', function(next) {
