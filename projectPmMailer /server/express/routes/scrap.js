@@ -46,7 +46,7 @@ router.get('/fund', function(req, res, next) {
 
 router.get('/news/:id', function(req, res, next) {
     date = new Date();
-    stockmodel.find({ term: req.params.id, day: date.getDay(), month: date.getMonth(), year: year.getFullYear() }, (err, data) => {
+    stockmodel.find({ term: req.params.id, day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }, (err, data) => {
         if (err) {
             console.log("error")
 
