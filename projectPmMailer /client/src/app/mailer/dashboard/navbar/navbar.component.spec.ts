@@ -44,11 +44,13 @@ describe('testing navbar component', () => {
     expect(navbar).toBeTruthy();
   });
 
+
 	//test case for checking interpolation of LOGOUT
 	it('should display original category value through interpolation of LOGOUT', () => {
 		fixture.detectChanges();
 		expect(elLogout.textContent).toContain(comp.config.dashboard.LOGOUT);
 	});
+
 
   //test case for checking interpolation of MAILER
   it('should display original category value through interpolation of MAILER', () => {

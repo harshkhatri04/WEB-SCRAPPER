@@ -1,7 +1,11 @@
 /**
  * margin top
  */
+.marg {
+  margin-left: 7%;
+  margin-top: 7%;
 
+}
 .container-fluid {
   margin-top: 55px;
 }
@@ -304,3 +308,10 @@ margins
 .card-data h6 {
   color: black;
 }
+
+@media (max-width: 767px){
+  .tweetMarg{
+    margin-left: 10%;
+  }
+}
+
