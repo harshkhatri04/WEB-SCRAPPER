@@ -21,9 +21,11 @@ value:{};
 stockprice:string;
 stocknews:string;
 header:string;
-
+date:any;
+stockrate:any=[];
 investmentProductuser:string;
-listchart:{};
+listchart:string;
+close:any;
   ngOnInit() {
      this.nasdaq.getnasdaqstocks().subscribe((data) => {
 		 this.nasdaqcode = data;
@@ -51,7 +53,7 @@ listchart:{};
  searchnews(name:string){
 
 	this.twitnasdaq();
-
+   this.chart(name);
 this.header='NEWS'
 
 	 this.nasdaq.getnews(name).subscribe(res => {
@@ -87,14 +89,50 @@ this.header='NEWS'
 chart(name:string) {
  
   
-   this.nasdaq.getchart(this.value).subscribe(res => {
+   this.nasdaq.getchart(name).subscribe(res => {
+      this.listchart = res.results;
+     for(let i=0;i<this.listchart.length;i++){
+       
+        this.date=new Date(res.results[i].tradingDay);
+        // console.log(this.date.getFullYear());
+        if(this.date.getFullYear()==2016){
+       this.stockrate.push(res.results[i].close)
+
+       
+       
+
+        }
+       
+       
+
+     }
+     console.log(this.stockrate);
      
-     this.listchart = res;
-     console.log(this.listchart)
+    
+     
+    
    }, error => {
      console.log("Error" + error)
    })
  }
 
+// lineChart
+ public lineChartData= this.stockrate;
+ 
+
+ public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'];
+ public lineChartType:string = 'line';
+
+ public randomizeType():void {
+   this.lineChartType = this.lineChartType === 'line' ? 'bar' : 'line';
+ }
+
+ public chartClicked(e:any):void {
+   console.log(e);
+ }
+
+ public chartHovered(e:any):void {
+   console.log(e);
+ }
 
 }

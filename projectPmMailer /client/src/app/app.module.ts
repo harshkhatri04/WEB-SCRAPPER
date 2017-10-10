@@ -26,6 +26,7 @@ import { SettingsService } from './mailer/dashboard/settings/settings.service';
 import { PreferenceComponent } from './mailer/preference/preference.component';
 import {PreferenceService} from './mailer/preference/preference.service';
 import {TweetService} from './mailer/dashboard/service/tweet.service';
+import { ChartsModule } from 'ng2-charts';
 /*import { AuthoriseGuard} from './guards/authorise.guard';
 */
 
@@ -89,6 +90,7 @@ const route: Routes = ([{
     BootstrapModalModule,
     HttpModule,
     DashboardModule,
+    ChartsModule,
      AngularMultiSelectModule,
     RouterModule.forRoot(route)
   ],
