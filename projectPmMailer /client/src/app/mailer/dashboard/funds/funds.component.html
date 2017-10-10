@@ -11,20 +11,6 @@
       <div class="d-flex d-md-block flex-nowrap wrapper">
         <div class="float-left col px-5 pl-md-2 pt-2 main">
           <br>
-          <div class="col-md-6">
-            <ul class="nav nav-tabs">
-              <li class="nav-item">
-                <a class="nav-link " [routerLink]="'/currency'">Currency</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" [routerLink]="'/nasdaq'">Nasdaq</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" [routerLink]="'/funds'">Funds</a>
-              </li>
-            </ul>
-          </div>
-          <br>
           <!-- fund details section -->
           <div class="card text-white mb-3 cardStyle" *ngFor="let post of fundnews">
             <div class="card-body">
@@ -37,7 +23,7 @@
       </div>
     </div>
     <!--Conatiner for Tweetes -->
-    <div class="col-md-4" style="margin-top: 13%">
+    <div class="col-md-4" style="margin-top: 1%">
       <b><p class="h4" style="text-align:center">{{tweets}}</p></b>
       <div class="card text-white mb-3" style="background-color:white;" *ngFor="let data of investmentProductuser">
         <div class="card-body">
