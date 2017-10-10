@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit {
         this.mobile = res.mobile;
         this.password = res.password;
         this.flag=res.flag;
-        console.log("-=====",this.flag)
       // setting user information in local storage
 			localStorage.setItem('currentUser', JSON.stringify({ 
 				token: this.value,
@@ -78,7 +77,6 @@ export class LoginComponent implements OnInit {
         this.showConfirm()
         this.flag++;
         this.flagSet(this.flag)
-        console.log(this.flag);
         }
         else{
           this.router.navigateByUrl('dashboard')
@@ -135,15 +133,16 @@ export class LoginComponent implements OnInit {
     }
   }
 
+//method for first time preference set
 flagSet(flag:number){
   this.registeredData=JSON.parse(localStorage.getItem('currentUser'));
        this.emailCheck=this.registeredData.email;
     this.LoginService.firstPreference(flag,this.emailCheck).subscribe((data)=>{
-          console.log(data);
         })
   }
+  //method for first time preference set end
 
-  //method for preference setting
+  //method for preference set
 	showConfirm() {
             let disposable = this.dialogService.addDialog(PreferenceComponent, {
                 title:'Confirm title', 
@@ -158,5 +157,5 @@ flagSet(flag:number){
                     }
                 });
         }
-
+   //method for preference set end
 }
