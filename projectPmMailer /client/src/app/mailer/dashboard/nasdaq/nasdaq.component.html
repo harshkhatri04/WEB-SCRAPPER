@@ -58,6 +58,7 @@
           </div>
           <br> &nbsp;
           <button id="search" (click)="search(selectedname.value)" class="btn btn-outline-primary" type="button"> {{config.dashboard.SEARCH}}</button>
+          
           <div class="jumbotron marg container text" *ngFor="let data of stockprice">
             <div class="row">
               <div class="col-md-8">
@@ -77,24 +78,25 @@
             </ul>
           </div>
         </div>
-        <b><p class="h4">{{header}}</p></b>
+       <!--  <b><p class="h4">{{header}}</p></b> -->
         <hr>
-        <div *ngFor="let data of stocknews">
-          <div class="card bg-dark text-white mb-3" style="background-color: #333;" *ngIf=data.news>
+        
+          <div *ngFor="let data of stocknews" class="card bg-dark text-white mb-3" style="background-color: #333;">
             <div class="card-body">
               <p style="color: #ffe0b2">{{data.news}}</p>
             </div>
           </div>
-        </div>
       </div>
     </div>
     <!--Conatiner for Tweetes -->
-    <div class="col-md-4"  style="margin-top: 15%">
-      <div class="card bg-dark text-white mb-3" style="background-color: white;" *ngFor="let data of investmentProductuser">
-        <div class="card-body">
-          <p style="color: #ffe0b2">{{data.text}}</p>
-        </div>
-      </div>
+    <div class="col-md-4">
+    <!-- <b><p class="h4" style="text-align:center">{{tweets}}</p></b>
+              <div class="card bg-dark text-white mb-3" style="background-color: white;" *ngFor="let data of investmentProductuser">
+            
+                <div class="card-body">
+                  <p style="color: #ffe0b2">{{data.text}}</p>
+        </div> </div>     -->        
+     
     </div>
   </div>
 </div>

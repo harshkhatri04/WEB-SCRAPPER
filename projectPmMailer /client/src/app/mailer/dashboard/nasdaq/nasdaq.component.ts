@@ -21,6 +21,7 @@ value:{};
 stockprice:string;
 stocknews:string;
 header:string;
+tweets:string;
 investmentProductuser:string;
   ngOnInit() {
      this.nasdaq.getnasdaqstocks().subscribe((data) => {
@@ -62,6 +63,7 @@ this.header='NEWS'
  }
 
   twitnasdaq(){
+    this.tweets='TWEETS';
     let user='nasdaq';
     this.tweetService.tweetSearch(user).subscribe((data)=>{
           this.investmentProductuser=data;

@@ -38,7 +38,8 @@ export const config = {
 	"DASHBOARD": "Dashboard",
 	"PERSONALISED_MAILER": "Personalised Mailer",
 	"SEARCH": "Search",
-	"NEWS": "News"
+	"NEWS": "News",
+	"TWEETS": "Tweets"
   },
 
   "sidebar": {
