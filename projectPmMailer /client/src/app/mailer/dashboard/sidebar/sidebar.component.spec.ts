@@ -84,11 +84,11 @@ it('should create Sidebar Component', () => {
 	});
 
 //test case for checking interpolation of CHARTS
-	it('should display original  value through interpolation of CHARTS', () => {
+/*	it('should display original  value through interpolation of CHARTS', () => {
 		fixture.detectChanges();
 		expect(elChart.textContent).toContain(component.config.sidebar.CHARTS);
 	});
-
+*/
 	it('it can get router links from template',()=>{
   expect(links.length).toBe(3,'should have 3 links');
 	})
