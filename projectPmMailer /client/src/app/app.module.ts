@@ -29,8 +29,8 @@ import {PreferenceService} from './mailer/preference/preference.service';
 import {TweetService} from './mailer/dashboard/service/tweet.service';
 import { UpdatepasswordService } from './mailer/dashboard/updatepassword/updatepassword.service';
 
-/*import { AuthoriseGuard} from './guards/authorise.guard';
-*/
+import { AuthoriseGuard} from './guards/authorise.guard';
+
 
 const route: Routes = ([{
     path: 'login',
@@ -52,7 +52,7 @@ const route: Routes = ([{
   {
     path: 'dashboard',
     component: DashboardComponent,
-    /*canActivate: [AuthoriseGuard]*/
+    canActivate: [AuthoriseGuard]
   },
   {
     path: '',
@@ -98,6 +98,7 @@ const route: Routes = ([{
   ],
 
  providers: [LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService, DialogService, PreferenceService,SettingsService,CurrencyService,FundService,TweetService,UpdatepasswordService],
+
 
 
   bootstrap: [AppComponent]

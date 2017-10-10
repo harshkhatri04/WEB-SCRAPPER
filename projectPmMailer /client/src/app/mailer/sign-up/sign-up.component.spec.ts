@@ -1,9 +1,10 @@
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { By }              from '@angular/platform-browser';
 import { DebugElement }    from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+
 
 import { SignUpComponent } from './sign-up.component';
 import { SignUpService } from './sign-up.service';
@@ -24,7 +25,7 @@ describe('testing sign up component',()=>{
   	
      TestBed.configureTestingModule({
      	imports:[
-     	FormsModule,ReactiveFormsModule],
+     	FormsModule,ReactiveFormsModule,RouterTestingModule],
      	declarations:[SignUpComponent], //declaring component to be tested
      	providers:[{provide: SignUpService},{provide: Router}]
      }).compileComponents();

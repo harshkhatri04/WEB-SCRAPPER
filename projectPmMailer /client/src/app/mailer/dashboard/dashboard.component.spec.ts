@@ -61,20 +61,20 @@ describe('DashboardComponent', () => {
    fixture = TestBed.createComponent(DashboardComponent);
    component = fixture.componentInstance;
 
-   // nasdaqService actually injected into the component
-    let nasdaqService = fixture.debugElement.injector.get(NasdaqService);
+   // tweetService actually injected into the component
+    // let tweetService = fixture.debugElement.injector.get(TweetService);
    
-    // Setup spy on the `getnasdaqstocks` method
-    spy = spyOn(nasdaqService, 'getnasdaqstocks')
-          .and.returnValue(Observable.of(mockData));
+    // Setup spy on the `twitinsight` method
+    // spy = spyOn(Service, 'getnasdaqstocks')
+    //       .and.returnValue(Observable.of(mockData));
 
     // Get the mockdata element by CSS selector (e.g., by class name)
     
-    destock = fixture.debugElement.query(By.css('.dash'));
+    destock = fixture.debugElement.query(By.css('.logout'));
     elstock = destock.nativeElement;
-    de = fixture.debugElement.query(By.css('.title'));
+    de = fixture.debugElement.query(By.css('a'));
     el = de.nativeElement;
-    fixture.detectChanges();
+    
 
 
  });
@@ -83,26 +83,26 @@ it('should create dashboard component',()=>{
  expect(component).toBeTruthy();
 });
 
-it('should display original title', () => {
+it('should display read more title', () => {
 
  fixture.detectChanges()
   expect(el.textContent).toContain(component.config.dashboard.PERSONALISED_MAILER);
 
 });
 
-it('should display dashboard title', () => {
+it('should display logout', () => {
 
 fixture.detectChanges()
-  expect(elstock.textContent).toContain(component.config.dashboard.DASHBOARD);
+  expect(elstock.textContent).toContain(component.config.dashboard.LOGOUT);
 
 });
-it('testing ng oninit method',fakeAsync(()=>{
-  fixture.detectChanges();
-  tick();
-  fixture.detectChanges();
-  expect(spy.calls.any()).toBe(true);
+// it('testing ng oninit method',fakeAsync(()=>{
+//   fixture.detectChanges();
+//   tick();
+//   fixture.detectChanges();
+//   expect(spy.calls.any()).toBe(true);
 
 
-}))
+// }))
 
 });
