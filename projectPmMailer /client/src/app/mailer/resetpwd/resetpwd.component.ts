@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { ResetpwdService } from './resetpwd.service';
 import { config } from '../../config/config';
+import swal from 'sweetalert2';
 @Component({
   selector: 'app-resetpwd',
   templateUrl: './resetpwd.component.html',
@@ -13,6 +14,7 @@ export class ResetpwdComponent implements OnInit {
 
   tkn: any;
   config = config;
+
   constructor(private ResetpwdService: ResetpwdService, private route: ActivatedRoute, private Router: Router) {
 
     this.route.params.subscribe(params => this.tkn = (params.token));
@@ -41,17 +43,31 @@ export class ResetpwdComponent implements OnInit {
   get pwd() { return this.form.get('pwd'); }
   get cpwd() { return this.form.get('cpwd'); }
 
-
   reset(resetpwd) {
     this.mydata = {
       password: resetpwd
     }
     this.ResetpwdService.resetPassword(this.mydata, this.tkn)
       .subscribe((res) => {
-        if (res)
-          this.Router.navigateByUrl('reset')
-        else
+        if (res){
+          //alert("password has been changed")
+          swal({
+      timer: 3000,
+      title: "Personalised Mailer!",
+      text: "your password has been changed",
+      type: 'success',
+      showConfirmButton: false,
+    }).then(()=>{},
+    (dismiss)=>{
+      if (dismiss === 'timer') {
+        //navigate here
+        this.Router.navigateByUrl('reset') 
+      }
+    });
+        }
+        else{
           this.Router.navigateByUrl('login')
+        }
       }, error => {
         console.log("Error" + error)
       })
