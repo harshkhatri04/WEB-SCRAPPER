@@ -206,29 +206,49 @@ function currencynews() {
 /*This the cron job function to get all emailId and there preference set*/
 var dailyMailJob = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 5 08 * * *',
+    cronTime: '00 00 10 * * *',
 
     onTick: function(req, res) {
         user.find((err, data) => {
             if (err) {
                 res.status(403).send({ success: false, message: 'You are unauthorized' })
             } else {
-                fundmodel.find((err, fundsData) => {
-                    if (err) {
-                        res.status(403).send({ success: false, message: 'You are unauthorized' })
-                    } else {
-                        getEmailAndPreference(data, fundsData)
+
+                for (let i = 0; i < data.length; i++) {
+
+                    if (data[i].preferences[0].frequency == 'Daily') {
+                        if (data[i].preferences[0].items[0].itemName == 'Nasdaq Stocks') {
+                            stockmodel.find((err, stockData) => {
+                                if (err) {
+                                    res.status(403).send({ success: false, message: 'You are unauthorized' })
+                                } else {
+                                    sendMails(data[i].email, stockData)
+                                }
+                            })
+                        } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
+                            fundmodel.find((err, fundsData) => {
+                                if (err) {
+                                    res.status(403).send({ success: false, message: 'You are unauthorized' })
+                                } else {
+                                    sendMails(data[i].email, fundsData)
+                                }
+                            })
+                        } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
+                            currencymodel.find((err, currencyData) => {
+                                if (err) {
+                                    res.status(403).send({ success: false, message: 'You are unauthorized' })
+                                } else {
+                                    sendMails(data[i].email, currencyData)
+                                }
+                            })
+                        }
+
                     }
-                })
+
+                }
+
             }
         })
-        /*for (let i = 0; i < data.length; i++) {
-            user.findOne({ email: data[i].email },function(){
-            	if(err) return handleError(err)
-
-            })
-        }*/
-
     },
     start: false,
     timeZone: 'Asia/Kolkata'
@@ -239,28 +259,47 @@ dailyMailJob.start();
 /*This the cron job function to get all emailId and there preference set*/
 var weeklyMailJob = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 59 15 * * 1',
+    cronTime: '00 40 09 * * 2',
     onTick: function(req, res) {
         user.find((err, data) => {
             if (err) {
                 res.status(403).send({ success: false, message: 'You are unauthorized' })
             } else {
-                fundmodel.find((err, fundsData) => {
-                    if (err) {
-                        res.status(403).send({ success: false, message: 'You are unauthorized' })
-                    } else {
-                        getEmailAndPreference(data, fundsData)
+                for (let i = 0; i < data.length; i++) {
+
+                    if (data[i].preferences[0].frequency == 'Weekly') {
+                        if (data[i].preferences[0].items[0].itemName == 'Nasdaq Stocks') {
+                            stockmodel.find((err, stockData) => {
+                                if (err) {
+                                    res.status(403).send({ success: false, message: 'You are unauthorized' })
+                                } else {
+                                    sendMails(data[i].email, stockData)
+                                }
+                            })
+                        } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
+                            fundmodel.find((err, fundsData) => {
+                                if (err) {
+                                    res.status(403).send({ success: false, message: 'You are unauthorized' })
+                                } else {
+                                    sendMails(data[i].email, fundsData)
+                                }
+                            })
+                        } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
+                            currencymodel.find((err, currencyData) => {
+                                if (err) {
+                                    res.status(403).send({ success: false, message: 'You are unauthorized' })
+                                } else {
+                                    sendMails(data[i].email, currencyData)
+                                }
+                            })
+                        }
+
                     }
-                })
+
+                }
+
             }
         })
-        /*for (let i = 0; i < data.length; i++) {
-            user.findOne({ email: data[i].email },function(){
-            	if(err) return handleError(err)
-
-            })
-        }*/
-
     },
     start: false,
     timeZone: 'Asia/Kolkata'
@@ -271,48 +310,52 @@ weeklyMailJob.start();
 /*This the cron job function to get all emailId and there preference set*/
 var monthlyMailJob = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 59 15 1-12 * 1',
+    cronTime: '00 40 09 10 * *',
     onTick: function(req, res) {
         user.find((err, data) => {
             if (err) {
                 res.status(403).send({ success: false, message: 'You are unauthorized' })
             } else {
-                fundmodel.find((err, fundsData) => {
-                    if (err) {
-                        res.status(403).send({ success: false, message: 'You are unauthorized' })
-                    } else {
-                        getEmailAndPreference(data, fundsData)
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].preferences[0].frequency == 'Daily') {
+                        if (data[i].preferences[0].items[0].itemName == 'Nasdaq Stocks') {
+                            stockmodel.find((err, stockData) => {
+                                if (err) {
+                                    res.status(403).send({ success: false, message: 'You are unauthorized' })
+                                } else {
+                                    sendMails(data[i].email, stockData)
+                                }
+                            })
+                        } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
+                            fundmodel.find((err, fundsData) => {
+                                if (err) {
+                                    res.status(403).send({ success: false, message: 'You are unauthorized' })
+                                } else {
+                                    sendMails(data[i].email, fundsData)
+                                }
+                            })
+                        } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
+                            currencymodel.find((err, currencyData) => {
+                                if (err) {
+                                    res.status(403).send({ success: false, message: 'You are unauthorized' })
+                                } else {
+                                    sendMails(data[i].email, currencyData)
+                                }
+                            })
+                        }
+
                     }
-                })
+
+                }
+
             }
         })
-        /*for (let i = 0; i < data.length; i++) {
-            user.findOne({ email: data[i].email },function(){
-            	if(err) return handleError(err)
-
-            })
-        }*/
-
     },
     start: false,
     timeZone: 'Asia/Kolkata'
 
 });
 monthlyMailJob.start();
-
-function getEmailAndPreference(data, fundsData) {
-    let news = [];
-
-    for (let i = 0; i < data.length; i++) {
-        //console.log(fundsData[i].Headline)
-        /* for (let k = 0; k < fundsData.length; k++) {
-             news[k] = fundsData[k].Headline
-         }*/
-        //console.log(data[i].preferences[0].frequency)
-        console.log(data[i].preferences[0].items[0].itemName)
-        //sendMails(data[i].email, news)
-    }
-}
 
 function sendMails(emailId, fundsData) {
     let nodemailer = require('nodemailer');
