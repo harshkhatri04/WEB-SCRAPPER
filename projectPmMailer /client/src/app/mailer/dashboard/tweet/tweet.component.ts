@@ -6,13 +6,16 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './tweet.component.html',
   styleUrls: ['./tweet.component.css']
 })
+
+/**
+ * TweetComponent class
+ */
 export class TweetComponent implements OnInit {
-   investmentProductuser: string;
+  investmentProductuser: string;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 
 

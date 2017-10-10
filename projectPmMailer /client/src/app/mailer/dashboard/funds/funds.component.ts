@@ -36,7 +36,9 @@ export class FundsComponent implements OnInit {
     this.twitfunds();
  }
 
- 
+ /**
+  * [twitfunds description] getting funds tweets
+  */
  twitfunds(){
     
     let user='MutualFundscom';
@@ -45,7 +47,9 @@ export class FundsComponent implements OnInit {
           console.log(this.investmentProductuser);
         })
   }
-
+/**
+ *  method to signout
+ */
   logout() {
     this.DashboardService.signout()
       .subscribe((res) => {

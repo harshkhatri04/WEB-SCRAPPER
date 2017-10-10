@@ -1,25 +1,47 @@
 /* for dashboard content */
 
 .marg {
-  margin-left:17%;
+  margin-left: 17%;
   margin-top: 7%;
 }
 
-.drop{
-	width: 200px !important;
+
+
+/**
+ *  width
+ */
+
+.drop {
+  width: 200px !important;
 }
+
+
+
+/**
+ * text styling
+ */
 
 .text {
-	color: white;
-	font-weight:bold;
-	background-color: black;
+  color: white;
+  font-weight: bold;
+  background-color: black;
 }
 
-.list li{
-	float: left;
-	margin-left:10px;
+
+/**
+ * list
+ */
+
+.list li {
+  float: left;
+  margin-left: 10px;
 }
 
-.list{
+
+/**
+ * list 
+ */
+
+.list {
   list-style: none;
 }
