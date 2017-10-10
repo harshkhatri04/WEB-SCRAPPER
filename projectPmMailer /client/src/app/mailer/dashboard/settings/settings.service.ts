@@ -5,18 +5,19 @@ import { Http } from '@angular/http';
 export class SettingsService {
 
 
-  /**
-   * [constructor description]
-   * @param {Http} private http [description]
-   */
-  constructor(private http: Http) {}
+  constructor(private http:Http) {
+   }
+  updateUser(userInfo,email){
+  	console.log(userInfo,email)
+    const url ='http://localhost:3000/update/updateUser/'+email;
+    return this.http.put(url,userInfo)
+                     .map(res=>res.json(),error=>error.json())
+  }
 
-  /**
-   * [updateNameAndMobile description]
-   * @param {[type]} name   [description]
-   * @param {[type]} mobile [description]
-   */
-  updateNameAndMobile(name, mobile) {
+  getDataFromDB(email){
+    const url ='http://localhost:3000/find/findUser/'+email;
+     return this.http.get(url)
+                     .map(res=>res.json(),error=>error.json())
 
   }
 }

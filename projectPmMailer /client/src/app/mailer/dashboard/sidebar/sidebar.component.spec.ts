@@ -97,6 +97,7 @@ it('should create Sidebar Component', () => {
 		expect(elSetting.textContent).toContain(component.config.sidebar.SETTINGS);
 	});
 
+
  //test case for router link 
 	it('it can get router links from template',()=>{
   expect(links.length).toBe(5,'should have 3 links');
