@@ -222,66 +222,73 @@ function currencynews() {
 /*This the cron job function to get all emailId and there preference set*/
 var dailyMailJob = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 00 15 * * *',
+    cronTime: '00 50 18 * * *',
 
     onTick: function(req, res) {
+        // let p1, p2, p3;
         user.find((err, data) => {
             if (err) {
                 res.status(403).send({ success: false, message: 'You are unauthorized' })
             } else {
-                /* for (let i = 0; i < data.length; i++) {
-                     console.log(data[i].preferences[0].items[0].itemName)
-                     //console.log(data[i].preferences[0].frequency);
-                      if (data[i].preferences[0].frequency == null) {
-                          console.log('error')
-                      } else {
-                          console.log(data[i].preferences[0].frequency);
-                      }
-
-                     // console.log(JSON.parse(data[i].preferences[i]).frequency)
-                 }*/
                 for (let i = 0; i < data.length; i++) {
                     if (data[i].preferences[0].frequency == 'Daily') {
                         if (data[i].preferences[0].items[0].itemName == 'Nasdaq Stocks') {
+                            //p1 = new Promise((resolve, reject) => {
                             let news = stockmodel.find({}).select('news');
                             news.exec(function(err, stockData) {
                                 if (err) {
                                     console.log('error in stockmodel')
                                 } else {
                                     let stock = stockData.map(ele => ele.news)
-                                    //console.log(JSON.stringify(stock, null, 2))
+                                    //newsData.push("stock")
+                                    //console.log(stock)
+                                    //resolve(stock);
+                                    //console.log('in else of stock')
                                     sendMails(data[i].email, stock)
                                 }
                             })
-                        } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
-                            fundmodel.find((err, fundsData) => {
-                                if (err) {
-                                    console.log('error in fundmodel')
-                                } else {
-                                    //sendMails(data[i].email, fundsData.Headline)
-                                }
-                            })
-                            let news = stockmodel.find({}).select('news');
-                            news.exec(function(err, stockData) {
-                                if (err) {
-                                    console.log('error in stockmodel')
-                                } else {
-                                    let stock = stockData.map(ele => ele.news)
-                                    //console.log(JSON.stringify(stock, null, 2))
-                                    sendMails(data[i].email, stock)
-                                }
-                            })
-                        } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
-                            currencymodel.find((err, currencyData) => {
-                                if (err) {
-                                    console.log('error in currencymodel')
-                                } else {
-                                    //sendMails(data[i].email, currencyData.News)
-                                }
-                            })
-                        }
+                            //})
 
+                        } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
+                            //p2 = new Promise((resolve, reject) => {
+                            let news = fundmodel.find({}).select('News')
+                            news.exec(function(err, fundData) {
+                                if (err) {
+                                    console.log('error')
+                                } else {
+                                    let fund = fundData.map(ele => ele.News)
+                                    //resolve(fund);
+                                    //newsData.push("fund")
+                                    //console.log('in else of fund')
+                                    sendMails(data[i].email, fund)
+                                }
+                            })
+                            //})
+
+                        } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
+                            //p3 = new Promise((resolve, reject) => {
+                            let news = currencymodel.find({}).select('News');
+                            news.exec(function(err, currencyData) {
+                                if (err) {
+                                    console.log('error')
+                                } else {
+                                    let currency = currencyData.map(ele => ele.News)
+                                    //  newsData.push("currency")
+                                    //resolve(currency);
+                                    //console.log(currencyData)
+                                    sendMails(data[i].email, currency)
+                                }
+                            })
+                            //})
+
+                        }
+                        //console.log(newsData)
+                        //sendMails(data[i].email, newsData)
                     }
+
+                    /*Promise.all([p1, p2, p3]).then(values => {
+                        console.log(values)
+                    })*/
 
                 }
 
@@ -303,38 +310,67 @@ var weeklyMailJob = new CronJob({
             if (err) {
                 res.status(403).send({ success: false, message: 'You are unauthorized' })
             } else {
-                /*     for (let i = 0; i < data.length; i++) {
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].preferences[0].frequency == 'Weekly') {
+                        if (data[i].preferences[0].items[1].itemName == 'Nasdaq Stocks') {
+                            //p1 = new Promise((resolve, reject) => {
+                            let news = stockmodel.find({}).select('news');
+                            news.exec(function(err, stockData) {
+                                if (err) {
+                                    console.log('error in stockmodel')
+                                } else {
+                                    let stock = stockData.map(ele => ele.news)
+                                    //newsData.push("stock")
+                                    //console.log(stock)
+                                    //resolve(stock);
+                                    //console.log('in else of stock')
+                                    sendMails(data[i].email, stock)
+                                }
+                            })
+                            //})
 
-                         if (data[i].preferences[0].frequency == 'Weekly') {
-                             if (data[i].preferences[0].items[0].itemName == 'Nasdaq Stocks') {
-                                 stockmodel.find((err, stockData) => {
-                                     if (err) {
-                                         res.status(403).send({ success: false, message: 'You are unauthorized' })
-                                     } else {
-                                         sendMails(data[i].email, stockData)
-                                     }
-                                 })
-                             } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
-                                 fundmodel.find((err, fundsData) => {
-                                     if (err) {
-                                         res.status(403).send({ success: false, message: 'You are unauthorized' })
-                                     } else {
-                                         sendMails(data[i].email, fundsData)
-                                     }
-                                 })
-                             } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
-                                 currencymodel.find((err, currencyData) => {
-                                     if (err) {
-                                         res.status(403).send({ success: false, message: 'You are unauthorized' })
-                                     } else {
-                                         sendMails(data[i].email, currencyData)
-                                     }
-                                 })
-                             }
+                        } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
+                            //p2 = new Promise((resolve, reject) => {
+                            let news = fundmodel.find({}).select('News')
+                            news.exec(function(err, fundData) {
+                                if (err) {
+                                    console.log('error')
+                                } else {
+                                    let fund = fundData.map(ele => ele.News)
+                                    //resolve(fund);
+                                    //newsData.push("fund")
+                                    //console.log('in else of fund')
+                                    sendMails(data[i].email, fund)
+                                }
+                            })
+                            //})
 
-                         }
+                        } else if (data[i].preferences[0].items[2].itemName == 'Currency') {
+                            //p3 = new Promise((resolve, reject) => {
+                            let news = currencymodel.find({}).select('News');
+                            news.exec(function(err, currencyData) {
+                                if (err) {
+                                    console.log('error')
+                                } else {
+                                    let currency = currencyData.map(ele => ele.News)
+                                    //  newsData.push("currency")
+                                    //resolve(currency);
+                                    // console.log('in else of currency')
+                                    sendMails(data[i].email, currency)
+                                }
+                            })
+                            //})
 
-                     }*/
+                        }
+                        //console.log(newsData)
+                        //sendMails(data[i].email, newsData)
+                    }
+
+                    /*Promise.all([p1, p2, p3]).then(values => {
+                        console.log(values)
+                    })*/
+
+                }
 
             }
         })
@@ -354,38 +390,67 @@ var monthlyMailJob = new CronJob({
             if (err) {
                 res.status(403).send({ success: false, message: 'You are unauthorized' })
             } else {
-                /*    for (let i = 0; i < data.length; i++) {
-                        if (data[i].preferences[0].frequency == 'Daily') {
-                            if (data[i].preferences[0].items[0].itemName == 'Nasdaq Stocks') {
-                                stockmodel.find((err, stockData) => {
-                                    if (err) {
-                                        res.status(403).send({ success: false, message: 'You are unauthorized' })
-                                    } else {
-                                        sendMails(data[i].email, stockData)
-                                    }
-                                })
-                            } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
-                                fundmodel.find((err, fundsData) => {
-                                    if (err) {
-                                        res.status(403).send({ success: false, message: 'You are unauthorized' })
-                                    } else {
-                                        sendMails(data[i].email, fundsData)
-                                    }
-                                })
-                            } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
-                                currencymodel.find((err, currencyData) => {
-                                    if (err) {
-                                        res.status(403).send({ success: false, message: 'You are unauthorized' })
-                                    } else {
-                                        sendMails(data[i].email, currencyData)
-                                    }
-                                })
-                            }
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].preferences[0].frequency == 'Monthly') {
+                        if (data[i].preferences[0].items[1].itemName == 'Nasdaq Stocks') {
+                            //p1 = new Promise((resolve, reject) => {
+                            let news = stockmodel.find({}).select('news');
+                            news.exec(function(err, stockData) {
+                                if (err) {
+                                    console.log('error in stockmodel')
+                                } else {
+                                    let stock = stockData.map(ele => ele.news)
+                                    //newsData.push("stock")
+                                    //console.log(stock)
+                                    //resolve(stock);
+                                    //console.log('in else of stock')
+                                    sendMails(data[i].email, stock)
+                                }
+                            })
+                            //})
+
+                        } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
+                            //p2 = new Promise((resolve, reject) => {
+                            let news = fundmodel.find({}).select('News')
+                            news.exec(function(err, fundData) {
+                                if (err) {
+                                    console.log('error')
+                                } else {
+                                    let fund = fundData.map(ele => ele.News)
+                                    //resolve(fund);
+                                    //newsData.push("fund")
+                                    //console.log('in else of fund')
+                                    sendMails(data[i].email, fund)
+                                }
+                            })
+                            //})
+
+                        } else if (data[i].preferences[0].items[2].itemName == 'Currency') {
+                            //p3 = new Promise((resolve, reject) => {
+                            let news = currencymodel.find({}).select('News');
+                            news.exec(function(err, currencyData) {
+                                if (err) {
+                                    console.log('error')
+                                } else {
+                                    let currency = currencyData.map(ele => ele.News)
+                                    //  newsData.push("currency")
+                                    //resolve(currency);
+                                    // console.log('in else of currency')
+                                    sendMails(data[i].email, currency)
+                                }
+                            })
+                            //})
 
                         }
+                        //console.log(newsData)
+                        //sendMails(data[i].email, newsData)
+                    }
 
-                    }*/
+                    /*Promise.all([p1, p2, p3]).then(values => {
+                        console.log(values)
+                    })*/
 
+                }
             }
         })
     },
@@ -411,7 +476,7 @@ function sendMails(emailId, fundsData) {
         subject: 'Personalized Emailer',
         html: `<ul>News</ul><br><li>
 							${fundsData}
-        			</li>`
+							</li>`
 
     };
 

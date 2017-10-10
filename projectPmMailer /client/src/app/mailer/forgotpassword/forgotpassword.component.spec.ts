@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotpasswordComponent } from './forgotpassword.component';
 import { ForgotpasswordService } from './forgotpassword.service'
 
-describe('testing forgotPassword component', () => {
+describe('Testing forgotPassword component', () => {
 
 	let comp: ForgotpasswordComponent;
 	let fixture: ComponentFixture < ForgotpasswordComponent > ;
