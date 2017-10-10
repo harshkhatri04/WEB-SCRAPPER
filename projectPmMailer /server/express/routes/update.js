@@ -58,13 +58,14 @@ router.delete('/deleteUser/:email', (req, res) => {
 // route to update password
 // route starts here
 router.post('/updatePassword/:email', (req, res) => {
+  console.log(req.body.newPwd,req.params)
 						User.findOne({ email: req.params.email }, function(err, user) {
 												if (err) {
 														res.status(400).send({ status: false, message: 'error updating password' })
 												} else {
-														user.comparePassword(req.body.password, function(err, isMatch) {
+														user.comparePassword(req.body.currentPwd, function(err, isMatch) {
 																				if (isMatch && !err) {
-																						user.password = req.body.newPassword;
+																						user.password = req.body.newPwd;
 																						user.save((err) => {
 																												if (err) {
 																														res.status(400).send({ success: false, message: 'could not update password' })
