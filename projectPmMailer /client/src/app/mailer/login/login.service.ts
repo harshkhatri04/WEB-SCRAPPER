@@ -36,4 +36,10 @@ export class LoginService {
 			.map(res => res,error=>error.json());
 	}
 	//Method for facebook-auth end
+
+	firstPreference(flag:number,email){
+		console.log("==flag===",flag)
+  	return this.http.put('http://localhost:3000/update/flag/'+email,flag)
+  .map(res=>res.json());
+  }
 }
