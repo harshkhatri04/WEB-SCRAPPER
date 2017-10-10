@@ -16,8 +16,19 @@ let UserSchema = new Schema({
         items: [{ id: Number, itemName: String }],
         frequency: String
     }],
-    alternateEmail:{type:String,default:null},
-    flag:{type:Number,default:0},
+    alternateEmail: { type: String, default: null },
+    flag: { type: Number, default: 0 },
+});
+
+UserSchema.pre("save", function(next) {
+    let obj = {
+        items: [{ "id": 1, "itemName": "Funds" }],
+        frequency: 'Daily'
+    }
+    if (this.preferences.length == 0)
+        this.preferences.push(obj);
+
+    next();
 });
 //pre method to encrypt password
 UserSchema.pre('save', function(next) {

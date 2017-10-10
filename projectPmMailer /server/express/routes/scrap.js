@@ -30,7 +30,8 @@ router.get('/details', function(req, res, next) {
 })
 
 router.get('/fund', function(req, res, next) {
-    fundmodel.find((err, data) => {
+     date = new Date();
+    fundmodel.find({ day: date.getDay(), month: date.getMonth(), year: year.getFullYear()}, (err, data) => {
         if (err) {
             console.log("error")
 
@@ -44,7 +45,8 @@ router.get('/fund', function(req, res, next) {
 
 
 router.get('/news/:id', function(req, res, next) {
-    stockmodel.find({ term: req.params.id }, (err, data) => {
+    date = new Date();
+    stockmodel.find({ term: req.params.id, day: date.getDay(), month: date.getMonth(), year: year.getFullYear() }, (err, data) => {
         if (err) {
             console.log("error")
 
@@ -57,7 +59,8 @@ router.get('/news/:id', function(req, res, next) {
 })
 
 router.get('/currency', function(req, res, next) {
-    currencymodel.find((err, data) => {
+    date = new Date();
+    currencymodel.find({ day: date.getDay(), month: date.getMonth(), year: year.getFullYear() }, (err, data) => {
         if (err) {
             console.log("error")
 
@@ -122,7 +125,10 @@ function getnasdaq(data) {
                     let stockdata = {};
                     stockdata.term = term;
                     stockdata.news = news;
-
+                    date = new Date();
+                    stockdata.day = date.getDay();
+                    stockdata.month = date.getMonth();
+                    stockdata.year = date.getFullYear();
                     liststock = new stockmodel(stockdata);
                     liststock.save((err, data) => {
                         if (err) {
@@ -154,6 +160,11 @@ function fundsnews() {
                 funddata.Time = fundsdate;
                 funddata.Headline = fundsheadline;
                 funddata.News = fundsnews;
+                date = new Date();
+                date = new Date();
+                funddata.day = date.getDay();
+                funddata.month = date.getMonth();
+                funddata.year = date.getFullYear();
 
                 let listoffund = new fundmodel(funddata)
                 listoffund.save((err, data) => {
@@ -187,6 +198,11 @@ function currencynews() {
                 currencydata.Time = cuurencydate;
                 currencydata.Headline = currencyheadline;
                 currencydata.News = currencynews;
+                date = new Date();
+                currencydata.day = date.getDay();
+                currencydata.month = date.getMonth();
+                currencydata.year = date.getFullYear();
+
                 let listofcurrency = new currencymodel(currencydata)
                 listofcurrency.save((err, data) => {
                     if (err) {
@@ -403,12 +419,13 @@ function sendMails(emailId, fundsData) {
 /*This the cron job function to do scheduling on the nasdaq data*/
 var job = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 37 15 * * *',
+    cronTime: '00 30 14 * * *',
     onTick: function(req, res, next) {
         nasdaq.find((err, data) => {
             if (err) {
                 console.log("error")
             } else {
+                console.log('Sheduler start')
                 getnasdaq(data);
                 fundsnews();
                 currencynews();
