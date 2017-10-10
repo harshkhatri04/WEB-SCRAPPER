@@ -13,6 +13,7 @@
     <div class="col-md-6">
       <div class="d-flex d-md-block flex-nowrap wrapper">
         <div class="float-left col px-5 pl-md-2 pt-2 main">
+<<<<<<< HEAD
           <br>
           <div class="col-md-12">
             <ul class="nav nav-tabs">
@@ -54,6 +55,28 @@
                 <p>{{data.hupdown}}</p>
               </li>
             </ul>
+=======
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <br>
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+      <div class="d-flex d-md-block flex-nowrap wrapper">
+        <div class="float-left col px-5 pl-md-2 pt-2 main">
+          <select #selectedname class="drop">
+            <option [value]="post.Code" *ngFor="let post of nasdaqcode">
+              {{post.Company}}
+            </option>
+          </select>
+          <div class="col-md-2">
+            <button id="search" (click)="search(selectedname.value)" class="btn btn-outline-primary" type="button"> {{config.dashboard.SEARCH}}</button>
+>>>>>>> 7ef6d3bb726421694a857d58ecd4dd48512adcf0
           </div>
         </div>
         <b><p class="h4">{{header}}</p></b>
