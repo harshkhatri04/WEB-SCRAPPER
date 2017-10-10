@@ -30,4 +30,11 @@
 	      .map((res: Response) => res.json())
 	  }
 
+	   getchart(term){
+	   	console.log(term)
+     var api='http://marketdata.websol.barchart.com/getHistory.json?apikey=35721129e1bfdd75860694bacc162262&symbol='+term+'&type=daily&startDate=20160910000000'
+     return this.http.get(api)
+       .map((res)=>res.json())
+   }
+
 	}

@@ -22,6 +22,7 @@ stockprice:string;
 stocknews:string;
 header:string;
 investmentProductuser:string;
+listchart:{};
   ngOnInit() {
      this.nasdaq.getnasdaqstocks().subscribe((data) => {
 
@@ -37,6 +38,7 @@ investmentProductuser:string;
      term: name
    }
    this.searchnews(name);
+   this.chart(name);
    this.nasdaq.getresult(this.value).subscribe(res => {
      console.log(res)
      this.stockprice = res.data;
@@ -78,4 +80,18 @@ this.header='NEWS'
        console.log("Error" + error)
      })
  }
+
+chart(name:string) {
+ 
+  
+   this.nasdaq.getchart(this.value).subscribe(res => {
+     
+     this.listchart = res;
+     console.log(this.listchart)
+   }, error => {
+     console.log("Error" + error)
+   })
+ }
+
+
 }
