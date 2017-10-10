@@ -9,7 +9,8 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "logo.ico"
+        "logo.ico",
+        "photo.png"
       ],
       "index": "index.html",
       "main": "main.ts",
