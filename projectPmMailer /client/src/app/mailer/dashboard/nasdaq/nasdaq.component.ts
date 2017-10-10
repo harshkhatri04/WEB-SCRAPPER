@@ -134,7 +134,7 @@ chart(name:string) {
  
  /**
   * [lineChartLabels description]
-  * @type {Array<any>}
+  
   */
  public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'];
  public lineChartType:string = 'line';
