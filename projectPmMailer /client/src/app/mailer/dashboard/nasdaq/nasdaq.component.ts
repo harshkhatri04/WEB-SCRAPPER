@@ -22,9 +22,10 @@ stockprice:string;
 stocknews:string;
 header:string;
 
-investmentProductuser:any=[];
-	ngOnInit() {
-		 this.nasdaq.getnasdaqstocks().subscribe((data) => {
+investmentProductuser:string;
+listchart:{};
+  ngOnInit() {
+     this.nasdaq.getnasdaqstocks().subscribe((data) => {
 		 this.nasdaqcode = data;
 		 console.log(this.nasdaqcode)
 	 }, error => {
@@ -33,6 +34,19 @@ investmentProductuser:any=[];
 	}
 
  search(name:string) {
+/*<<<<<<< HEAD
+   this.value = {
+     term: name
+   }
+   this.searchnews(name);
+   this.chart(name);
+   this.nasdaq.getresult(this.value).subscribe(res => {
+     console.log(res)
+     this.stockprice = res.data;
+   }, error => {
+     console.log("Error" + error)
+   })
+=======*/
 	 this.value = {
 		 term: name
 	 }
@@ -43,6 +57,7 @@ investmentProductuser:any=[];
 	 }, error => {
 		 console.log("Error" + error)
 	 })
+/*>>>>>>> d350c5491ad1714b1bd76bf61582dbe5af252c9c*/
  }
 
  searchnews(name:string){
@@ -62,7 +77,7 @@ this.header='NEWS'
  }
 
   twitnasdaq(){
-    this.tweets='TWEETS';
+    
     let user='nasdaq';
     this.tweetService.tweetSearch(user).subscribe((data)=>{
           this.investmentProductuser=data;
@@ -80,4 +95,18 @@ this.header='NEWS'
 			 console.log("Error" + error)
 		 })
  }
+
+chart(name:string) {
+ 
+  
+   this.nasdaq.getchart(this.value).subscribe(res => {
+     
+     this.listchart = res;
+     console.log(this.listchart)
+   }, error => {
+     console.log("Error" + error)
+   })
+ }
+
+
 }
