@@ -1,28 +1,30 @@
 <!--nav bar-->
 <app-navbar></app-navbar>
-<div class="container-fluid marg">
+<div class="container-fluid" style="margin-top: 55px;">
   <div class="row">
-    <div class="col-sm-3">
-      <!--sidebar-->
+    <!--Conatiner for Sidebar -->
+    <div class="col-md-2">
+      <app-sidebar></app-sidebar>
     </div>
-    <br>
-    <!--line chart for Gandhimathi Appliances Ltd.-->
-    <div class="col-sm-6">
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
       <div class="canvasstyle ">
         <canvas id="canvas" baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"></canvas>
       </div>
-    </div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-sm-3">
-    </div>
-    <br>
-    <!--line chart for Havells India Ltd.-->
-    <div class="col-sm-6">
       <div class="canvasstyle">
         <canvas id="canvas" baseChart width="400" height="400" [datasets]="lineChartData1" [labels]="lineChartLabels1" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"></canvas>
       </div>
     </div>
   </div>
+  <!-- =======
+
+<div class="container-fluid marg">
+ <div>
+            <select #selectedname class="drop">
+              <option [value]="post.Code" *ngFor="let post of nasdaqcode">
+                {{post.Company}}
+              </option>
+            </select>
+          </div>
+>>>>>>> c83d9dd1b4462771a9269219d218550b875f98d3 -->
 </div>

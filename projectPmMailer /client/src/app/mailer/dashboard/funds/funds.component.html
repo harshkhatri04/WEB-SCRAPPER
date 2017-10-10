@@ -1,38 +1,20 @@
-<!--     Fonts and icons     -->
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-<!-- navbar added -->
-<!-- navbar started -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand title" href="#">{{config.dashboard.PERSONALISED_MAILER}}</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <!-- navbar elements -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" (click)="logout()">Logout</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<!-- navbar ends -->
-<!-- sidebar added -->
-<div class="container">
-  <div class="col-md-4">
-    <app-sidebar></app-sidebar>
-  </div>
-  <!-- Search Started -->
-  <div class="row d-flex d-md-block flex-nowrap wrapper">
-    <main class="col-md-9 float-left col px-5 pl-md-2 pt-2 main">
-      <div>
-        <div class="marg">
+<app-navbar></app-navbar>
+<!-- Parent Container having all details -->
+<div class="container-fluid" style="margin-top: 55px;">
+  <div class="row">
+    <!--Conatiner for Sidebar -->
+    <div class="col-md-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <!--Conatiner for Details -->
+    <div class="col-md-6">
+      <div class="d-flex d-md-block flex-nowrap wrapper">
+        <div class="float-left col px-5 pl-md-2 pt-2 main">
           <br>
           <div class="col-md-6">
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a class="nav-link" [routerLink]="'/currency'">Currency</a>
+                <a class="nav-link active" [routerLink]="'/currency'">Currency</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" [routerLink]="'/nasdaq'">Nasdaq</a>
@@ -43,16 +25,19 @@
             </ul>
           </div>
           <br>
-          <div class="card bg-dark text-white mb-3" style="background-color: #333;" *ngFor="let post of fundnews">
+          <div class="card text-white mb-3" style="background-color: #80cbc4;" *ngFor="let post of fundnews">
             <div class="card-body">
-              <h3 class="card-title text-uppercase" style="color: #bbdefb"><b>{{post.Time}}</b></h3>
-              <p class="card-text text-uppercase"><b>{{post.Headline}}</b></p>
-              <p style="color: #ffe0b2">{{post.News}}</p>
+              <h6 class="text-uppercase" style="color: #004d40"><b>{{post.Time}}</b></h6>
+              <p class="h4 text-uppercase"><b>{{post.Headline}}</b></p>
+              <p class="h7" style="color: #333">{{post.News}}</p>
             </div>
           </div>
         </div>
       </div>
-    </main>
+    </div>
+    <!--Conatiner for Tweetes -->
+    <div class="col-md-4">
+      DATA
+    </div>
   </div>
 </div>
-<!-- search ended -->
