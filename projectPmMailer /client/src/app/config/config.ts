@@ -39,14 +39,17 @@ export const config = {
 	"PERSONALISED_MAILER": "Personalised Mailer",
 	"SEARCH": "Search",
 	"NEWS": "News",
-	"TWEETS": "Tweets"
+	"TWEETS": "Tweets",
+	"LOGOUT":"Logout"
   },
 
   "sidebar": {
 	"DASHBOARD": "Dashboard",
 	"SETTINGS": "Settings",
 	"MAILS": "Mails",
-	"CHARTS": "Charts"
+	"NASDAQ":"Nasdaq",
+	"CURRENCY":"Currency",
+	"FUNDS":"Funds"
   },
 
   "signup": {

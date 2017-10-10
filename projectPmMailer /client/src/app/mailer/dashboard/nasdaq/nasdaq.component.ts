@@ -13,7 +13,15 @@ import {TweetService} from '../service/tweet.service';
 export class NasdaqComponent implements OnInit {
 
 
-	constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService,private tweetService:TweetService) { }
+
+/**
+ * [constructor description]
+ * @param {DashboardService} private DashboardService [description]
+ * @param {Router}           private router           [description]
+ * @param {NasdaqService}    private nasdaq           [description]
+ * @param {TweetService}     private tweetService     [description]
+ */
+constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService,private tweetService:TweetService) { }
 list:string;
 nasdaqcode:number;
 config=config;
@@ -26,6 +34,10 @@ stockrate:any=[];
 investmentProductuser:string;
 listchart:string;
 close:any;
+
+/**
+ * [ngOnInit description] getting nasdaq stocks data
+ */
   ngOnInit() {
      this.nasdaq.getnasdaqstocks().subscribe((data) => {
 		 this.nasdaqcode = data;
@@ -35,6 +47,11 @@ close:any;
 	 })
 	}
 
+
+/**
+ * [search description]
+ * @param {string} name [description]
+ */
  search(name:string) {
 
 	 this.value = {
@@ -50,22 +67,25 @@ close:any;
 
  }
 
+/**
+ * [searchnews description]
+ * @param {string} name [description]
+ */
  searchnews(name:string){
 
-	this.twitnasdaq();
+	 this.twitnasdaq();
    this.chart(name);
-this.header='NEWS'
-
+   this.header='NEWS'
 	 this.nasdaq.getnews(name).subscribe(res => {
-		
-		 this.stocknews = res;
-
+	 this.stocknews = res;
 	 }, error => {
 		 console.log("Error" + error)
 	 })
-
  }
 
+ /**
+  * [twitnasdaq description]
+  */
   twitnasdaq(){
     
     let user='nasdaq';
@@ -75,7 +95,9 @@ this.header='NEWS'
         })
   }
 
-
+  /**
+   * [logout description]
+   */
  logout() {
 	 this.DashboardService.signout()
 		 .subscribe((res) => {
@@ -86,31 +108,22 @@ this.header='NEWS'
 		 })
  }
 
+/**
+ * [chart description]
+ * @param {string} name [description]
+ */
 chart(name:string) {
- 
   
    this.nasdaq.getchart(name).subscribe(res => {
-      this.listchart = res.results;
-     for(let i=0;i<this.listchart.length;i++){
-       
-        this.date=new Date(res.results[i].tradingDay);
-        // console.log(this.date.getFullYear());
-        if(this.date.getFullYear()==2016){
-       this.stockrate.push(res.results[i].close)
-
-       
-       
-
-        }
-       
-       
-
+   this.listchart = res.results;
+   for(let i=0;i<this.listchart.length;i++){    
+   this.date=new Date(res.results[i].tradingDay);
+   // console.log(this.date.getFullYear());
+     if(this.date.getFullYear()==2016){
+      this.stockrate.push(res.results[i].close)
+           }
      }
-     console.log(this.stockrate);
-     
-    
-     
-    
+     console.log(this.stockrate);    
    }, error => {
      console.log("Error" + error)
    })
@@ -119,18 +132,33 @@ chart(name:string) {
 // lineChart
  public lineChartData= this.stockrate;
  
-
+ /**
+  * [lineChartLabels description]
+  * @type {Array<any>}
+  */
  public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'];
  public lineChartType:string = 'line';
 
+
+ /**
+  * [randomizeType description]
+  */
  public randomizeType():void {
    this.lineChartType = this.lineChartType === 'line' ? 'bar' : 'line';
  }
 
+/**
+ * [chartClicked description]
+ * @param {any} e [description]
+ */
  public chartClicked(e:any):void {
    console.log(e);
  }
 
+/**
+ * [chartHovered description]
+ * @param {any} e [description]
+ */
  public chartHovered(e:any):void {
    console.log(e);
  }
