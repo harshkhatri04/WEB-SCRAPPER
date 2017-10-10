@@ -10,9 +10,8 @@
 }
 
 .text {
-	color: black;
-	font-weight:bold;
-	background-color: #e0e0e0;
+	color: white;
+ background-color:gray;
 }
 
 .list li {
@@ -25,7 +24,7 @@
 }
 
 .img {
-  width: 400px;
+  width: 100%;
 }
 
 .profile {
@@ -54,8 +53,17 @@
   display: inline-block;
 }
 
-.profile-inline~.card-title {
-  display: inline-block;
-  margin-left: 4px;
-  vertical-align: top;
+
+.profile-inline ~ .card-title {
+   display: inline-block;
+   margin-left: 4px;
+   vertical-align: top;
+}
+.card-data{
+  background-color:white;
+  margin-left: 3%;
+
+}
+.fa {
+  margin-right: 1%;
 }

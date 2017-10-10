@@ -13,7 +13,9 @@ import { DashboardComponent } from './dashboard.component';
 import { SidebarComponent} from './sidebar/sidebar.component';
 import { NasdaqService } from './service/nasdaq.service';
 import { DashboardService} from './dashboard.service';
-
+import {NavbarComponent} from './navbar/navbar.component';
+import {CurrencyService} from './service/currency.service';
+import {TweetService} from './service/tweet.service';
 
 @Directive({
   selector: '[routerLink]',
@@ -45,8 +47,8 @@ describe('DashboardComponent', () => {
  beforeEach(async(() => {
    TestBed.configureTestingModule({
      imports: [FormsModule,HttpModule],
-     declarations: [DashboardComponent, SidebarComponent, RouterLinkStubDirective ],
-     providers: [NasdaqService,{provide: DashboardService},{provide: Router}],
+     declarations: [DashboardComponent, SidebarComponent,NavbarComponent, RouterLinkStubDirective ],
+     providers: [NasdaqService,CurrencyService,TweetService,{provide: DashboardService},{provide: Router}],
 
 
      

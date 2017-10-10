@@ -96,7 +96,6 @@ confirm() {
       this.registeredData=JSON.parse(localStorage.getItem('currentUser'));
        this.email=this.registeredData.email;
 				this.preference.insert(preferences,this.email).subscribe((data)=>{
-					console.log(JSON.stringify(data));
 				})
 		}
 }

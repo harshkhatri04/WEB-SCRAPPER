@@ -7,18 +7,29 @@ const validate = require('mongoose-validator');
 
 let UserSchema = new Schema({
     name: { type: String },
+    id: { type: String },
     email: { type: String },
     mobile: { type: Number },
     password: { type: String },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    preferences: {
+    preferences: [{
         items: [{ id: Number, itemName: String }],
         frequency: String
-    },
-    alternateEmail:{type:String,default:null},
-    flag:Number,
-   
+    }],
+    alternateEmail: { type: String, default: null },
+    flag: { type: Number, default: 0 },
+});
+
+UserSchema.pre("save", function(next) {
+    let obj = {
+        items: [{ "id": 1, "itemName": "Funds" }],
+        frequency: 'Daily'
+    }
+    if (this.preferences.length == 0)
+        this.preferences.push(obj);
+
+    next();
 });
 //pre method to encrypt password
 UserSchema.pre('save', function(next) {

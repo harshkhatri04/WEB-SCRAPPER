@@ -38,14 +38,19 @@ export const config = {
 	"DASHBOARD": "Dashboard",
 	"PERSONALISED_MAILER": "Personalised Mailer",
 	"SEARCH": "Search",
-	"NEWS": "News"
+	"NEWS": "News",
+	"TWEETS": "Tweets",
+	"LOGOUT":"Logout",
+	"READ_MORE":"Read More"
   },
 
   "sidebar": {
 	"DASHBOARD": "Dashboard",
 	"SETTINGS": "Settings",
 	"MAILS": "Mails",
-	"CHARTS": "Charts"
+	"NASDAQ":"Nasdaq",
+	"CURRENCY":"Currency",
+	"FUNDS":"Funds"
   },
 
   "signup": {

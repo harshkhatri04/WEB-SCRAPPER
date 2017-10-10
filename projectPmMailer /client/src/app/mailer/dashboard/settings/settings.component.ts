@@ -10,20 +10,15 @@ import { SettingsService } from './settings.service';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
+
+/**
+ * SettingsComponent class
+ */
 export class SettingsComponent implements OnInit {
   userInfo: FormGroup;
   config = config;
- // data: any = {};
-  //fb:FormBuilder;
   currentUser: any;
   email: string;
-  /* name: string;
- 
-  mobile: string;
-  password: string;
-  alternateEmail: string;
-  userName:any={};
-  userMobile:any={};*/
   constructor(
     @Inject(FormBuilder) private fb: FormBuilder,
     private settingsService: SettingsService) {
@@ -38,8 +33,8 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {
+
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.email = this.currentUser.email;
     // get user details from local storage
@@ -53,15 +48,7 @@ export class SettingsComponent implements OnInit {
         }
            this.displayData(data);
       })
-    /*let data={
-   email:'harsh@gmail',
-   name:'harsh',
-   mobile:12345567899,
-   alternateEmail:'h.khahaha@GMAIL.COM'
-    };*/
-
- 
-  }
+    }
 
   //
   displayData(data: any) {
@@ -83,62 +70,7 @@ export class SettingsComponent implements OnInit {
         .subscribe((res)=>{
           console.log(res)
         })
-    /*alert(JSON.stringify(user));*/
 
   }
-  /* this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-   //this.name = this.currentUser.name;
-   this.email = this.currentUser.email;
-   this.mobile = this.currentUser.mobile;
-   this.password = this.currentUser.password;
-   this.alternateEmail = this.currentUser.alternateEmail;*/
-  /*this.settingsService.getDataFromDB(this.email)
-    .subscribe((res)=>{
-      console.log(res.name)
-      this.name=res.name;
-      console.log(this.name)
 
-    })
-   this.createForm();
-
-  }
-/*updateName(name,email){
-  this.userName={
-    "name":name
-  }
-  this.settingsService.updateName(this.userName,email)
-  .subscribe((res)=>{
-     if(res){
-
-      
-     }
-  })
-}
-
-addAlternateEmail(email){
-  console.log(email)
-}
-*/
-  /*updateMobile(mobile,email){
-    this.userMobile={
-      "mobile":mobile
-    }
-    this.settingsService.updateMobile(this.userMobile,email)
-    .subscribe((res)=>{
-      if(res){
-        console.log(res)
-      }
-    })
-  }
-
-  createForm() {
-      this.form = this.formBuilder.group({
-        name: [this.name,Validators.required], // <--- the FormControl called "name"
-        email:this.email,
-        mobil
-e:[this.mobile,Validators.required],
-        password:this.password,
-        alternateEmail:this.alternateEmail
-      });
-    }*/
 }

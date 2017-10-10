@@ -20,6 +20,7 @@ app.use(function(req, res, next) {
 });
 //route to update name by the given email
 //route starts here
+
 router.put('/updateUser/:email',(req,res)=>{
   User.update({email:req.params.email},{ 
  		$set:{
@@ -38,48 +39,64 @@ router.put('/updateUser/:email',(req,res)=>{
  });
 //route ends here
 
-
-
 //route to delete user account
 //route starts here
-router.delete('/deleteUser/:email',(req,res)=>{
-	User.findOneAndRemove({
-		email:req.params.email
-	},
-	(err,data)=>{
-		if(err) {
-			res.send(err)
-		}
-			else{
-				res.send('deleted successfully');
-			}
-	}
-	);
+router.delete('/deleteUser/:email', (req, res) => {
+		User.findOneAndRemove({
+						email: req.params.email
+				},
+				(err, data) => {
+						if (err) {
+								res.send(err)
+						} else {
+								res.send('deleted successfully');
+						}
+				}
+		);
 });
 
 // route to update password
 // route starts here
-router.post('/updatePassword/:email',(req,res)=>{
-	User.findOne({email:req.params.email},function(err,user){
-		if(err){
-			res.status(400).send({status:false,message:'error updating password'})
-		}else{
-			user.comparePassword(req.body.password,function(err,isMatch){
-				if(isMatch && !err){
-					user.password = req.body.newPassword;
-          user.save((err)=>{
-          	if(err){
-          		res.status(400).send({success:false,message:'could not update password'})
-          	}else{
-          		res.status(200).send({success:true,message:'password updated successfully'})
-          	}
-          })
-				}else{
-          res.status(400).send({success:false,message:'password mismatch'})
+router.post('/updatePassword/:email', (req, res) => {
+						User.findOne({ email: req.params.email }, function(err, user) {
+												if (err) {
+														res.status(400).send({ status: false, message: 'error updating password' })
+												} else {
+														user.comparePassword(req.body.password, function(err, isMatch) {
+																				if (isMatch && !err) {
+																						user.password = req.body.newPassword;
+																						user.save((err) => {
+																												if (err) {
+																														res.status(400).send({ success: false, message: 'could not update password' })
+																												} else { res.status(200).send({ success: true, message: 'password updated successfully' })
+																								}
+																						})
+																				} else {
+																						res.status(400).send({ success: false, message: 'password mismatch' })
+								}
+						})
 				}
-			})
-		}
-	})
+		})
 })
+
+		router.put('/flag/:email', (req, res) => {
+				req.body.flag=1;
+				User.update({ email: req.params.email }, {
+
+						$set: {
+								flag: req.body.flag
+						}
+				}, (err, Data) => {
+						/*console.log(JSON.stringify(Data))*/
+						if (err) {
+								console.log('error occured');
+						} else {
+
+								res.send(Data);
+								//console.log(JSON.stringify(Data));
+						}
+
+				});
+		});
 // route ends here
 module.exports = router;

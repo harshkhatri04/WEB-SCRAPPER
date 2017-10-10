@@ -1,14 +1,8 @@
-<!-- <form>
-  <input type="text" name="inputName" value={{name}} [(ngModel)]="name">
-  <button class="btn btn-primary button" (click)="updateName(name)">{{config.settings.SAVE}}</button>
-</form> -->
-
 <form [formGroup]="userInfo" novalidate>
   <div class="form-group">
     <label class="center-block">Name:
   <input class="form-control" formControlName="name">
 </label> 
-<!-- <button (click)="updateName(form.get('name').value,form.get('email').value)">{{config.settings.SAVE}}</button> -->
   </div>
   <div class="form-group">
     <label class="center-block">Email:
@@ -19,7 +13,6 @@
     <label class="center-block"> Add Alternate Email:
   <input class="form-control" formControlName="alternateEmail">
 </label> 
-<!-- <button (click)="addAlternateEmail(form.get('alternateEmail').value)">{{config.settings.SAVE}}</button> -->
   </div>
   <div class="form-group">
     <label class="center-block">Mobile:

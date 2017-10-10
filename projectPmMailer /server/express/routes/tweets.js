@@ -6,7 +6,7 @@ var config = require('../config/tweetconfig');
 // instantiate Twit module
 var twitter = new Twit(config.twitter);
 
-var TWEET_COUNT = 15;
+var TWEET_COUNT = 25;
 var MAX_WIDTH = 305;
 var OEMBED_URL = 'statuses/oembed';
 var USER_TIMELINE_URL = 'statuses/user_timeline';
