@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
  investmentProductuser:string;
  //load dropdown for nasdaq stocks  
  ngOnInit() {
-   this.twitwsj();
+   this.twitinsight();
     this.currency.getcurrency().subscribe((data) => {
 
      this.list = data;
@@ -45,9 +45,9 @@ export class DashboardComponent implements OnInit {
  //This function load the news basis of the the stock which was selected in dropdown  
  
 
- twitwsj(){
+ twitinsight(){
     
-    let user='WSJmarkets';
+    let user='Schuldensuehner';
     this.tweetService.tweetSearch(user).subscribe((data)=>{
           this.investmentProductuser=data;
           console.log(this.investmentProductuser);

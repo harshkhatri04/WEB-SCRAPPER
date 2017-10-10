@@ -10,23 +10,30 @@ import { config } from '../../../config/config'
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+
+/**
+ *  navbarcomponent class
+ */
 export class NavbarComponent implements OnInit {
 
-
+  /**
+   * [constructor description]
+   * @param {DashboardService} private DashboardService [description]
+   * @param {Router}           private router           [description]
+   */
   constructor(private DashboardService: DashboardService, private router: Router) {}
 
 
-  config=config;
+  config = config;
 
-  ngOnInit() {
-  }
-  
+  ngOnInit() {}
+
   // method for logout
   logout() {
     this.DashboardService.signout()
       .subscribe((res) => {
-       //localStorage.removeItem('currentUser');
-       localStorage.clear()
+        //localStorage.removeItem('currentUser');
+        localStorage.clear()
         this.router.navigateByUrl('logout')
       }, error => {
         console.log("Error" + error)

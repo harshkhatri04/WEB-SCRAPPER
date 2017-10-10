@@ -24,6 +24,11 @@ describe('NasdaqService (mockBackend)', () => {
     { Code: "asasas", Company: 'Windstorm' }
 
   ];
+
+  /**
+   * [beforeEach description]
+   * @param {MockBackend }      ]    });  }} () => {    TestBed.configureTestingModule({      imports [description]
+   */
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
@@ -34,23 +39,42 @@ describe('NasdaqService (mockBackend)', () => {
     });
   });
 
+  /**
+   * [it description]
+   * @param {[type]}            'can instantiate service when inject service' [description]
+   * @param {NasdaqService) =>   {                                                     expect(service instanceof NasdaqService).toBe(true);    })} inject([NasdaqService], (service [description]
+   */
   it('can instantiate service when inject service',
     inject([NasdaqService], (service: NasdaqService) => {
       expect(service instanceof NasdaqService).toBe(true);
     }));
 
-
+  /**
+   * [it description] mocking the backend
+   * @param {[type]}          'can provide the mockBackend as XHRBackend' [description]
+   * @param {MockBackend) =>   {                                                   expect(backend).not.toBeNull('backend should be provided');    })} inject([XHRBackend], (backend [description]
+   */
   it('can provide the mockBackend as XHRBackend',
     inject([XHRBackend], (backend: MockBackend) => {
       expect(backend).not.toBeNull('backend should be provided');
     }));
 
+  /**
+   * [it description] instantiating the service with new
+   * @param {[type]}   'can instantiate service with "new"' [description]
+   * @param {Http) =>   {                              expect(http).not.toBeNull('http should be provided');    let service = new NasdaqService(http);    expect(service instanceof NasdaqService).toBe(true, 'new service should be ok');  })} inject([Http], (http [description]
+   */
   it('can instantiate service with "new"', inject([Http], (http: Http) => {
     expect(http).not.toBeNull('http should be provided');
     let service = new NasdaqService(http);
     expect(service instanceof NasdaqService).toBe(true, 'new service should be ok');
   }));
 
+  /**
+   * [it description] getting details method
+   * @param {[type]}                          'get details methods' [description]
+   * @param {JSON.stringify(mockResponse)                                        })));      });      NasdaqService.getresult().subscribe((nasdaqObj) => {        expect(nasdaqObj.term).toEqual('AADA');      });    })} inject([NasdaqService, XHRBackend], (NasdaqService, mockBackend) => {      const mockResponse = { term [description]
+   */
   it('get details methods',
     inject([NasdaqService, XHRBackend], (NasdaqService, mockBackend) => {
       const mockResponse = { term: "AADA" };
@@ -67,12 +91,15 @@ describe('NasdaqService (mockBackend)', () => {
 
     }));
 
+  /**
+   * [description]
+   * @param  {[type]}   'when getNasdaq'    [description]
+   * @param  {Function} ()    [description]
+   * @return {[type]}         [description]
+   */
   describe('when getNasdaq', () => {
     it('test getRequest function',
       inject([NasdaqService, XHRBackend], (nasdaqService, mockBackend) => {
-
-
-
         mockBackend.connections.subscribe((connection) => {
           connection.mockRespond(new Response(new ResponseOptions({
             body: JSON.stringify(makeHeroData)

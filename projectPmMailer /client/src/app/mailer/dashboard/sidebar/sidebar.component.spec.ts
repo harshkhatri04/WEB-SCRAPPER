@@ -74,20 +74,8 @@ it('should create Sidebar Component', () => {
 		expect(elSetting.textContent).toContain(component.config.sidebar.SETTINGS);
 	});
 
-//test case for checking interpolation of MAILS
-/*	it('should display original  value through interpolation of MAILS', () => {
-		fixture.detectChanges();
-		expect(elMails.textContent).toContain(component.config.sidebar.MAILS);
-	});*/
-
-//test case for checking interpolation of CHARTS
-	/*it('should display original  value through interpolation of CHARTS', () => {
-		fixture.detectChanges();
-		expect(elChart.textContent).toContain(component.config.sidebar.CHARTS);
-	});*/
-
 	it('it can get router links from template',()=>{
-  expect(links.length).toBe(3,'should have 3 links');
+  expect(links.length).toBe(5,'should have 3 links');
 	})
 
 });

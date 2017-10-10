@@ -8,18 +8,6 @@
     <div class="col-md-8">
       <div class="d-flex d-md-block flex-nowrap wrapper">
         <div class="float-left col px-5 pl-md-2 pt-2 main">
-          <br>
-          <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a class="nav-link " [routerLink]="'/currency'">Currency</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" [routerLink]="'/nasdaq'">Nasdaq</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="'/funds'">Funds</a>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
@@ -51,13 +39,20 @@
     <div class="col-md-2">
     </div>
     <div class="col-md-8">
-      <div class="jumbotron jumbotron-fluid marg container text" *ngFor="let data of stockprice">
-        <p>{{data.closeAt}}</p>
-        <h4>${{data.Price}}</h4>
-        <h6>{{data.upDown}}</h6>
-        <p>AFTER HOURS</p>
-        <h4>${{data.hPrice}}</h4>
-        <p>{{data.hupdown}}</p>
+      <div class="jumbotron jumbotron-fluid marg container text">
+        <div class="col-md-3"  *ngFor="let data of stockprice">
+          <p>{{data.closeAt}}</p>
+          <h4>${{data.Price}}</h4>
+          <h6>{{data.upDown}}</h6>
+          <p>AFTER HOURS</p>
+          <h4>${{data.hPrice}}</h4>
+          <p>{{data.hupdown}}</p>
+        </div>
+        <div class="col-md-4">
+          <div>
+            <canvas baseChart [data]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -70,7 +65,7 @@
       <b><p class="h4">{{header}}</p></b>
       <hr>
       <div *ngFor="let data of stocknews">
-        <div class="card text-white mb-3" style="background-color: #80cbc4 ;" *ngIf=data.news>
+        <div class="card text-white mb-3" style="background-color: #80cbc4;" *ngIf=data.news>
           <div class="card-body">
             <p class="h7" style="color: #333">{{data.news}}</p>
           </div>
@@ -81,7 +76,7 @@
       <b><p class="h4" style="text-align:center">{{tweets}}</p></b>
       <div class="card text-white mb-3" style="background-color:white;" *ngFor="let data of investmentProductuser">
         <div class="card-body">
-          <i class="fa fa-twitter" aria-hidden="true" style="color: #33b5e5 "></i>
+          <i class="fa fa-twitter" aria-hidden="true" style="color: #33b5e5"></i>
           <p style="color: #333">{{data.text}}</p>
           <div *ngIf="data.entities.media">
             <img class="img" src="{{data.entities.media[0].media_url}}">
