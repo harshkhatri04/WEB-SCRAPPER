@@ -49,6 +49,8 @@ const route:Routes=([  {
    CommonModule,
    RouterModule,
    Ng2Charts,
+   FormsModule,
+   ReactiveFormsModule,
     RouterModule.forRoot(route)
  ],
  declarations: [
@@ -59,7 +61,7 @@ const route:Routes=([  {
    TweetComponent,
    NasdaqComponent,
    CurrencyComponent,
-   FundsComponent
+   FundsComponent,
  ],
  exports: [
   SettingsComponent,
