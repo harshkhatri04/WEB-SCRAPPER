@@ -40,16 +40,20 @@
     </div>
     <div class="col-md-8">
       <div class="jumbotron jumbotron-fluid marg container text">
+       <div class="row">
         <div class="col-md-3"  *ngFor="let data of stockprice">
+         
           <p>{{data.closeAt}}</p>
           <h4>${{data.Price}}</h4>
           <h6>{{data.upDown}}</h6>
           <p>AFTER HOURS</p>
           <h4>${{data.hPrice}}</h4>
           <p>{{data.hupdown}}</p>
+          
         </div>
+
         <div class="col-md-4">
-          <div>
+          <div class="size">
             <canvas baseChart [data]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
           </div>
         </div>
