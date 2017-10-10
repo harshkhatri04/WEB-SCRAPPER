@@ -9,26 +9,6 @@ const config = require('../config/database');
 const configure = require('../config/configure');
 const logger = require('../services/app.logger');
 
-<<<<<<< HEAD
-//route to update name by the given email
-//route starts here
-router.put('/updateName/:email', (req, res) => {
-		User.update({ _email: req.params.email }, {
-				$set: {
-						name: req.body.name // updating the name in database by name provided by user
-				}
-		}, (err, result) => {
-				if (err) {
-						res.send(err)
-				} else {
-						res.send(result)
-				}
-		});
-});
-//route ends here
-=======
->>>>>>> 6842e43a4a4deb7bda9e519ca826d85f085738de
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(function(req, res, next) {

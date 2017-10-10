@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthoriseGuard implements CanActivate{
 
+	public authorised: boolean; 
+	public token: any;
+
 	constructor(
 		private route: Router
 				){}
@@ -15,13 +18,19 @@ export class AuthoriseGuard implements CanActivate{
 
 	private isAuthorised(): boolean {
 
-		let isAuthorised: boolean= Math.random() < 0.5;
 		
-		if(!isAuthorised){
-		alert("AuthoriseGuard: The User is not authorised and can not navigate to Dashboard page")
-		this.route.navigate(['']);
+		let token = localStorage.getItem('currentUser');
+		if(token)
+		{
+		this.authorised=true;
+		}
+		else
+		{
+			this.authorised=false;
+			this.route.navigate(['/']);
+
 		
 		}
-		return isAuthorised;
+		return this.authorised;
 	}
 }

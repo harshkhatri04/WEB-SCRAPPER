@@ -28,8 +28,8 @@ import { PreferenceComponent } from './mailer/preference/preference.component';
 import {PreferenceService} from './mailer/preference/preference.service';
 import {TweetService} from './mailer/dashboard/service/tweet.service';
 
-/*import { AuthoriseGuard} from './guards/authorise.guard';
-*/
+import { AuthoriseGuard} from './guards/authorise.guard';
+
 
 const route: Routes = ([{
     path: 'login',
@@ -51,7 +51,7 @@ const route: Routes = ([{
   {
     path: 'dashboard',
     component: DashboardComponent,
-    /*canActivate: [AuthoriseGuard]*/
+    canActivate: [AuthoriseGuard]
   },
   {
     path: '',
@@ -96,7 +96,7 @@ const route: Routes = ([{
     RouterModule.forRoot(route)
   ],
 
- providers: [LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService, DialogService, PreferenceService,SettingsService,CurrencyService,FundService,TweetService],
+ providers: [AuthoriseGuard,LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService, DialogService, PreferenceService,SettingsService,CurrencyService,FundService,TweetService],
 
 
   bootstrap: [AppComponent]
