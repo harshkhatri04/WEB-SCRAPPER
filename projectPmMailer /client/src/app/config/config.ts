@@ -40,7 +40,8 @@ export const config = {
 	"SEARCH": "Search",
 	"NEWS": "News",
 	"TWEETS": "Tweets",
-	"LOGOUT":"Logout"
+	"LOGOUT":"Logout",
+	"READ_MORE":"Read More"
   },
 
   "sidebar": {
