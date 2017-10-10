@@ -1,95 +1,88 @@
+
+<!-- navbar added -->
+<!-- navbar started -->
 <app-navbar></app-navbar>
+<!-- navbar ends-->
 <div class="container-fluid" style="margin-top: 55px;">
   <div class="row">
     <!--Conatiner for Sidebar -->
     <div class="col-md-2">
       <app-sidebar></app-sidebar>
     </div>
-    <div class="col-md-8">
+    <!--Conatiner for Details -->
+    <div class="col-md-6">
       <div class="d-flex d-md-block flex-nowrap wrapper">
         <div class="float-left col px-5 pl-md-2 pt-2 main">
           <br>
-          <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a class="nav-link " [routerLink]="'/currency'">Currency</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" [routerLink]="'/nasdaq'">Nasdaq</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="'/funds'">Funds</a>
-            </li>
-          </ul>
+          <div class="col-md-12">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" [routerLink]="'/currency'"><b>Currency</b></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="'/nasdaq'"><b>Nasdaq</b></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="'/funds'"><b>Funds</b></a>
+              </li>
+            </ul>
+          </div>
+          <br>
+          <div>
+            <select #selectedname class="drop">
+              <option [value]="post.Code" *ngFor="let post of nasdaqcode">
+                {{post.Company}}
+              </option>
+            </select>
+          </div>
+          <br> &nbsp;
+          <button id="search" (click)="search(selectedname.value)" class="btn btn-outline-primary" type="button"> {{config.dashboard.SEARCH}}</button>
+          <div class="jumbotron marg container text" *ngFor="let data of stockprice">
+            <div class="row">
+              <div class="col-md-8">
+                <p>{{data.closeAt}}</p>
+                <h1>{{data.Price}}</h1>
+                <h4>{{data.upDown}}</h4>
+                <p>{{data.hours}}</p>
+              </div>
+            </div>
+            <ul class="list">
+              <li>
+                <h4>{{data.hPrice}}</h4>
+              </li>
+              <li>
+                <p>{{data.hupdown}}</p>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="container-fluid">
-  <br>
-  <div class="row">
-    <div class="col-md-2">
-    </div>
-    <div class="col-md-2">
-      <div class="d-flex d-md-block flex-nowrap wrapper">
-        <div class="float-left col px-5 pl-md-2 pt-2 main">
-          <select #selectedname class="drop">
-            <option [value]="post.Code" *ngFor="let post of nasdaqcode">
-              {{post.Company}}
-            </option>
-          </select>
-          <div class="col-md-2">
-            <button id="search" (click)="search(selectedname.value)" class="btn btn-outline-primary" type="button"> {{config.dashboard.SEARCH}}</button>
+        <b><p class="h4">{{header}}</p></b>
+        <hr>
+        <div *ngFor="let data of stocknews">
+          <div class="card text-white mb-3" style="background-color: #80cbc4;" *ngIf=data.news>
+            <div class="card-body">
+              <p class="h7" style="color: #333">{{data.news}}</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2">
-    </div>
-    <div class="col-md-8">
-      <div class="jumbotron jumbotron-fluid marg container text" *ngFor="let data of stockprice">
-        <p>{{data.closeAt}}</p>
-        <h4>${{data.Price}}</h4>
-        <h6>{{data.upDown}}</h6>
-        <p>AFTER HOURS</p>
-        <h4>${{data.hPrice}}</h4>
-        <p>{{data.hupdown}}</p>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-md-1">
-    </div>
-    <div class="col-md-7">
-      <b><p class="h4">{{header}}</p></b>
-      <hr>
-      <div *ngFor="let data of stocknews">
-        <div class="card text-white mb-3" style="background-color: #80cbc4 ;" *ngIf=data.news>
-          <div class="card-body">
-            <p class="h7" style="color: #333">{{data.news}}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
+    <!--Conatiner for Tweetes -->
+    <div class="col-md-4" style="margin-top: 13%">
       <b><p class="h4" style="text-align:center">{{tweets}}</p></b>
-      <div class="card text-white mb-3" style="background-color:white;" *ngFor="let data of investmentProductuser">
+      
+<div class="card text-white mb-3" style="background-color:white;" *ngFor="let data of investmentProductuser">
         <div class="card-body">
-          <i class="fa fa-twitter" aria-hidden="true" style="color: #33b5e5 "></i>
+        <i class="fa fa-twitter" aria-hidden="true" style="color: #33b5e5"></i>
           <p style="color: #333">{{data.text}}</p>
           <div *ngIf="data.entities.media">
             <img class="img" src="{{data.entities.media[0].media_url}}">
           </div>
+
         </div>
         <div class="card-data">
           <h6 style="color:black;"><i class="fa fa-clock-o"></i>{{data.created_at}} </h6>
-        </div>
+          </div>
       </div>
     </div>
   </div>
