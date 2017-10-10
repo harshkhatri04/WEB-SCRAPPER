@@ -222,7 +222,7 @@ function currencynews() {
 /*This the cron job function to get all emailId and there preference set*/
 var dailyMailJob = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 20 18 * * *',
+    cronTime: '00 50 18 * * *',
 
     onTick: function(req, res) {
         // let p1, p2, p3;
@@ -231,8 +231,8 @@ var dailyMailJob = new CronJob({
                 res.status(403).send({ success: false, message: 'You are unauthorized' })
             } else {
                 for (let i = 0; i < data.length; i++) {
-                    if (data[i].preferences[0].frequency == 'Weekly') {
-                        if (data[i].preferences[0].items[1].itemName == 'Nasdaq Stocks') {
+                    if (data[i].preferences[0].frequency == 'Daily') {
+                        if (data[i].preferences[0].items[0].itemName == 'Nasdaq Stocks') {
                             //p1 = new Promise((resolve, reject) => {
                             let news = stockmodel.find({}).select('news');
                             news.exec(function(err, stockData) {
@@ -265,7 +265,7 @@ var dailyMailJob = new CronJob({
                             })
                             //})
 
-                        } else if (data[i].preferences[0].items[2].itemName == 'Currency') {
+                        } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
                             //p3 = new Promise((resolve, reject) => {
                             let news = currencymodel.find({}).select('News');
                             news.exec(function(err, currencyData) {
@@ -275,7 +275,7 @@ var dailyMailJob = new CronJob({
                                     let currency = currencyData.map(ele => ele.News)
                                     //  newsData.push("currency")
                                     //resolve(currency);
-                                    // console.log('in else of currency')
+                                    //console.log(currencyData)
                                     sendMails(data[i].email, currency)
                                 }
                             })
