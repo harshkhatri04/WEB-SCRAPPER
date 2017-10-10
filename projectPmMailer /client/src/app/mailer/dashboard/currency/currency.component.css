@@ -1,35 +1,47 @@
 /**
+
  * margin top
+
  */
 
 .container-fluid {
+
   margin-top: 55px;
 }
 
 
 /**
+
  * card background color
+
  */
 
 .cardStyle {
+
   background-color: #80cbc4;
 }
 
 
 /**
+
  * heading color
+
  */
 
 .card-body h6 {
+
   color: #004d40;
 }
 
 
 /**
+
  * heading color
+
  */
 
 .h7 {
+
   color: #333;
 }
 
@@ -37,69 +49,89 @@
 /* for dashboard content */
 
 .color {
+
   background-color: red;
 }
 
 
 /*
+
 margins
+
  */
 
 .marg {
+
   margin-left: 7%;
 }
 
 
 /**
+
  * width
+
  */
 
 .drop {
+
   width: 200px !important;
 }
 
 
-
 /**
+
  * text styling
+
  */
 
 .text {
+
   color: white;
+
   font-weight: bold;
+
   background-color: black;
 }
 
 
 /**
+
  * lists
+
  */
 
 .list li {
+
   float: left;
+
   margin-left: 10px;
 }
 
 
 /**
+
  * no bullets
+
  */
 
 .list {
+
   list-style: none;
 }
 
-
 .img {
+
   width: 100%;
 }
 
-.card-data{
-  background-color:white;
-  margin-left: 3%;
+.card-data {
 
+  background-color: white;
+
+  margin-left: 3%;
 }
+
 .fa {
+
   margin-right: 1%;
 }
-

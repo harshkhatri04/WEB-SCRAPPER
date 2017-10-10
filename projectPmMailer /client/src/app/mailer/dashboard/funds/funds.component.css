@@ -7,6 +7,7 @@
 
 
 
+
 /**
  * card background color
  */
@@ -14,6 +15,7 @@
 .cardStyle {
   background-color: #80cbc4;
 }
+
 
 
 
@@ -27,6 +29,7 @@
 
 
 
+
 /**
  * heading color
  */
@@ -34,6 +37,7 @@
 .h7 {
   color: #333;
 }
+
 
 
 
@@ -46,13 +50,12 @@
 
 
 
+
 /*width*/
 
 .drop {
   width: 200px !important;
 }
-
-
 
 /*text styling*/
 
@@ -63,24 +66,12 @@
 }
 
 
-
-
-
-
-
-
 /*list items*/
 
 .list li {
   float: left;
   margin-left: 10px;
 }
-
-
-
-
-
-
 
 
 /*list*/
@@ -90,14 +81,29 @@
 }
 
 
+/**
+ * image width
+ */
+
 .img {
   width: 100%;
 }
+
+
+/**
+ * card background color
+ */
 
 .card-data {
   background-color: white;
   margin-left: 3%;
 }
+
+
+
+/**
+ * left margin
+ */
 
 .fa {
   margin-right: 1%;
