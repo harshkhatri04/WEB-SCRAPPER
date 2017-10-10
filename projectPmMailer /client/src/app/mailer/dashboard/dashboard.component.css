@@ -6,6 +6,7 @@
   margin-top: 55px;
 }
 
+
 /**
  * card background color
  */
@@ -13,6 +14,7 @@
 .cardStyle {
   background-color: #80cbc4;
 }
+
 
 /**
  * heading color
@@ -22,6 +24,7 @@
   color: #004d40;
 }
 
+
 /**
  * heading color
  */
@@ -30,11 +33,13 @@
   color: #333;
 }
 
+
 /* for dashboard content */
 
 .color {
   background-color: red;
 }
+
 
 /*
 margins
@@ -44,6 +49,7 @@ margins
   margin-left: 7%;
 }
 
+
 /**
  * width
  */
@@ -51,6 +57,7 @@ margins
 .drop {
   width: 200px !important;
 }
+
 
 
 /**
@@ -63,6 +70,7 @@ margins
   background-color: black;
 }
 
+
 /**
  * lists
  */
@@ -71,6 +79,7 @@ margins
   float: left;
   margin-left: 10px;
 }
+
 
 /**
  * no bullets
