@@ -37,9 +37,11 @@ export class LoginService {
 	}
 	//Method for facebook-auth end
 
+ //method for set first time preference
 	firstPreference(flag:number,email){
 		console.log("==flag===",flag)
   	return this.http.put('http://localhost:3000/update/flag/'+email,flag)
   .map(res=>res.json());
   }
+  //method for set first time preference end
 }
