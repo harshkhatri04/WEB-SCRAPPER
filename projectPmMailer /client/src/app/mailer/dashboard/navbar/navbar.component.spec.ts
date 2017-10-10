@@ -45,7 +45,7 @@ describe('testing navbar component', () => {
   });
 
 	//test case for checking interpolation of LOGOUT
-	it('should display original category value through interpolation of SETTINGS', () => {
+	it('should display original category value through interpolation of LOGOUT', () => {
 		fixture.detectChanges();
 		expect(elLogout.textContent).toContain(comp.config.dashboard.LOGOUT);
 	});
