@@ -46,7 +46,9 @@ export const config = {
 	"DASHBOARD": "Dashboard",
 	"SETTINGS": "Settings",
 	"MAILS": "Mails",
-	"CHARTS": "Charts"
+	"NASDAQ":"Nasdaq",
+	"CURRENCY":"Currency",
+	"FUNDS":"Funds"
   },
 
   "signup": {

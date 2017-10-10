@@ -27,7 +27,7 @@ const route:Routes=([  {
  },
   {
    path:'currency',
-   component:DashboardComponent
+   component:CurrencyComponent
  },
   {
    path:'funds',
