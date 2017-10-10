@@ -25,8 +25,8 @@ describe('PreferenceComponent', () => {
        AngularMultiSelectModule,
        HttpModule
       ],
-      declarations: [ PreferenceComponent ],
-      providers: [PreferenceService,{provide: DialogService}]
+      declarations: [ PreferenceComponent],
+      providers: [PreferenceService,DialogService]
     })
     .compileComponents();
   }));
