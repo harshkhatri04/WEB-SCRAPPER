@@ -43,17 +43,14 @@ describe('SidebarComponent', () => {
 		fixture = TestBed.createComponent(SidebarComponent);
 		component = fixture.componentInstance;
 
-		deChart = fixture.debugElement.query(By.css('.charts'));
-		elChart = deChart.nativeElement;
-
 		deDashboard = fixture.debugElement.query(By.css('.dashboard'));
 		elDashboard = deDashboard.nativeElement;
 
 		deSetting = fixture.debugElement.query(By.css('.settings'));
 		elSetting = deSetting.nativeElement;
 
-		deMails = fixture.debugElement.query(By.css('.mails'));
-		elMails = deMails.nativeElement;
+		/*deMails = fixture.debugElement.query(By.css('.mails'));
+		elMails = deMails.nativeElement;*/
 
 		linkDes=fixture.debugElement.queryAll(By.directive(RouterLinkStubDirective));
 		links=linkDes.map(de=>de.injector.get(RouterLinkStubDirective)as RouterLinkStubDirective);
@@ -78,16 +75,16 @@ it('should create Sidebar Component', () => {
 	});
 
 //test case for checking interpolation of MAILS
-	it('should display original  value through interpolation of MAILS', () => {
+/*	it('should display original  value through interpolation of MAILS', () => {
 		fixture.detectChanges();
 		expect(elMails.textContent).toContain(component.config.sidebar.MAILS);
-	});
+	});*/
 
 //test case for checking interpolation of CHARTS
-	it('should display original  value through interpolation of CHARTS', () => {
+	/*it('should display original  value through interpolation of CHARTS', () => {
 		fixture.detectChanges();
 		expect(elChart.textContent).toContain(component.config.sidebar.CHARTS);
-	});
+	});*/
 
 	it('it can get router links from template',()=>{
   expect(links.length).toBe(3,'should have 3 links');

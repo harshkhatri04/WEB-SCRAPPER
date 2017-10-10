@@ -230,15 +230,15 @@ var dailyMailJob = new CronJob({
                 res.status(403).send({ success: false, message: 'You are unauthorized' })
             } else {
                 /* for (let i = 0; i < data.length; i++) {
-                     console.log(data[i].preferences[0].items[0].itemName)
-                     //console.log(data[i].preferences[0].frequency);
-                      if (data[i].preferences[0].frequency == null) {
-                          console.log('error')
-                      } else {
-                          console.log(data[i].preferences[0].frequency);
-                      }
+                		 console.log(data[i].preferences[0].items[0].itemName)
+                		 //console.log(data[i].preferences[0].frequency);
+                			if (data[i].preferences[0].frequency == null) {
+                					console.log('error')
+                			} else {
+                					console.log(data[i].preferences[0].frequency);
+                			}
 
-                     // console.log(JSON.parse(data[i].preferences[i]).frequency)
+                		 // console.log(JSON.parse(data[i].preferences[i]).frequency)
                  }*/
                 for (let i = 0; i < data.length; i++) {
                     if (data[i].preferences[0].frequency == 'Daily') {
@@ -305,36 +305,36 @@ var weeklyMailJob = new CronJob({
             } else {
                 /*     for (let i = 0; i < data.length; i++) {
 
-                         if (data[i].preferences[0].frequency == 'Weekly') {
-                             if (data[i].preferences[0].items[0].itemName == 'Nasdaq Stocks') {
-                                 stockmodel.find((err, stockData) => {
-                                     if (err) {
-                                         res.status(403).send({ success: false, message: 'You are unauthorized' })
-                                     } else {
-                                         sendMails(data[i].email, stockData)
-                                     }
-                                 })
-                             } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
-                                 fundmodel.find((err, fundsData) => {
-                                     if (err) {
-                                         res.status(403).send({ success: false, message: 'You are unauthorized' })
-                                     } else {
-                                         sendMails(data[i].email, fundsData)
-                                     }
-                                 })
-                             } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
-                                 currencymodel.find((err, currencyData) => {
-                                     if (err) {
-                                         res.status(403).send({ success: false, message: 'You are unauthorized' })
-                                     } else {
-                                         sendMails(data[i].email, currencyData)
-                                     }
-                                 })
-                             }
+                				 if (data[i].preferences[0].frequency == 'Weekly') {
+                						 if (data[i].preferences[0].items[0].itemName == 'Nasdaq Stocks') {
+                								 stockmodel.find((err, stockData) => {
+                										 if (err) {
+                												 res.status(403).send({ success: false, message: 'You are unauthorized' })
+                										 } else {
+                												 sendMails(data[i].email, stockData)
+                										 }
+                								 })
+                						 } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
+                								 fundmodel.find((err, fundsData) => {
+                										 if (err) {
+                												 res.status(403).send({ success: false, message: 'You are unauthorized' })
+                										 } else {
+                												 sendMails(data[i].email, fundsData)
+                										 }
+                								 })
+                						 } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
+                								 currencymodel.find((err, currencyData) => {
+                										 if (err) {
+                												 res.status(403).send({ success: false, message: 'You are unauthorized' })
+                										 } else {
+                												 sendMails(data[i].email, currencyData)
+                										 }
+                								 })
+                						 }
 
-                         }
+                				 }
 
-                     }*/
+                		 }*/
 
             }
         })
@@ -347,44 +347,43 @@ weeklyMailJob.start();
 
 /*This the cron job function to get all emailId and there preference set*/
 var monthlyMailJob = new CronJob({
-    /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 40 09 10 * *',
-    onTick: function(req, res) {
-        user.find((err, data) => {
-            if (err) {
-                res.status(403).send({ success: false, message: 'You are unauthorized' })
-            } else {
-                /*    for (let i = 0; i < data.length; i++) {
-                        if (data[i].preferences[0].frequency == 'Daily') {
-                            if (data[i].preferences[0].items[0].itemName == 'Nasdaq Stocks') {
-                                stockmodel.find((err, stockData) => {
-                                    if (err) {
-                                        res.status(403).send({ success: false, message: 'You are unauthorized' })
-                                    } else {
-                                        sendMails(data[i].email, stockData)
-                                    }
-                                })
-                            } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
-                                fundmodel.find((err, fundsData) => {
-                                    if (err) {
-                                        res.status(403).send({ success: false, message: 'You are unauthorized' })
-                                    } else {
-                                        sendMails(data[i].email, fundsData)
-                                    }
-                                })
-                            } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
-                                currencymodel.find((err, currencyData) => {
-                                    if (err) {
-                                        res.status(403).send({ success: false, message: 'You are unauthorized' })
-                                    } else {
-                                        sendMails(data[i].email, currencyData)
-                                    }
-                                })
-                            }
+            /*format is second, minute, hour, day of month, months, day of week*/
+            cronTime: '00 40 09 10 * *',
+            onTick: function(req, res) {
+                    user.find((err, data) => {
+                                if (err) {
+                                    res.status(403).send({ success: false, message: 'You are unauthorized' })
+                                } else {
+                                    /*    for (let i = 0; i < data.length; i++) {
+                                    				if (data[i].preferences[0].frequency == 'Daily') {
+                                    						if (data[i].preferences[0].items[0].itemName == 'Nasdaq Stocks') {
+                                    								stockmodel.find((err, stockData) => {
+                                    										if (err) {
+                                    												res.status(403).send({ success: false, message: 'You are unauthorized' })
+                                    										} else {
+                                    												sendMails(data[i].email, stockData)
+                                    										}
+                                    								})
+                                    						} else if (data[i].preferences[0].items[0].itemName == 'Funds') {
+                                    								fundmodel.find((err, fundsData) => {									if (err) {
+                												res.status(403).send({ success: false, message: 'You are unauthorized' })
+                										} else {
+                												sendMails(data[i].email, fundsData)
+                										}
+                								})
+                						} else if (data[i].preferences[0].items[0].itemName == 'Currency') {
+                								currencymodel.find((err, currencyData) => {
+                										if (err) {
+                												res.status(403).send({ success: false, message: 'You are unauthorized' })
+                										} else {
+                												sendMails(data[i].email, currencyData)
+                										}
+                								})
+                						}
 
-                        }
+                				}
 
-                    }*/
+                		}*/
 
             }
         })
@@ -411,7 +410,7 @@ function sendMails(emailId, fundsData) {
         subject: 'Personalized Emailer',
         html: `<ul>News</ul><br><li>
 							${fundsData}
-        			</li>`
+							</li>`
 
     };
 
