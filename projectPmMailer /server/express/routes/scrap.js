@@ -206,47 +206,58 @@ function currencynews() {
 /*This the cron job function to get all emailId and there preference set*/
 var dailyMailJob = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 06 12 * * *',
+    cronTime: '00 00 15 * * *',
 
     onTick: function(req, res) {
         user.find((err, data) => {
             if (err) {
                 res.status(403).send({ success: false, message: 'You are unauthorized' })
             } else {
+                /* for (let i = 0; i < data.length; i++) {
+                     console.log(data[i].preferences[0].items[0].itemName)
+                     //console.log(data[i].preferences[0].frequency);
+                      if (data[i].preferences[0].frequency == null) {
+                          console.log('error')
+                      } else {
+                          console.log(data[i].preferences[0].frequency);
+                      }
+
+                     // console.log(JSON.parse(data[i].preferences[i]).frequency)
+                 }*/
                 for (let i = 0; i < data.length; i++) {
-                    console.log(data[i].preferences)
+                    if (data[i].preferences[0].frequency == 'Daily') {
+                        if (data[i].preferences[0].items[0].itemName == 'Nasdaq Stocks') {
+                            let news = stockmodel.find({}).select('news');
+                            news.exec(function(err, stockData) {
+                                if (err) {
+                                    console.log('error in stockmodel')
+                                } else {
+                                    let stock = stockData.map(ele => ele.news)
+                                    //console.log(JSON.stringify(stock, null, 2))
+                                    sendMails(data[i].email, stock)
+                                }
+                            })
+                        } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
+                            fundmodel.find((err, fundsData) => {
+                                if (err) {
+                                    console.log('error in fundmodel')
+                                } else {
+                                    //sendMails(data[i].email, fundsData.Headline)
+                                }
+                            })
+                        } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
+                            currencymodel.find((err, currencyData) => {
+                                if (err) {
+                                    console.log('error in currencymodel')
+                                } else {
+                                    //sendMails(data[i].email, currencyData.News)
+                                }
+                            })
+                        }
+
+                    }
+
                 }
-                /*       for (let i = 0; i < data.length; i++) {
-                           if (data[i].preferences[0].frequency == 'Daily') {
-                               if (data[i].preferences[0].items[0].itemName == 'Nasdaq Stocks') {
-                                   stockmodel.find((err, stockData) => {
-                                       if (err) {
-                                           console.log('error in stockmodel')
-                                       } else {
-                                           sendMails(data[i].email, stockData)
-                                       }
-                                   })
-                               } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
-                                   fundmodel.find((err, fundsData) => {
-                                       if (err) {
-                                           console.log('error in fundmodel')
-                                       } else {
-                                           sendMails(data[i].email, fundsData.Headline)
-                                       }
-                                   })
-                               } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
-                                   currencymodel.find((err, currencyData) => {
-                                       if (err) {
-                                           console.log('error in currencymodel')
-                                       } else {
-                                           sendMails(data[i].email, currencyData.News)
-                                       }
-                                   })
-                               }
-
-                           }
-
-                       }*/
 
             }
         })
@@ -359,7 +370,6 @@ var monthlyMailJob = new CronJob({
 monthlyMailJob.start();
 
 function sendMails(emailId, fundsData) {
-    let nodemailer = require('nodemailer');
 
     let transporter = nodemailer.createTransport({
         service: configure.serviceProvider,
@@ -373,7 +383,9 @@ function sendMails(emailId, fundsData) {
         from: configure.mailSendingId,
         to: emailId,
         subject: 'Personalized Emailer',
-        html: "<ul>News</ul><br><li>" + fundsData + "</li>"
+        html: `<ul>News</ul><br><li>
+							${fundsData}
+        			</li>`
 
     };
 
