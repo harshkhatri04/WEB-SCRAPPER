@@ -1,43 +1,42 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router, RouterLinkWithHref,RouterLink } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DebugElement} from '@angular/core';
+import { HttpModule } from '@angular/http';
 
 import { CurrencyComponent } from './currency.component';
+import {NavbarComponent} from '../navbar/navbar.component';
+import {SidebarComponent} from '../sidebar/sidebar.component';
+import {CurrencyService} from '../service/currency.service';
+import {DashboardService} from '../dashboard.service';
+import {TweetService} from '../service/tweet.service';
 
-/**
- * [describe description]
- * @param {[type]} 'CurrencyComponent' [description]
- * @param {[   CurrencyComponent   ]                })    .compileComponents();  }));  beforeEach(() => {    fixture = TestBed.createComponent(CurrencyComponent);    component = fixture.componentInstance;    fixture.detectChanges();  });  it('should be created', () => {    expect(component).toBeTruthy();  });}} () => {  let component [description]
- */
 describe('CurrencyComponent', () => {
   let component: CurrencyComponent;
   let fixture: ComponentFixture<CurrencyComponent>;
 
-/**
- * [beforeEach description] configuring component with testing environment
- * @param {[ CurrencyComponent ]    })    .compileComponents();  })} async(() => {    TestBed.configureTestingModule({      declarations [description]
- */
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CurrencyComponent ]
+      imports:[
+      RouterTestingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpModule
+      ],
+      declarations: [ CurrencyComponent,NavbarComponent,SidebarComponent ],
+      providers: [CurrencyService,DashboardService,TweetService]
     })
     .compileComponents();
   }));
 
-/**
- * [beforeEach description] initialising fixtures and component
- * @param {[type]} () => {    fixture = TestBed.createComponent(CurrencyComponent);    component = fixture.componentInstance;    fixture.detectChanges();  } [description]
- */
   beforeEach(() => {
     fixture = TestBed.createComponent(CurrencyComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-/**
- * [it description] checlking component creation
- * @param {[type]} 'should be created' [description]
- * @param {[type]} ()      => { expect(component).toBeTruthy();  } [description]
- */
-  it('should be created', () => {
-    expect(component).toBeTruthy();
+  it('should create currency component', () => {
+    const currency = fixture.debugElement.componentInstance;
+    expect(currency).toBeTruthy();
   });
 });

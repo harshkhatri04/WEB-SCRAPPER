@@ -11,11 +11,12 @@ let stock = require('./../models/stock')
 let detailStub = sinon.stub(detail, 'find')
 let insertStub = sinon.stub(model.prototype, 'save');
 let modelStub = sinon.stub(model, 'find');
-let findStub = sinon.stub(model, 'findOne')
+let findStub = sinon.stub(model.prototype, 'findOne')
 let updateStub = sinon.stub(model, 'update');
 let currencyStub = sinon.stub(currency, 'find')
 let stockStub = sinon.stub(stock, 'find')
 let fundStub = sinon.stub(fund, 'find')
+let findOneStub = sinon.stub(model, 'findOneAndUpdate')
 
 describe('POST /signup/users', () => {
     before(() => {
@@ -44,6 +45,11 @@ describe('POST /signup/users', () => {
                 }
             });
     });
+
+    it('should take less than 500ms', function(done) {
+        this.timeout(500);
+        setTimeout(done, 300);
+    });
 });
 
 describe('GET /', () => {
@@ -60,7 +66,20 @@ describe('GET /', () => {
     });
 });
 
-/*describe('GET /login/signin/:email/:password', () => {
+describe('GET /findUser/:email', () => {
+    it('test find user', (done) => {
+        modelStub.yields(null, { name: "Pulkit", password: "Pulkit@123", email: "Pulkit176@gmail.com", mobile: 9799999999 })
+        request(App)
+            .get('/find/findUser/:email')
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.status).to.be.equal(200);
+                done();
+            })
+    })
+})
+
+describe('GET /login/signin/:email/:password', () => {
     it('respond with json', (done) => {
         findStub.withArgs({ 'email': 'Pulkit176@gmail.com', 'password': 'Pulkit@123' })
             .yields(null, {
@@ -74,13 +93,13 @@ describe('GET /', () => {
             .end((err, res) => {
                 if (err)
                     return err;
-                expect(res.body).to.be.equal(" success: true, token: 'JWT ' + token ");
+                expect(res.status).to.be.equal(401);
                 done();
 
             })
     })
 })
-*/
+
 //test case for HTTP Get method for stock price of NASDAQ for WSJ website
 describe('get method', () => {
     it('respond with json', (done) => {
@@ -97,29 +116,6 @@ describe('get method', () => {
             });
     });
 });
-
-describe('update user mobile number', () => {
-    before(function() {
-        console.log('in before')
-        updateStub.withArgs({ '_email': 'admin@gmail.com' }, { $set: { "mobile": 8989177424 } })
-            .yields(null, {
-                "ok": 1,
-                "nModified": 1,
-                "n": 1
-            })
-    })
-    it('should respond with json', function(done) {
-        request(App)
-            .put('/updateMobile/admin@gmail.com')
-            .send({ "mobile": 8989177424 })
-            .end(function(err, res) {
-                if (err) { return done(err) };
-                expect(res.body.ok).to.be.equal(1);
-                done();
-            })
-
-    })
-})
 
 describe('get method for curency', () => {
     it('respond with json', (done) => {
@@ -189,25 +185,165 @@ describe('get method for stock', () => {
     });
 });
 
+describe('GET of logout', () => {
+    it('Testing Logout', (done) => {
+        request(App)
+            .get('/logout/logout')
+            .end((err, res) => {
+                if (err) return done(err)
+                expect(res.status).to.be.equal(200)
+                done();
+            })
+    })
+})
 
-describe('/PUT/:id book', () => {
-      it('it should UPDATE a book given the id', (done) => {
-        let book = new Book({title: "The Chronicles of Narnia", author: "C.S. Lewis", year: 1948, pages: 778})
-        book.save((err, book) => {
-                chai.request(server)
-                .put('/book/' + book.id)
-                .send({title: "The Chronicles of Narnia", author: "C.S. Lewis", year: 1950, pages: 778})
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('message').eql('Book updated!');
-                    res.body.book.should.have.property('year').eql(1950);
-                  done();
-                });
-          });
-      });
-  });
+describe('resetPwd', () => {
+    it('Testing Reset Password'), (done) => {
+        request(App)
+            .get('/resetPwd/forgot/:email')
+            .end((err, res) => {
+                if (err) return done(err)
+                expect(res.status).to.be.equal(200)
+                done()
+            })
+    }
+})
 
+describe('tweets', () => {
+    it('Testing tweets'), (done) => {
+        request(App)
+            .get('/tweets/user_timeline/' + 'admin@gmail.com')
+            .end((err, res) => {
+                if (err) return done(err)
+                expect(res.status).to.be.equal(200)
+                done()
+            })
+    }
+})
 
+describe('update user name', () => {
+    before(function() {
+        updateStub.withArgs({ _email: 'admin@gmail.com' }, { $set: { name: 'TestUser' } })
+            .yields(null, {
+                "ok": 1,
+                "nModified": 1,
+                "n": 1
+            })
+    })
+    it('Testing update Name', function(done) {
+        request(App)
+            .put('/update/updateName/admin@gmail.com')
+            .send({ name: "TestUser" })
+            .end(function(err, res) {
+                if (err) { return done(err) };
+                expect(res.status).to.be.equal(200);
+                done();
+            })
 
+    })
+})
 
+describe('update alternate emailId', () => {
+    before(function() {
+        updateStub.withArgs({ email: 'admin@gmail.com' }, {
+                $set: {
+                    name: 'TestUser',
+                    mobile: 9278721821,
+                    alternateEmail: 'TestUser123@gmail.com'
+                }
+            })
+            .yields(null, {
+                "ok": 1,
+                "nModified": 1,
+                "n": 1
+            })
+    })
+    it('Testing alternate emailId', function(done) {
+        request(App)
+            .put('/update/updateUser/admin@gmail.com')
+            .send({ name: "TestUser" })
+            .end(function(err, res) {
+                if (err) { return done(err) };
+                expect(res.status).to.be.equal(200);
+                done();
+            })
+
+    })
+})
+
+describe('Delete user', () => {
+    it('Testing delete user', (done) => {
+        request(App)
+            .delete('/update/deleteUser/admin@gmail.com')
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.status).to.be.equal(200);
+                done()
+            })
+    })
+})
+
+describe('POST /updatePassword/:email', () => {
+    it('Testing updatePassword/:email', (done) => {
+        request(App)
+            .post('/update/updatePassword/admin@gmail.com')
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.status).to.be.equal(200);
+                done();
+
+            });
+    });
+});
+
+describe('set Flag', () => {
+    before(function() {
+        updateStub.withArgs({ email: 'admin@gmail.com' }, {
+                $set: {
+                    flag: 1
+                }
+            })
+            .yields(null, {
+                "ok": 1,
+                "nModified": 1,
+                "n": 1
+            })
+    })
+    it('Testing set Flag', function(done) {
+        request(App)
+            .put('/update/updateUser/admin@gmail.com')
+            .send({ flag: 1 })
+            .end((err, res) => {
+                if (err) { return done(err) };
+                expect(res.status).to.be.equal(200);
+                done();
+            })
+
+    })
+})
+
+describe('PUT investment/:email', () => {
+    before(function() {
+        findOneStub.withArgs({ email: 'admin@gmail.com' }, {
+                $set: {
+                    preferences: ['test']
+                }
+            })
+            .yields(null, {
+                "ok": 1,
+                "nModified": 1,
+                "n": 1
+            })
+    })
+    it('Testing set Flag', function(done) {
+        request(App)
+            .put('/update/updateUser/admin@gmail.com')
+            .send({ preferences: ['test'] })
+            .end((err, res) => {
+                if (err) { return done(err) };
+                expect(res.status).to.be.equal(200);
+                done();
+            })
+
+    })
+})

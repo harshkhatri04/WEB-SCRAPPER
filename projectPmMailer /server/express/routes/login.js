@@ -27,11 +27,8 @@ router.get('/signin/:email/:password', function(req, res) {
                     // if user is found and password is right create a token
                     var token = jwt.sign({ user }, config.secret);
                     // return the information including token as JSON
-
-
+                    //console.log('success')
                     return res.status(200).send({ success: true, token: 'JWT ' + token, email: user.email });
-
-
                     logger.info("token generated successfully");
                     //console.log({ success: true, token: 'JWT ' + token })*/
                 } else {

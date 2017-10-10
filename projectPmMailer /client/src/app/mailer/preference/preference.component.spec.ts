@@ -6,6 +6,7 @@ import { DebugElement,Directive, Injectable, Input  } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import { HttpModule } from '@angular/http';
+import { DialogComponent, DialogService} from "ng2-bootstrap-modal";
 
 import { PreferenceComponent } from './preference.component';
 import {PreferenceService} from './preference.service';
@@ -24,8 +25,8 @@ describe('PreferenceComponent', () => {
        AngularMultiSelectModule,
        HttpModule
       ],
-      declarations: [ PreferenceComponent ],
-      providers: [PreferenceService]
+      declarations: [ PreferenceComponent],
+      providers: [PreferenceService,DialogService]
     })
     .compileComponents();
   }));
@@ -33,9 +34,9 @@ describe('PreferenceComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PreferenceComponent);
     component = fixture.componentInstance;
-    de = fixture.debugElement.query(By.css('modal-title'));
+    /*de = fixture.debugElement.query(By.css('modal-title'));
     el = de.nativeElement;
-
+*/
   });
 
   it('should be created', () => {
