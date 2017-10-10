@@ -1,18 +1,17 @@
-<!-- navbar started -->
+<!-- navigation bar  -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand mailer" [routerLink]="'/dashboard'">{{config.dashboard.PERSONALISED_MAILER}}</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <!-- toggle buttons -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <!-- navbar elements -->
+  <!-- Brand -->
+  <a class="navbar-brand mailer" [routerLink]="'/dashboard'">{{config.dashboard.PERSONALISED_MAILER}}</a>
+  <!-- Links -->
+  <div class="collapse navbar-collapse justify-content-end" id="nav-content">
     <ul class="navbar-nav">
-      
-     <li class="nav-item">
-        <a class="nav-link" (click)="logout()">Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
-</a>
+      <li class="nav-item">
+        <a class="nav-link" (click)="logout()">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a>
       </li>
     </ul>
   </div>
 </nav>
-<!-- navbar ends -->

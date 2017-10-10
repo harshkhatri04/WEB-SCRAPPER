@@ -54,8 +54,17 @@
   display: inline-block;
 }
 
-.profile-inline~.card-title {
-  display: inline-block;
-  margin-left: 4px;
-  vertical-align: top;
+
+.profile-inline ~ .card-title {
+   display: inline-block;
+   margin-left: 4px;
+   vertical-align: top;
+}
+.card-data{
+  background-color:white;
+  margin-left: 3%;
+
+}
+.fa {
+  margin-right: 1%;
 }
