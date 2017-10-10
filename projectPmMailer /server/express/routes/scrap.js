@@ -206,7 +206,7 @@ function currencynews() {
 /*This the cron job function to get all emailId and there preference set*/
 var dailyMailJob = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 23 08 * * *',
+    cronTime: '00 5 08 * * *',
 
     onTick: function(req, res) {
         user.find((err, data) => {
@@ -308,7 +308,8 @@ function getEmailAndPreference(data, fundsData) {
         /* for (let k = 0; k < fundsData.length; k++) {
              news[k] = fundsData[k].Headline
          }*/
-        console.log(data[i])
+        //console.log(data[i].preferences[0].frequency)
+        console.log(data[i].preferences[0].items[0].itemName)
         //sendMails(data[i].email, news)
     }
 }
@@ -346,7 +347,7 @@ function sendMails(emailId, fundsData) {
 /*This the cron job function to do scheduling on the nasdaq data*/
 var job = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 15 16 * * *',
+    cronTime: '00 37 15 * * *',
     onTick: function(req, res, next) {
         nasdaq.find((err, data) => {
             if (err) {

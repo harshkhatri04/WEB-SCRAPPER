@@ -7,14 +7,14 @@ module.exports = {
         infoLogging: { type: 'file', filename: './logs/app-info.log' },
 
         'info': { type: 'logLevelFilter', appender: 'infoLogging', level: 'info' },
-        // console: { type: 'console' },
+        console: { type: 'console' },
 
         debugLogging: { type: 'file', filename: './logs/app-debug.log' },
 
         'debug': { type: 'logLevelFilter', appender: 'debugLogging', level: 'debug' },
-        // console: { type: 'console' }
+        console: { type: 'console' }
     },
     categories: {
-        default: { appenders: ['debug', 'info', 'allLogs'], level: 'debug' }
+        default: { appenders: ['debug', 'info', 'allLogs', 'console'], level: 'debug' }
     }
 };
