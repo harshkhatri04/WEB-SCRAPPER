@@ -6,6 +6,7 @@
 }
 
 
+
 /**
  * card background color
  */
@@ -13,6 +14,7 @@
 .cardStyle {
   background-color: #80cbc4;
 }
+
 
 
 /**
@@ -24,6 +26,7 @@
 }
 
 
+
 /**
  * heading color
  */
@@ -31,6 +34,7 @@
 .h7 {
   color: #333;
 }
+
 
 
 /* for dashboard content */
@@ -41,11 +45,13 @@
 }
 
 
+
 /*width*/
 
 .drop {
   width: 200px !important;
 }
+
 
 
 /*text styling*/
@@ -55,6 +61,7 @@
   font-weight: bold;
   background-color: black;
 }
+
 
 
 
@@ -75,8 +82,23 @@
 
 
 
+
 /*list*/
 
 .list {
   list-style: none;
+}
+
+
+.img {
+  width: 100%;
+}
+
+.card-data {
+  background-color: white;
+  margin-left: 3%;
+}
+
+.fa {
+  margin-right: 1%;
 }
