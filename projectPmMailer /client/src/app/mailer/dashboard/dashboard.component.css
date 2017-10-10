@@ -1,7 +1,11 @@
 /**
  * margin top
  */
+.marg {
+  margin-left: 7%;
+  margin-top: 7%;
 
+}
 .container-fluid {
   margin-top: 55px;
 }
