@@ -15,5 +15,17 @@ router.get('/auth/facebook/callback',
         failureRedirect: configurationFb.failureRedirect
     })
 );
+passport.serializeUser(function(user, done) {
+    console.log(user);
+    done(null, user._id);
+});
 
+/*passport.deserializeUser(function(id, done) {
+    user.findById(id, function(err, user) {
+        done(err, user);
+    });
+});
+
+router.use(passport.initialize());
+router.use(passport.session());*/
 module.exports = router;

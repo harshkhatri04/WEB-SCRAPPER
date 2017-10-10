@@ -20,6 +20,7 @@ const logout = require('./logout')
 const googleAuth = require('./googleAuth')
 const facebookAuth = require('./facebookAuth')
 const update = require('./update')
+const findUser = require('./getData')
 
 const preference = require('./preference')
 const scrap = require('./scrap')
@@ -31,7 +32,7 @@ app.use('/login', login);
 app.use('/resetPwd', resetPassword);
 app.use('/logout', logout);
 app.use('/postNews', scrap);
-
+app.use('/find',findUser);
 app.use('/googleAuth', googleAuth);
 app.use('/facebookAuth', facebookAuth);
 app.use('/update',update);
