@@ -6,6 +6,7 @@ import { DebugElement,Directive, Injectable, Input  } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import { HttpModule } from '@angular/http';
+import { DialogComponent, DialogService} from "ng2-bootstrap-modal";
 
 import { PreferenceComponent } from './preference.component';
 import {PreferenceService} from './preference.service';
@@ -25,7 +26,7 @@ describe('PreferenceComponent', () => {
        HttpModule
       ],
       declarations: [ PreferenceComponent ],
-      providers: [PreferenceService]
+      providers: [PreferenceService,{provide: DialogService}]
     })
     .compileComponents();
   }));
