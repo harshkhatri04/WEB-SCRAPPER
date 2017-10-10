@@ -19,20 +19,21 @@
 </nav>
 <!-- navbar ends -->
 <!-- sidebar added -->
-<div class="container">
-  <div class="col-md-4">
-    <app-sidebar></app-sidebar>
-  </div>
-  <!-- Search Started -->
-  <div class="row d-flex d-md-block flex-nowrap wrapper">
-    <main class="col-md-9 float-left col px-5 pl-md-2 pt-2 main">
-      <div>
-        <div class="marg">
+<div class="container-fluid" style="margin-top: 55px;">
+  <div class="row">
+    <!--Conatiner for Sidebar -->
+    <div class="col-md-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <!--Conatiner for Details -->
+    <div class="col-md-6">
+      <div class="d-flex d-md-block flex-nowrap wrapper">
+        <div class="float-left col px-5 pl-md-2 pt-2 main">
           <br>
-          <div class="col-md-6">
+          <div class="col-md-12">
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a class="nav-link" [routerLink]="'/currency'">Currency</a>
+                <a class="nav-link active" [routerLink]="'/currency'">Currency</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" [routerLink]="'/nasdaq'">Nasdaq</a>
@@ -40,19 +41,23 @@
               <li class="nav-item">
                 <a class="nav-link" [routerLink]="'/funds'">Funds</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="'/tweet'">Twit</a>
+              </li>
             </ul>
           </div>
           <br>
           <div class="card text-white mb-3" style="background-color: #80cbc4;" *ngFor="let post of fundnews">
             <div class="card-body">
-               <h6 class="text-uppercase" style="color: #004d40"><b>{{post.Time}}</b></h6>
+              <h6 class="text-uppercase" style="color: #004d40"><b>{{post.Time}}</b></h6>
               <p class="h4 text-uppercase"><b>{{post.Headline}}</b></p>
-               <p class="h7" style="color: #333">{{post.News}}</p>
+              <p class="h7" style="color: #333">{{post.News}}</p>
             </div>
+          </div>
+          <!--Conatiner for Tweetes -->
+          <div class="col-md-4" style="margin-top: 13%">
           </div>
         </div>
       </div>
-    </main>
+    </div>
   </div>
-</div>
-<!-- search ended -->
