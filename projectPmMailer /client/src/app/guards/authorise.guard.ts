@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 
 @Injectable()
+
 //AuthoriseGuard class implemenmting canActivate method to protect routes
 export class AuthoriseGuard implements CanActivate {
 
@@ -41,3 +42,4 @@ export class AuthoriseGuard implements CanActivate {
     return this.authorised;
   }
 }
+

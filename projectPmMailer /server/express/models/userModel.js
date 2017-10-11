@@ -1,8 +1,10 @@
+/*requiring dependencies*/
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 const titlize = require('mongoose-title-case');
 const validate = require('mongoose-validator');
+// structure of user saved in database 
 let UserSchema = new Schema({
     name: { type: String },
     id: { type: String },
@@ -23,10 +25,11 @@ UserSchema.pre("save", function(next) {
         items: [{ "id": 1, "itemName": "Funds" }],
         frequency: 'Daily'
     }
-    if (this.preferences.length == 0)
-        this.preferences.push(obj);
-
+    if (this.preferences.length == 0){
+        this.preferences.push(obj);}
+    
     next();
+    
 });
 //pre method to encrypt password
 UserSchema.pre('save', function(next) {
@@ -52,4 +55,5 @@ UserSchema.methods.comparePassword = function(passw, cb) {
         cb(null, isMatch);
     });
 };
+// schema exported as model
 module.exports = mongoose.model('User', UserSchema);

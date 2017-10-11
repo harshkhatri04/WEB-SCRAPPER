@@ -14,13 +14,7 @@ export class NasdaqComponent implements OnInit {
 
 
 
-/**
- * [constructor description]
- * @param {DashboardService} private DashboardService [description]
- * @param {Router}           private router           [description]
- * @param {NasdaqService}    private nasdaq           [description]
- * @param {TweetService}     private tweetService     [description]
- */
+
 constructor(private DashboardService: DashboardService, private router: Router,private nasdaq:NasdaqService,private tweetService:TweetService) { }
 list:string;
 nasdaqcode:number;
@@ -35,9 +29,8 @@ investmentProductuser:string;
 listchart:string;
 close:any;
 
-/**
- * [ngOnInit description] getting nasdaq stocks data
- */
+//call when component loads
+//contains the code and company for nasdaq 
   ngOnInit() {
      this.nasdaq.getnasdaqstocks().subscribe((data) => {
 		 this.nasdaqcode = data;
@@ -47,10 +40,7 @@ close:any;
 	}
 
 
-/**
- * [search description]
- * @param {string} name [description]
- */
+//Nasdaq news search according to the Code selected in dropdown
  search(name:string) {
 
 	 this.value = {
@@ -65,10 +55,7 @@ close:any;
 
  }
 
-/**
- * [searchnews description]
- * @param {string} name [description]
- */
+//nasdaq stock price according to the code
  searchnews(name:string){
 
 	 this.twitnasdaq();
@@ -81,9 +68,7 @@ close:any;
 	 })
  }
 
- /**
-  * [twitnasdaq description]
-  */
+ //twitter data of nasdaq
   twitnasdaq(){
     
     let user='nasdaq';
@@ -92,9 +77,7 @@ close:any;
         })
   }
 
-  /**
-   * [logout description]
-   */
+ //logout function
  logout() {
 	 this.DashboardService.signout()
 		 .subscribe((res) => {
@@ -105,10 +88,7 @@ close:any;
 		 })
  }
 
-/**
- * [chart description]
- * @param {string} name [description]
- */
+//chart on the basis of code selected in dropdown only for 2016 data
 chart(name:string) {
   
    this.nasdaq.getchart(name).subscribe(res => {
@@ -124,36 +104,25 @@ chart(name:string) {
    })
  }
 
-// lineChart
+
+// lineChart 
  public lineChartData= this.stockrate;
  
- /**
-  * [lineChartLabels description]
-  
-  */
+
  public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'];
  public lineChartType:string = 'line';
 
 
- /**
-  * [randomizeType description]
-  */
  public randomizeType():void {
    this.lineChartType = this.lineChartType === 'line' ? 'bar' : 'line';
  }
 
-/**
- * [chartClicked description]
- * @param {any} e [description]
- */
+
  public chartClicked(e:any):void {
    console.log(e);
  }
 
-/**
- * [chartHovered description]
- * @param {any} e [description]
- */
+
  public chartHovered(e:any):void {
    console.log(e);
  }

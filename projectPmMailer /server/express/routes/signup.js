@@ -1,24 +1,22 @@
-const User = require('../models/userModel')
-const path = require('path');
-const jwt = require('jsonwebtoken');
-const config = require('../config/database');
-const configure = require('../config/configure');
+//importing pre-defined dependencies
 const nodemailer = require('nodemailer');
-const logger = require('../services/app.logger');
 const express = require('express');
 const router = express.Router();
 
+//importing user-defined dependencies
+const User = require('../models/userModel')
+const config = require('../config/database');
+const configure = require('../config/configure');
+const logger = require('../services/app.logger');
 
-
-// signup url
+//This route is used to sign up for a user i.e. a new user
 router.post('/users', (req, res) => {
-
     let user = new User();
     user.name = req.body.name;
     user.password = req.body.password;
     user.email = req.body.email;
     user.mobile = req.body.mobile;
-    user.flag=0;
+    user.flag = 0;
     // checking if fields are empty or not
     if (req.body.name == null || req.body.password == null || req.body.email == null || req.body.mobile == null) {
         return res.status(400).json({ success: false, message: 'Ensure all the fields are filled' });
