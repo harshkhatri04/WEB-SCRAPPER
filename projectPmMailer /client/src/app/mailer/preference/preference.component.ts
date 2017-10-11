@@ -46,7 +46,7 @@ export class PreferenceComponent extends DialogComponent<ConfirmModel,boolean> i
 		this.basicExampleSelectedItems = [
 													{"id":1,"itemName":"Funds"},
 													{"id":2,"itemName":"Nasdaq Stocks"},
-													{"id":3,"itemName":"Currency"}
+													{"id":3,"itemName":"Currency"}],
 	 
 	 //getting investment product based on search
 		this.placeholderExampleList = [
