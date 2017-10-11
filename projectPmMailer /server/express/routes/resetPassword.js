@@ -83,14 +83,14 @@ router.get('/forgot/:email', function(req, res, next) {
                     'If you did not request this, please ignore this email and your password will remain unchanged.\n',
 
             };
-
             transporter.sendMail(mailOptions, function(error, info) {
                 if (error) {
                     logger.warn("network error");
                     res.status(400).send({ success: false });
                 } else {
-                    logger.info("Email sent to user to reset password");
                     res.status(200).send({ success: true });
+                    logger.info("Email sent to user to reset password");
+                    
                 }
             });
         }
