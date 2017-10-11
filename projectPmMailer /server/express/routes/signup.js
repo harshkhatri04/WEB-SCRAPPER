@@ -44,7 +44,6 @@ router.post('/users', (req, res) => {
                     subject: 'Registered on Personalized-Emailer',
                     text: 'Hello,\n\n' +
                         'You have been successfully registered on Personalized-Emailer.\n',
-
                 };
                 transporter.sendMail(mailOptions, function(error, info) {
                     if (error) {
@@ -58,5 +57,4 @@ router.post('/users', (req, res) => {
         })
     }
 });
-
 module.exports = router;

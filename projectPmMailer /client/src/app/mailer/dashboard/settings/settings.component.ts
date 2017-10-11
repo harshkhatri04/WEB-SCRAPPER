@@ -3,7 +3,7 @@ import { FormControl, FormGroup, FormBuilder, Validators, NgForm } from '@angula
 
 import { config } from '../../../config/config';
 import { SettingsService } from './settings.service';
-import {PreferenceComponent} from '../../preference/preference.component';
+import { PreferenceComponent } from '../../preference/preference.component';
 import { DialogService } from "ng2-bootstrap-modal";
 import swal from 'sweetalert2';
 @Component({
@@ -18,14 +18,14 @@ export class SettingsComponent implements OnInit {
   email: string;
   constructor(
     @Inject(FormBuilder) private fb: FormBuilder,
-      private settingsService: SettingsService,private dialogService:DialogService) {
+    private settingsService: SettingsService, private dialogService: DialogService) {
     // initialising user details to be displayed
     this.userInfo = fb.group({
       email: ['', [Validators.required]],
       name: ['', [Validators.required]],
       mobile: ['', [Validators.required]],
       alternateEmail: ''
-     });
+    });
   }
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class SettingsComponent implements OnInit {
     // getting details from local storage
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.email = this.currentUser.email;
-  
+
     // calling method to get user details from database for the user who has logged in
     this.settingsService.getDataFromDB(this.email)
       .subscribe((res) => {
@@ -43,9 +43,9 @@ export class SettingsComponent implements OnInit {
           mobile: res.mobile,
           alternateEmail: res.alternateEmail
         }
-           this.displayData(data);
+        this.displayData(data);
       })
-    }
+  }
   // displaying the user details to be displayed
   displayData(data: any) {
     this.userInfo = this.fb.group({
@@ -56,38 +56,37 @@ export class SettingsComponent implements OnInit {
     })
   }
   // method to update user details
-  updateUserInfo(userInfo,email) {
+  updateUserInfo(userInfo, email) {
     let user = {
       name: userInfo.get('name').value,
-      mobile:userInfo.get('mobile').value,
-      alternateEmail:userInfo.get('alternateEmail').value
+      mobile: userInfo.get('mobile').value,
+      alternateEmail: userInfo.get('alternateEmail').value
     }
-     this.settingsService.updateUser(user,email)
-        .subscribe((res)=>{
-          if(res){       
-     swal({
-      timer: 1000,
-      title: "Details saved successfully",
-      text:  "accepted",
-      type:  'success',
-      showConfirmButton: false,
-    })
-  }
-  })
+    this.settingsService.updateUser(user, email)
+      .subscribe((res) => {
+        if (res) {
+          swal({
+            title: "Details saved successfully",
+            type: "success",
+          });
+        }
+      })
   }
   // method to update mailing preferences
   showConfirm() {
-            let disposable = this.dialogService.addDialog(PreferenceComponent, {
-                title:'Confirm title', 
-                message:'Confirm message'})
-                .subscribe((isConfirmed)=>{
-                    //We get dialog result
-                    if(isConfirmed) {
-                        alert('accepted');
-                    }
-                    else {
-                        alert('declined');
-                    }
-                });
+    let disposable = this.dialogService.addDialog(PreferenceComponent, {
+        title: 'Confirm title',
+        message: 'Confirm message'
+      })
+      .subscribe((isConfirmed) => {
+        //We get dialog result
+        if (isConfirmed) {
+          swal({
+            title: "Preferences set successfully",
+            type: "success",
+          });
+        } else {
         }
+      });
+  }
 }

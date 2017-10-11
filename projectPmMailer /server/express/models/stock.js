@@ -1,6 +1,8 @@
+/*requiring dependencies*/
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// structure of stock data saved in database
 const stockschema = new Schema({
     term: String,
     news: String,
