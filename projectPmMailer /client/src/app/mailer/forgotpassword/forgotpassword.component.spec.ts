@@ -15,7 +15,7 @@ describe('Testing forgotPassword component', () => {
 	let deDashboard, deCharts, deSetting, deMailer: DebugElement;
 	let elDashboard, elCharts, elSetting, elMailer: HTMLElement;
 
-	//async beforeEach
+	//configuring module with testing environment
 	beforeEach(async() => {
 
 		TestBed.configureTestingModule({
@@ -27,7 +27,7 @@ describe('Testing forgotPassword component', () => {
 		}).compileComponents();
 	})
 
-	//sync beforeEach
+	//creating component instance and handler
 	beforeEach(() => {
 		fixture = TestBed.createComponent(ForgotpasswordComponent);
 		comp = fixture.componentInstance; //Nav Component instance
