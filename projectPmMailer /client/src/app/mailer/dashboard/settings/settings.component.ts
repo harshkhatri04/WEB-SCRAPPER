@@ -5,16 +5,12 @@ import { config } from '../../../config/config';
 import { SettingsService } from './settings.service';
 import {PreferenceComponent} from '../../preference/preference.component';
 import { DialogService } from "ng2-bootstrap-modal";
-
+import swal from 'sweetalert2';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
-
-/**
- * SettingsComponent class
- */
 export class SettingsComponent implements OnInit {
   userInfo: FormGroup;
   config = config;
@@ -50,7 +46,6 @@ export class SettingsComponent implements OnInit {
            this.displayData(data);
       })
     }
-
   // displaying the user details to be displayed
   displayData(data: any) {
     this.userInfo = this.fb.group({
@@ -69,9 +64,16 @@ export class SettingsComponent implements OnInit {
     }
      this.settingsService.updateUser(user,email)
         .subscribe((res)=>{
-          console.log(res)
-        })
-
+          if(res){       
+     swal({
+      timer: 1000,
+      title: "Details saved successfully",
+      text:  "accepted",
+      type:  'success',
+      showConfirmButton: false,
+    })
+  }
+  })
   }
   // method to update mailing preferences
   showConfirm() {

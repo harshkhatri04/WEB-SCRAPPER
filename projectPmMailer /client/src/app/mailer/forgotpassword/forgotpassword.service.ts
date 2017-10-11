@@ -15,7 +15,6 @@ export class ForgotpasswordService {
  							.get(url)
  							.map(res => res.json(),error=>error.json());
  }
-
 }
 
 
