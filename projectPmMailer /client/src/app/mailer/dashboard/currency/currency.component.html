@@ -30,14 +30,11 @@
           <i class="fa fa-twitter" aria-hidden="true" style="color: #33b5e5"></i>
           <p style="color: #333">{{data.text}}</p>
           <div *ngIf="data.entities.urls[0]">
-              <a href="{{data.entities.urls[0].url}}">Read More</a>
+              <a href="{{data.entities.urls[0].url}}">{{config.currency.READ_MORE}}</a>
             </div>
           <div *ngIf="data.entities.media">
             <img class="img" src="{{data.entities.media[0].media_url}}">
           </div>
-          <!-- <div *ngIf="data.entities.urls">
-            <img class="img" src="{{data.entities.urls[0].expanded_url}}">
-          </div> -->
         </div>
         <div class="card-data">
           <h6 style="color:black;"><i class="fa fa-clock-o"></i>{{data.created_at}} </h6>

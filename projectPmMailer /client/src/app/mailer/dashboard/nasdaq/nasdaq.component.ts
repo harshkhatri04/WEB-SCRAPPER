@@ -41,7 +41,6 @@ close:any;
   ngOnInit() {
      this.nasdaq.getnasdaqstocks().subscribe((data) => {
 		 this.nasdaqcode = data;
-		 console.log(this.nasdaqcode)
 	 }, error => {
 		 console.log("Error" + error)
 	 })
@@ -59,7 +58,6 @@ close:any;
 	 }
 	 this.searchnews(name);
 	 this.nasdaq.getresult(this.value).subscribe(res => {
-		 console.log(res)
 		 this.stockprice = res.data;
 	 }, error => {
 		 console.log("Error" + error)
@@ -91,7 +89,6 @@ close:any;
     let user='nasdaq';
     this.tweetService.tweetSearch(user).subscribe((data)=>{
           this.investmentProductuser=data;
-          console.log(this.investmentProductuser);
         })
   }
 
@@ -118,12 +115,10 @@ chart(name:string) {
    this.listchart = res.results;
    for(let i=0;i<this.listchart.length;i++){    
    this.date=new Date(res.results[i].tradingDay);
-   // console.log(this.date.getFullYear());
      if(this.date.getFullYear()==2016){
       this.stockrate.push(res.results[i].close)
            }
-     }
-     console.log(this.stockrate);    
+     }    
    }, error => {
      console.log("Error" + error)
    })

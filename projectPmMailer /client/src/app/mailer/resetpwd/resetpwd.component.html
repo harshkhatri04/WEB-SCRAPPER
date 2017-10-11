@@ -36,39 +36,39 @@
         <form class="reset-form">
           <form [formGroup]="form" #formDir="ngForm">
             <!-- <div [hidden]="formDir.submitted"> -->
-              <div class="form-group">
-                <div class="row">
-                  <input id="pwd" type="password" class="form-control" name="pwd" placeholder="Password" formControlName="pwd" required #resetpwd>
-                  <div *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)">
-                    <div *ngIf="pwd.errors.required">
-                      Password is required.
-                    </div>
-                    <div *ngIf="pwd.errors.minlength">
-                      Password can't be so small.
-                    </div>
+            <div class="form-group">
+              <div class="row">
+                <input id="pwd" type="password" class="form-control" name="pwd" placeholder="Password" formControlName="pwd" required #resetpwd>
+                <div *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)">
+                  <div *ngIf="pwd.errors.required">
+                    Password is required.
                   </div>
-                </div>
-                <div class="row">
-                  <input id="cpwd" type="password" class="form-control" name="cpwd" value="" placeholder={{config.resetpwd.CONFIRM_PASSWORD}} formControlName="cpwd" required>
-                  <div *ngIf="cpwd.invalid && (cpwd.dirty || cpwd.touched)">
-                    <div *ngIf="cpwd.errors.required">
-                      Password is required.
-                    </div>
-                    <div *ngIf="cpwd.errors.minlength">
-                      Password must be 8 characters long .
-                    </div>
-                    <div *ngIf="cpwd.errors.maxlength">
-                      Password must be 8 characters long .
-                    </div>
-                    <div *ngIf="cpwd!=pwd">
-                      Passwords donot match.
-                    </div>
+                  <div *ngIf="pwd.errors.minlength">
+                    Password can't be so small.
                   </div>
-                </div>
-                <div>
-                  <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="reset(resetpwd.value)">{{config.resetpwd.RESET_PASSWORD}}</button>
                 </div>
               </div>
+              <div class="row">
+                <input id="cpwd" type="password" class="form-control" name="cpwd" value="" placeholder={{config.resetpwd.CONFIRM_PASSWORD}} formControlName="cpwd" required>
+                <div *ngIf="cpwd.invalid && (cpwd.dirty || cpwd.touched)">
+                  <div *ngIf="cpwd.errors.required">
+                    Password is required.
+                  </div>
+                  <div *ngIf="cpwd.errors.minlength">
+                    Password must be 8 characters long .
+                  </div>
+                  <div *ngIf="cpwd.errors.maxlength">
+                    Password must be 8 characters long .
+                  </div>
+                  <div *ngIf="cpwd!=pwd">
+                    Passwords donot match.
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="reset(resetpwd.value)">{{config.resetpwd.RESET_PASSWORD}}</button>
+              </div>
+            </div>
             <!-- </div> -->
           </form>
         </form>
@@ -76,3 +76,8 @@
     </div>
   </div>
 </section>
+
+<div *ngIf="alert" id="alert" class="alert-{{alert.type}}">
+  {{alert.message}}
+</div>
+

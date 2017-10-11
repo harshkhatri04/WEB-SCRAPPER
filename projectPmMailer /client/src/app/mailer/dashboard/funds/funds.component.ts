@@ -29,7 +29,6 @@ export class FundsComponent implements OnInit {
     this.fund.getfund().subscribe((data) => {
 
       this.fundnews = data;
-      console.log(this.fundnews)
     }, error => {
       console.log("Error" + error)
     })
@@ -44,7 +43,6 @@ export class FundsComponent implements OnInit {
     let user='MutualFundscom';
     this.tweetService.tweetSearch(user).subscribe((data)=>{
           this.investmentProductuser=data;
-          console.log(this.investmentProductuser);
         })
   }
 /**
