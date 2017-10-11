@@ -49,7 +49,7 @@ router.get('/forgot/:email', function(req, res, next) {
                 if (!user) {
                     logger.warn("No account with that email address exists.");
                     return res.status(401).send({ success: false, message: 'No account with that email address exists' });
-                    
+
                 }
                 user.resetPasswordToken = token;
                 user.resetPasswordExpires = Date.now() + configure.tokenValidity; // 1 hour validity for link
@@ -87,7 +87,7 @@ router.get('/forgot/:email', function(req, res, next) {
             transporter.sendMail(mailOptions, function(error, info) {
                 if (error) {
                     logger.warn("network error");
-                    res.status(400).send({success: false});
+                    res.status(400).send({ success: false });
                 } else {
                     logger.info("Email sent to user to reset password");
                     res.status(200).send({ success: true });
@@ -136,13 +136,12 @@ router.post('/reset/:token', function(req, res) {
         },
 
     ], function(err) {
-        if (err){ 
-        return res.status(400).send({success: false});
+        if (err) {
+            return res.status(400).send({ success: false });
+        } else {
+            logger.info("password successfully changed")
+            res.status(200).send({ success: true });
         }
-        else{
-        logger.info("password successfully changed")
-        res.status(200).send({ success: true });
-    }
     });
 });
 
