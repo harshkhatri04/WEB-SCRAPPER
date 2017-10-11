@@ -23,15 +23,12 @@ router.get('/signin/:email/:password', function(req, res) {
         } else {
             // check if password matches
             user.comparePassword(req.params.password, function(err, isMatch) {
-
                 if (isMatch && !err) {
                     // if user is found and password is right create a token
                     var token = jwt.sign({ user }, config.secret);
                     // return the information including token as JSON
                     //console.log('success')
-
-                    return res.status(200).send({ success: true, token: 'JWT ' + token ,email:user.email});
-
+                    return res.status(200).send({ success: true, token: 'JWT ' + token, email: user.email });
                     logger.info("token generated successfully");
                     //console.log({ success: true, token: 'JWT ' + token })*/
                 } else {
@@ -45,18 +42,16 @@ router.get('/signin/:email/:password', function(req, res) {
     });
 });
 
-
-
-   router.get('/', function(req, res) {
-          User.find((err, data) => {
-              if (err) {
-                  res.send({ success: false, message: "error in finding" })
-                  logger.info("error");
-              } else {
-                  res.json(data)
-                  logger.info("data fetched successfully");
-              }
-          })
-      })
+router.get('/', function(req, res) {
+    User.find((err, data) => {
+        if (err) {
+            res.send({ success: false, message: "error in finding" })
+            logger.info("error");
+        } else {
+            res.json(data)
+            logger.info("data fetched successfully");
+        }
+    })
+})
 
 module.exports = router;

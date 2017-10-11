@@ -14,6 +14,13 @@ export class SettingsService {
                      .map(res=>res.json(),error=>error.json())
   }
 
+  updateUserPwd(userPwdInfo,email){
+  	console.log(userPwdInfo,email)
+    const url ='http://localhost:3000/update/updatePassword/'+email;
+    return this.http.put(url,userPwdInfo)
+                     .map(res=>res.json(),error=>error.json())
+  }
+
   getDataFromDB(email){
     const url ='http://localhost:3000/find/findUser/'+email;
      return this.http.get(url)

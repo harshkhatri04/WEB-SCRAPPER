@@ -86,6 +86,7 @@ it('should create Sidebar Component', () => {
 		expect(elNasdaq.textContent).toContain(component.config.sidebar.NASDAQ);
 	});
 
+//test case for checking interpolation of FUNDS
 	it('should display original category value through interpolation of FUNDS', () => {
 		fixture.detectChanges();
 		expect(elFunds.textContent).toContain(component.config.sidebar.FUNDS);

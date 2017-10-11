@@ -1,3 +1,5 @@
+//config for google oauth
+
 module.exports = {
     'successRedirect': 'http://localhost:4200/dashboard',
     'failureRedirect': 'http://localhost:4200/login',
