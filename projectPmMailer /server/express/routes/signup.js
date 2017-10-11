@@ -24,17 +24,13 @@ router.post('/users', (req, res) => {
         return res.status(400).json({ success: false, message: 'Ensure all the fields are filled' });
         logger.info("ensure all fields are filled");
     } else {
-
-
         user.save((err) => {
             // return name of error in case of error
             if (err) {
-
                 if (err.errors.name) {
                     return res.status(403).json({ success: false, message: err.errors.name.message });
                     logger.info("ensure all fields are filled");
                 }
-
             } else {
                 let transporter = nodemailer.createTransport({
                     service: configure.serviceProvider,
@@ -50,9 +46,7 @@ router.post('/users', (req, res) => {
                     subject: 'Registered on Personalized-Emailer',
                     text: 'Hello,\n\n' +
                         'You have been successfully registered on Personalized-Emailer.\n',
-
                 };
-
                 transporter.sendMail(mailOptions, function(error, info) {
                     if (error) {
                         logger.info("cannot send mail");
@@ -65,5 +59,4 @@ router.post('/users', (req, res) => {
         })
     }
 });
-
 module.exports = router;
