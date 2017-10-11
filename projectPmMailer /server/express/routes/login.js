@@ -6,7 +6,7 @@ const logger = require('../services/app.logger');
 const express = require('express');
 const router = express.Router();
 
-// login url
+// route to login with given email and password
 router.get('/signin/:email/:password', function(req, res) {
     User.findOne({
         email: req.params.email
@@ -19,7 +19,6 @@ router.get('/signin/:email/:password', function(req, res) {
 
             return res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' })
             logger.info("Authentication failed. User not found");
-            //res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
         } else {
             // check if password matches
             user.comparePassword(req.params.password, function(err, isMatch) {
@@ -27,13 +26,9 @@ router.get('/signin/:email/:password', function(req, res) {
                     // if user is found and password is right create a token
                     var token = jwt.sign({ user }, config.secret);
                     // return the information including token as JSON
-                    //console.log('success')
                     return res.status(200).send({ success: true, token: 'JWT ' + token, email: user.email, flag: user.flag });
                     logger.info("token generated successfully");
-                    //console.log({ success: true, token: 'JWT ' + token })*/
                 } else {
-                    //console.log('success')
-                    //console.log("found")
                     return res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
                     logger.info("Authentication failed. Wrong password.");
                 }
@@ -41,13 +36,15 @@ router.get('/signin/:email/:password', function(req, res) {
         }
     });
 });
-
+// route to get all the users
 router.get('/', function(req, res) {
     User.find((err, data) => {
+    	// if error occurs send the failure message
         if (err) {
             res.send({ success: false, message: "error in finding" })
             logger.info("error");
         } else {
+        	// send success message if there is no failure
             res.json(data)
             logger.info("data fetched successfully");
         }
