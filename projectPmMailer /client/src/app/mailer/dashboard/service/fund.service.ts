@@ -4,16 +4,13 @@ import { Http, Response } from '@angular/http';
 import  { config } from '../../../config/config'
 
 @Injectable()
-/**
- *  FundService class
- */
+
+//Fundservice class
 export class FundService {
 
   constructor(private http:Http) { }
 
-/**
- * [getfund description] getting funds
- */
+//method to get fund news from database
 getfund(){
 	 return this.http.get(config.urlToServer+'/postNews/fund')
 	      .map(res =>

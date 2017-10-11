@@ -1,4 +1,4 @@
-import { TestBed, fakeAsync,async, inject } from '@angular/core/testing';
+import { TestBed, fakeAsync, async, inject } from '@angular/core/testing';
 import {
   HttpModule,
   Http,

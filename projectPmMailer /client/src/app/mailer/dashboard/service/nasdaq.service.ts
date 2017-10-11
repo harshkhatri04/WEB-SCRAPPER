@@ -14,7 +14,6 @@
 	        res.json()
 	      )
 	  }
-	  //get the stocks code and company of nasdaq End
 
 	  //get the news of respective code which was selected in dropdown 
 	  getresult(term) {
