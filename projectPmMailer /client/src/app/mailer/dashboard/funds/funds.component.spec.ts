@@ -17,6 +17,7 @@ describe('FundsComponent', () => {
   let component: FundsComponent;
   let fixture: ComponentFixture<FundsComponent>;
 
+  //configuring module with testing environment
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports:[
@@ -31,11 +32,13 @@ describe('FundsComponent', () => {
     .compileComponents();
   }));
 
+  //creating fixtures and component instance for testing
   beforeEach(() => {
     fixture = TestBed.createComponent(FundsComponent);
     component = fixture.componentInstance;
   });
 
+  //test case for checking whether funds component is created or not
   it('should be create funds component', () => {
     const funds = fixture.debugElement.componentInstance;
     expect(funds).toBeTruthy();

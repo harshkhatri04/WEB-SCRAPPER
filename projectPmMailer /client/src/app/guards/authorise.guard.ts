@@ -1,36 +1,43 @@
-import { CanActivate,Router } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 
 @Injectable()
-export class AuthoriseGuard implements CanActivate{
+//AuthoriseGuard class implemenmting canActivate method to protect routes
+export class AuthoriseGuard implements CanActivate {
 
-	public authorised: boolean; 
-	public token: any;
+  public authorised: boolean;
+  public token: any;
 
-	constructor(
-		private route: Router
-				){}
 
-	canActivate(){
-		return this.isAuthorised();
-	}
+  constructor(
+    private route: Router
+  ) {
 
-	private isAuthorised(): boolean {
+  }
 
-		
-		let token = localStorage.getItem('currentUser');
-		if(token)
-		{
-		this.authorised=true;
-		}
-		else
-		{
-			this.authorised=false;
-			this.route.navigate(['/']);
+  //calling isAuthorised method to check user authorisation
+  canActivate() {
+    return this.isAuthorised();
+  }
 
-		
-		}
-		return this.authorised;
-	}
+  //checking valid or invalid user
+  private isAuthorised(): boolean {
+
+    //accessing token from local storage
+    let token = localStorage.getItem('currentUser');
+
+    //if token is valid then user can visit different routes
+    if (token) {
+      this.authorised = true;
+    }
+    
+    //redirect user to login page 
+    else
+     {
+      this.authorised = false;
+      this.route.navigate(['/']);
+    }
+    return this.authorised;
+  }
 }

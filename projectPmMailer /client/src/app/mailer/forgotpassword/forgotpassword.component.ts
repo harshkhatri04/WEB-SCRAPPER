@@ -1,11 +1,12 @@
+//importing angular libraries
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
-import { NgForm } from '@angular/forms';
-
+import { NgForm } from '@angular/forms';import { Router } from '@angular/router';
+import swal from 'sweetalert2';
+//importing 
 import { config } from '../../config/config'
 import { ForgotpasswordService } from './forgotpassword.service';
-import { Router } from '@angular/router';
-import swal from 'sweetalert2';
+
 @Component({
   selector: 'app-forgotpassword',
   templateUrl: './forgotpassword.component.html',

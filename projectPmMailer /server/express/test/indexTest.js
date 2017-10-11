@@ -18,6 +18,7 @@ let stockStub = sinon.stub(stock, 'find')
 let fundStub = sinon.stub(fund, 'find')
 let findOneStub = sinon.stub(model, 'findOneAndUpdate')
 
+//test case for the POST method of register user
 describe('POST /signup/users', () => {
     before(() => {
         insertStub.yields(null, {
@@ -48,6 +49,7 @@ describe('POST /signup/users', () => {
 
 });
 
+//test case for GET method for user login
 describe('GET /', () => {
     it('respond with json', (done) => {
 
@@ -62,6 +64,7 @@ describe('GET /', () => {
     });
 });
 
+//test case for GET method for existing user
 describe('GET /findUser/:email', () => {
     it('test find user', (done) => {
         modelStub.yields(null, { name: "Pulkit", password: "Pulkit@123", email: "Pulkit176@gmail.com", mobile: 9799999999 })
@@ -92,6 +95,7 @@ describe('get method', () => {
     });
 });
 
+//test case for GET method for retrieving currency data
 describe('get method for curency', () => {
     it('respond with json', (done) => {
         currencyStub.yields(null, [{
@@ -115,6 +119,7 @@ describe('get method for curency', () => {
     });
 });
 
+//test case for GET method for retrieving fund data
 describe('get method for fund', () => {
     it('respond with json', (done) => {
         fundStub.yields(null, [{
@@ -138,6 +143,7 @@ describe('get method for fund', () => {
     });
 });
 
+//test case for GET method for retrieving stock data
 describe('get method for stock', () => {
     it('respond with json', (done) => {
         stockStub.yields(null, [{
@@ -160,6 +166,7 @@ describe('get method for stock', () => {
     });
 });
 
+//test case for GET method for user logout
 describe('GET of logout', () => {
     it('Testing Logout', (done) => {
         request(App)
@@ -172,6 +179,7 @@ describe('GET of logout', () => {
     })
 })
 
+//test case for testing the tweets
 describe('tweets ', () => {
     it(' Testing tweets', (done) => {
         modelStub.yields(null, { name: "Pulkit", password: "Pulkit@123", email: "Pulkit176@gmail.com", mobile: 9799999999 })
@@ -180,12 +188,13 @@ describe('tweets ', () => {
             .end((err, res) => {
                 if (err) return done(err);
                 expect(res.body.name).to.be.equal("Pulkit");
-                
+
             })
-            done();
+        done();
     });
 });
 
+//test case for whether a username is updated or not
 describe('update user name', () => {
     before(function() {
         updateStub.withArgs({ _email: 'admin@gmail.com' }, { $set: { name: 'TestUser' } })
@@ -208,6 +217,7 @@ describe('update user name', () => {
     })
 })
 
+//test case for updation of alternate email ID
 describe('update alternate emailId', () => {
     before(function() {
         updateStub.withArgs({ email: 'admin@gmail.com' }, {
@@ -236,6 +246,8 @@ describe('update alternate emailId', () => {
     })
 })
 
+
+//test case for deletion of existing user account
 describe('Delete user', () => {
     it('Testing delete user', (done) => {
         request(App)
@@ -248,6 +260,8 @@ describe('Delete user', () => {
     })
 })
 
+
+//test case for testing whether password is updated or not
 describe('POST /updatePassword/:email', () => {
     it('Testing updatePassword/:email', (done) => {
         request(App)
@@ -329,7 +343,7 @@ describe('get Data ', () => {
 
 //Negative Test Cases
 
-
+//negative test case for user login
 describe('GET /login/signin/:email/:password', () => {
     it('respond with json', (done) => {
         findStub.withArgs({ 'email': 'Pulkit176@gmail.com', 'password': 'Pulkit@123' })
@@ -351,6 +365,7 @@ describe('GET /login/signin/:email/:password', () => {
     })
 })
 
+//negative test case for reset password
 describe('resetPwd ', () => {
     it('Testing Reset Password', (done) => {
         modelStub.yields(null, { name: "Pulkit", password: "Pulkit@123", email: "Pulkit176@gmail.com", mobile: 9799999999 })
@@ -504,9 +519,8 @@ describe('negative test case for tweets ', () => {
             .end((err, res) => {
                 if (err) return done(err);
                 expect(res.body.name).not.to.be.equal("Pulki");
-                
+
             })
-            done();
+        done();
     });
 });
-
