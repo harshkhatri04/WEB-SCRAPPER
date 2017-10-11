@@ -1,7 +1,10 @@
-const configuration = require('./../config/googleAuth');
+//importing pre-defined dependencies
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+
+//importing user-defined dependencies
+const configuration = require('./../config/googleAuth');
 
 /* GOOGLE ROUTER */
 router.get('/auth/google',
@@ -10,6 +13,7 @@ router.get('/auth/google',
     })
 );
 
+//Google callback router
 router.get('/auth/google/callback',
     passport.authenticate('google', {
         successRedirect: configuration.successRedirect,

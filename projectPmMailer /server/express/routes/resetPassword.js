@@ -1,13 +1,17 @@
-const User = require('../models/userModel')
-const configure = require('../config/configure');
+//importing user-defined dependencies
 const nodemailer = require('nodemailer');
 const express = require('express');
 const async = require('async');
 const router = express.Router();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const logger = require('../services/app.logger');
 const crypto = require('crypto');
+
+//importing pre-defined dependencies
+const User = require('../models/userModel')
+const configure = require('../config/configure');
+const logger = require('../services/app.logger');
+
 //This route finds a user according to his EmailId
 passport.use(new LocalStrategy(function(email, password, done) {
     User.findOne({ email: email }, function(err, user) {
@@ -22,16 +26,19 @@ passport.use(new LocalStrategy(function(email, password, done) {
         });
     });
 }));
+
 //saving the created objects in the sequence of bytes
 passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
+
 //Retrieving those saved bytes into the form of original object
 passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
         done(err, user);
     });
 });
+
 // route to generate token on forgotpassword so that it can be used to reset the password
 router.get('/forgot/:email', function(req, res, next) {
     async.waterfall([
@@ -81,7 +88,7 @@ router.get('/forgot/:email', function(req, res, next) {
                 } else {
                     res.status(200).send({ success: true });
                     logger.info("Email sent to user to reset password");
-                    
+
                 }
             });
         }
@@ -135,4 +142,5 @@ router.post('/reset/:token', function(req, res) {
         }
     });
 });
+
 module.exports = router;

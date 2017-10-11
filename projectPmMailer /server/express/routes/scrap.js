@@ -1,15 +1,18 @@
+//importing pre-defined dependencies
 let express = require('express');
 let router = express.Router();
+let request = require('request');
+let CronJob = require('cron').CronJob;
+let cheerio = require('cheerio');
+let nodemailer = require('nodemailer');
 let mongoose = require('mongoose');
+
+//importing user-defined dependencies
 let config = require('../config/database')
 let connect = mongoose.connect('mongodb://192.168.252.47:27017/testing');
 let currencymodel = require('../models/currencymodel')
 let stockmodel = require('../models/stock')
 let nasdaq = require('../models/nasdaq');
-let request = require('request');
-let CronJob = require('cron').CronJob;
-let cheerio = require('cheerio');
-let nodemailer = require('nodemailer');
 let fundmodel = require('../models/fundsmodel')
 let user = require('../models/userModel')
 let configure = require('../config/configure');
