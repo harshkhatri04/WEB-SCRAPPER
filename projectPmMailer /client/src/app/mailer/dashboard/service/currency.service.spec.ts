@@ -1,4 +1,4 @@
-import { TestBed, fakeAsync,async, inject } from '@angular/core/testing';
+import { TestBed, fakeAsync,async, inject, } from '@angular/core/testing';
 import {
   HttpModule,
   Http,
@@ -6,17 +6,23 @@ import {
   ResponseOptions,
   XHRBackend
 } from '@angular/http';
+import { Router } from '@angular/router';
+
 import { MockBackend } from '@angular/http/testing';
 import { CurrencyService } from './currency.service';
 describe('CurrencyService', () => {
-
+let routerStub;
+let router:Router;
   beforeEach(() => {
-
+      routerStub={
+        navigate: jasmine.createSpy('navigate')
+      }
     TestBed.configureTestingModule({
       imports: [HttpModule],
       providers: [
         CurrencyService,
         { provide: XHRBackend, useClass: MockBackend },
+        {provide: Router, useValue:routerStub}
       ]
     });
   });
@@ -36,4 +42,17 @@ describe('CurrencyService', () => {
     inject([XHRBackend], (backend: MockBackend) => {
       expect(backend).not.toBeNull('backend should be provided');
     }));
+
+  it('navigate to login',
+    inject([CurrencyService, XHRBackend], (currencyService, mockBackend) => {
+
+      mockBackend.connections.subscribe((connection) => {
+        connection.mockRespond(new Response(new ResponseOptions({ status: 200 })))
+      });
+      currencyService.getcurrency().subscribe((stock) => {
+             expect(stock.status).toBe(200);
+      })
+    }));
+
+
 });

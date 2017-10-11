@@ -13,6 +13,7 @@ let nodemailer = require('nodemailer');
 let fundmodel = require('../models/fundsmodel')
 let user = require('../models/userModel')
 let configure = require('../config/configure');
+let logger = require('../services/app.logger');
 
 //HTTP Post method end
 
@@ -20,7 +21,8 @@ let configure = require('../config/configure');
 router.get('/details', function(req, res, next) {
     nasdaq.find((err, data) => {
         if (err) {
-            console.log("error")
+            logger.error("error in getting details");
+
 
         } else {
             res.json(data)
@@ -33,7 +35,7 @@ router.get('/fund', function(req, res, next) {
     date = new Date();
     fundmodel.find({ day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }, (err, data) => {
         if (err) {
-            console.log("error")
+            logger.error("error in getting fund details");
 
         } else {
             res.json(data)
@@ -48,7 +50,8 @@ router.get('/news/:id', function(req, res, next) {
     date = new Date();
     stockmodel.find({ term: req.params.id, day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }, (err, data) => {
         if (err) {
-            console.log("error")
+            logger.error("error in getting news at particular id");
+
 
         } else {
             res.json(data)
@@ -62,7 +65,7 @@ router.get('/currency', function(req, res, next) {
     date = new Date();
     currencymodel.find({ day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }, (err, data) => {
         if (err) {
-            console.log("error")
+            logger.error("error in getting currency")
 
         } else {
             res.json(data)
@@ -77,7 +80,7 @@ router.get('/currency', function(req, res, next) {
 //HTTP Post method for stock price of NASDAQ for WSJ website
 router.post('/stock', function(req, res, next) {
     let term = req.body.term;
-    console.log("============================",term)
+    console.log("============================", term)
     request('http://quotes.wsj.com/' + term, function(error, response, html) {
         if (!error && response.statusCode == 200) {
             let $ = cheerio.load(html);
@@ -112,7 +115,7 @@ function getnasdaq(data) {
     for (let i = 0; i < data.length; i++) {
         term = data[i].Code;
         liststockdata(term);
-        // news(term);
+
     }
 
     function liststockdata(term) {
@@ -133,8 +136,7 @@ function getnasdaq(data) {
                     liststock = new stockmodel(stockdata);
                     liststock.save((err, data) => {
                         if (err) {
-                            // logger.error('not found')
-                            console.log('error')
+                            logger.error('not found')
                         } else if (data) {
 
                         }
@@ -170,7 +172,7 @@ function fundsnews() {
                 let listoffund = new fundmodel(funddata)
                 listoffund.save((err, data) => {
                     if (err) {
-                        console.log("error")
+                        logger.error("error in getting funds list");
 
                     } else if (data) {
 
@@ -207,10 +209,11 @@ function currencynews() {
                 let listofcurrency = new currencymodel(currencydata)
                 listofcurrency.save((err, data) => {
                     if (err) {
-                        console.log("error")
+                        logger.error("error in getting currencynews")
 
                     } else if (data) {
-                        console.log("success", data)
+                        console.success("currencynews fetched successfully")
+
                     }
 
                 })
@@ -238,13 +241,10 @@ var dailyMailJob = new CronJob({
                             let news = stockmodel.find({}).select('news');
                             news.exec(function(err, stockData) {
                                 if (err) {
-                                    console.log('error in stockmodel')
+                                    logger.error("error in stockmodelk")
                                 } else {
                                     let stock = stockData.map(ele => ele.news)
-                                    //newsData.push("stock")
-                                    //console.log(stock)
-                                    //resolve(stock);
-                                    //console.log('in else of stock')
+
                                     sendMails(data[i].email, stock)
                                 }
                             })
@@ -255,41 +255,33 @@ var dailyMailJob = new CronJob({
                             let news = fundmodel.find({}).select('News')
                             news.exec(function(err, fundData) {
                                 if (err) {
-                                    console.log('error')
+
+                                    logger.error("error");
                                 } else {
                                     let fund = fundData.map(ele => ele.News)
-                                    //resolve(fund);
-                                    //newsData.push("fund")
-                                    //console.log('in else of fund')
                                     sendMails(data[i].email, fund)
                                 }
                             })
-                            //})
+
 
                         } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
                             //p3 = new Promise((resolve, reject) => {
                             let news = currencymodel.find({}).select('News');
                             news.exec(function(err, currencyData) {
                                 if (err) {
-                                    console.log('error')
+                                    logger.error("error in getting preferences currency")
                                 } else {
                                     let currency = currencyData.map(ele => ele.News)
-                                    //  newsData.push("currency")
-                                    //resolve(currency);
-                                    //console.log(currencyData)
+
                                     sendMails(data[i].email, currency)
                                 }
                             })
-                            //})
+
 
                         }
-                        //console.log(newsData)
-                        //sendMails(data[i].email, newsData)
                     }
 
-                    /*Promise.all([p1, p2, p3]).then(values => {
-                        console.log(values)
-                    })*/
+
 
                 }
 
@@ -318,58 +310,45 @@ var weeklyMailJob = new CronJob({
                             let news = stockmodel.find({}).select('news');
                             news.exec(function(err, stockData) {
                                 if (err) {
-                                    console.log('error in stockmodel')
+                                    logger.error('error in stockmodel')
                                 } else {
                                     let stock = stockData.map(ele => ele.news)
-                                    //newsData.push("stock")
-                                    //console.log(stock)
-                                    //resolve(stock);
-                                    //console.log('in else of stock')
                                     sendMails(data[i].email, stock)
                                 }
                             })
-                            //})
+
 
                         } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
-                            //p2 = new Promise((resolve, reject) => {
+
                             let news = fundmodel.find({}).select('News')
                             news.exec(function(err, fundData) {
                                 if (err) {
-                                    console.log('error')
+                                    logger.error('error in getting data relating to funds')
                                 } else {
                                     let fund = fundData.map(ele => ele.News)
-                                    //resolve(fund);
-                                    //newsData.push("fund")
-                                    //console.log('in else of fund')
                                     sendMails(data[i].email, fund)
                                 }
                             })
-                            //})
+
 
                         } else if (data[i].preferences[0].items[2].itemName == 'Currency') {
-                            //p3 = new Promise((resolve, reject) => {
+
                             let news = currencymodel.find({}).select('News');
                             news.exec(function(err, currencyData) {
                                 if (err) {
                                     console.log('error')
                                 } else {
                                     let currency = currencyData.map(ele => ele.News)
-                                    //  newsData.push("currency")
-                                    //resolve(currency);
-                                    // console.log('in else of currency')
+
                                     sendMails(data[i].email, currency)
                                 }
                             })
-                            //})
+
 
                         }
-                        //console.log(newsData)
-                        //sendMails(data[i].email, newsData)
+
                     }
 
-                    /*Promise.all([p1, p2, p3]).then(values => {
-                        console.log(values)
-                    })*/
 
                 }
 
@@ -398,13 +377,9 @@ var monthlyMailJob = new CronJob({
                             let news = stockmodel.find({}).select('news');
                             news.exec(function(err, stockData) {
                                 if (err) {
-                                    console.log('error in stockmodel')
+                                    logger.error('error in stockmodel')
                                 } else {
                                     let stock = stockData.map(ele => ele.news)
-                                    //newsData.push("stock")
-                                    //console.log(stock)
-                                    //resolve(stock);
-                                    //console.log('in else of stock')
                                     sendMails(data[i].email, stock)
                                 }
                             })
@@ -418,9 +393,6 @@ var monthlyMailJob = new CronJob({
                                     console.log('error')
                                 } else {
                                     let fund = fundData.map(ele => ele.News)
-                                    //resolve(fund);
-                                    //newsData.push("fund")
-                                    //console.log('in else of fund')
                                     sendMails(data[i].email, fund)
                                 }
                             })
@@ -434,22 +406,17 @@ var monthlyMailJob = new CronJob({
                                     console.log('error')
                                 } else {
                                     let currency = currencyData.map(ele => ele.News)
-                                    //  newsData.push("currency")
-                                    //resolve(currency);
-                                    // console.log('in else of currency')
+
                                     sendMails(data[i].email, currency)
                                 }
                             })
                             //})
 
                         }
-                        //console.log(newsData)
-                        //sendMails(data[i].email, newsData)
+
                     }
 
-                    /*Promise.all([p1, p2, p3]).then(values => {
-                        console.log(values)
-                    })*/
+
 
                 }
             }
@@ -476,18 +443,18 @@ function sendMails(emailId, fundsData) {
         to: emailId,
         subject: 'Personalized Emailer',
         html: `<ul>News</ul><br><li>
-							${fundsData}
-							</li>`
+                            ${fundsData}
+                            </li>`
 
     };
 
     transporter.sendMail(mailOptions, function(error, info) {
         if (error) {
-            /*logger.warn("network error");*/
-            console.log("emailId is wrong " + emailId)
+            logger.warn("emailId is wrong");
+
         } else {
-            /* logger.info("Email sent to user to reset password");*/
-            console.log("successfully to " + emailId)
+            logger.info("Email sent to user to reset password");
+
         }
     });
 }
@@ -499,9 +466,9 @@ var job = new CronJob({
     onTick: function(req, res, next) {
         nasdaq.find((err, data) => {
             if (err) {
-                console.log("error")
+                logger.error("error")
             } else {
-                console.log('Sheduler start')
+                logger.info('Sheduler start')
                 getnasdaq(data);
                 fundsnews();
                 currencynews();

@@ -20,6 +20,7 @@ router.put('/updateName/:email', (req, res) => {
             res.send(err)
         } else {
             res.send(result)
+            logger.info("updating name by given email")
         }
     });
 });
@@ -55,6 +56,7 @@ router.delete('/deleteUser/:email', (req, res) => {
                 res.send(err)
             } else {
                 res.send('deleted successfully');
+                logger.info("user account deleted successfully")
             }
         }
     );
@@ -63,17 +65,20 @@ router.delete('/deleteUser/:email', (req, res) => {
 // route to update password
 // route starts here
 router.post('/updatePassword/:email', (req, res) => {
+
     User.findOne({ email: req.params.email }, function(err, user) {
         if (err) {
             res.status(400).send({ status: false, message: 'error updating password' })
         } else {
-            user.comparePassword(req.body.password, function(err, isMatch) {
+            user.comparePassword(req.body.currentPwd, function(err, isMatch) {
                 if (isMatch && !err) {
-                    user.password = req.body.newPassword;
+                    user.password = req.body.newPwd;
                     user.save((err) => {
                         if (err) {
+                            logger.error("could not update password")
                             res.status(400).send({ success: false, message: 'could not update password' })
                         } else {
+                            logger.success("password updated successfully")
                             res.status(200).send({ success: true, message: 'password updated successfully' })
                         }
                     })
@@ -83,6 +88,7 @@ router.post('/updatePassword/:email', (req, res) => {
             })
         }
     })
+
 })
 
 router.put('/flag/:email', (req, res) => {
@@ -93,13 +99,12 @@ router.put('/flag/:email', (req, res) => {
             flag: req.body.flag
         }
     }, (err, Data) => {
-        /*console.log(JSON.stringify(Data))*/
+
         if (err) {
-            console.log('error occured');
+            logger.error('error occured');
         } else {
 
             res.send(Data);
-            //console.log(JSON.stringify(Data));
         }
 
     });
