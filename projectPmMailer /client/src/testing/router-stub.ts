@@ -1,4 +1,4 @@
-import { Component, OnInit,Input,Directive } from '@angular/core';
+import { Component, OnInit, Input, Directive } from '@angular/core';
 
 @Directive({
   selector: '[routerLink]',

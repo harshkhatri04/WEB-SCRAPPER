@@ -8,7 +8,7 @@ const passport = require('passport');
 router.get('/auth/facebook',
    passport.authenticate('facebook', { scope: 'email' })
 );
-
+// callback url for Personalised Mailer
 router.get('/auth/facebook/callback',
    passport.authenticate('facebook', {
        successRedirect: configurationFb.successRedirect,

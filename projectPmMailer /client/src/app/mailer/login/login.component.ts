@@ -88,7 +88,6 @@ export class LoginComponent implements OnInit {
   }
 
 
-
   //Method for google-auth
   loginByGoogle() {
     this.LoginService.google()

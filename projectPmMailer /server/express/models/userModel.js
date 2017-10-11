@@ -26,10 +26,11 @@ UserSchema.pre("save", function(next) {
         items: [{ "id": 1, "itemName": "Funds" }],
         frequency: 'Daily'
     }
-    if (this.preferences.length == 0)
-        this.preferences.push(obj);
-
+    if (this.preferences.length == 0){
+        this.preferences.push(obj);}
+    
     next();
+    
 });
 //pre method to encrypt password
 UserSchema.pre('save', function(next) {

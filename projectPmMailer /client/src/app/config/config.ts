@@ -106,6 +106,12 @@ export const config = {
 
   "nasdaq":{
   	"READ_MORE":"Read More"
+  },
+
+  "updatepassword":{
+  	"CURRENT_PASSWORD":"Current Password",
+  	"NEW_PASSWORD":"New Password",
+  	"CONFIRM_PASSWORD":"Confirm Password"
   }
 }
 
