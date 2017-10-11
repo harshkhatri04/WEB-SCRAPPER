@@ -21,14 +21,13 @@ export class SettingsComponent implements OnInit {
   email: string;
   constructor(
     @Inject(FormBuilder) private fb: FormBuilder,
-    private settingsService: SettingsService) {
+      private settingsService: SettingsService) {
     //this.fb=fb;
     this.userInfo = fb.group({
       email: ['', [Validators.required]],
-      //status:['',[Validators.required]],
       name: ['', [Validators.required]],
       mobile: ['', [Validators.required]],
-      alternateEmail: ['', [Validators.required]]
+      alternateEmail: ''
 
     });
   }
@@ -37,7 +36,7 @@ export class SettingsComponent implements OnInit {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.email = this.currentUser.email;
-    // get user details from local storage
+  
     this.settingsService.getDataFromDB(this.email)
       .subscribe((res) => {
         let data = {
@@ -47,10 +46,11 @@ export class SettingsComponent implements OnInit {
           alternateEmail: res.alternateEmail
         }
            this.displayData(data);
+           /*this.displayPwdData(data);*/
       })
     }
 
-  //
+  
   displayData(data: any) {
     this.userInfo = this.fb.group({
       email: [data.email],
@@ -72,5 +72,4 @@ export class SettingsComponent implements OnInit {
         })
 
   }
-
 }
