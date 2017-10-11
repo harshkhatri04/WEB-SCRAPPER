@@ -8,7 +8,12 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const logger = require('../services/app.logger');
 const crypto = require('crypto');
+<<<<<<< HEAD
 //reset pwd routes
+=======
+
+//This route finds a user according to his EmailId
+>>>>>>> 0cf583b3155a1ccf93f0feba2b080f9a6ca4627a
 passport.use(new LocalStrategy(function(email, password, done) {
     User.findOne({ email: email }, function(err, user) {
         if (err) return done(err);
@@ -22,15 +27,17 @@ passport.use(new LocalStrategy(function(email, password, done) {
         });
     });
 }));
+//saving the created objects in the sequence of bytes
 passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
+//Retrieving those saved bytes into the form of original object
 passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
         done(err, user);
     });
 });
-// route to provide token on forgotpassword
+// route to generate token on forgotpassword so that it can be used to reset the password
 router.get('/forgot/:email', function(req, res, next) {
     async.waterfall([
         function(done) {
@@ -56,8 +63,6 @@ router.get('/forgot/:email', function(req, res, next) {
         },
         //function to send a reset link on email
         function(token, user, done) {
-            var nodemailer = require('nodemailer');
-
             var transporter = nodemailer.createTransport({
                 service: configure.serviceProvider,
                 auth: {
@@ -90,6 +95,7 @@ router.get('/forgot/:email', function(req, res, next) {
         logger.info('redirect to forgot')
     });
 });
+
 // route to take reset password request
 router.get('/reset/:token', function(req, res) {
     var rpwtoken = req.params.token;
@@ -103,7 +109,8 @@ router.get('/reset/:token', function(req, res) {
         logger.warn("redirect to reset password page");
     });
 });
-//route to reset password
+
+//route to reset password of the user
 router.post('/reset/:token', function(req, res) {
     async.waterfall([
         function(done) {
