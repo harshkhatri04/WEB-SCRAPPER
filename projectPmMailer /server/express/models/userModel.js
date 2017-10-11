@@ -1,10 +1,10 @@
+/*requiring dependencies*/
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 const titlize = require('mongoose-title-case');
 const validate = require('mongoose-validator');
-
-
+// structure of user saved in database 
 let UserSchema = new Schema({
     name: { type: String },
     id: { type: String },
@@ -20,7 +20,6 @@ let UserSchema = new Schema({
     alternateEmail: { type: String, default: null },
     flag: { type: Number, default: 0 },
 });
-
 UserSchema.pre("save", function(next) {
     let obj = {
         items: [{ "id": 1, "itemName": "Funds" }],
@@ -43,7 +42,6 @@ UserSchema.pre('save', function(next) {
     });
 
 })
-
 UserSchema.plugin(titlize, {
     paths: ['name'] // Array of paths 
 
@@ -57,6 +55,5 @@ UserSchema.methods.comparePassword = function(passw, cb) {
         cb(null, isMatch);
     });
 };
-
-
+// schema exported as model
 module.exports = mongoose.model('User', UserSchema);

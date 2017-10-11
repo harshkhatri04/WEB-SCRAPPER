@@ -1,5 +1,5 @@
 /* for dashboard content */
-
+/* margin for news */
 .marg {
   margin-left: 7%;
   margin-top: 7%;
@@ -9,11 +9,13 @@
   width: 200px !important;
 }
 
+/* color for jumbotron */
 .text {
 	color: white;
  background-color:black;
 }
 
+/* for the news list */
 .list li {
   float: left;
   margin-left: 10px;
@@ -23,10 +25,12 @@
   list-style: none;
 }
 
+/* for image in tweets */
 .img {
   width: 100%;
 }
 
+/* for the position of news */
 .profile {
   position: absolute;
   top: -12px;
@@ -59,15 +63,19 @@
    margin-left: 4px;
    vertical-align: top;
 }
+
+/* card fro twitter data */
 .card-data{
   background-color:white;
   margin-left: 3%;
 
 }
+
 .fa {
   margin-right: 1%;
 }
 
+/* size of image in tweets */
 .size{
     height:100%;
     width: 100%;
