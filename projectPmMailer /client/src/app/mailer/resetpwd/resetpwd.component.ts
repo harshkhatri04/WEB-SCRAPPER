@@ -43,29 +43,30 @@ export class ResetpwdComponent implements OnInit {
   get pwd() { return this.form.get('pwd'); }
   get cpwd() { return this.form.get('cpwd'); }
 
+
+  // Function to reset password
   reset(resetpwd) {
     this.mydata = {
       password: resetpwd
     }
     this.ResetpwdService.resetPassword(this.mydata, this.tkn)
       .subscribe((res) => {
-        if (res){
+        if (res) {
           //alert("password has been changed")
           swal({
-      timer: 3000,
-      title: "Personalised Mailer!",
-      text: "your password has been changed",
-      type: 'success',
-      showConfirmButton: false,
-    }).then(()=>{},
-    (dismiss)=>{
-      if (dismiss === 'timer') {
-        //navigate here
-        this.Router.navigateByUrl('reset') 
-      }
-    });
-        }
-        else{
+            timer: 3000,
+            title: "Personalised Mailer!",
+            text: "your password has been changed",
+            type: 'success',
+            showConfirmButton: false,
+          }).then(() => {},
+            (dismiss) => {
+              if (dismiss === 'timer') {
+                //navigate here to reset
+                this.Router.navigateByUrl('reset')
+              }
+            });
+        } else {
           this.Router.navigateByUrl('login')
         }
       }, error => {
