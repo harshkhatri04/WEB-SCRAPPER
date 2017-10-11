@@ -1,5 +1,8 @@
+//importing pre-defined dependencies
 const express = require('express');
 const router = express.Router();
+
+//importing user-defined dependencies
 const logger = require('../services/app.logger');
 
 //route for logout
