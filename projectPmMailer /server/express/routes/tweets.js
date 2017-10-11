@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Twit = require('twit');
+
 var config = require('../config/tweetconfig');
 
 // instantiate Twit module
@@ -17,11 +18,9 @@ router.get('/user_timeline/:user', function(req, res) {
 
     var oembedTweets = [],
         tweets = [],
-
         params = {
             screen_name: req.params.user, // the user id passed in as part of the route
             count: TWEET_COUNT, // how many tweets to return
-
         };
 
     // the max_id is passed in via a query string param
@@ -31,12 +30,9 @@ router.get('/user_timeline/:user', function(req, res) {
 
     // request data 
     twitter.get(USER_TIMELINE_URL, params, function(err, data, resp) {
-
         tweets = data;
-
         var i = 0,
             len = tweets.length;
-
         for (i; i < len; i++) {
             getOEmbed(tweets[i]);
         }
