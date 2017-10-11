@@ -517,7 +517,7 @@ h2 {
 
 .loginBtn--facebook {
 
-  margin-left: 15%;
+  margin-left: 5%;
 
   background-color: #4C69BA;
 
@@ -549,7 +549,7 @@ h2 {
 .loginBtn--google {
 
   /*font-family: "Roboto", Roboto, arial, sans-serif;*/
-  margin-left: 15%;
+  margin-left: 5%;
 
   background: #DD4B39;
 }
