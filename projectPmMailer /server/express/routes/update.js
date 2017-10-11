@@ -1,13 +1,9 @@
 const express = require('express');
-const app = express();
 const router = express.Router();
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-
 const User = require('../models/userModel')
-const config = require('../config/database');
-const configure = require('../config/configure');
+
 const logger = require('../services/app.logger');
+
 //route to update name by the given email
 //route starts here
 router.put('/updateName/:email', (req, res) => {
@@ -25,9 +21,9 @@ router.put('/updateName/:email', (req, res) => {
     });
 });
 //route ends here
+
 //route to update name by the given email
 //route starts here
-
 router.put('/updateUser/:email', (req, res) => {
     User.update({ email: req.params.email }, {
         $set: {
@@ -61,11 +57,11 @@ router.delete('/deleteUser/:email', (req, res) => {
         }
     );
 });
+//route ends here
 
 // route to update password
 // route starts here
 router.post('/updatePassword/:email', (req, res) => {
-
     User.findOne({ email: req.params.email }, function(err, user) {
         if (err) {
             res.status(400).send({ status: false, message: 'error updating password' })
@@ -90,23 +86,22 @@ router.post('/updatePassword/:email', (req, res) => {
     })
 
 })
+//route ends here
 
+// route to maintain flag for the first time preference Set
+// route starts here
 router.put('/flag/:email', (req, res) => {
     req.body.flag = 1;
     User.update({ email: req.params.email }, {
-
         $set: {
             flag: req.body.flag
         }
     }, (err, Data) => {
-
         if (err) {
             logger.error('error occured');
         } else {
-
             res.send(Data);
         }
-
     });
 });
 // route ends here
