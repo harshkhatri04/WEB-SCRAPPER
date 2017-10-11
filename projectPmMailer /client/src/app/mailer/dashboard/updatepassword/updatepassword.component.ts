@@ -1,6 +1,8 @@
+/*importing all the angular  dependencies required in the component*/
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 
+/*importing all the user defined  dependencies required in the component*/
 import { config } from '../../../config/config';
 import { SettingsService } from '../settings/settings.service';
 import { UpdatepasswordService } from './updatepassword.service';
@@ -10,17 +12,19 @@ import { UpdatepasswordService } from './updatepassword.service';
   templateUrl: './updatepassword.component.html',
   styleUrls: ['./updatepassword.component.css']
 })
+/*UpdatePassword component class*/
 export class UpdatepasswordComponent implements OnInit {
   pwdInfo: FormGroup;
   config = config;
   currentUser: any;
   email: string;
+  /*constructor of component*/
   constructor(
     @Inject(FormBuilder)
     private fbPwd: FormBuilder,
       private updatepasswordService: UpdatepasswordService,
       private settingsService: SettingsService) {
-
+   
     this.pwdInfo = fbPwd.group({
       currentPwd: ['', [Validators.required]],
       newPwd: ['', [Validators.required]],
@@ -28,12 +32,12 @@ export class UpdatepasswordComponent implements OnInit {
       email:''
     });
   }
-
+  /*method called when the component loads*/
   ngOnInit() {
-
+    /*getting user details from local storage*/
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.email = this.currentUser.email;
-  
+    /*calling method in SettingsService to get data of user for the given email*/
     this.settingsService.getDataFromDB(this.email)
       .subscribe((res) => {
         let data = {
@@ -42,11 +46,12 @@ export class UpdatepasswordComponent implements OnInit {
           confirmPwd: '',
           newPwd:''
         }
+           /*method to display data on the form*/
            this.displayData(data);
       })
     }
 
-  
+  /*definition of display data*/
   displayData(data: any) {
     this.pwdInfo = this.fbPwd.group({
        email:[data.email],
@@ -55,7 +60,7 @@ export class UpdatepasswordComponent implements OnInit {
        newPwd:[data.newPwd]
        })
   }
-
+  /*method to update password*/
   updatePwdInfo(pwdInfo,email) {
     let userPwd = {
       currentPwd: pwdInfo.get('currentPwd').value,
@@ -63,6 +68,7 @@ export class UpdatepasswordComponent implements OnInit {
       confirmPwd:pwdInfo.get('confirmPwd').value
     }
     if(userPwd.newPwd===userPwd.confirmPwd){
+      /*calling method in service*/
     	this.updatepasswordService.updateUserPwd(userPwd,email)
      .subscribe((res)=>{
        console.log(res)
