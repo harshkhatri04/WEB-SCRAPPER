@@ -5,12 +5,12 @@ var Twit = require('twit');
 var config = require('../config/tweetconfig');
 
 // instantiate Twit module
-var twitter = new Twit(config.twitter);
-const logger = require('../services/app.logger');
+var twitter = new Twit(config.twitter); //loading the access keys and consumer keys 
+const logger = require('../services/app.logger'); //logger
 
-var TWEET_COUNT = 25;
+var TWEET_COUNT = 25;                   //setting the numer of tweets to show
 var MAX_WIDTH = 305;
-var OEMBED_URL = 'statuses/oembed';
+var OEMBED_URL = 'statuses/oembed';      //setting the urls from the api to acess the required tweets
 var USER_TIMELINE_URL = 'statuses/user_timeline';
 
 
