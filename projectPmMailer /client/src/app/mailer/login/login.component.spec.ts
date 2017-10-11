@@ -33,10 +33,10 @@ describe('testing login component', () => {
     }).compileComponents();
   })
 
-  //sync beforeEach
+  /*Initial configuration that will run before every testcase*/
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
-    comp = fixture.componentInstance; //SignUp Component instance
+    comp = fixture.componentInstance; //Login Component instance
     deStock = fixture.debugElement.query(By.css('p'));
     elStock = deStock.nativeElement;
 
@@ -47,11 +47,13 @@ describe('testing login component', () => {
 
   })
 
+  /*Testcase to check whether service is injected or not*/
   it('should create Login component', () => {
     const login = fixture.debugElement.componentInstance;
     expect(login).toBeTruthy();
   });
 
+  /*Testcase to check whether label is currently displayed or not*/
   it('should display carousel heading through interpolation', () => {
     fixture.detectChanges();
     expect(elStock.textContent).toContain(comp.config.login.PICTURE_DESCRIPTION_1);
@@ -59,10 +61,3 @@ describe('testing login component', () => {
 
 
 })
-
-/*it('it can get router links from template',()=>{
-expect(links.length).toBe(2,'should have 2 links');
-expect(links[0].linkParams).toBe('/dashboard','1st link should go to dashboard');
-expect(links[1].linkParams).toBe('/settings','2nd link should go to settings');
-expect(links[2].linkParams).toBe('/charts','3rd link should go to charts');
-})*/

@@ -23,7 +23,7 @@ import {TweetService} from './service/tweet.service';
     '(click)': 'onClick()'
   }
 })
-
+/*Router stub class*/
 export class RouterLinkStubDirective {
   @Input('routerLink') linkParams: any;
   navigatedTo: any = null;
@@ -43,7 +43,7 @@ describe('DashboardComponent', () => {
  let elstock: HTMLElement;
 
  let mockData = ["value of Nasdaq is 360","value of sensex  is 450"];
-
+/*configuring module with testing environment*/
  beforeEach(async(() => {
    TestBed.configureTestingModule({
      imports: [FormsModule,HttpModule],
@@ -60,15 +60,6 @@ describe('DashboardComponent', () => {
  beforeEach(() => {
    fixture = TestBed.createComponent(DashboardComponent);
    component = fixture.componentInstance;
-
-   // tweetService actually injected into the component
-    // let tweetService = fixture.debugElement.injector.get(TweetService);
-   
-    // Setup spy on the `twitinsight` method
-    // spy = spyOn(Service, 'getnasdaqstocks')
-    //       .and.returnValue(Observable.of(mockData));
-
-    // Get the mockdata element by CSS selector (e.g., by class name)
     
     destock = fixture.debugElement.query(By.css('.logout'));
     elstock = destock.nativeElement;
@@ -78,11 +69,11 @@ describe('DashboardComponent', () => {
 
 
  });
-
+/*checking creation of dashboard component*/
 it('should create dashboard component',()=>{
  expect(component).toBeTruthy();
 });
-
+/*checking display of title*/
 it('should display read more title', () => {
 
  fixture.detectChanges()
@@ -90,19 +81,12 @@ it('should display read more title', () => {
 
 });
 
+/*checking logout method*/
 it('should display logout', () => {
 
 fixture.detectChanges()
   expect(elstock.textContent).toContain(component.config.dashboard.LOGOUT);
 
 });
-// it('testing ng oninit method',fakeAsync(()=>{
-//   fixture.detectChanges();
-//   tick();
-//   fixture.detectChanges();
-//   expect(spy.calls.any()).toBe(true);
-
-
-// }))
 
 });

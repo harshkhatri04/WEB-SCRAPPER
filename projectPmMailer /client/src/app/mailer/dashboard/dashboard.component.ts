@@ -27,25 +27,20 @@ export class DashboardComponent implements OnInit {
  news: any = [];
  value: any;
  investmentProductuser:string;
- //load dropdown for nasdaq stocks  
+
  ngOnInit() {
    this.twitinsight();   
 
  }
- //load dropdown for nasdaq stocks end
-
- //This function load the news basis of the the stock which was selected in dropdown  
- 
 
  twitinsight(){
     
     let user='Schuldensuehner';
     this.tweetService.tweetSearch(user).subscribe((data)=>{
           this.investmentProductuser=data;
-          // console.log(this.investmentProductuser);
         })
   }
-
+/*logot method*/
  logout() {
    this.DashboardService.signout()
      .subscribe((res) => {
