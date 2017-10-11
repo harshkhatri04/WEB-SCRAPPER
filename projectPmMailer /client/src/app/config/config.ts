@@ -31,8 +31,8 @@ export const config = {
 	"PICTURE_DESCRIPTION_2": "Stock market bubbles don't grow out of thin air. They have a solid basis in reality, but reality as distorted by a misconception.",
 	"FORGET_PASSWORD": "Forgot Password",
 	"NEW_USER": "New User",
-	"FACEBOOK": "Login With Facebook",
-	"GOOGLE": "Login With Google"
+	"FACEBOOK": "Login",
+	"GOOGLE": "Login"
   },
 
   "dashboard": {
