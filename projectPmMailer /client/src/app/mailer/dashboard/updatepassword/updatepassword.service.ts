@@ -12,7 +12,6 @@ export class UpdatepasswordService {
   
 
   updateUserPwd(userPwdInfo,email){
-  	console.log(userPwdInfo,email,"hii")
     const url =config.urlToServer+'/update/updatePassword/'+email;
     return this.http.post(url,userPwdInfo)
                      .map(res=>res.json(),error=>error.json())

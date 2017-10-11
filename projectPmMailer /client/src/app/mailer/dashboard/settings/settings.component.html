@@ -9,28 +9,28 @@
     <div class="col-md-8 marg">
       <form [formGroup]="userInfo" novalidate>
         <div class="form-group">
-          <label class="center-block">Name:
+          <label class="center-block">{{config.settings.NAME}}
             <input class="form-control" formControlName="name">
           </label>
         </div>
         <div class="form-group">
-          <label class="center-block">Email:
+          <label class="center-block">{{config.settings.EMAIL}}
             <input class="form-control" formControlName="email" readonly>
           </label>
         </div>
         <div class="form-group">
-          <label class="center-block"> Add Alternate Email:
+          <label class="center-block">{{config.settings.ALTERNATE_EMAIL}}
             <input class="form-control" formControlName="alternateEmail">
           </label>
         </div>
         <div class="form-group">
-          <label class="center-block">Mobile:
+          <label class="center-block">{{config.settings.MOBILE}}
             <input class="form-control" formControlName="mobile">
           </label>
         </div>
         <button (click)="updateUserInfo(userInfo,userInfo.get('email').value)">{{config.settings.SAVE}}</button>
       </form>
-      <a [routerLink]="'/updatePassword'">Update Password</a>
+      <a [routerLink]="'/updatePassword'">{{config.setttings.UPDATE_PASSWORD}}</a>
     </div>
   </div>
 </div>

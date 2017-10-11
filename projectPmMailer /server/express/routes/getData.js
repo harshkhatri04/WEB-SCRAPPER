@@ -14,7 +14,7 @@ router.get('/findUser/:email', function(req, res) {
 
     User.findOne({ email: req.params.email }, (err, data) => {
         if (err) {
-            logger.success("user not found");
+            logger.info("user not found");
             res.send({ success: false, message: 'user not found' })
         } else {
             logger.info("user found in database")
