@@ -100,6 +100,18 @@ export const config = {
   	"INVESTMENT_TYPE" :   "Investment Type",
   	 "SELECT_FREQUENCY_OF_MAIL":"Select the Frequency of Email",
   	 "SUBMIT":"Submit",
+  },
+
+  "currency":{
+  	"READ_MORE":"Read More"
+  },
+
+  "funds":{
+  	"READ_MORE":"Read More"
+  },
+
+  "nasdaq":{
+  	"READ_MORE":"Read More"
   }
 }
 
