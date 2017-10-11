@@ -87,8 +87,10 @@
   }
 }
 
-
-
 .side {
   width: 150px;
+}
+
+.marg{
+  width: 100%;
 }
