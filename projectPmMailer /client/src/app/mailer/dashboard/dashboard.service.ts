@@ -10,7 +10,7 @@ export class DashboardService {
   constructor(private http: Http) {}
   //method for logout
   signout() {
-    const url = config.urlToServer.DASHBOARD_SERVICE_GET
+    const url = config.urlToServer+'/logout/logout/'
     return this.http
       .get(url)
       .map(res => res, error => error)

@@ -10,7 +10,7 @@ import { LoginComponent } from './login.component';
 import { SignUpComponent } from '../sign-up/sign-up.component';
 import { ForgotpasswordComponent } from '../forgotpassword/forgotpassword.component';
 import { LoginService } from './login.service';
-import {RouterLinkStubDirective} from '../../../testing/router-stub';
+import { RouterLinkStubDirective } from '../../../testing/router-stub';
 
 describe('testing login component', () => {
 
@@ -26,9 +26,9 @@ describe('testing login component', () => {
 
     TestBed.configureTestingModule({
       imports: [RouterTestingModule,
-        FormsModule, ReactiveFormsModule,HttpModule
+        FormsModule, ReactiveFormsModule, HttpModule
       ],
-      declarations: [LoginComponent,SignUpComponent,ForgotpasswordComponent,RouterLinkStubDirective], //declaring component to be tested
+      declarations: [LoginComponent, SignUpComponent, ForgotpasswordComponent, RouterLinkStubDirective], //declaring component to be tested
       providers: [{ provide: LoginService }]
     }).compileComponents();
   })
@@ -41,8 +41,8 @@ describe('testing login component', () => {
     elStock = deStock.nativeElement;
 
 
-    linkDes=fixture.debugElement.queryAll(By.directive(RouterLinkStubDirective));
-    links=linkDes.map(de=>de.injector.get(RouterLinkStubDirective)as RouterLinkStubDirective);
+    linkDes = fixture.debugElement.queryAll(By.directive(RouterLinkStubDirective));
+    links = linkDes.map(de => de.injector.get(RouterLinkStubDirective) as RouterLinkStubDirective);
     console.log(links);
 
   })
@@ -58,13 +58,11 @@ describe('testing login component', () => {
   });
 
 
- })
+})
 
-  /*it('it can get router links from template',()=>{
-  expect(links.length).toBe(2,'should have 2 links');
-  expect(links[0].linkParams).toBe('/dashboard','1st link should go to dashboard');
-  expect(links[1].linkParams).toBe('/settings','2nd link should go to settings');
-  expect(links[2].linkParams).toBe('/charts','3rd link should go to charts');
-  })*/
-
- 
+/*it('it can get router links from template',()=>{
+expect(links.length).toBe(2,'should have 2 links');
+expect(links[0].linkParams).toBe('/dashboard','1st link should go to dashboard');
+expect(links[1].linkParams).toBe('/settings','2nd link should go to settings');
+expect(links[2].linkParams).toBe('/charts','3rd link should go to charts');
+})*/

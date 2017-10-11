@@ -7,94 +7,85 @@ import { LoginService } from './login.service';
 import { DialogService } from "ng2-bootstrap-modal";
 import { config } from '../../config/config';
 
-import {PreferenceComponent} from '../preference/preference.component';
+import { PreferenceComponent } from '../preference/preference.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers:[LoginService,DialogService,HttpModule]
+  providers: [LoginService, DialogService, HttpModule]
 })
 export class LoginComponent implements OnInit {
-
-  /*alert:{
-    type:any,
-    message:any
-  };*/
-  alert: any={};
+  alert: any = {};
   public myErrorMsg: string;
 
-	constructor(private LoginService: LoginService, private router: Router, private dialogService:DialogService) {}
-	value: any;
-	hero = { email: '', pwd: '' };
-	form: FormGroup;
-	config = config;
-	emailId:string;
-	password:string;
-  name:string;
-  mobile:any;
-  flag:number;
+  constructor(private LoginService: LoginService, private router: Router, private dialogService: DialogService) {}
+  value: any;
+  hero = { email: '', pwd: '' };
+  form: FormGroup;
+  config = config;
+  emailId: string;
+  password: string;
+  name: string;
+  mobile: any;
+  flag: number;
   registeredData: any;
   emailCheck: string;
-	ngOnInit(): void {
-		
-		this.form = new FormGroup({ /*Validation functions through regex*/
-			'email': new FormControl(this.hero.email, [
-				Validators.required ||
-				Validators.minLength(4),
-				Validators.pattern("[^ @]*@[^ @]*")
-			]),
-			'pwd': new FormControl(this.hero.pwd, [
-				Validators.required,
-				Validators.minLength(4)
-			]),
-		});
+  ngOnInit(): void {
+
+    this.form = new FormGroup({ /*Validation functions through regex*/
+      'email': new FormControl(this.hero.email, [
+        Validators.required ||
+        Validators.minLength(4),
+        Validators.pattern("[^ @]*@[^ @]*")
+      ]),
+      'pwd': new FormControl(this.hero.pwd, [
+        Validators.required,
+        Validators.minLength(4)
+      ]),
+    });
 
   }
   get email() { return this.form.get('email'); }
 
   get pwd() { return this.form.get('pwd'); }
 
-//Method for Local Login with Local Storage
-	checkUser(emailID, pwd) {
-		this.LoginService.findUser(emailID, pwd)
-			.subscribe((res) => { // getting user information from server  
-				this.value = res.token;
-        this.name = res.name;
-        this.emailId = res.email;
-        this.mobile = res.mobile;
-        this.password = res.password;
-        this.flag=res.flag;
-      // setting user information in local storage
-			localStorage.setItem('currentUser', JSON.stringify({ 
-				token: this.value,
-				email:this.emailId,
+  //Method for Local Login with Local Storage
+  checkUser(emailID, pwd) {
+    this.LoginService.findUser(emailID, pwd)
+      .subscribe((res) => { // getting user information from server  
+          this.value = res.token;
+          this.name = res.name;
+          this.emailId = res.email;
+          this.mobile = res.mobile;
+          this.password = res.password;
+          this.flag = res.flag;
+          // setting user information in local storage
+          localStorage.setItem('currentUser', JSON.stringify({
+            token: this.value,
+            email: this.emailId
+          }));
+          if (this.value) { // checking if retrieved token is valid or not
+            if (this.flag == 0) {
+              this.router.navigateByUrl('dashboard'),
+                this.showConfirm()
+              this.flag++;
+              this.flagSet(this.flag)
+            } else {
+              this.router.navigateByUrl('dashboard')
+            }
+          } else {
+            alert('Invalid Credentials');
+          }
 
-				}));
-		  if(this.value){// checking if retrieved token is valid or not
-        if(this.flag==0){
-			  this.router.navigateByUrl('dashboard'),
-        this.showConfirm()
-        this.flag++;
-        this.flagSet(this.flag)
-        }
-        else{
-          this.router.navigateByUrl('dashboard')
-        }
-      }
-			else{
-				alert('Invalid Credentials');
-      }
-       
 
-			},
-      error => {
-        this.newAlert('none','You have entered wrong credentials')
-        this.myErrorMsg="email id not correct";
-        console.log("Error wrong email id" + error)
-      })
-	}
-
+        },
+        error => {
+          this.newAlert('none', 'You have entered wrong credentials')
+          this.myErrorMsg = "email id not correct";
+          console.log("Error wrong email id" + error)
+        })
+  }
 
 
   //Method for google-auth
@@ -124,38 +115,36 @@ export class LoginComponent implements OnInit {
         console.log("Error" + error)
       })
   }
- // alert method
-  newAlert(type: String, message:String)
-  {
-    this.alert={
-      type:type,
-      message:message
+  // alert method
+  newAlert(type: String, message: String) {
+    this.alert = {
+      type: type,
+      message: message
     }
   }
 
-//method for first time preference set
-flagSet(flag:number){
-  this.registeredData=JSON.parse(localStorage.getItem('currentUser'));
-       this.emailCheck=this.registeredData.email;
-    this.LoginService.firstPreference(flag,this.emailCheck).subscribe((data)=>{
-        })
+  //method for first time preference set
+  flagSet(flag: number) {
+    this.registeredData = JSON.parse(localStorage.getItem('currentUser'));
+    this.emailCheck = this.registeredData.email;
+    this.LoginService.firstPreference(flag, this.emailCheck).subscribe((data) => {})
   }
   //method for first time preference set end
 
   //method for preference set
-	showConfirm() {
-            let disposable = this.dialogService.addDialog(PreferenceComponent, {
-                title:'Confirm title', 
-                message:'Confirm message'})
-                .subscribe((isConfirmed)=>{
-                    //We get dialog result
-                    if(isConfirmed) {
-                        alert('accepted');
-                    }
-                    else {
-                        alert('declined');
-                    }
-                });
+  showConfirm() {
+    let disposable = this.dialogService.addDialog(PreferenceComponent, {
+        title: 'Confirm title',
+        message: 'Confirm message'
+      })
+      .subscribe((isConfirmed) => {
+        //We get dialog result
+        if (isConfirmed) {
+          alert('accepted');
+        } else {
+          alert('declined');
         }
-   //method for preference set end
+      });
+  }
+  //method for preference set end
 }
