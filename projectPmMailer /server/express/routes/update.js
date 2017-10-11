@@ -20,6 +20,7 @@ router.put('/updateName/:email', (req, res) => {
             res.send(err)
         } else {
             res.send(result)
+            logger.info("updating name by given email")
         }
     });
 });
@@ -55,6 +56,7 @@ router.delete('/deleteUser/:email', (req, res) => {
                 res.send(err)
             } else {
                 res.send('deleted successfully');
+                logger.info("user account deleted successfully")
             }
         }
     );
@@ -73,8 +75,10 @@ router.post('/updatePassword/:email', (req, res) => {
                     user.password = req.body.newPwd;
                     user.save((err) => {
                         if (err) {
+                            logger.error("could not update password")
                             res.status(400).send({ success: false, message: 'could not update password' })
                         } else {
+                            logger.success("password updated successfully")
                             res.status(200).send({ success: true, message: 'password updated successfully' })
                         }
                     })
@@ -95,13 +99,12 @@ router.put('/flag/:email', (req, res) => {
             flag: req.body.flag
         }
     }, (err, Data) => {
-        /*console.log(JSON.stringify(Data))*/
+
         if (err) {
-            console.log('error occured');
+            logger.error('error occured');
         } else {
 
             res.send(Data);
-            //console.log(JSON.stringify(Data));
         }
 
     });

@@ -4,7 +4,6 @@ import { Http, Response } from '@angular/http';
 export class CurrencyService {
   getstockapi: string = 'http://localhost:3000';
   constructor(private http: Http) {}
-
   /**
    * [getcurrency description] getting currency details
    * @return {[type]} [description]

@@ -47,12 +47,12 @@ router.get('/forgot/:email', function(req, res, next) {
             rpwtoken = token;
             User.findOne({ email: req.params.email }, function(err, user) {
                 if (!user) {
-                    console.log("agayallll")
+
                     logger.warn("No account with that email address exists.");
                     return res.status(400).send({ success: false, message: 'No account with that email address exists' });
-                    
+
                 }
-                console.log('saihai')
+
                 user.resetPasswordToken = token;
                 user.resetPasswordExpires = Date.now() + configure.tokenValidity; // 1 hour validity for link
                 user.save(function(err) {
