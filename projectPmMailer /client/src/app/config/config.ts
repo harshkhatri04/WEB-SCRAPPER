@@ -71,7 +71,10 @@ export const config = {
 	"PIC_TWO": "Stock market bubbles don't grow out of thin air. They have a solid basis in reality, but reality as distorted by a misconception.",
 	"FORGOT_PASSWORD": "Forgot Password?",
 	"EMAIL_ADDRESS": "Email Address",
-	"RESET_PASSWORD": "Reset Password"
+	"RESET_PASSWORD": "Reset Password",
+	"VALIDATION_ONE":"Email is required",
+	"VALIDATION_TWO":"Email must contain @.",
+	"VALIDATION_THREE":"Email must be at least 4 characters long."
   },
 
   "resetpwd": {
