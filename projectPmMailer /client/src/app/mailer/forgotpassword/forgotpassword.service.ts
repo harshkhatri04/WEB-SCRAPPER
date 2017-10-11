@@ -11,6 +11,7 @@ export class ForgotpasswordService {
 
    forgotPassword(emailId){
  	const url = config.urlToServer+'/resetPwd/forgot/' + emailId
+
  	return this.http
  							.get(url)
  							.map(res => res.json(),error=>error.json());
