@@ -15,10 +15,7 @@ export const config = {
 	"MAILING_PREFERENCE": "Update Mailing Preferences",
 	"DAILY": "Daily",
 	"WEEKLY": "Weekly",
-	"MONTHLY": "Monthly",
-	"NAME_FROM_DATABASE": "Name from Database",
-	"MOBILE_FROM_DATABASE": "Mobile from Database",
-	"EMAIL_ID_DATABASE": "Email id from Database"
+	"MONTHLY": "Monthly"
 
   },
 
@@ -31,8 +28,8 @@ export const config = {
 	"PICTURE_DESCRIPTION_2": "Stock market bubbles don't grow out of thin air. They have a solid basis in reality, but reality as distorted by a misconception.",
 	"FORGET_PASSWORD": "Forgot Password",
 	"NEW_USER": "New User",
-	"FACEBOOK": "Login With Facebook",
-	"GOOGLE": "Login With Google"
+	"FACEBOOK": "Login",
+	"GOOGLE": "Login"
   },
 
   "dashboard": {
@@ -106,6 +103,12 @@ export const config = {
 
   "nasdaq":{
   	"READ_MORE":"Read More"
+  },
+  "updatepassword":{
+  	"CURRENT_PASSWORD":"Current Password",
+  	"NEW_PASSWORD":"New Password",
+  	"CONFIRM_PASSWORD":"Confirm Password",
+  	"SAVE":"Save"
   }
 }
 
