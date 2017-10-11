@@ -5,6 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './mailer.component.html',
   styleUrls: ['./mailer.component.css']
 })
+
+/**
+ * parent component class
+ * 
+ */
 export class MailerComponent implements OnInit {
 
   constructor() { }

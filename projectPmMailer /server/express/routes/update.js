@@ -1,11 +1,12 @@
+//importing pre-defined dependencies
 const express = require('express');
 const router = express.Router();
-const User = require('../models/userModel')
 
+//importing user-defined dependencies
+const User = require('../models/userModel')
 const logger = require('../services/app.logger');
 
 //route to update name by the given email
-//route starts here
 router.put('/updateName/:email', (req, res) => {
     User.update({ _email: req.params.email }, {
         $set: {
@@ -20,10 +21,8 @@ router.put('/updateName/:email', (req, res) => {
         }
     });
 });
-//route ends here
 
 //route to update name by the given email
-//route starts here
 router.put('/updateUser/:email', (req, res) => {
 
     User.update({ email: req.params.email }, {
@@ -40,10 +39,8 @@ router.put('/updateUser/:email', (req, res) => {
         }
     });
 });
-//route ends here
 
 //route to delete user account
-//route starts here
 router.delete('/deleteUser/:email', (req, res) => {
     User.findOneAndRemove({
             email: req.params.email
@@ -58,10 +55,8 @@ router.delete('/deleteUser/:email', (req, res) => {
         }
     );
 });
-//route ends here
 
 // route to update password
-// route starts here
 router.post('/updatePassword/:email', (req, res) => {
     User.findOne({ email: req.params.email }, function(err, user) {
         if (err) {
@@ -85,12 +80,9 @@ router.post('/updatePassword/:email', (req, res) => {
             })
         }
     })
-
 })
-//route ends here
 
 // route to maintain flag for the first time preference Set
-// route starts here
 router.put('/flag/:email', (req, res) => {
     req.body.flag = 1;
     User.update({ email: req.params.email }, {
@@ -105,5 +97,5 @@ router.put('/flag/:email', (req, res) => {
         }
     });
 });
-// route ends here
+
 module.exports = router;
