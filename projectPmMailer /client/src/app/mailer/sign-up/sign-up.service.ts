@@ -10,12 +10,12 @@ import { config } from '../../config/config'
 export class SignUpService {
 
   constructor(private http: Http) {}
- 
+
   //method to hit server 
   addUser(user) {
     const url = config.urlToServer.SIGN_UP_SERVICE_POST; // sign up url
     return this.http
       .post(url, user)
-      .map(res => res.json(),error => error);
+      .map(res => res.json(), error => error);
   }
 }

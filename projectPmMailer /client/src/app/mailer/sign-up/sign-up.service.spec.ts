@@ -23,11 +23,11 @@ describe('SignUpService', () => {
     });
   });
 
- describe('addUser()', () => {
+  describe('addUser()', () => {
 
     it('add user account',
       inject([SignUpService, XHRBackend], (SignUpService, mockBackend) => {
-        const mockResponse = { name: "admin" , email: "abc@gmail.com", mobile:"1234567890", pwd:"12345678", cpwd:"12345678"};
+        const mockResponse = { name: "admin", email: "abc@gmail.com", mobile: "1234567890", pwd: "12345678", cpwd: "12345678" };
 
 
 
@@ -49,27 +49,25 @@ describe('SignUpService', () => {
       }));
 
     it('can instantiate service when inject service',
-    inject([SignUpService], (service: SignUpService) => {
-      expect(service instanceof SignUpService).toBe(true);
-  }));
+      inject([SignUpService], (service: SignUpService) => {
+        expect(service instanceof SignUpService).toBe(true);
+      }));
 
 
 
 
- it('can instantiate service with "new"', inject([Http], (http: Http) => {
-    expect(http).not.toBeNull('http should be provided');
-    let service = new SignUpService(http);
-    expect(service instanceof SignUpService).toBe(true, 'new service should be ok');
-  }));
+    it('can instantiate service with "new"', inject([Http], (http: Http) => {
+      expect(http).not.toBeNull('http should be provided');
+      let service = new SignUpService(http);
+      expect(service instanceof SignUpService).toBe(true, 'new service should be ok');
+    }));
 
 
- it('can provide the mockBackend as XHRBackend',
-    inject([XHRBackend], (backend: MockBackend) => {
-      expect(backend).not.toBeNull('backend should be provided');
-  }));
+    it('can provide the mockBackend as XHRBackend',
+      inject([XHRBackend], (backend: MockBackend) => {
+        expect(backend).not.toBeNull('backend should be provided');
+      }));
   });
 
-   
-  });
-  
 
+});
