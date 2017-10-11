@@ -129,7 +129,6 @@ export class LoginComponent implements OnInit {
     this.emailCheck = this.registeredData.email;
     this.LoginService.firstPreference(flag, this.emailCheck).subscribe((data) => {})
   }
-  //method for first time preference set end
 
   //method for preference set
   showConfirm() {

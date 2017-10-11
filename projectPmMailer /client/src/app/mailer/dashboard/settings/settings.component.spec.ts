@@ -27,13 +27,14 @@ describe('Settings component Testing', () => {
     }).compileComponents();
   })
 
+/*Initial configuration that will run before every testcase*/
   beforeEach(() => {
     fixture = TestBed.createComponent(SettingsComponent);
     comp = fixture.componentInstance;
     
   })
 
-
+/*Testcase to check whether component is created or not*/
   it('should create Settings component', () => {
     const settings = fixture.debugElement.componentInstance;
     expect(settings).toBeTruthy();

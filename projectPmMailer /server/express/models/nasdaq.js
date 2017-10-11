@@ -1,6 +1,8 @@
+/*requiring dependencies*/
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// structure of nasdaq data in database
 const nasdaqschema = new Schema({
 
     Code: String,

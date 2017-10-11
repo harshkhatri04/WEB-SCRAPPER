@@ -1,4 +1,4 @@
-import { TestBed, fakeAsync,async, inject, } from '@angular/core/testing';
+import { TestBed, fakeAsync, async, inject, } from '@angular/core/testing';
 import {
   HttpModule,
   Http,
@@ -13,18 +13,18 @@ import { CurrencyService } from './currency.service';
 
 //chart service describe suite
 describe('CurrencyService', () => {
-let routerStub;
-let router:Router;
+  let routerStub;
+  let router: Router;
   beforeEach(() => {
-      routerStub={
-        navigate: jasmine.createSpy('navigate')
-      }
+    routerStub = {
+      navigate: jasmine.createSpy('navigate')
+    }
     TestBed.configureTestingModule({
       imports: [HttpModule],
       providers: [
         CurrencyService,
         { provide: XHRBackend, useClass: MockBackend },
-        {provide: Router, useValue:routerStub}
+        { provide: Router, useValue: routerStub }
       ]
     });
   });
@@ -56,9 +56,7 @@ let router:Router;
         connection.mockRespond(new Response(new ResponseOptions({ status: 200 })))
       });
       currencyService.getcurrency().subscribe((stock) => {
-             expect(stock.status).toBe(200);
+        expect(stock.status).toBe(200);
       })
     }));
-
-
 });

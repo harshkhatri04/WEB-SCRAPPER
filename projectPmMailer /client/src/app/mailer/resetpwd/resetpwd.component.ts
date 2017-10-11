@@ -10,6 +10,8 @@ import swal from 'sweetalert2';
   templateUrl: './resetpwd.component.html',
   styleUrls: ['./resetpwd.component.css']
 })
+
+//Reset Pwd component class
 export class ResetpwdComponent implements OnInit {
   tkn: any;
   config = config;
@@ -20,6 +22,7 @@ export class ResetpwdComponent implements OnInit {
   mydata = {}
   form: FormGroup;
 
+//validation for the form of reset password
   ngOnInit(): void {
     this.form = new FormGroup({
       'pwd': new FormControl(this.hero.pwd, [
@@ -52,7 +55,7 @@ export class ResetpwdComponent implements OnInit {
           }).then(() => {},
             (dismiss) => {
               if (dismiss === 'timer') {
-                //navigate here
+                //navigate to the login page
                 this.Router.navigateByUrl('login')
               }
             });

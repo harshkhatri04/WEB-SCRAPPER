@@ -5,18 +5,11 @@ import  { config } from '../../../config/config'
 
 @Injectable()
 
-/**
- * TweetService class
- */
 export class TweetService {
 
   constructor(private http: Http) {}
 
-  /**
-   * [tweetSearch description]
-   * @param  {[type]} user: string        [description]
-   * @return {[type]}       [description]
-   */
+ //this method search the tweets according to twitter handler 
   tweetSearch(user: string) {
     console.log(user);
     return this.http
