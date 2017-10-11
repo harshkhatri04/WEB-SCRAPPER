@@ -1,6 +1,7 @@
 let express = require('express');
 let User = require('../models/userModel');
 let router = express.Router();
+let logger = require('../services/app.logger');
 
 router.put('/investment/:email', (req, res) => {
 
@@ -16,11 +17,12 @@ router.put('/investment/:email', (req, res) => {
     }, (err, Data) => {
         /*console.log(JSON.stringify(Data))*/
         if (err) {
-            console.log('error occured');
-        } else {
+            logger.error("error occured");
 
+        } else {
+            logger.info("preferences set successfully")
             res.send(Data);
-            console.log(JSON.stringify(Data));
+            // console.log(JSON.stringify(Data));
         }
 
     });
