@@ -2,7 +2,6 @@ import { TestBed, async, inject, fakeAsync, tick } from '@angular/core/testing';
 import { Location } from "@angular/common";
 import { Router } from '@angular/router';
 
-
 import {
   HttpModule,
   Http,
