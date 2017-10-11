@@ -46,10 +46,6 @@ describe('POST /signup/users', () => {
             });
     });
 
-    it('should take less than 500ms', function(done) {
-        this.timeout(500);
-        setTimeout(done, 300);
-    });
 });
 
 describe('GET /', () => {
@@ -75,27 +71,6 @@ describe('GET /findUser/:email', () => {
                 if (err) return done(err);
                 expect(res.status).to.be.equal(200);
                 done();
-            })
-    })
-})
-
-describe('GET /login/signin/:email/:password', () => {
-    it('respond with json', (done) => {
-        findStub.withArgs({ 'email': 'Pulkit176@gmail.com', 'password': 'Pulkit@123' })
-            .yields(null, {
-                name: "Pulkit",
-                password: "Pulkit@123",
-                email: "Pulkit@gmail.com",
-                mobile: 9799999900
-            })
-        request(App)
-            .get('/login/signin/Pulkit176@gmail.com/Pulkit@123')
-            .end((err, res) => {
-                if (err)
-                    return err;
-                expect(res.status).to.be.equal(401);
-                done();
-
             })
     })
 })
@@ -197,29 +172,18 @@ describe('GET of logout', () => {
     })
 })
 
-describe('resetPwd', () => {
-    it('Testing Reset Password'), (done) => {
+describe('tweets ', () => {
+    it('Testing tweets', (done) => {
+        modelStub.yields(null, { name: "Pulkit", password: "Pulkit@123", email: "Pulkit176@gmail.com", mobile: 9799999999 })
         request(App)
-            .get('/resetPwd/forgot/:email')
+            .get('/tweets/user_timeline/admin@gmail.com')
             .end((err, res) => {
-                if (err) return done(err)
-                expect(res.status).to.be.equal(200)
-                done()
+                if (err) return done(err);
+                expect(res.status).to.be.equal(200);
+                done();
             })
-    }
-})
-
-describe('tweets', () => {
-    it('Testing tweets'), (done) => {
-        request(App)
-            .get('/tweets/user_timeline/' + 'admin@gmail.com')
-            .end((err, res) => {
-                if (err) return done(err)
-                expect(res.status).to.be.equal(200)
-                done()
-            })
-    }
-})
+    });
+});
 
 describe('update user name', () => {
     before(function() {
@@ -347,3 +311,52 @@ describe('PUT investment/:email', () => {
 
     })
 })
+
+describe('get Data ', () => {
+    it('Testing getData', (done) => {
+        modelStub.yields(null, { name: "Pulkit", password: "Pulkit@123", email: "admin@gmail.co", mobile: 9799999999 })
+        request(App)
+            .get('/find/findUser/admin@gmail.com')
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.status).to.be.equal(200);
+                done();
+            })
+    });
+});
+
+
+//Negative Test Cases
+describe('GET /login/signin/:email/:password', () => {
+    it('respond with json', (done) => {
+        findStub.withArgs({ 'email': 'Pulkit176@gmail.com', 'password': 'Pulkit@123' })
+            .yields(null, {
+                name: "Pulkit",
+                password: "Pulkit@123",
+                email: "Pulkit@gmail.com",
+                mobile: 9799999900
+            })
+        request(App)
+            .get('/login/signin/Pulkit176@gmail.com/Pulkit@123')
+            .end((err, res) => {
+                if (err)
+                    return err;
+                expect(res.status).to.be.equal(401);
+                done();
+
+            })
+    })
+})
+
+describe('resetPwd ', () => {
+    it('Testing Reset Password', (done) => {
+        modelStub.yields(null, { name: "Pulkit", password: "Pulkit@123", email: "Pulkit176@gmail.com", mobile: 9799999999 })
+        request(App)
+            .get('/resetPwd/forgot/admin@gmail.com')
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.status).to.be.equal(400);
+                done();
+            })
+    });
+});
