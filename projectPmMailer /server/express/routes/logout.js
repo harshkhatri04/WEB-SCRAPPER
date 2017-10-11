@@ -3,9 +3,9 @@ const router = express.Router();
 const logger = require('../services/app.logger');
 
 //route for logout
-    router.get('/logout', function(req, res) {
-        res.status(200).send("logout success!");
-        logger.info("successfully logged out")
-    });
+router.get('/logout', function(req, res) {
+    res.status(200).send("logout success!");
+    logger.info("successfully logged out")
+});
 
-    module.exports = router;
+module.exports = router;
