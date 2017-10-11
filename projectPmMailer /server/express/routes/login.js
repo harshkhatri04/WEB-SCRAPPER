@@ -41,12 +41,12 @@ router.get('/signin/:email/:password', function(req, res) {
 // route to get all the users
 router.get('/', function(req, res) {
     User.find((err, data) => {
-    	// if error occurs send the failure message
+        // if error occurs send the failure message
         if (err) {
             res.send({ success: false, message: "error in finding" })
             logger.info("error");
         } else {
-        	// send success message if there is no failure
+            // send success message if there is no failure
             res.json(data)
             logger.info("data fetched successfully");
         }
