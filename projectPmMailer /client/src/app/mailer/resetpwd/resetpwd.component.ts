@@ -17,9 +17,7 @@ export class ResetpwdComponent implements OnInit {
     this.route.params.subscribe(params => this.tkn = (params.token));
   }
   hero = { pwd: '', cpwd: '' };
-
   mydata = {}
-
   form: FormGroup;
 
   ngOnInit(): void {
@@ -38,8 +36,6 @@ export class ResetpwdComponent implements OnInit {
   }
   get pwd() { return this.form.get('pwd'); }
   get cpwd() { return this.form.get('cpwd'); }
-
-
   // Function to reset password
   reset(resetpwd) {
     this.mydata = {
@@ -47,21 +43,20 @@ export class ResetpwdComponent implements OnInit {
     }
     this.ResetpwdService.resetPassword(this.mydata, this.tkn)
       .subscribe((res) => {
-        if (res){
+        if (res) {
           swal({
-      timer: 2000,
-      title: "your password has been changed!",
-      type: 'success',
-      showConfirmButton: false,
-    }).then(()=>{},
-    (dismiss)=>{
-      if (dismiss === 'timer') {
-        //navigate here
-        this.Router.navigateByUrl('login') 
-      }
-    });
-        }
-        else{
+            timer: 2000,
+            title: "your password has been changed!",
+            type: 'success',
+            showConfirmButton: false,
+          }).then(() => {},
+            (dismiss) => {
+              if (dismiss === 'timer') {
+                //navigate here
+                this.Router.navigateByUrl('login')
+              }
+            });
+        } else {
 
           this.Router.navigateByUrl('login')
         }

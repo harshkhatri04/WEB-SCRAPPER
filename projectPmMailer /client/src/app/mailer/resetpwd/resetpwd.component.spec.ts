@@ -14,8 +14,6 @@ describe('testing resetpwd component', () => {
   let fixture: ComponentFixture < ResetpwdComponent > ;
   let deresetpwd, deCharts, deSetting: DebugElement;
   let elresetpwd, elCharts, elSetting: HTMLElement;
-
-
   let deHeading: DebugElement;
   let elHeading: HTMLElement;
   let deResetpwd: DebugElement;
