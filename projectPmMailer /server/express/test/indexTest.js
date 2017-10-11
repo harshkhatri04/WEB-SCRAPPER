@@ -173,15 +173,16 @@ describe('GET of logout', () => {
 })
 
 describe('tweets ', () => {
-    it('Testing tweets', (done) => {
+    it(' Testing tweets', (done) => {
         modelStub.yields(null, { name: "Pulkit", password: "Pulkit@123", email: "Pulkit176@gmail.com", mobile: 9799999999 })
         request(App)
             .get('/tweets/user_timeline/admin@gmail.com')
             .end((err, res) => {
                 if (err) return done(err);
-                expect(res.status).to.be.equal(200);
-                done();
+                expect(res.body.name).to.be.equal("Pulkit");
+                
             })
+            done();
     });
 });
 
@@ -327,6 +328,8 @@ describe('get Data ', () => {
 
 
 //Negative Test Cases
+
+
 describe('GET /login/signin/:email/:password', () => {
     it('respond with json', (done) => {
         findStub.withArgs({ 'email': 'Pulkit176@gmail.com', 'password': 'Pulkit@123' })
@@ -360,3 +363,150 @@ describe('resetPwd ', () => {
             })
     });
 });
+
+//negative test case for /login
+describe('negative test case for GET /', () => {
+    it('negative test case for /login', (done) => {
+
+        modelStub.yields(null, { name: "Pulkit", password: "Pulkit@123", email: "Pulkit176@gmail.com", mobile: 9799999999 })
+        request(App)
+            .get('/login')
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.body.name).not.to.be.equal("Pulki");
+
+                done();
+            })
+    });
+});
+
+//negative test case for findUser
+describe('negative test case for GET /findUser/:email', () => {
+    it('negative test case for test find user', (done) => {
+        modelStub.yields(null, { name: "Pulkit", password: "Pulkit@123", email: "Pulkit176@gmail.com", mobile: 9799999999 })
+        request(App)
+            .get('/find/findUser/:email')
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.status).not.to.be.equal(400);
+                done();
+            })
+    })
+})
+
+//negative test case for HTTP Get method for stock price of NASDAQ for WSJ website
+describe('get method', () => {
+    it('negative test case for http  get method', (done) => {
+        detailStub.yields(null, [{ Code: "100", Company: "abc" }])
+        request(App)
+            .get('/postNews/details')
+            .expect('Content-Type', /json/)
+
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.body[0].Code).not.to.be.equal("101");
+                expect(res.body[0].Company).not.to.be.equal("ab");
+                done();
+            });
+    });
+});
+
+//negative test case for get method for curency
+describe('negative test case for get method for curency', () => {
+    it('negative test', (done) => {
+        currencyStub.yields(null, [{
+            Time: "22:00",
+            Headline: "Headline--",
+            News: "News",
+            day: "day",
+            month: "month",
+            year: "year",
+        }])
+        request(App)
+            .get('/postNews/currency')
+            .expect('Content-Type', /json/)
+
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.body[0].Time).not.to.be.equal("21:00");
+                expect(res.body[0].Headline).not.to.be.equal("Headline");
+                done();
+            });
+    });
+});
+
+//negative test case for get method for fund
+describe('negative test case for get method for fund', () => {
+    it('negative test', (done) => {
+        fundStub.yields(null, [{
+            Time: "time",
+            Headline: "Headline",
+            News: "News",
+            day: "day",
+            month: "month",
+            year: "year"
+        }])
+        request(App)
+            .get('/postNews/fund')
+            .expect('Content-Type', /json/)
+
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.body[0].Time).not.to.be.equal("timer");
+                expect(res.body[0].Headline).not.to.be.equal("Headlines");
+                done();
+            });
+    });
+});
+
+//negative test case for get method for stock
+describe('negative test case for get method for stock', () => {
+    it('negative test', (done) => {
+        stockStub.yields(null, [{
+            term: "AABA",
+            news: "news",
+            day: "day",
+            month: "month",
+            year: "year",
+        }])
+        request(App)
+            .get('/postNews/news/AABA')
+            .expect('Content-Type', /json/)
+
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.body[0].term).not.to.be.equal("AAB");
+                expect(res.body[0].news).not.to.be.equal("new");
+                done();
+            });
+    });
+});
+
+//negative test case for GET of logout
+describe('negative test case for GET of logout', () => {
+    it('negative Testing Logout', (done) => {
+        request(App)
+            .get('/logout/logout')
+            .end((err, res) => {
+                if (err) return done(err)
+                expect(res.status).not.to.be.equal(400)
+                done();
+            })
+    })
+})
+
+//negative test case for tweets
+describe('negative test case for tweets ', () => {
+    it('ngative Testing tweets', (done) => {
+        modelStub.yields(null, { name: "Pulkit", password: "Pulkit@123", email: "Pulkit176@gmail.com", mobile: 9799999999 })
+        request(App)
+            .get('/tweets/user_timeline/admin@gmail.com')
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.body.name).not.to.be.equal("Pulki");
+                
+            })
+            done();
+    });
+});
+
