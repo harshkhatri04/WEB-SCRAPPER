@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 
 import { MockBackend } from '@angular/http/testing';
 import { CurrencyService } from './currency.service';
+
+//chart service describe suite
 describe('CurrencyService', () => {
 let routerStub;
 let router:Router;
@@ -27,22 +29,26 @@ let router:Router;
     });
   });
 
+  //checking  service instantiation when inject service
   it('can instantiate service when inject service',
     inject([CurrencyService], (service: CurrencyService) => {
       expect(service instanceof CurrencyService).toBe(true);
     }));
 
+  //checking  service instantiation with new
   it('can instantiate service with "new"', inject([Http], (http: Http) => {
     expect(http).not.toBeNull('http should be provided');
     let service = new CurrencyService(http);
     expect(service instanceof CurrencyService).toBe(true, 'new service should be ok');
   }));
 
+  //checking mockBackend as XHRBackend
   it('can provide the mockBackend as XHRBackend',
     inject([XHRBackend], (backend: MockBackend) => {
       expect(backend).not.toBeNull('backend should be provided');
     }));
 
+  //checking navigation to login
   it('navigate to login',
     inject([CurrencyService, XHRBackend], (currencyService, mockBackend) => {
 
