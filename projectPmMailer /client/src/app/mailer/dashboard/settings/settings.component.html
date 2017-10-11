@@ -29,7 +29,9 @@
           </label>
         </div>
         <button (click)="updateUserInfo(userInfo,userInfo.get('email').value)">{{config.settings.SAVE}}</button>
-        <button (click)="showConfirm()">{{config.settings.PREFERENCE}}</button>
+
+          <button (click)="showConfirm()">{{config.settings.PREFERENCE}}</button>
+          
       </form>
       <a [routerLink]="'/updatePassword'">{{config.setttings.UPDATE_PASSWORD}}</a>
     </div>

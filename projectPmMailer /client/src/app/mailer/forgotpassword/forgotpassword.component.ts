@@ -18,9 +18,7 @@ export class ForgotpasswordComponent implements OnInit {
     type:any,
     message:any
   };
- 
   constructor(private ForgotpasswordService: ForgotpasswordService,private Router: Router) {}
-
   hero = { email: '' };
   form: FormGroup;
   emailId:string;
@@ -33,10 +31,8 @@ export class ForgotpasswordComponent implements OnInit {
         Validators.minLength(4),
         Validators.pattern("[^ @]*@[^ @]*")
       ]),
-
     });
   }
-
   get email() { return this.form.get('email'); }
 
   newAlert(type: String, message:String)
@@ -46,7 +42,6 @@ export class ForgotpasswordComponent implements OnInit {
       message:message
     }
   }
-
   forgot(emailID) {
     this.ForgotpasswordService.forgotPassword(emailID)
       .subscribe((res) => {
