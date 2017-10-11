@@ -15,21 +15,23 @@ let user = require('../models/userModel')
 let configure = require('../config/configure');
 let logger = require('../services/app.logger');
 
-//HTTP Get method start
+//HTTP Get method for getting Nasdaq code and company
 
 router.get('/details', function(req, res, next) {
     nasdaq.find((err, data) => {
         if (err) {
             logger.error("error in getting details");
-
-
         } else {
             res.json(data)
         }
     })
-
 })
 
+//HTTP Get method for getting Nasdaq code and company End
+
+
+
+//HTTP Get method for getting fund news 
 router.get('/fund', function(req, res, next) {
     date = new Date();
     fundmodel.find({ day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }, (err, data) => {
@@ -38,13 +40,15 @@ router.get('/fund', function(req, res, next) {
 
         } else {
             res.json(data)
-
         }
     })
-
 })
 
+//HTTP Get method for getting news End
 
+
+
+//HTTP Get method for getting Nasdaq News
 router.get('/news/:id', function(req, res, next) {
     date = new Date();
     stockmodel.find({ term: req.params.id, day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }, (err, data) => {
@@ -57,9 +61,10 @@ router.get('/news/:id', function(req, res, next) {
 
         }
     })
-
 })
+//HTTP Get method for getting Nasdaq News end
 
+//HTTP Get method for getting Currency News
 router.get('/currency', function(req, res, next) {
     date = new Date();
     currencymodel.find({ day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }, (err, data) => {
@@ -74,7 +79,8 @@ router.get('/currency', function(req, res, next) {
 
 })
 
-//HTTP Get method start
+//HTTP Get method for getting Currency News End
+
 
 //HTTP Post method for stock price of NASDAQ for WSJ website
 router.post('/stock', function(req, res, next) {
@@ -108,8 +114,9 @@ router.post('/stock', function(req, res, next) {
         }
     })
 });
+//HTTP Post method for stock price of NASDAQ for WSJ website
 
-
+//function for scrap nasdaq news from wsj
 function getnasdaq(data) {
     for (let i = 0; i < data.length; i++) {
         term = data[i].Code;
@@ -145,8 +152,9 @@ function getnasdaq(data) {
         })
     }
 }
+//function for scrap nasdaq news from wsj End
 
-
+//function for scrap fund news from wsj
 function fundsnews() {
 
     let funddata = {};
@@ -183,8 +191,9 @@ function fundsnews() {
         }
     })
 }
+//function for scrap fund news from wsj End
 
-
+//function for scrap currency news from wsj
 function currencynews() {
     let currencydata = {};
     request('https://www.wsj.com/news/types/foreign-exchange', function(error, response, html) {
@@ -221,6 +230,7 @@ function currencynews() {
         }
     })
 }
+//function for scrap fund news from wsj end
 
 /*This the cron job function to get all emailId and there preference set*/
 var dailyMailJob = new CronJob({
@@ -419,7 +429,7 @@ function sendMails(emailId, fundsData) {
     });
 }
 
-/*This the cron job function to do scheduling on the nasdaq data*/
+/*This the cron job function to do scheduling on the nasdaq data,fund data,currency*/
 var job = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
     cronTime: '00 30 14 * * *',
