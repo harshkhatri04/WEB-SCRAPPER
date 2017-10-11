@@ -78,7 +78,7 @@ router.post('/updatePassword/:email', (req, res) => {
                             logger.error("could not update password")
                             res.status(400).send({ success: false, message: 'could not update password' })
                         } else {
-                            logger.success("password updated successfully")
+                            logger.info("password updated successfully")
                             res.status(200).send({ success: true, message: 'password updated successfully' })
                         }
                     })

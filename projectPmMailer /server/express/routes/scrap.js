@@ -80,7 +80,7 @@ router.get('/currency', function(req, res, next) {
 //HTTP Post method for stock price of NASDAQ for WSJ website
 router.post('/stock', function(req, res, next) {
     let term = req.body.term;
-    console.log("============================", term)
+    
     request('http://quotes.wsj.com/' + term, function(error, response, html) {
         if (!error && response.statusCode == 200) {
             let $ = cheerio.load(html);
@@ -212,7 +212,7 @@ function currencynews() {
                         logger.error("error in getting currencynews")
 
                     } else if (data) {
-                        console.success("currencynews fetched successfully")
+                        logger.info("currencynews fetched successfully")
 
                     }
 
@@ -336,7 +336,7 @@ var weeklyMailJob = new CronJob({
                             let news = currencymodel.find({}).select('News');
                             news.exec(function(err, currencyData) {
                                 if (err) {
-                                    console.log('error')
+                                    logger.error("err")
                                 } else {
                                     let currency = currencyData.map(ele => ele.News)
 
@@ -390,7 +390,7 @@ var monthlyMailJob = new CronJob({
                             let news = fundmodel.find({}).select('News')
                             news.exec(function(err, fundData) {
                                 if (err) {
-                                    console.log('error')
+                                     logger.error('error in news')
                                 } else {
                                     let fund = fundData.map(ele => ele.News)
                                     sendMails(data[i].email, fund)
@@ -403,7 +403,7 @@ var monthlyMailJob = new CronJob({
                             let news = currencymodel.find({}).select('News');
                             news.exec(function(err, currencyData) {
                                 if (err) {
-                                    console.log('error')
+                                    logger.error('error in news')
                                 } else {
                                     let currency = currencyData.map(ele => ele.News)
 

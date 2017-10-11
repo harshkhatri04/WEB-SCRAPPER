@@ -4,7 +4,8 @@ import { NgForm } from '@angular/forms';
 
 import { config } from '../../config/config'
 import { ForgotpasswordService } from './forgotpassword.service';
-
+import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 @Component({
   selector: 'app-forgotpassword',
   templateUrl: './forgotpassword.component.html',
@@ -17,9 +18,7 @@ export class ForgotpasswordComponent implements OnInit {
     type:any,
     message:any
   };
- 
-  constructor(private ForgotpasswordService: ForgotpasswordService) {}
-
+  constructor(private ForgotpasswordService: ForgotpasswordService,private Router: Router) {}
   hero = { email: '' };
   form: FormGroup;
   emailId:string;
@@ -32,10 +31,8 @@ export class ForgotpasswordComponent implements OnInit {
         Validators.minLength(4),
         Validators.pattern("[^ @]*@[^ @]*")
       ]),
-
     });
   }
-
   get email() { return this.form.get('email'); }
 
   newAlert(type: String, message:String)
@@ -45,12 +42,25 @@ export class ForgotpasswordComponent implements OnInit {
       message:message
     }
   }
-
   forgot(emailID) {
     this.ForgotpasswordService.forgotPassword(emailID)
       .subscribe((res) => {
-        this.emailId = res.email;
-         console.log("email sent")
+        if(res){       
+          this.emailId = res.email;
+          swal({
+      timer: 2000,
+      title: "An Email Has Been Sent To You!",
+      type: 'success',
+      showConfirmButton: false,
+    }).then(()=>{},
+    (dismiss)=>{
+
+      if (dismiss === 'timer') {
+        //navigate here
+        this.Router.navigateByUrl('login')
+      }
+    });
+  }
       }, error => {
         this.newAlert('none','email id not correct')
         

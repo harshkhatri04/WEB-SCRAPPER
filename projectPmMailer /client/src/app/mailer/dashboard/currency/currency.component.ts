@@ -40,7 +40,6 @@ export class CurrencyComponent implements OnInit {
     this.currency.getcurrency().subscribe((data) => {
 
       this.list = data;
-      console.log(this.list)
     }, error => {
       console.log("Error" + error)
     })
@@ -57,7 +56,6 @@ export class CurrencyComponent implements OnInit {
     let user = 'WSJmarkets';
     this.tweetService.tweetSearch(user).subscribe((data) => {
       this.investmentProductuser = data;
-      console.log(this.investmentProductuser);
     })
   }
 
