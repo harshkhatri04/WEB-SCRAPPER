@@ -1,10 +1,13 @@
+//importing pre-defined dependencies
+const nodemailer = require('nodemailer');
+const express = require('express');
+const router = express.Router();
+
+//importing user-defined dependencies
 const User = require('../models/userModel')
 const config = require('../config/database');
 const configure = require('../config/configure');
-const nodemailer = require('nodemailer');
 const logger = require('../services/app.logger');
-const express = require('express');
-const router = express.Router();
 
 //This route is used to sign up for a user i.e. a new user
 router.post('/users', (req, res) => {
@@ -41,7 +44,6 @@ router.post('/users', (req, res) => {
                     subject: 'Registered on Personalized-Emailer',
                     text: 'Hello,\n\n' +
                         'You have been successfully registered on Personalized-Emailer.\n',
-
                 };
                 transporter.sendMail(mailOptions, function(error, info) {
                     if (error) {
@@ -55,5 +57,4 @@ router.post('/users', (req, res) => {
         })
     }
 });
-
 module.exports = router;

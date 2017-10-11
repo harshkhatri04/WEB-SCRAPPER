@@ -101,6 +101,41 @@ margins
 }
 
 /**
+ * margin container top margin
+ */
+.tweetMarg{
+  margin-top: 1%
+}
+
+/**
+ * background color for card
+ */
+.twitterBackground{
+  background-color:white;
+}
+
+/**
+ * twitter colors
+ */
+.fa-twitter{
+  color: #33b5e5;
+}
+
+/**
+ * card body color
+ */
+.card-body p{
+ color: #333;
+}
+
+/**
+ * card data heading
+ */
+.card-data h6{
+  color:black;
+}
+
+/**
  * [media description] media queries
  * @param  {[type]} max-width: 767px         [description]
  * @return {[type]}            [description]
