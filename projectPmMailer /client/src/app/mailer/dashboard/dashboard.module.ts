@@ -15,6 +15,7 @@ import { NasdaqComponent } from './nasdaq/nasdaq.component';
 import { CurrencyComponent } from './currency/currency.component';
 import { FundsComponent} from './funds/funds.component';
 import {DashboardComponent} from './dashboard.component';
+import { UpdatepasswordComponent } from './updatepassword/updatepassword.component';
 
 //routes used in this component
 const route:Routes=([  {
@@ -36,6 +37,10 @@ const route:Routes=([  {
  {
    path:'charts',
    component:ChartComponent
+ },
+ {
+   path:'updatePassword',
+   component:UpdatepasswordComponent
  }
  ])
 
@@ -57,6 +62,7 @@ const route:Routes=([  {
    NasdaqComponent,
    CurrencyComponent,
    FundsComponent,
+   UpdatepasswordComponent,
  ],
  exports: [
   SettingsComponent,

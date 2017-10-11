@@ -9,6 +9,7 @@ let request = require('request');
 let CronJob = require('cron').CronJob;
 let cheerio = require('cheerio');
 let fundmodel = require('../models/fundsmodel')
+const logger = require('../services/app.logger');
 
 //HTTP Post method end
 
@@ -16,11 +17,11 @@ let fundmodel = require('../models/fundsmodel')
 router.get('/details', function(req, res, next) {
     nasdaq.find((err, data) => {
         if (err) {
-            console.log("error")
+            logger.error("error");
 
         } else {
             res.json(data)
-            console.log(data)
+            logger.info("data");
         }
     })
 
@@ -53,7 +54,7 @@ router.post('/stock', function(req, res, next) {
                 stock.push(metadata1);
             });
 
-            console.log(stock);
+            logger.info("post method for stock price of NASDAQ for WSJ website");
             res.json({ data: stock });
         }
     })
@@ -82,10 +83,10 @@ function getnasdaq(data) {
                     liststock = new stockmodel(stockdata);
                     liststock.save((err, data) => {
                         if (err) {
-                            // logger.error('not found')
-                            console.log('error')
+                            logger.error('not found')
+
                         } else if (data) {
-                            console.log('success', data);
+                            logger.info("success")
                         }
                     });
                 })
@@ -114,10 +115,10 @@ function fundsnews() {
                 let listoffund = new fundmodel(funddata)
                 listoffund.save((err, data) => {
                     if (err) {
-                        console.log("error")
+                        logger.error("error in fundsnews")
 
                     } else if (data) {
-                        console.log("sucess", data)
+                        logger.info("list of funds news")
                     }
 
                 })
@@ -146,10 +147,10 @@ function currencynews() {
                 let listofcurrency = new currencymodel(currencydata)
                 listofcurrency.save((err, data) => {
                     if (err) {
-                        console.log("error")
+                        logger.error("error in currency news")
 
                     } else if (data) {
-                        console.log("sucess", data)
+                        logger.info("list of currency news")
                     }
 
                 })
@@ -167,7 +168,7 @@ var job = new CronJob({
     onTick: function(req, res, next) {
         nasdaq.find((err, data) => {
             if (err) {
-                console.log("error")
+                logger.error("error in cronjob");
 
             } else {
                 getnasdaq(data);
