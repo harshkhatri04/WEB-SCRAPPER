@@ -1,10 +1,13 @@
-const User = require('../models/userModel')
+//importing pre-defined dependencies
 const path = require('path');
 const jwt = require('jsonwebtoken');
-const config = require('../config/database');
-const logger = require('../services/app.logger');
 const express = require('express');
 const router = express.Router();
+
+//importing user-defined dependencies
+const config = require('../config/database');
+const logger = require('../services/app.logger');
+const User = require('../models/userModel')
 
 // route to login with given email and password
 router.get('/signin/:email/:password', function(req, res) {
@@ -36,6 +39,7 @@ router.get('/signin/:email/:password', function(req, res) {
         }
     });
 });
+
 // route to get all the users
 router.get('/', function(req, res) {
     User.find((err, data) => {

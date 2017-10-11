@@ -1,11 +1,13 @@
+//importing pre-defined dependencies
 let express = require('express');
-let User = require('../models/userModel');
 let router = express.Router();
+
+//importing user-defined dependencies
+let User = require('../models/userModel');
 let logger = require('../services/app.logger');
 
 // route to update investment of the given email id
 router.put('/investment/:email', (req, res) => {
-
     let obj = {
         items: req.body.items,
         frequency: req.body.frequency
@@ -19,14 +21,12 @@ router.put('/investment/:email', (req, res) => {
         // action to take if error occurs 
         if (err) {
             logger.error("error occured");
-
         }
         // action to take when there is no error
-         else {
+        else {
             logger.info("preferences set successfully")
             res.send(Data);
         }
-
     });
 });
 
