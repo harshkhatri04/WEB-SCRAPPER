@@ -1,5 +1,6 @@
 export const config = {
   "settings": {
+  "PREFERENCE": "Update Preference",
 	"SETTINGS": "Settings",
 	"UPDATE_NAME_AND_MOBILE": "Update Name and Mobile",
 	"NAME": "Name",

@@ -3,7 +3,8 @@ import { FormControl, FormGroup, FormBuilder, Validators, NgForm } from '@angula
 
 import { config } from '../../../config/config';
 import { SettingsService } from './settings.service';
-
+import {PreferenceComponent} from '../../preference/preference.component';
+import { DialogService } from "ng2-bootstrap-modal";
 
 @Component({
   selector: 'app-settings',
@@ -21,7 +22,7 @@ export class SettingsComponent implements OnInit {
   email: string;
   constructor(
     @Inject(FormBuilder) private fb: FormBuilder,
-      private settingsService: SettingsService) {
+      private settingsService: SettingsService,private dialogService:DialogService) {
     //this.fb=fb;
     this.userInfo = fb.group({
       email: ['', [Validators.required]],
@@ -72,4 +73,19 @@ export class SettingsComponent implements OnInit {
         })
 
   }
+
+  showConfirm() {
+            let disposable = this.dialogService.addDialog(PreferenceComponent, {
+                title:'Confirm title', 
+                message:'Confirm message'})
+                .subscribe((isConfirmed)=>{
+                    //We get dialog result
+                    if(isConfirmed) {
+                        alert('accepted');
+                    }
+                    else {
+                        alert('declined');
+                    }
+                });
+        }
 }
