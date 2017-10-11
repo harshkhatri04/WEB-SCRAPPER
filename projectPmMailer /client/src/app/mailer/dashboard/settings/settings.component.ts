@@ -33,6 +33,7 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(config);
     // getting details from local storage
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.email = this.currentUser.email;
