@@ -16,7 +16,7 @@ let configure = require('../config/configure');
 let logger = require('../services/app.logger');
 
 //HTTP Get method start
- 
+
 router.get('/details', function(req, res, next) {
     nasdaq.find((err, data) => {
         if (err) {
@@ -226,7 +226,7 @@ function currencynews() {
 var dailyMailJob = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
     //This cron will work on 11:00 AM daily
-    cronTime: '00 00 11 * * *',
+    cronTime: '00 05 16 * * *',
 
     onTick: function(req, res) {
         user.find((err, data) => {
@@ -235,22 +235,21 @@ var dailyMailJob = new CronJob({
             } else {
                 for (let i = 0; i < data.length; i++) {
                     if (data[i].preferences[0].frequency == 'Daily') {
+                        date = new Date();
                         if (data[i].preferences[0].items[0].itemName == 'Nasdaq Stocks') {
-                            let news = stockmodel.find({}).select('news');
+                            let news = stockmodel.find({ day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }).select('news');
                             news.exec(function(err, stockData) {
                                 if (err) {
                                     logger.error("error in stockmodel")
                                 } else {
                                     let stock = stockData.map(ele => ele.news)
-
                                     sendMails(data[i].email, stock)
                                 }
                             })
                         } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
-                            let news = fundmodel.find({}).select('News')
+                            let news = fundmodel.find({ day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }).select('News')
                             news.exec(function(err, fundData) {
                                 if (err) {
-
                                     logger.error("error");
                                 } else {
                                     let fund = fundData.map(ele => ele.News)
@@ -258,13 +257,12 @@ var dailyMailJob = new CronJob({
                                 }
                             })
                         } else if (data[i].preferences[0].items[0].itemName == 'Currency') {
-                            let news = currencymodel.find({}).select('News');
+                            let news = currencymodel.find({ day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }).select('News');
                             news.exec(function(err, currencyData) {
                                 if (err) {
                                     logger.error("error in getting preferences currency")
                                 } else {
                                     let currency = currencyData.map(ele => ele.News)
-
                                     sendMails(data[i].email, currency)
                                 }
                             })
@@ -292,8 +290,9 @@ var weeklyMailJob = new CronJob({
             } else {
                 for (let i = 0; i < data.length; i++) {
                     if (data[i].preferences[0].frequency == 'Weekly') {
+                        date = new Date();
                         if (data[i].preferences[0].items[1].itemName == 'Nasdaq Stocks') {
-                            let news = stockmodel.find({}).select('news');
+                            let news = stockmodel.find({ day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }).select('news');
                             news.exec(function(err, stockData) {
                                 if (err) {
                                     logger.error('error in stockmodel')
@@ -303,7 +302,7 @@ var weeklyMailJob = new CronJob({
                                 }
                             })
                         } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
-                            let news = fundmodel.find({}).select('News')
+                            let news = fundmodel.find({ day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }).select('News')
                             news.exec(function(err, fundData) {
                                 if (err) {
                                     logger.error('error in getting data relating to funds')
@@ -313,7 +312,7 @@ var weeklyMailJob = new CronJob({
                                 }
                             })
                         } else if (data[i].preferences[0].items[2].itemName == 'Currency') {
-                            let news = currencymodel.find({}).select('News');
+                            let news = currencymodel.find({ day: date.getDay(), month: date.getMonth(), year: date.getFullYear() }).select('News');
                             news.exec(function(err, currencyData) {
                                 if (err) {
                                     logger.error("err")
@@ -347,9 +346,10 @@ var monthlyMailJob = new CronJob({
                 res.status(403).send({ success: false, message: 'You are unauthorized' })
             } else {
                 for (let i = 0; i < data.length; i++) {
+                    date = new Date();
                     if (data[i].preferences[0].frequency == 'Monthly') {
                         if (data[i].preferences[0].items[1].itemName == 'Nasdaq Stocks') {
-                            let news = stockmodel.find({}).select('news');
+                            let news = stockmodel.find({ month: date.getMonth() }).select('news');
                             news.exec(function(err, stockData) {
                                 if (err) {
                                     logger.error('error in stockmodel')
@@ -359,7 +359,7 @@ var monthlyMailJob = new CronJob({
                                 }
                             })
                         } else if (data[i].preferences[0].items[0].itemName == 'Funds') {
-                            let news = fundmodel.find({}).select('News')
+                            let news = fundmodel.find({ month: date.getMonth() }).select('News')
                             news.exec(function(err, fundData) {
                                 if (err) {
                                     logger.error('error in news')
@@ -369,7 +369,7 @@ var monthlyMailJob = new CronJob({
                                 }
                             })
                         } else if (data[i].preferences[0].items[2].itemName == 'Currency') {
-                            let news = currencymodel.find({}).select('News');
+                            let news = currencymodel.find({ month: date.getMonth() }).select('News');
                             news.exec(function(err, currencyData) {
                                 if (err) {
                                     logger.error('error in news')
