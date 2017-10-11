@@ -16,23 +16,28 @@ import { CurrencyComponent } from './currency/currency.component';
 import { FundsComponent} from './funds/funds.component';
 import {DashboardComponent} from './dashboard.component';
 import { UpdatepasswordComponent } from './updatepassword/updatepassword.component';
+import { AuthoriseGuard} from '../../guards/authorise.guard';
 
 //routes used in this component
 const route:Routes=([  {
    path:'settings',
-   component:SettingsComponent
+   component:SettingsComponent,
+   canActivate: [AuthoriseGuard]
  },
   {
    path:'nasdaq',
-   component:NasdaqComponent
+   component:NasdaqComponent,
+   canActivate: [AuthoriseGuard]
  },
   {
    path:'currency',
-   component:CurrencyComponent
+   component:CurrencyComponent,
+   canActivate: [AuthoriseGuard]
  },
   {
    path:'funds',
-   component:FundsComponent
+   component:FundsComponent,
+   canActivate: [AuthoriseGuard]
  },
  {
    path:'charts',
@@ -64,6 +69,7 @@ const route:Routes=([  {
    FundsComponent,
    UpdatepasswordComponent,
  ],
+ providers:[AuthoriseGuard],
  exports: [
   SettingsComponent,
    NavbarComponent,
