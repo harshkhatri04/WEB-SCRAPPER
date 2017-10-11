@@ -97,7 +97,7 @@ const route: Routes = ([{
     RouterModule.forRoot(route)
   ],
 
- providers: [LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService, DialogService, PreferenceService,SettingsService,CurrencyService,FundService,TweetService,UpdatepasswordService],
+ providers: [AuthoriseGuard,LoginService, ForgotpasswordService, ResetpwdService, DashboardService, NasdaqService, SignUpService, DialogService, PreferenceService,SettingsService,CurrencyService,FundService,TweetService,UpdatepasswordService],
 
 
 
