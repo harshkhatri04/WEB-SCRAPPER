@@ -12,7 +12,7 @@ export class ResetpwdService {
 
 
     resetPassword(password,token){ 
- 	const url = config.urlToServer.RESET_PASSWORD_POST+ token;
+ 	const url = config.urlToServer+"/resetPwd/reset/"+ token;
  	return this.http
  							.post(url,password)
  							.map(res => res.json(),error=>error.json());

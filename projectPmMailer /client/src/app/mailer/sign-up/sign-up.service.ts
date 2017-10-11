@@ -13,7 +13,7 @@ export class SignUpService {
  
   //method to hit server 
   addUser(user) {
-    const url = config.urlToServer.SIGN_UP_SERVICE_POST; // sign up url
+    const url = config.urlToServer+'/signup/users'; // sign up url
     return this.http
       .post(url, user)
       .map(res => res.json(),error => error);
