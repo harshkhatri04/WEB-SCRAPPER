@@ -8,12 +8,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const logger = require('../services/app.logger');
 const crypto = require('crypto');
-<<<<<<< HEAD
-//reset pwd routes
-=======
-
 //This route finds a user according to his EmailId
->>>>>>> 0cf583b3155a1ccf93f0feba2b080f9a6ca4627a
 passport.use(new LocalStrategy(function(email, password, done) {
     User.findOne({ email: email }, function(err, user) {
         if (err) return done(err);
