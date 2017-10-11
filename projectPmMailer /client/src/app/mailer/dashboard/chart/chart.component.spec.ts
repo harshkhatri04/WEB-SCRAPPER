@@ -11,12 +11,13 @@ import { DashboardService } from '../dashboard.service';
 import {SidebarComponent} from '../sidebar/sidebar.component';
 import {NasdaqService} from '../service/nasdaq.service';
 
+//test suite for chart component
 describe('testing chart component', () => {
 
   let comp: ChartComponent;
   let fixture: ComponentFixture < ChartComponent > ;
 
-  //async beforeEach
+  //configuring module with testing environment
   beforeEach(async() => {
     TestBed.configureTestingModule({
       imports: [
@@ -26,12 +27,12 @@ describe('testing chart component', () => {
         Ng2Charts,
         HttpModule
       ],
-      declarations: [ChartComponent, NavbarComponent,NavbarComponent,SidebarComponent], //declaring component to be tested
+      declarations: [ChartComponent, NavbarComponent,NavbarComponent,SidebarComponent],
       providers: [NasdaqService,{ provide: DashboardService }]
     }).compileComponents();
   })
 
-  //sync beforeEach
+  //creating fixtures and component instance for testing
   beforeEach(() => {
     fixture = TestBed.createComponent(ChartComponent);
     comp = fixture.componentInstance; //Chart Component instance
