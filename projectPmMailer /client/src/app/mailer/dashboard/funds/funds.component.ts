@@ -10,9 +10,9 @@ import {TweetService} from '../service/tweet.service';
   styleUrls: ['./funds.component.css']
 })
 
-/**
- * fund component class
- */
+
+ //fund component class
+
 export class FundsComponent implements OnInit {
   config = config;
   fundnews: String;
@@ -21,10 +21,8 @@ export class FundsComponent implements OnInit {
 
   constructor(private DashboardService: DashboardService, private router: Router, private fund: FundService,private tweetService:TweetService) {}
 
-
-  /**
-   * [ngOnInit description] getting funds
-   */ 
+//[ngOnInit description] getting funds data from wsj website 
+  
   ngOnInit() {
     this.fund.getfund().subscribe((data) => {
 
@@ -35,9 +33,8 @@ export class FundsComponent implements OnInit {
     this.twitfunds();
  }
 
- /**
-  * [twitfunds description] getting funds tweets
-  */
+ //[twitfunds description] getting funds latest tweets from twitter
+  
  twitfunds(){
     
     let user='MutualFundscom';
@@ -45,9 +42,9 @@ export class FundsComponent implements OnInit {
           this.investmentProductuser=data;
         })
   }
-/**
- *  method to signout
- */
+
+ // method to signout from account
+ 
   logout() {
     this.DashboardService.signout()
       .subscribe((res) => {

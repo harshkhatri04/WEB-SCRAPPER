@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { config } from '../../../config/config';
 import { Router } from '@angular/router'
-
 import { TweetService } from '../service/tweet.service';
-
 import { CurrencyService } from '../service/currency.service';
-
-/**
- * 
- */
 import { DashboardService } from '../dashboard.service';
 
 
