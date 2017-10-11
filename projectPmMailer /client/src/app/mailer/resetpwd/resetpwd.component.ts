@@ -44,7 +44,7 @@ export class ResetpwdComponent implements OnInit {
   get cpwd() { return this.form.get('cpwd'); }
 
 
-// Function to reset password
+  // Function to reset password
   reset(resetpwd) {
     this.mydata = {
       password: resetpwd
