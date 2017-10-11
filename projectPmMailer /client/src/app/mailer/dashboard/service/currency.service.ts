@@ -6,10 +6,8 @@ import  { config } from '../../../config/config'
 @Injectable()
 export class CurrencyService {
   constructor(private http: Http) {}
-  /**
-   * [getcurrency description] getting currency details
-   * @return {[type]} [description]
-   */
+  
+  //method to get currency data
   getcurrency() {
     return this.http.get(config.urlToServer + '/postNews/currency')
       .map(res =>

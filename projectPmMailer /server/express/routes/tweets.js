@@ -7,13 +7,10 @@ var config = require('../config/tweetconfig');
 // instantiate Twit module
 var twitter = new Twit(config.twitter);
 const logger = require('../services/app.logger');
-
 var TWEET_COUNT = 25;
 var MAX_WIDTH = 305;
 var OEMBED_URL = 'statuses/oembed';
 var USER_TIMELINE_URL = 'statuses/user_timeline';
-
-
 /**
  * GET tweets json.
  */

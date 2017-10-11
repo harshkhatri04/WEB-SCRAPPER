@@ -7,9 +7,9 @@ import { config } from '../../config/config'
 export class SignUpService {
   constructor(private http: Http) {}
 
-  //method to hit server 
+  //method to add user by hitting the server
   addUser(user) {
-    const url = config.urlToServer+'/signup/users'; // sign up url
+    const url = config.urlToServer+'/signup/users'; 
     return this.http
       .post(url, user)
       .map(res => res.json(), error => error);

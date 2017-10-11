@@ -1,5 +1,5 @@
 /* importing predefined  dependencies */
-const express = require('express'); 
+const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
@@ -7,17 +7,19 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
 
-// importing user defined dependencies
-const routes = require('./routes/route');
+//importing user-defined dependencies
 const config = require('./config/database')
 const logger = require('./services/app.logger');
 const configure = require('./config/configure')
+const routes = require('./routes/route');
+
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt-nodejs');
 const async = require('async');
 const crypto = require('crypto');
-const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
+
+//this is used to connect to our database
 const connect = mongoose.connect(config.database);
 let cors = require('cors');
 
@@ -39,15 +41,13 @@ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
-
 app.use(session({ secret: 'session secret key' }));
-app.use(flash());
 app.use(cookieParser());
 app.use('/', routes);
 
-// app runs on port 3000
+// app runs on port defined in config file
 app.listen(config.port, () => {
-  logger.info("application running on port" + config.port);
+    logger.info("application running on port" + config.port);
 });
 
 module.exports = app;
