@@ -19,7 +19,7 @@ describe('NasdaqComponent', () => {
   let el:      HTMLElement;
   let destock: DebugElement;
   let elstock: HTMLElement;
-  
+  let mockData = ["value of Nasdaq is 360","value of sensex  is 450"];
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports:[

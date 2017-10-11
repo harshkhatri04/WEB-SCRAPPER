@@ -40,63 +40,58 @@
     </div>
     <div class="col-md-8">
       <div class="jumbotron jumbotron-fluid marg container text">
-       <div class="row">
-        <div class="col-md-3"  *ngFor="let data of stockprice">
-         
-          <p>{{data.closeAt}}</p>
-          <h4>${{data.Price}}</h4>
-          <h6>{{data.upDown}}</h6>
-          <p>AFTER HOURS</p>
-          <h4>${{data.hPrice}}</h4>
-          <p>{{data.hupdown}}</p>
-          
-        </div>
-
-        <div class="col-md-4">
-          <div class="size">
-            <canvas baseChart [data]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+        <div class="row">
+          <div class="col-md-3" *ngFor="let data of stockprice">
+            <p>{{data.closeAt}}</p>
+            <h4>${{data.Price}}</h4>
+            <h6>{{data.upDown}}</h6>
+            <p>AFTER HOURS</p>
+            <h4>${{data.hPrice}}</h4>
+            <p>{{data.hupdown}}</p>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-md-1">
-    </div>
-    <div class="col-md-7">
-      <b><p class="h4">{{header}}</p></b>
-      <hr>
-      <div *ngFor="let data of stocknews">
-        <div class="card text-white mb-3" style="background-color: #80cbc4;" *ngIf=data.news>
-          <div class="card-body">
-            <p class="h7" style="color: #333">{{data.news}}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-    <div>
-      <b><p class="h4" style="text-align:center">{{tweets}}</p></b>
-      <div class="card text-white mb-3" style="background-color:white;" *ngFor="let data of investmentProductuser">
-      
-        <div class="card-body">
-          <i class="fa fa-twitter" aria-hidden="true" style="color: #33b5e5"></i>
-          <p style="color: #333">{{data.text}}</p>
-          <div *ngIf="data.entities.urls[0]">
-              <a href="{{data.entities.urls[0].url}}">Read More</a>
+          <div class="col-md-4">
+            <div class="size">
+              <canvas baseChart [data]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
             </div>
-          <div *ngIf="data.entities.media">
-            <img class="img" src="{{data.entities.media[0].media_url}}">
           </div>
         </div>
-        <div class="card-data">
-          <h6 style="color:black;"><i class="fa fa-clock-o"></i>{{data.created_at}} </h6>
-        </div>
-        >
-      </div>
       </div>
     </div>
   </div>
-</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-7">
+        <b><p class="h4">{{header}}</p></b>
+        <hr>
+        <div *ngFor="let data of stocknews">
+          <div class="card text-white mb-3" style="background-color: #80cbc4;" *ngIf=data.news>
+            <div class="card-body">
+              <p class="h7" style="color: #333">{{data.news}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div>
+          <b><p class="h4" style="text-align:center">{{tweets}}</p></b>
+          <div class="card text-white mb-3" style="background-color:white;" *ngFor="let data of investmentProductuser">
+            <div class="card-body">
+              <i class="fa fa-twitter" aria-hidden="true" style="color: #33b5e5"></i>
+              <p style="color: #333">{{data.text}}</p>
+              <div *ngIf="data.entities.urls[0]">
+                <a href="{{data.entities.urls[0].url}}">{{config.nasdaq.READ_MORE}}</a>
+              </div>
+              <div *ngIf="data.entities.media">
+                <img class="img" src="{{data.entities.media[0].media_url}}">
+              </div>
+            </div>
+            <div class="card-data">
+              <h6 style="color:black;"><i class="fa fa-clock-o"></i>{{data.created_at}} </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
