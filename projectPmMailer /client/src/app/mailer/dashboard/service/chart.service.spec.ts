@@ -8,8 +8,11 @@ import {
 } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 import { ChartService } from './chart.service';
+
+//test suite for chart service
 describe('ChartService', () => {
 
+  //configuring module with the test environment
   beforeEach(() => {
 
     TestBed.configureTestingModule({
@@ -21,6 +24,8 @@ describe('ChartService', () => {
     });
   });
 
+
+  //checking 
   it('Chart service should return chart',
     inject([ChartService, XHRBackend], (ChartService, mockBackend) => {
       const mockResponse = { term: 'AAPL' };
