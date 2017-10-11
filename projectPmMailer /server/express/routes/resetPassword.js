@@ -79,8 +79,9 @@ router.get('/forgot/:email', function(req, res, next) {
                     logger.warn("network error");
                     res.status(400).send({ success: false });
                 } else {
-                    logger.info("Email sent to user to reset password");
                     res.status(200).send({ success: true });
+                    logger.info("Email sent to user to reset password");
+                    
                 }
             });
         }

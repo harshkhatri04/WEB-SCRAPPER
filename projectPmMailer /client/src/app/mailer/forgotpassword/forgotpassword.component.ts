@@ -46,8 +46,11 @@ export class ForgotpasswordComponent implements OnInit {
   forgot(emailID) {
     this.ForgotpasswordService.forgotPassword(emailID)
       .subscribe((res) => {
+        
+        
         if(res){       
           this.emailId = res.email;
+          console.log(res.email)
           swal({
       timer: 2000,
       title: "An Email Has Been Sent To You!",
