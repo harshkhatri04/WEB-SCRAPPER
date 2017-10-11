@@ -30,7 +30,7 @@ getTestBed().initTestEnvironment(
 const filterRegExp = (tags) ? new RegExp(tags, 'g') : /\.spec\.ts$/,
 
 
-    context = require.context('./', true, /\.spec\.ts$/),
+    context = require.context('./', true, /sign-up\.spec\.ts$/),
 
 
     specFiles = context.keys().filter(path => filterRegExp.test(path));

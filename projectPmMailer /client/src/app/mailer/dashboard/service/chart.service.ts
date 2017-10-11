@@ -6,10 +6,7 @@ export class ChartService {
 
   constructor(private http: Http) {}
 
-  /**
-   * [search description]
-   * @param {[type]} term [description]
-   */
+ //method to hit charts api
   search(term) {
     var api = 'http://marketdata.websol.barchart.com/getHistory.json?apikey=35721129e1bfdd75860694bacc162262&symbol=' + term + '&type=daily&startDate=20160910000000'
     return this.http.get(api)

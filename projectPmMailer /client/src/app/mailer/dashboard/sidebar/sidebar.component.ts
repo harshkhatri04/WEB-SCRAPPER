@@ -6,9 +6,7 @@ import { config } from '../../../config/config';
   styleUrls: ['./sidebar.component.css']
 })
 
-/**
- * SidebarComponent class
- */
+/* SidebarComponent class */
 export class SidebarComponent implements OnInit {
 
   constructor() {}

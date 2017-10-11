@@ -5,15 +5,13 @@ var Twit = require('twit');
 var config = require('../config/tweetconfig');
 
 // instantiate Twit module
-var twitter = new Twit(config.twitter);
-const logger = require('../services/app.logger');
+var twitter = new Twit(config.twitter); //loading the access keys and consumer keys 
+const logger = require('../services/app.logger'); //logger
 
-var TWEET_COUNT = 25;
+var TWEET_COUNT = 25; //setting the numer of tweets to show
 var MAX_WIDTH = 305;
-var OEMBED_URL = 'statuses/oembed';
+var OEMBED_URL = 'statuses/oembed'; //setting the urls from the api to acess the required tweets
 var USER_TIMELINE_URL = 'statuses/user_timeline';
-
-
 /**
  * GET tweets json.
  */
@@ -48,10 +46,10 @@ router.get('/user_timeline/:user', function(req, res) {
 
         // oEmbed request params,helps in setting the data fields of the tweets
         var params = {
-            "id": tweet.id_str,               //twitter handle selection
-            "maxwidth": MAX_WIDTH,           //The maximum width of a rendered Tweet in whole pixels.
-            "hide_thread": true             //When set to true , t, or 1 a collapsed version of the previous Tweet in a conversation thread will not be displayed when the requested Tweet is in reply to another Tweet
-            
+            "id": tweet.id_str, //twitter handle selection
+            "maxwidth": MAX_WIDTH, //The maximum width of a rendered Tweet in whole pixels.
+            "hide_thread": true //When set to true , t, or 1 a collapsed version of the previous Tweet in a conversation thread will not be displayed when the requested Tweet is in reply to another Tweet
+
         };
 
         // request data 

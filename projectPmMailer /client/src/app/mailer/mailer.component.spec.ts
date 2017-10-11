@@ -8,10 +8,13 @@ import { HttpModule } from '@angular/http';
 import { MailerComponent } from './mailer.component';
 import {LoginComponent} from './login/login.component';
 
+
+//mailer component test suite
 describe('MailerComponent', () => {
  let component: MailerComponent;
   let fixture: ComponentFixture<MailerComponent>;
 
+  //configuring component with testing environment
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports:[
@@ -24,11 +27,14 @@ describe('MailerComponent', () => {
     }).compileComponents();
   }));
 
+
+//creating fixture and componentInstance
 beforeEach(() => {
     fixture = TestBed.createComponent(MailerComponent);
     component = fixture.componentInstance;
   });
 
+//checking component creation
   it('should be create mailer component', () => {
     const mailer = fixture.debugElement.componentInstance;
     expect(mailer).toBeTruthy();

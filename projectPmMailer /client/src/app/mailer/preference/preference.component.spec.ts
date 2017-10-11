@@ -31,14 +31,14 @@ describe('PreferenceComponent', () => {
     .compileComponents();
   }));
 
+/*Initial configuration that will run before every testcase*/
   beforeEach(() => {
     fixture = TestBed.createComponent(PreferenceComponent);
     component = fixture.componentInstance;
-    /*de = fixture.debugElement.query(By.css('modal-title'));
-    el = de.nativeElement;
-*/
+
   });
 
+/*Testcase to check whether component is created or not*/
   it('should be created', () => {
     const preference = fixture.debugElement.componentInstance;
     expect(preference).toBeTruthy();
