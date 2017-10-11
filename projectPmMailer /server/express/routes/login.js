@@ -26,7 +26,9 @@ router.get('/signin/:email/:password', function(req, res) {
                     // if user is found and password is right create a token
                     var token = jwt.sign({ user }, config.secret);
                     // return the information including token as JSON
+
                     return res.status(200).send({ success: true, token: 'JWT ' + token, email: user.email, flag: user.flag });
+
                     logger.info("token generated successfully");
                 } else {
                     return res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
@@ -39,12 +41,12 @@ router.get('/signin/:email/:password', function(req, res) {
 // route to get all the users
 router.get('/', function(req, res) {
     User.find((err, data) => {
-    	// if error occurs send the failure message
+        // if error occurs send the failure message
         if (err) {
             res.send({ success: false, message: "error in finding" })
             logger.info("error");
         } else {
-        	// send success message if there is no failure
+            // send success message if there is no failure
             res.json(data)
             logger.info("data fetched successfully");
         }
