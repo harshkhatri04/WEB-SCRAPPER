@@ -9,7 +9,7 @@ let request = require('request');
 let CronJob = require('cron').CronJob;
 let cheerio = require('cheerio');
 let fundmodel = require('../models/fundsmodel')
-const logger = require('../services/app.logger');
+let logger = require('../services/app.logger');
 
 //HTTP Post method end
 
