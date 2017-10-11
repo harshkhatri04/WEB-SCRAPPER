@@ -12,7 +12,8 @@ import {
 } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 import { DashboardService } from './dashboard.service';
-/*import { DashboardComponent } from './dashboard.component';*/
+
+/*test suit for initial configuration*/
 describe('DashboardService', () => {
   let router: Router;
   let location: Location;
@@ -30,14 +31,12 @@ describe('DashboardService', () => {
       ]
     });
   });
-
+/*instantiate service when inject service*/
   it('can instantiate service when inject service',
     inject([DashboardService], (service: DashboardService) => {
       expect(service instanceof DashboardService).toBe(true);
     }));
-
-
-
+ /* instantiate service with "new*/
 
   it('can instantiate service with "new"', inject([Http], (http: Http) => {
     expect(http).not.toBeNull('http should be provided');
@@ -45,12 +44,12 @@ describe('DashboardService', () => {
     expect(service instanceof DashboardService).toBe(true, 'new service should be ok');
   }));
 
-
+/*checking mockBackend as XHRBackend*/
   it('can provide the mockBackend as XHRBackend',
     inject([XHRBackend], (backend: MockBackend) => {
       expect(backend).not.toBeNull('backend should be provided');
     }));
-
+/*checking logout method*/
   it('navigate to login',
     inject([DashboardService, XHRBackend], (dashboardservice, mockBackend) => {
 

@@ -10,13 +10,13 @@
     <div class="col-md-1">
     </div>
     <!--Conatiner for Details -->
-    <div class="col-md-8 tweetMarg" style="margin-top: 1%">
-      <div class="card text-white mb-3" style="background-color:white;" *ngFor="let data of investmentProductuser">
+    <div class="col-md-8 tweetMarg marginn">
+      <div class="card text-white mb-3 bgcolor" *ngFor="let data of investmentProductuser">
         <!-- <div class="card text-center"> -->
         <div class="card-block">
           <div class="card-body">
-            <i class="fa fa-twitter" aria-hidden="true" style="color: #33b5e5">@Schuldensuehner</i>
-            <p style="color: #333">{{data.text}}</p>
+            <i class="fa fa-twitter nameColor" aria-hidden="true">@Schuldensuehner</i>
+            <p class="tweetColor">{{data.text}}</p>
             <div *ngIf="data.entities.urls[0]">
               <a class="read" href="{{data.entities.urls[0].url}}">{{config.dashboard.READ_MORE}}</a>
             </div>
@@ -27,7 +27,7 @@
         </div>
         <div class="card-footer text-muted">
 
-          <h6 style="color:black;"><i class="fa fa-clock-o"></i>{{data.created_at}} </h6>
+          <h6 class="dateColor"><i class="fa fa-clock-o"></i>{{data.created_at}} </h6>
         </div>
       </div>
     </div>

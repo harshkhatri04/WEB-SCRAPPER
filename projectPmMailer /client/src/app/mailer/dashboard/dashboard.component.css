@@ -1,22 +1,15 @@
 /**
  * margin top
  */
+
 .marg {
   margin-left: 7%;
   margin-top: 7%;
-
 }
+
 .container-fluid {
   margin-top: 55px;
 }
-
-
-
-
-
-
-
-
 
 /**
  * card background color
@@ -26,14 +19,6 @@
   background-color: #80cbc4;
 }
 
-
-
-
-
-
-
-
-
 /**
  * heading color
  */
@@ -41,14 +26,6 @@
 .card-body h6 {
   color: #004d40;
 }
-
-
-
-
-
-
-
-
 
 /**
  * heading color
@@ -58,27 +35,11 @@
   color: #333;
 }
 
-
-
-
-
-
-
-
-
 /* for dashboard content */
 
 .color {
   background-color: red;
 }
-
-
-
-
-
-
-
-
 
 /*
 margins
@@ -88,14 +49,6 @@ margins
   margin-left: 7%;
 }
 
-
-
-
-
-
-
-
-
 /**
  * width
  */
@@ -103,14 +56,6 @@ margins
 .drop {
   width: 200px !important;
 }
-
-
-
-
-
-
-
-
 
 /**
  * text styling
@@ -122,14 +67,6 @@ margins
   background-color: black;
 }
 
-
-
-
-
-
-
-
-
 /**
  * lists
  */
@@ -139,14 +76,6 @@ margins
   margin-left: 10px;
 }
 
-
-
-
-
-
-
-
-
 /**
  * no bullets
  */
@@ -155,14 +84,6 @@ margins
   list-style: none;
 }
 
-
-
-
-
-
-
-
-
 /**
  * image width
  */
@@ -170,14 +91,6 @@ margins
 .img {
   width: 100%;
 }
-
-
-
-
-
-
-
-
 
 /**
  * card data
@@ -188,14 +101,6 @@ margins
   margin-left: 3%;
 }
 
-
-
-
-
-
-
-
-
 /**
  * margin for tweet icon
  */
@@ -203,15 +108,6 @@ margins
 .fa {
   margin-right: 1%;
 }
-
-
-
-
-
-
-
-
-
 
 /**
  * tweets margin
@@ -221,15 +117,6 @@ margins
   margin-top: 13%
 }
 
-
-
-
-
-
-
-
-
-
 /**
  * heading alignment
  */
@@ -237,15 +124,6 @@ margins
 .tweetsHeading {
   text-align: center
 }
-
-
-
-
-
-
-
-
-
 
 /**
  * card background color
@@ -256,16 +134,6 @@ margins
   background-color: white;
 }
 
-
-
-
-
-
-
-
-
-
-
 /**
  * color
  */
@@ -273,16 +141,6 @@ margins
 .fa-twitter {
   color: #33b5e5;
 }
-
-
-
-
-
-
-
-
-
-
 
 /**
  * card paragraph color
@@ -292,15 +150,6 @@ margins
   color: #333;
 }
 
-
-
-
-
-
-
-
-
-
 /**
  * card heading color
  */
@@ -309,9 +158,35 @@ margins
   color: black;
 }
 
-@media (max-width: 767px){
-  .tweetMarg{
+@media (max-width: 767px) {
+  .tweetMarg {
     margin-left: 10%;
   }
 }
 
+/* background color for tweets */
+.bgcolor{
+
+  background-color:white;
+}
+
+.nameColor{
+
+  color: #33b5e5;
+}
+
+/* color for tweets color */
+.tweetColor{
+  color: #333;
+}
+
+/* date color for tweets */
+.dateColor{
+
+  color:black;
+}
+
+.marginn{
+
+  margin-top: 1%;
+}

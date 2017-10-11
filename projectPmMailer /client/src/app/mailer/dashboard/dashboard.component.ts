@@ -42,10 +42,9 @@ export class DashboardComponent implements OnInit {
     let user='Schuldensuehner';
     this.tweetService.tweetSearch(user).subscribe((data)=>{
           this.investmentProductuser=data;
-          // console.log(this.investmentProductuser);
         })
   }
-
+/*logot method*/
  logout() {
    this.DashboardService.signout()
      .subscribe((res) => {
