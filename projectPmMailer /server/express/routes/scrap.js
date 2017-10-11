@@ -226,7 +226,7 @@ function currencynews() {
 /*This the cron job function to get all emailId and there preference set*/
 var dailyMailJob = new CronJob({
     /*format is second, minute, hour, day of month, months, day of week*/
-    cronTime: '00 50 18 * * *',
+    cronTime: '00 50 09 * * *',
 
     onTick: function(req, res) {
         // let p1, p2, p3;
@@ -443,8 +443,8 @@ function sendMails(emailId, fundsData) {
         to: emailId,
         subject: 'Personalized Emailer',
         html: `<ul>News</ul><br><li>
-                            ${fundsData}
-                            </li>`
+							${fundsData}
+							</li>`
 
     };
 
