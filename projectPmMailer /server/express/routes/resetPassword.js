@@ -47,12 +47,10 @@ router.get('/forgot/:email', function(req, res, next) {
             rpwtoken = token;
             User.findOne({ email: req.params.email }, function(err, user) {
                 if (!user) {
-
                     logger.warn("No account with that email address exists.");
-                    return res.status(400).send({ success: false, message: 'No account with that email address exists' });
-
+                    return res.status(401).send({ success: false, message: 'No account with that email address exists' });
+                    
                 }
-
                 user.resetPasswordToken = token;
                 user.resetPasswordExpires = Date.now() + configure.tokenValidity; // 1 hour validity for link
                 user.save(function(err) {
@@ -89,14 +87,16 @@ router.get('/forgot/:email', function(req, res, next) {
             transporter.sendMail(mailOptions, function(error, info) {
                 if (error) {
                     logger.warn("network error");
+                    res.status(400).send({success: false});
                 } else {
                     logger.info("Email sent to user to reset password");
+                    res.status(200).send({ success: true });
                 }
             });
         }
     ], function(err) {
         if (err) return next(err);
-        res.redirect('/forgot');
+        res.send({ success: true });
         logger.info('redirect to forgot')
     });
 });
@@ -136,10 +136,13 @@ router.post('/reset/:token', function(req, res) {
         },
 
     ], function(err) {
-        if (err) return next(err);
+        if (err){ 
+        return res.status(400).send({success: false});
+        }
+        else{
         logger.info("password successfully changed")
-        res.send({ success: true });
-
+        res.status(200).send({ success: true });
+    }
     });
 });
 

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
+import  { config } from '../../../config/config'
+
 @Injectable()
 /**
  *  FundService class
@@ -8,15 +10,12 @@ import { Http, Response } from '@angular/http';
 export class FundService {
 
   constructor(private http:Http) { }
-   
-getstockapi:string='http://localhost:3000';
-
 
 /**
  * [getfund description] getting funds
  */
 getfund(){
-	 return this.http.get(this.getstockapi+'/postNews/fund')
+	 return this.http.get(config.urlToServer+'/postNews/fund')
 	      .map(res =>
 	        res.json()
 	      )

@@ -11,15 +11,11 @@ import swal from 'sweetalert2';
   styleUrls: ['./resetpwd.component.css']
 })
 export class ResetpwdComponent implements OnInit {
-
   tkn: any;
   config = config;
-
   constructor(private ResetpwdService: ResetpwdService, private route: ActivatedRoute, private Router: Router) {
-
     this.route.params.subscribe(params => this.tkn = (params.token));
   }
-
   hero = { pwd: '', cpwd: '' };
 
   mydata = {}
@@ -44,29 +40,29 @@ export class ResetpwdComponent implements OnInit {
   get cpwd() { return this.form.get('cpwd'); }
 
 
-// Function to reset password
+  // Function to reset password
   reset(resetpwd) {
     this.mydata = {
       password: resetpwd
     }
     this.ResetpwdService.resetPassword(this.mydata, this.tkn)
       .subscribe((res) => {
-        if (res) {
-          //alert("password has been changed")
+        if (res){
           swal({
-            timer: 3000,
-            title: "Personalised Mailer!",
-            text: "your password has been changed",
-            type: 'success',
-            showConfirmButton: false,
-          }).then(() => {},
-            (dismiss) => {
-              if (dismiss === 'timer') {
-                //navigate here to reset
-                this.Router.navigateByUrl('reset')
-              }
-            });
-        } else {
+      timer: 2000,
+      title: "your password has been changed!",
+      type: 'success',
+      showConfirmButton: false,
+    }).then(()=>{},
+    (dismiss)=>{
+      if (dismiss === 'timer') {
+        //navigate here
+        this.Router.navigateByUrl('login') 
+      }
+    });
+        }
+        else{
+
           this.Router.navigateByUrl('login')
         }
       }, error => {

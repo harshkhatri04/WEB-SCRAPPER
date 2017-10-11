@@ -87,16 +87,7 @@ export const config = {
 	"RESET_PASSWORD": "Reset Password"
   },
 
-  "urlToServer" :{
-	  "DASHBOARD_SERVICE_GET": "http://localhost:3000/logout/logout/",
-	  "SIGN_UP_SERVICE_POST" : "http://localhost:3000/signup/users",
-	  "RESET_PASSWORD_POST" : "http://localhost:3000/resetPwd/reset/",
-	  "LOGIN_SERVICE_GET":"http://localhost:3000/login/signin/",
-	  "LOGIN_SERVICE_GOGGLE_GET" : "http://localhost:3000/googleAuth/auth/google",
-	  "LOGIN_SERVICE_FACEBOOK_GET" : "http://localhost:3000/facebookAuth/auth/facebook",
-		"FORGOT_PASSWORD_SERVICE_GET" : "http://localhost:3000/resetPwd/forgot/"
-		
-  },
+  "urlToServer" : "http://localhost:3000",
 
   "preference":{
   	"PREFERENCE": "Select your Preferences",
