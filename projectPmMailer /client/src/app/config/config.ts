@@ -1,5 +1,6 @@
 export const config = {
   "settings": {
+  "PREFERENCE": "Update Preference",
 	"SETTINGS": "Settings",
 	"UPDATE_NAME_AND_MOBILE": "Update Name and Mobile",
 	"NAME": "Name",
@@ -99,6 +100,18 @@ export const config = {
   	"INVESTMENT_TYPE" :   "Investment Type",
   	 "SELECT_FREQUENCY_OF_MAIL":"Select the Frequency of Email",
   	 "SUBMIT":"Submit",
+  },
+
+  "currency":{
+  	"READ_MORE":"Read More"
+  },
+
+  "funds":{
+  	"READ_MORE":"Read More"
+  },
+
+  "nasdaq":{
+  	"READ_MORE":"Read More"
   }
 }
 

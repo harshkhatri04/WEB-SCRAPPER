@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router, RouterLinkWithHref,RouterLink } from '@angular/router';
+import { DebugElement, ChangeDetectorRef }    from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NasdaqComponent } from './nasdaq.component';
 import {NavbarComponent} from '../navbar/navbar.component';
@@ -13,7 +14,12 @@ import {TweetService} from '../service/tweet.service';
 describe('NasdaqComponent', () => {
   let component: NasdaqComponent;
   let fixture: ComponentFixture<NasdaqComponent>;
-
+  let spy : jasmine.Spy;
+  let de:      DebugElement;
+  let el:      HTMLElement;
+  let destock: DebugElement;
+  let elstock: HTMLElement;
+  let mockData = ["value of Nasdaq is 360","value of sensex  is 450"];
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports:[
