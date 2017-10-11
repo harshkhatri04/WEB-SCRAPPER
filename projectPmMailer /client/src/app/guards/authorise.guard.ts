@@ -27,7 +27,7 @@ export class AuthoriseGuard implements CanActivate{
 		else
 		{
 			this.authorised=false;
-			this.route.navigate(['/']);
+			this.route.navigate(['/login']);
 
 		
 		}
