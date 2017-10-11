@@ -57,7 +57,6 @@ export class ResetpwdComponent implements OnInit {
               }
             });
         } else {
-
           this.Router.navigateByUrl('login')
         }
       }, error => {

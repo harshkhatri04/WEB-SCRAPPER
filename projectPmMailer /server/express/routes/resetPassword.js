@@ -8,7 +8,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const logger = require('../services/app.logger');
 const crypto = require('crypto');
-
 //This route finds a user according to his EmailId
 passport.use(new LocalStrategy(function(email, password, done) {
     User.findOne({ email: email }, function(err, user) {
@@ -23,19 +22,16 @@ passport.use(new LocalStrategy(function(email, password, done) {
         });
     });
 }));
-
 //saving the created objects in the sequence of bytes
 passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
-
 //Retrieving those saved bytes into the form of original object
 passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
         done(err, user);
     });
 });
-
 // route to generate token on forgotpassword so that it can be used to reset the password
 router.get('/forgot/:email', function(req, res, next) {
     async.waterfall([
@@ -77,7 +73,6 @@ router.get('/forgot/:email', function(req, res, next) {
                     'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                     configure.resetLinkUrl + token + '\n\n' +
                     'If you did not request this, please ignore this email and your password will remain unchanged.\n',
-
             };
             transporter.sendMail(mailOptions, function(error, info) {
                 if (error) {
@@ -107,7 +102,6 @@ router.get('/reset/:token', function(req, res) {
         }
         res.redirect(configure.OnSuccessRedirect + rpwtoken);
         logger.warn("redirect to reset password page");
-
     });
 });
 
@@ -140,5 +134,4 @@ router.post('/reset/:token', function(req, res) {
         }
     });
 });
-
 module.exports = router;

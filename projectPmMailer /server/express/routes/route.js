@@ -24,9 +24,7 @@ const findUser = require('./getData')
 
 const preference = require('./preference')
 const scrap = require('./scrap')
-const index = require('./index')
 const tweets = require('./tweets')
-const liveTweets = require('./liveTweets')
 app.use('/signup', signup);
 app.use('/login', login);
 app.use('/resetPwd', resetPassword);
@@ -37,7 +35,6 @@ app.use('/googleAuth', googleAuth);
 app.use('/facebookAuth', facebookAuth);
 app.use('/update',update);
 app.use('/investment' , preference);
-app.use('/', index);
 app.use('/tweets', tweets);
 
 module.exports = app;

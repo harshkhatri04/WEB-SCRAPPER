@@ -8,7 +8,7 @@ const validate = require('mongoose-validator');
 let UserSchema = new Schema({
     name: { type: String },
     id: { type: String },
-    email: { type: String ,unique: true},
+    email: { type: String },
     mobile: { type: Number },
     password: { type: String },
     resetPasswordToken: String,
@@ -26,10 +26,11 @@ UserSchema.pre("save", function(next) {
         items: [{ "id": 1, "itemName": "Funds" }],
         frequency: 'Daily'
     }
-    if (this.preferences.length == 0)
-        this.preferences.push(obj);
-
+    if (this.preferences.length == 0){
+        this.preferences.push(obj);}
+    
     next();
+    
 });
 //pre method to encrypt password
 UserSchema.pre('save', function(next) {
