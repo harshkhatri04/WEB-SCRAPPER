@@ -11,9 +11,8 @@ import { config } from '../../../config/config'
   styleUrls: ['./navbar.component.css']
 })
 
-/**
- *  navbarcomponent class
- */
+ /*navbarcomponent class*/
+ 
 export class NavbarComponent implements OnInit {
 
 
