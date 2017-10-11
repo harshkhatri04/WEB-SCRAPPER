@@ -27,8 +27,8 @@ router.put('/updateName/:email', (req, res) => {
 //route ends here
 //route to update name by the given email
 //route starts here
-
 router.put('/updateUser/:email', (req, res) => {
+
     User.update({ email: req.params.email }, {
         $set: {
             name: req.body.name, // updating the name in database by name provided by user
@@ -65,7 +65,7 @@ router.delete('/deleteUser/:email', (req, res) => {
 // route to update password
 // route starts here
 router.post('/updatePassword/:email', (req, res) => {
-
+    console.log(req.body)
     User.findOne({ email: req.params.email }, function(err, user) {
         if (err) {
             res.status(400).send({ status: false, message: 'error updating password' })
@@ -78,7 +78,7 @@ router.post('/updatePassword/:email', (req, res) => {
                             logger.error("could not update password")
                             res.status(400).send({ success: false, message: 'could not update password' })
                         } else {
-                            logger.success("password updated successfully")
+                            logger.info("password updated successfully")
                             res.status(200).send({ success: true, message: 'password updated successfully' })
                         }
                     })
