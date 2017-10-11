@@ -16,6 +16,7 @@ describe('CurrencyComponent', () => {
   let component: CurrencyComponent;
   let fixture: ComponentFixture<CurrencyComponent>;
 
+  //configuring module with testing environment
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports:[
@@ -30,11 +31,13 @@ describe('CurrencyComponent', () => {
     .compileComponents();
   }));
 
+  //creating fixtures and component instance for testing
   beforeEach(() => {
     fixture = TestBed.createComponent(CurrencyComponent);
     component = fixture.componentInstance;
   });
 
+  //test case for checking whether currency is created or not
   it('should create currency component', () => {
     const currency = fixture.debugElement.componentInstance;
     expect(currency).toBeTruthy();

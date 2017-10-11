@@ -20,6 +20,8 @@ describe('NasdaqComponent', () => {
   let destock: DebugElement;
   let elstock: HTMLElement;
   let mockData = ["value of Nasdaq is 360","value of sensex  is 450"];
+
+  //configuring module with testing environment
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports:[
@@ -33,12 +35,14 @@ describe('NasdaqComponent', () => {
     .compileComponents();
   }));
 
+  //creating fixtures and component instance for testing
   beforeEach(() => {
     fixture = TestBed.createComponent(NasdaqComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
+  //test case for checking whether nasdaq component is created or not
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
