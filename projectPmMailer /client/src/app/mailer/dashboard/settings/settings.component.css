@@ -47,3 +47,15 @@ h3 {
 .settingsColor {
   color: black
 }
+
+.marg{
+	margin-top: 7%;
+}
+
+
+@media (min-width: 767px){
+  .Marg{
+    margin-left: 50%;
+    margin-top: 10%;
+  }
+}

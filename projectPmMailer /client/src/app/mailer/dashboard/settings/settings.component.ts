@@ -23,21 +23,21 @@ export class SettingsComponent implements OnInit {
   constructor(
     @Inject(FormBuilder) private fb: FormBuilder,
       private settingsService: SettingsService,private dialogService:DialogService) {
-    //this.fb=fb;
+    // initialising user details to be displayed
     this.userInfo = fb.group({
       email: ['', [Validators.required]],
       name: ['', [Validators.required]],
       mobile: ['', [Validators.required]],
       alternateEmail: ''
-
-    });
+     });
   }
 
   ngOnInit() {
-
+    // getting details from local storage
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.email = this.currentUser.email;
   
+    // calling method to get user details from database for the user who has logged in
     this.settingsService.getDataFromDB(this.email)
       .subscribe((res) => {
         let data = {
@@ -47,11 +47,10 @@ export class SettingsComponent implements OnInit {
           alternateEmail: res.alternateEmail
         }
            this.displayData(data);
-           /*this.displayPwdData(data);*/
       })
     }
 
-  
+  // displaying the user details to be displayed
   displayData(data: any) {
     this.userInfo = this.fb.group({
       email: [data.email],
@@ -60,7 +59,7 @@ export class SettingsComponent implements OnInit {
       alternateEmail: [data.alternateEmail],
     })
   }
-
+  // method to update user details
   updateUserInfo(userInfo,email) {
     let user = {
       name: userInfo.get('name').value,
@@ -73,7 +72,7 @@ export class SettingsComponent implements OnInit {
         })
 
   }
-
+  // method to update mailing preferences
   showConfirm() {
             let disposable = this.dialogService.addDialog(PreferenceComponent, {
                 title:'Confirm title', 

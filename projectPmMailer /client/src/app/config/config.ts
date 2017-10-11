@@ -3,15 +3,15 @@ export const config = {
   "PREFERENCE": "Update Preference",
 	"SETTINGS": "Settings",
 	"UPDATE_NAME_AND_MOBILE": "Update Name and Mobile",
-	"NAME": "Name",
-	"MOBILE": "Mobile",
+	"NAME": "Name:",
+	"MOBILE": "Mobile:",
 	"SAVE": "Save",
-	"ALTERNATE_EMAIL": "Add Alternate Email-ID",
-	"EMAIL": "Email",
+	"ALTERNATE_EMAIL": "Add Alternate Email-ID:",
+	"EMAIL": "Email:",
 	"UPDATE_PASSWORD": "Update Password",
-	"CURRENT_PASSWORD": "Current Password",
-	"NEW_PASSWORD": "New Password",
-	"CONFIRM_PASSWORD": "Confirm Password",
+	"CURRENT_PASSWORD": "Current Password:",
+	"NEW_PASSWORD": "New Password:",
+	"CONFIRM_PASSWORD": "Confirm Password:",
 	"MAILING_PREFERENCE": "Update Mailing Preferences",
 	"DAILY": "Daily",
 	"WEEKLY": "Weekly",
@@ -71,7 +71,10 @@ export const config = {
 	"PIC_TWO": "Stock market bubbles don't grow out of thin air. They have a solid basis in reality, but reality as distorted by a misconception.",
 	"FORGOT_PASSWORD": "Forgot Password?",
 	"EMAIL_ADDRESS": "Email Address",
-	"RESET_PASSWORD": "Reset Password"
+	"RESET_PASSWORD": "Reset Password",
+	"VALIDATION_ONE":"Email is required",
+	"VALIDATION_TWO":"Email must contain @.",
+	"VALIDATION_THREE":"Email must be at least 4 characters long."
   },
 
   "resetpwd": {
@@ -84,22 +87,25 @@ export const config = {
 	"RESET_PASSWORD": "Reset Password"
   },
 
-  "urlToServer" :{
-	  "DASHBOARD_SERVICE_GET": "http://localhost:3000/logout/logout/",
-	  "SIGN_UP_SERVICE_POST" : "http://localhost:3000/signup/users",
-	  "RESET_PASSWORD_POST" : "http://localhost:3000/resetPwd/reset/",
-	  "LOGIN_SERVICE_GET":"http://localhost:3000/login/signin/",
-	  "LOGIN_SERVICE_GOGGLE_GET" : "http://localhost:3000/googleAuth/auth/google",
-	  "LOGIN_SERVICE_FACEBOOK_GET" : "http://localhost:3000/facebookAuth/auth/facebook",
-		"FORGOT_PASSWORD_SERVICE_GET" : "http://localhost:3000/resetPwd/forgot/"
-		
-  },
+  "urlToServer" : "http://localhost:3000",
 
   "preference":{
   	"PREFERENCE": "Select your Preferences",
   	"INVESTMENT_TYPE" :   "Investment Type",
   	 "SELECT_FREQUENCY_OF_MAIL":"Select the Frequency of Email",
   	 "SUBMIT":"Submit",
+  },
+
+  "currency":{
+  	"READ_MORE":"Read More"
+  },
+
+  "funds":{
+  	"READ_MORE":"Read More"
+  },
+
+  "nasdaq":{
+  	"READ_MORE":"Read More"
   }
 }
 
