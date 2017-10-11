@@ -16,11 +16,7 @@ import { config } from '../../../config/config'
  */
 export class NavbarComponent implements OnInit {
 
-  /**
-   * [constructor description]
-   * @param {DashboardService} private DashboardService [description]
-   * @param {Router}           private router           [description]
-   */
+
   constructor(private DashboardService: DashboardService, private router: Router) {}
 
 
@@ -32,7 +28,6 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.DashboardService.signout()
       .subscribe((res) => {
-        //localStorage.removeItem('currentUser');
         localStorage.clear()
         this.router.navigateByUrl('logout')
       }, error => {

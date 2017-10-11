@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { DialogService } from "ng2-bootstrap-modal";
 import { config } from '../../config/config';
-
+import swal from 'sweetalert2';
 import { PreferenceComponent } from '../preference/preference.component';
 
 @Component({
@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
         Validators.minLength(4)
       ]),
     });
-
   }
   get email() { return this.form.get('email'); }
 
@@ -73,6 +72,7 @@ export class LoginComponent implements OnInit {
               this.flagSet(this.flag)
             } else {
               this.router.navigateByUrl('dashboard')
+               
             }
           } else {
             alert('Invalid Credentials');
@@ -141,9 +141,21 @@ export class LoginComponent implements OnInit {
       .subscribe((isConfirmed) => {
         //We get dialog result
         if (isConfirmed) {
-          alert('accepted');
+          swal({
+      timer: 1000,
+      title: "Preferences are set",
+      text:  "accepted",
+      type:  'success',
+      showConfirmButton: false,
+    })
         } else {
-          alert('declined');
+          swal({
+      timer: 1000,
+      title: "Preferences are not set",
+      text:  "declined",
+      type: 'error',
+      showConfirmButton: false,
+    })
         }
       });
   }

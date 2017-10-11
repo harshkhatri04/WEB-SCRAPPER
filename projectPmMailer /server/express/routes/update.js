@@ -25,6 +25,7 @@ router.put('/updateName/:email', (req, res) => {
 //route to update name by the given email
 //route starts here
 router.put('/updateUser/:email', (req, res) => {
+
     User.update({ email: req.params.email }, {
         $set: {
             name: req.body.name, // updating the name in database by name provided by user
