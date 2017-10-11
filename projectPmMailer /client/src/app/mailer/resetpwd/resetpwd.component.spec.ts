@@ -20,7 +20,8 @@ describe('testing resetpwd component', () => {
   let elResetpwd: HTMLElement;
   let deStock: DebugElement;
   let elStock: HTMLElement;
-  //async beforeEach
+  
+  //configuring module with testing environment
   beforeEach(async() => {
 
     TestBed.configureTestingModule({
@@ -32,7 +33,7 @@ describe('testing resetpwd component', () => {
     }).compileComponents();
   })
 
-  //sync beforeEach
+  //creating fixtures and component instance for testing
   beforeEach(() => {
     fixture = TestBed.createComponent(ResetpwdComponent);
     comp = fixture.componentInstance; //Nav Component instance
@@ -44,6 +45,7 @@ describe('testing resetpwd component', () => {
     elStock = deStock.nativeElement;
   })
 
+  //test case for checking whether funds component is created or not
   it('should create resetpwd component', () => {
     const reset = fixture.debugElement.componentInstance;
     expect(reset).toBeTruthy();
