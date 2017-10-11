@@ -50,12 +50,12 @@ router.get('/user_timeline/:user', function(req, res) {
      */
     function getOEmbed(tweet) {
 
-        // oEmbed request params
+        // oEmbed request params,helps in setting the data fields of the tweets
         var params = {
-            "id": tweet.id_str,
-            "maxwidth": MAX_WIDTH,
-            "hide_thread": true,
-            "omit_script": true
+            "id": tweet.id_str,               //twitter handle selection
+            "maxwidth": MAX_WIDTH,           //The maximum width of a rendered Tweet in whole pixels.
+            "hide_thread": true             //When set to true , t, or 1 a collapsed version of the previous Tweet in a conversation thread will not be displayed when the requested Tweet is in reply to another Tweet
+            
         };
 
         // request data 
